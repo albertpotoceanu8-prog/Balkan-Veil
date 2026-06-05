@@ -1,4 +1,4 @@
-import type { PageKey } from "@/types/navigation";
+﻿import type { PageKey } from "@/types/navigation";
 
 export type Language = "ro" | "en";
 export type ServiceIcon = "Terminal" | "Network" | "Eye" | "Lock" | "Shield" | "ArrowRight";
@@ -460,7 +460,7 @@ export const siteContent: Record<Language, SiteContent> = {
       { page: "access", title: "Trimite Brief", description: "Scrie varianta bruta a proiectului." },
     ],
     navigation: {
-      brandLine: "Software · Sisteme · Design",
+      brandLine: "Software Â· Sisteme Â· Design",
       command: "Command",
       language: "Limba",
       ro: "RO Romana",
@@ -478,7 +478,7 @@ export const siteContent: Record<Language, SiteContent> = {
       subtitle: "Navigare rapida",
     },
     footer: {
-      brandLine: "Software · Sisteme · Design",
+      brandLine: "Software Â· Sisteme Â· Design",
       description: "Website-uri, landing pages si sisteme mici pentru business-uri care vor sa arate mai clar si mai serios online.",
       navigate: "Navigare",
       contact: "Contact",
@@ -490,7 +490,7 @@ export const siteContent: Record<Language, SiteContent> = {
       operational: "lucram selectiv",
       cinematic: "cinematic",
       standard: "standard",
-      copyright: "© 2026 Balkan Veil.",
+      copyright: "Â© 2026 Balkan Veil.",
       tagline: "Simplu. Inchis. Bine facut.",
     },
     terminal: {
@@ -708,7 +708,7 @@ export const siteContent: Record<Language, SiteContent> = {
       eyebrow: "Abonamente",
       title: "Prezenta web administrata pe abonament lunar.",
       text: "Pentru business-uri care vor o interfata publica distincta fara sa gestioneze hosting, deploy, mentenanta si modificarile mici.",
-      seoTitle: "Abonamente Balkan Veil � Prezenta web administrata",
+      seoTitle: "Abonamente Balkan Veil - Prezenta web administrata",
       seoDescription: "Abonamente pentru prezenta web administrata, CMS, suport tehnic si imbunatatiri lunare.",
       minimumLabel: "Contract minim 12 luni",
       supportLabel: "Suport inclus",
@@ -1035,7 +1035,7 @@ export const siteContent: Record<Language, SiteContent> = {
         startOptions: ["ASAP", "Luna aceasta", "Luna viitoare", "Doar explorez"],
       },
       projectOptions: ["Website", "Landing Page", "Portal Client", "Dashboard", "Automatizare", "Prezenta Brand"],
-      budgetOptions: ["Sub €500", "€500-€1.5k", "€1.5k-€3k", "€3k+", "Nu sunt sigur inca"],
+      budgetOptions: ["Sub â‚¬500", "â‚¬500-â‚¬1.5k", "â‚¬1.5k-â‚¬3k", "â‚¬3k+", "Nu sunt sigur inca"],
       packages: [
         {
           name: "Veil Start",
@@ -1088,7 +1088,7 @@ export const siteContent: Record<Language, SiteContent> = {
       { page: "access", title: "Send Brief", description: "Write the rough version of the project." },
     ],
     navigation: {
-      brandLine: "Software · Systems · Design",
+      brandLine: "Software Â· Systems Â· Design",
       command: "Command",
       language: "Language",
       ro: "RO Romana",
@@ -1106,7 +1106,7 @@ export const siteContent: Record<Language, SiteContent> = {
       subtitle: "Quick Navigation Layer",
     },
     footer: {
-      brandLine: "Software · Systems · Design",
+      brandLine: "Software Â· Systems Â· Design",
       description: "Websites, landing pages and small systems for businesses that need to look clearer and more serious online.",
       navigate: "Navigate",
       contact: "Contact",
@@ -1118,7 +1118,7 @@ export const siteContent: Record<Language, SiteContent> = {
       operational: "selective work",
       cinematic: "cinematic",
       standard: "standard",
-      copyright: "© 2026 Balkan Veil.",
+      copyright: "Â© 2026 Balkan Veil.",
       tagline: "Simple. Dark. Well built.",
     },
     terminal: {
@@ -1336,7 +1336,7 @@ export const siteContent: Record<Language, SiteContent> = {
       eyebrow: "Pricing",
       title: "Managed web presence on monthly subscription.",
       text: "For businesses that want a distinct public interface without managing hosting, deployment, maintenance and small changes.",
-      seoTitle: "Balkan Veil Pricing � Managed Web Presence",
+      seoTitle: "Balkan Veil Pricing - Managed Web Presence",
       seoDescription: "Subscription plans for managed web presence, CMS setup, technical support and monthly improvements.",
       minimumLabel: "Minimum 12-month contract",
       supportLabel: "Included support",
@@ -1663,7 +1663,7 @@ export const siteContent: Record<Language, SiteContent> = {
         startOptions: ["ASAP", "This month", "Next month", "Just exploring"],
       },
       projectOptions: ["Website", "Landing Page", "Client Portal", "Dashboard", "Automation", "Brand Presence"],
-      budgetOptions: ["Under €500", "€500-€1.5k", "€1.5k-€3k", "€3k+", "Not sure yet"],
+      budgetOptions: ["Under â‚¬500", "â‚¬500-â‚¬1.5k", "â‚¬1.5k-â‚¬3k", "â‚¬3k+", "Not sure yet"],
       packages: [
         {
           name: "Veil Start",

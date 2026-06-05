@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+ï»¿import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const fallbackSiteOrigin = "https://website-balkan-veil.vercel.app";
@@ -50,7 +50,7 @@ const routes = [
   {
     path: "/ro/abonamente",
     lang: "ro",
-    title: "Abonamente Balkan Veil — Prezenta web administrata | Balkan Veil",
+    title: "Abonamente Balkan Veil - Prezenta web administrata | Balkan Veil",
     description: "Abonamente pentru prezenta web administrata, CMS, suport tehnic si imbunatatiri lunare.",
     alternate: { ro: "/ro/abonamente", en: "/en/pricing" },
   },
@@ -106,7 +106,7 @@ const routes = [
   {
     path: "/en/pricing",
     lang: "en",
-    title: "Balkan Veil Pricing — Managed Web Presence | Balkan Veil",
+    title: "Balkan Veil Pricing - Managed Web Presence | Balkan Veil",
     description: "Subscription plans for managed web presence, CMS setup, technical support and monthly improvements.",
     alternate: { ro: "/ro/abonamente", en: "/en/pricing" },
   },
