@@ -1,12 +1,8 @@
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { ArchiveStamp } from "@/components/ArchiveStamp";
 import { DossierPanel } from "@/components/DossierPanel";
 import { PageShell } from "@/components/PageShell";
 import { WorkProjectCard } from "@/components/WorkProjectCard";
 import { Button } from "@/components/ui/button";
-import { cardMotion } from "@/components/motionConfig";
-import { VeilFrame } from "@/components/VeilFrame";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
@@ -18,44 +14,35 @@ type WorkPageProps = {
 export function WorkPage({ content, goToPage }: WorkPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
-      <div className="space-y-10">
+      <p className="mb-10 max-w-3xl border-l border-amber-300/25 pl-5 text-sm leading-6 text-stone-500">{content.disclaimer}</p>
+
+      <div className="space-y-8">
         {content.projects.map((project) => (
           <WorkProjectCard key={project.title} project={project} labels={content.labels} />
         ))}
       </div>
 
-      <div className="mt-28 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+      <div className="mt-28 border border-stone-800 bg-stone-950/35 p-6 md:p-10">
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.conceptLabel}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.conceptTitle}</h2>
             <p className="mt-6 text-lg leading-8 text-stone-500">{content.conceptText}</p>
           </div>
-          <div className="grid gap-5">
+          <div className="divide-y divide-stone-800 border-y border-stone-800">
             {content.concepts.map((item, index) => (
-              <motion.div key={item.title} {...cardMotion}>
-                <VeilFrame label={item.tag} index={`BV-WORK-${String(index + 1).padStart(2, "0")}`} className="archive-noise">
-                  <div className="grid gap-6 p-5 md:grid-cols-[0.72fr_1.28fr] md:p-7">
-                    <div>
-                      <ArchiveStamp code={`0${index + 1}`} label={item.tag} status={item.package} />
-                      <h3 className="mt-8 font-serif text-3xl leading-tight text-stone-100">{item.title}</h3>
-                    </div>
-                    <div className="grid gap-3">
-                      {[
-                        [content.conceptLabels.problem, item.problem],
-                        [content.conceptLabels.direction, item.direction],
-                        [content.conceptLabels.system, item.system],
-                        [content.conceptLabels.package, item.package],
-                      ].map(([label, value]) => (
-                        <div key={label} className="border-l border-amber-300/20 bg-black/30 px-5 py-4">
-                          <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/70">{label}</p>
-                          <p className="mt-2 text-base leading-7 text-stone-400">{value}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </VeilFrame>
-              </motion.div>
+              <article key={item.title} className="grid gap-5 py-6 md:grid-cols-[4rem_0.75fr_1.25fr] md:items-start">
+                <p className="font-mono text-xs text-amber-300/60">0{index + 1}</p>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-amber-300/70">{item.tag}</p>
+                  <h3 className="mt-3 font-serif text-2xl leading-tight text-stone-100">{item.title}</h3>
+                  <p className="mt-3 text-sm text-amber-100/75">{item.package}</p>
+                </div>
+                <div className="grid gap-3 text-sm leading-6 text-stone-500">
+                  <p><span className="text-amber-200">{content.conceptLabels.problem}:</span> {item.problem}</p>
+                  <p><span className="text-amber-200">{content.conceptLabels.direction}:</span> {item.direction}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>

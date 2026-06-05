@@ -21,9 +21,11 @@ export type WorkProject = {
   number: string;
   title: string;
   category: string;
+  summary: string;
   problem: string;
   solution: string;
   result: string;
+  recommendedPlan: string;
   stack: string[];
 };
 
@@ -302,7 +304,11 @@ export type SiteContent = {
       problem: string;
       solution: string;
       result: string;
+      plan: string;
+      scenario: string;
+      status: string;
     };
+    disclaimer: string;
     nextLabel: string;
     nextTitle: string;
     nextText: string;
@@ -796,36 +802,44 @@ export const siteContent: Record<Language, SiteContent> = {
           number: "01",
           title: "Pagina de Fondator",
           category: "Personal Brand / Autoritate",
+          summary: "O prezenta publica scurta pentru autoritate, outreach si conversatii comerciale mai clare.",
           problem: "Un fondator are nevoie de o pagina simpla care explica cine este, ce face si de ce merita contactat.",
           solution: "O structura one-page cu pozitionare scurta, dovada selectiva, CTA clar si zero umplutura.",
           result: "Un link credibil pentru outreach, prezentari si bio.",
+          recommendedPlan: "Launch",
           stack: ["React", "Tailwind", "Framer Motion", "Formular brief"],
         },
         {
           number: "02",
           title: "Landing Page Serviciu",
           category: "Business de Servicii Premium",
+          summary: "O interfata de oferta pentru servicii unde pretul, increderea si cererea trebuie sa fie mai usor de citit.",
           problem: "Business-ul voia sa taxeze ca un specialist, dar pagina veche il facea sa para interschimbabil.",
           solution: "Un landing page intunecat, cu ierarhie mai clara a ofertei, dovada mai calma si un traseu de conversie care califica, nu cerseste.",
           result: "O pagina mai buna pentru reclame, recomandari si discutii comerciale.",
+          recommendedPlan: "Premium",
           stack: ["Landing page", "Structura copy", "Flux CTA", "Build responsive"],
         },
         {
           number: "03",
           title: "Portal Client Simplu",
           category: "Dashboard / Operatiuni",
+          summary: "Un sistem mic pentru cereri, statusuri si vizibilitate interna, fara promisiunea unei platforme uriase.",
           problem: "Cererile, statusurile si notitele ajung rapid in mesaje separate, chiar si intr-un business mic.",
           solution: "Un dashboard simplu care aduce lucrurile importante intr-un singur loc, fara sa promita un ERP complet.",
           result: "O baza practica pentru un portal care poate creste dupa ce este folosit.",
+          recommendedPlan: "Studio System",
           stack: ["Dashboard UI", "Client records", "Status system", "Admin flow"],
         },
         {
           number: "04",
           title: "Automatizare de Pornire",
           category: "Automatizare Business",
+          summary: "Un traseu operational pentru follow-up, rutare si timing intern, construit ca prima versiune verificabila.",
           problem: "Workflow-ul depindea de memorie: mesaje repetate, verificari manuale si predari care puteau aluneca usor.",
           solution: "O harta de automatizare cu trigger points, cereri rutate, schimbari de status si timing intern mai curat.",
           result: "O prima automatizare utila, usor de verificat si extins dupa ce procesul devine stabil.",
+          recommendedPlan: "Premium / Studio System",
           stack: ["Logica automatizare", "Formulare", "Harta workflow", "Pregatit pentru integrari"],
         },
       ],
@@ -833,7 +847,11 @@ export const siteContent: Record<Language, SiteContent> = {
         problem: "Ce lipseste",
         solution: "Cum il construim",
         result: "Ce ar iesi",
+        plan: "Pachet recomandat",
+        scenario: "Directie de concept",
+        status: "Sample scenario",
       },
+      disclaimer: "Acestea sunt directii de concept si sisteme exemplu, nu proiecte prezentate ca rezultate ale unor clienti reali.",
       nextLabel: "Brief",
       nextTitle: "Ai ceva concret? Il asezam intr-un dossier de lansare.",
       nextText: "Trimite ideea in forma bruta. O curatam, taiem ce nu trebuie si pastram ce poate deveni prima interfata publica.",
@@ -1424,36 +1442,44 @@ export const siteContent: Record<Language, SiteContent> = {
           number: "01",
           title: "Founder Page",
           category: "Personal Brand / Authority",
+          summary: "A compact public presence for authority, outreach and clearer commercial conversations.",
           problem: "A founder needs a simple page that explains who they are, what they do and why they are worth contacting.",
           solution: "A one-page structure with short positioning, selective proof, a clear CTA and no filler.",
           result: "A credible link for outreach, presentations and bio.",
+          recommendedPlan: "Launch",
           stack: ["React", "Tailwind", "Framer Motion", "Brief form"],
         },
         {
           number: "02",
           title: "Service Landing Page",
           category: "Premium Service Business",
+          summary: "An offer interface for services where price, trust and inquiry need to be easier to read.",
           problem: "The business wanted to charge like a specialist, but the old page made it feel interchangeable.",
           solution: "A dark landing page with a tighter offer hierarchy, calmer proof and a conversion path that qualifies instead of begging.",
           result: "A better page for ads, referrals and sales conversations.",
+          recommendedPlan: "Premium",
           stack: ["Landing page", "Copy structure", "CTA flow", "Responsive build"],
         },
         {
           number: "03",
           title: "Simple Client Portal",
           category: "Dashboard / Operations",
+          summary: "A small system for requests, statuses and internal visibility without pretending to be a huge platform.",
           problem: "Requests, statuses and notes quickly end up in separate messages, even in a small business.",
           solution: "A simple dashboard that brings the important parts into one place without promising a full ERP.",
           result: "A practical base for a portal that can grow after people actually use it.",
+          recommendedPlan: "Studio System",
           stack: ["Dashboard UI", "Client records", "Status system", "Admin flow"],
         },
         {
           number: "04",
           title: "Starter Automation",
           category: "Business Automation",
+          summary: "An operating path for follow-up, routing and internal timing, built as a first version that can be checked.",
           problem: "The workflow depended on memory: repeated messages, manual checks and handoffs that could easily slip.",
           solution: "A structured automation map with trigger points, routed requests, status changes and cleaner internal timing.",
           result: "A useful first automation that is easy to verify and extend after the process becomes stable.",
+          recommendedPlan: "Premium / Studio System",
           stack: ["Automation logic", "Forms", "Workflow map", "Integration-ready"],
         },
       ],
@@ -1461,7 +1487,11 @@ export const siteContent: Record<Language, SiteContent> = {
         problem: "What is missing",
         solution: "How we build it",
         result: "What comes out",
+        plan: "Recommended plan",
+        scenario: "Concept direction",
+        status: "Sample scenario",
       },
+      disclaimer: "These are concept directions and sample systems, not client claims.",
       nextLabel: "Brief",
       nextTitle: "Have something concrete? Put it into a launch dossier.",
       nextText: "Send the rough idea. We clean it up, cut what is not needed and keep what can become the first public interface.",
