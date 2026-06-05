@@ -1,52 +1,75 @@
 import React from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 type DecodeTextProps = {
   text: string;
   className?: string;
   canStart?: boolean;
   disabled?: boolean;
-  maxLength?: number;
   durationMs?: number;
+  maxLength?: number;
+  revealChunkSize?: number;
 };
 
-const stableChars = new Set([" ", ".", ",", "-", ":", ";", "/", "\n"]);
-const decodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/_#@";
+const stableChars = new Set([" ", ".", ",", "-", ":", ";", "!", "?", "\n"]);
+const decodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+const defaultDurationMs = 1800;
 const defaultMaxLength = 90;
-const defaultDurationMs = 900;
-const minFrameMs = 48;
+const defaultRevealChunkSize = 1;
+const minFrameMs = 120;
+
+type DecodeFrame = {
+  activeIndex: number;
+  activeChars: Record<number, string>;
+  revealedCount: number;
+};
 
 function clampDuration(durationMs: number) {
-  return Math.min(1200, Math.max(450, durationMs));
+  return Math.min(2200, Math.max(1600, durationMs));
+}
+
+function easeOutCubic(progress: number) {
+  return 1 - Math.pow(1 - progress, 3);
 }
 
 function randomDecodeChar() {
-  return decodeChars[Math.floor(Math.random() * decodeChars.length)] ?? "";
+  return decodeChars[Math.floor(Math.random() * decodeChars.length)] ?? "A";
 }
 
-function buildDecodedFrame(text: string, progress: number) {
+function getRevealableIndexes(chars: string[]) {
+  return chars.reduce<number[]>((indexes, char, index) => {
+    if (!stableChars.has(char)) indexes.push(index);
+    return indexes;
+  }, []);
+}
+
+function buildFrame(text: string, progress: number, revealChunkSize: number): DecodeFrame {
   const chars = Array.from(text);
-  const revealedCount = Math.floor(chars.length * progress);
-  const activeCount = Math.min(chars.length, revealedCount + 3);
+  const revealableIndexes = getRevealableIndexes(chars);
+  const revealedCount = Math.min(revealableIndexes.length, Math.floor(revealableIndexes.length * easeOutCubic(progress)));
+  const activeIndexes = revealableIndexes.slice(revealedCount, revealedCount + Math.max(1, revealChunkSize));
 
-  return chars
-    .map((char, index) => {
-      if (index < revealedCount) return char;
-      if (index < activeCount) return stableChars.has(char) ? char : randomDecodeChar();
-      return char === "\n" ? "\n" : " ";
-    })
-    .join("");
+  return {
+    activeIndex: activeIndexes[0] ?? -1,
+    activeChars: activeIndexes.reduce<Record<number, string>>((activeChars, index) => {
+      activeChars[index] = randomDecodeChar();
+      return activeChars;
+    }, {}),
+    revealedCount,
+  };
 }
 
-export function DecodeText({ text, className = "", canStart = true, disabled = false, maxLength = defaultMaxLength, durationMs = defaultDurationMs }: DecodeTextProps) {
+export function DecodeText({ text, className = "", canStart = true, disabled = false, durationMs = defaultDurationMs, maxLength = defaultMaxLength, revealChunkSize = defaultRevealChunkSize }: DecodeTextProps) {
   const ref = React.useRef<HTMLSpanElement | null>(null);
   const frameRef = React.useRef<number | null>(null);
   const startedRef = React.useRef(false);
   const lastFrameAtRef = React.useRef(0);
   const isInView = useInView(ref, { once: true, amount: 0.35, margin: "-10% 0px -10% 0px" });
   const shouldReduceMotion = useReducedMotion();
+  const chars = React.useMemo(() => Array.from(text), [text]);
+  const revealableIndexes = React.useMemo(() => getRevealableIndexes(chars), [chars]);
   const shouldAnimate = !disabled && !shouldReduceMotion && text.length <= maxLength;
-  const [display, setDisplay] = React.useState(text);
+  const [frame, setFrame] = React.useState<DecodeFrame>(() => ({ activeIndex: -1, activeChars: {}, revealedCount: revealableIndexes.length }));
   const [isAnimating, setIsAnimating] = React.useState(false);
 
   React.useEffect(() => {
@@ -58,8 +81,8 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
     startedRef.current = false;
     lastFrameAtRef.current = 0;
     setIsAnimating(false);
-    setDisplay(text);
-  }, [text]);
+    setFrame({ activeIndex: -1, activeChars: {}, revealedCount: revealableIndexes.length });
+  }, [revealableIndexes.length, text]);
 
   React.useEffect(() => {
     if (!shouldAnimate || !canStart || !isInView || startedRef.current) {
@@ -73,12 +96,11 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
     const duration = clampDuration(durationMs);
 
     const tick = (now: number) => {
-      const elapsed = now - startedAt;
-      const progress = Math.min(1, elapsed / duration);
+      const progress = Math.min(1, (now - startedAt) / duration);
 
       if (now - lastFrameAtRef.current >= minFrameMs || progress >= 1) {
         lastFrameAtRef.current = now;
-        setDisplay(progress >= 1 ? text : buildDecodedFrame(text, progress));
+        setFrame(progress >= 1 ? { activeIndex: -1, activeChars: {}, revealedCount: revealableIndexes.length } : buildFrame(text, progress, revealChunkSize));
       }
 
       if (progress < 1) {
@@ -97,28 +119,36 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
         frameRef.current = null;
       }
     };
-  }, [canStart, durationMs, isInView, shouldAnimate, text]);
+  }, [canStart, durationMs, isInView, revealChunkSize, revealableIndexes.length, shouldAnimate, text]);
 
-  const visibleText = shouldAnimate && isAnimating ? display : text;
+  if (!shouldAnimate) {
+    return (
+      <span ref={ref} className={`inline whitespace-pre-wrap align-baseline ${className}`}>
+        {text}
+      </span>
+    );
+  }
+
+  let revealableSeen = 0;
 
   return (
-    <motion.span
-      ref={ref}
-      className={`relative inline-grid min-h-[1em] align-baseline ${className}`}
-      initial={false}
-      animate={{ opacity: 1 }}
-      transition={{ duration: shouldReduceMotion ? 0 : 0.2 }}
-    >
-      <span className="col-start-1 row-start-1 whitespace-pre-wrap" aria-label={text}>
-        <span className="invisible select-none" aria-hidden="true">{text}</span>
-        {shouldAnimate ? (
-          <span className="absolute inset-0 whitespace-pre-wrap" aria-hidden="true">
-            {visibleText}
-            {isAnimating ? <span className="ml-1 inline-block text-amber-300 decode-cursor" aria-hidden="true">{"\u258c"}</span> : null}
-          </span>
-        ) : null}
-        {!shouldAnimate ? text : null}
+    <span ref={ref} className={`inline whitespace-pre-wrap align-baseline ${className}`} aria-label={text} role="text">
+      <span aria-hidden="true">
+        {chars.map((char, index) => {
+          const isStable = stableChars.has(char);
+          const revealOrder = isStable ? -1 : revealableSeen++;
+          const isRevealed = isStable || revealOrder < frame.revealedCount;
+          const isActive = index in frame.activeChars;
+          const visibleChar = isActive ? frame.activeChars[index] : char;
+
+          return (
+            <span key={`${char}-${index}`} className={isActive ? "text-amber-200" : isRevealed ? undefined : "text-stone-100/35"}>
+              {visibleChar}
+            </span>
+          );
+        })}
+        {isAnimating ? <span className="ml-1 inline-block text-amber-300/75 decode-cursor" aria-hidden="true">{"\u258c"}</span> : null}
       </span>
-    </motion.span>
+    </span>
   );
 }
