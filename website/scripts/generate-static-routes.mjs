@@ -50,8 +50,8 @@ const routes = [
   {
     path: "/ro/abonamente",
     lang: "ro",
-    title: "Abonamente Balkan Veil â€” Website-uri premium administrate | Balkan Veil",
-    description: "Abonamente pentru website-uri premium, CMS, suport tehnic si imbunatatiri lunare.",
+    title: "Abonamente Balkan Veil — Prezenta web administrata | Balkan Veil",
+    description: "Abonamente pentru prezenta web administrata, CMS, suport tehnic si imbunatatiri lunare.",
     alternate: { ro: "/ro/abonamente", en: "/en/pricing" },
   },
   {
@@ -106,8 +106,8 @@ const routes = [
   {
     path: "/en/pricing",
     lang: "en",
-    title: "Balkan Veil Pricing â€” Managed Premium Websites | Balkan Veil",
-    description: "Subscription plans for premium websites, CMS setup, technical support and monthly improvements.",
+    title: "Balkan Veil Pricing — Managed Web Presence | Balkan Veil",
+    description: "Subscription plans for managed web presence, CMS setup, technical support and monthly improvements.",
     alternate: { ro: "/ro/abonamente", en: "/en/pricing" },
   },
   {

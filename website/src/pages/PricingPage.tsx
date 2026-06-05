@@ -1,11 +1,15 @@
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArchiveStamp } from "@/components/ArchiveStamp";
+import { DossierPanel } from "@/components/DossierPanel";
 import { PageShell } from "@/components/PageShell";
 import { ProcessPreview } from "@/components/ProcessPreview";
 import { SectionCTA } from "@/components/SectionCTA";
+import { SignalLedger } from "@/components/SignalLedger";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { cardClass, cardMotion, panelClass } from "@/components/motionConfig";
+import { cardMotion } from "@/components/motionConfig";
+import { VeilDivider } from "@/components/VeilDivider";
+import { VeilFrame } from "@/components/VeilFrame";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
@@ -17,68 +21,55 @@ type PricingPageProps = {
 export function PricingPage({ content, goToPage }: PricingPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
-      <div className="grid gap-8 lg:grid-cols-3">
-        {content.plans.map((plan) => (
-          <motion.div key={plan.name} {...cardMotion} className="h-full">
-            <Card className={`${cardClass} h-full ${plan.recommended ? "border-amber-300/35 bg-stone-950/75" : "bg-stone-950/55"}`}>
-              <CardContent className="flex h-full flex-col p-7 md:p-9">
-                <div className="flex min-h-16 items-start justify-between gap-4">
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.12fr_0.9fr] lg:items-start">
+        {content.plans.map((plan, index) => (
+          <motion.div key={plan.name} {...cardMotion} className={`h-full ${plan.recommended ? "lg:-mt-8" : "lg:mt-10"}`}>
+            <VeilFrame label={`${content.planIndexLabel} ${String(index + 1).padStart(2, "0")}`} index={plan.name} className={`h-full ${plan.recommended ? "border-amber-300/40 bg-stone-950/80" : "bg-stone-950/45"}`}>
+              <div className="flex h-full flex-col p-6 md:p-8">
+                <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.3em] text-amber-300">{plan.label}</p>
-                    <h2 className="mt-5 font-serif text-4xl text-stone-100">{plan.name}</h2>
+                    <p className="font-mono text-xs uppercase tracking-[0.3em] text-amber-300">{plan.label}</p>
+                    <h2 className="mt-5 font-serif text-4xl text-stone-100 md:text-5xl">{plan.name}</h2>
                   </div>
-                  {plan.recommended ? <p className="rounded-full border border-amber-300/30 bg-amber-300/10 px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-amber-100">{plan.recommended}</p> : null}
+                  <ArchiveStamp code={String(index + 1).padStart(2, "0")} label={content.minimumLabel} status={plan.recommended} align="right" className="hidden sm:flex" />
                 </div>
 
-                <div className="mt-8 flex items-end gap-2">
-                  <p className="font-serif text-5xl text-amber-100">{plan.price}</p>
-                  <p className="pb-2 text-sm uppercase tracking-[0.2em] text-stone-500">{plan.period}</p>
-                </div>
-                <p className="mt-3 text-xs uppercase tracking-[0.28em] text-stone-500">{content.minimumLabel}</p>
-                <p className="mt-6 text-base leading-7 text-stone-500">{plan.description}</p>
-
-                <div className="mt-8 border-t border-stone-800 pt-6">
-                  <p className="text-xs uppercase tracking-[0.28em] text-amber-300">{content.includedLabel}</p>
-                  <div className="mt-4 space-y-2">
-                    {plan.included.map((item) => (
-                      <p key={item} className="flex gap-2 text-sm leading-6 text-stone-400">
-                        <span className="text-amber-300/70" aria-hidden="true">{"\u2014"}</span>
-                        <span>{item}</span>
-                      </p>
-                    ))}
+                <div className="mt-9 border-y border-stone-800 py-6">
+                  <div className="flex items-end gap-2">
+                    <p className="font-serif text-5xl text-amber-100 md:text-6xl">{plan.price}</p>
+                    <p className="pb-2 text-sm uppercase tracking-[0.2em] text-stone-500">{plan.period}</p>
                   </div>
+                  <p className="mt-4 text-base leading-7 text-stone-500">{plan.description}</p>
                 </div>
 
-                <div className="mt-auto space-y-4 border-t border-stone-800 pt-6">
-                  <p className="text-sm text-stone-400">
+                <SignalLedger items={plan.included} label={content.ledgerLabel} className="mt-7" />
+
+                <div className="mt-auto space-y-4 pt-7">
+                  <p className="text-sm leading-6 text-stone-400">
                     <span className="text-amber-200">{content.supportLabel}:</span> {plan.support}
                   </p>
-                  <p className="text-sm text-stone-400">
+                  <p className="text-sm leading-6 text-stone-400">
                     <span className="text-amber-200">{content.bestForLabel}:</span> {plan.bestFor}
                   </p>
                   <Button type="button" onClick={() => goToPage("access")} className="mt-2 inline-flex min-h-12 w-full items-center justify-center rounded-full bg-amber-300 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black transition hover:bg-amber-200">
                     {content.finalCta.primary} <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </VeilFrame>
           </motion.div>
         ))}
       </div>
+
+      <VeilDivider label={content.minimumLabel} className="mt-20" />
 
       <div className="mt-28">
         <ProcessPreview eyebrow={content.subscriptionSteps.eyebrow} title={content.subscriptionSteps.title} steps={content.subscriptionSteps.steps} />
       </div>
 
-      <div className="mt-28 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
-        <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.notIncluded.eyebrow}</p>
-        <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.notIncluded.title}</h2>
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {content.notIncluded.items.map((item) => (
-            <p key={item} className="rounded-2xl border border-stone-800 bg-black/45 px-5 py-4 text-stone-400">{item}</p>
-          ))}
-        </div>
-      </div>
+      <DossierPanel eyebrow={content.notIncluded.eyebrow} title={content.notIncluded.title} className="mt-28 archive-noise">
+        <SignalLedger items={content.notIncluded.items} label={content.notIncludedLabel} />
+      </DossierPanel>
 
       <motion.div {...cardMotion} className="mt-28 rounded-[2.5rem] border border-amber-300/20 bg-black/55 p-7 md:p-12">
         <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.buyoutNote.eyebrow}</p>
@@ -91,10 +82,9 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.faqTitle}</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {content.faq.map((item) => (
-            <motion.div key={item.q} {...cardMotion} className={panelClass + " p-7"}>
-              <h3 className="font-serif text-2xl text-amber-100 md:text-3xl">{item.q}</h3>
+            <DossierPanel key={item.q} eyebrow={content.faqLabel} title={item.q}>
               <p className="mt-4 text-base leading-7 text-stone-500">{item.a}</p>
-            </motion.div>
+            </DossierPanel>
           ))}
         </div>
       </div>

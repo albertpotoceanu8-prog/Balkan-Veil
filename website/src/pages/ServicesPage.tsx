@@ -1,10 +1,12 @@
 import type React from "react";
 import { ArrowRight, Eye, Lock, Network, Shield, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
+import { DossierPanel } from "@/components/DossierPanel";
 import { PageShell } from "@/components/PageShell";
+import { SignalLedger } from "@/components/SignalLedger";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { cardClass, cardMotion, panelClass } from "@/components/motionConfig";
+import { cardMotion, panelClass } from "@/components/motionConfig";
+import { VeilFrame } from "@/components/VeilFrame";
 import type { ServiceIcon, SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
@@ -25,23 +27,13 @@ type ServicesPageProps = {
 export function ServicesPage({ content, goToPage }: ServicesPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
-      <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-        {content.services.map((service) => (
-          <motion.div key={service.title} {...cardMotion} className="h-full">
-            <Card className={cardClass + " h-full bg-stone-950/60 md:backdrop-blur-xl"}>
-              <CardContent className="flex h-full flex-col p-7 md:p-10">
-                <div className="mb-8 flex h-14 w-14 items-center justify-center rounded-full border border-amber-300/20 bg-amber-300/5 text-amber-200" aria-hidden="true">{serviceIcons[service.icon]}</div>
-                <h3 className="font-serif text-3xl leading-tight">{service.title}</h3>
-                <p className="mt-5 text-lg leading-8 text-stone-500">{service.text}</p>
-                <div className="mt-auto space-y-2 border-t border-stone-800 pt-6">
-                  {service.deliverables.map((deliverable) => (
-                    <p key={deliverable} className="flex gap-2 text-sm leading-6 text-stone-400">
-                      <span className="text-amber-300/70" aria-hidden="true">{"\u2014"}</span> <span>{deliverable}</span>
-                    </p>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-6">
+        {content.services.map((service, index) => (
+          <motion.div key={service.title} {...cardMotion} className={`h-full ${index === 0 || index === 3 ? "xl:col-span-3" : "xl:col-span-2"}`}>
+            <DossierPanel eyebrow={`BV SERVICE / ${String(index + 1).padStart(2, "0")}`} title={service.title} text={service.text} className="h-full md:backdrop-blur-xl">
+              <div className="mb-6 flex h-12 w-12 items-center justify-center border border-amber-300/20 bg-amber-300/5 text-amber-200" aria-hidden="true">{serviceIcons[service.icon]}</div>
+              <SignalLedger items={service.deliverables} />
+            </DossierPanel>
           </motion.div>
         ))}
       </div>
@@ -56,6 +48,24 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="mt-28 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div>
+          <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.architecture.eyebrow}</p>
+          <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.architecture.title}</h2>
+          <p className="mt-6 text-lg leading-8 text-stone-500">{content.architecture.text}</p>
+        </div>
+        <VeilFrame label={content.architecture.eyebrow} index="BV MAP" className="archive-noise p-5 md:p-8">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {content.architecture.nodes.map((node, index) => (
+              <div key={node} className={`border border-stone-800 bg-black/45 p-5 ${index === 0 || index === 5 ? "sm:col-span-2" : ""}`}>
+                <p className="font-mono text-xs text-amber-300/70">{String(index + 1).padStart(2, "0")}</p>
+                <p className="mt-4 font-serif text-3xl text-stone-100">{node}</p>
+              </div>
+            ))}
+          </div>
+        </VeilFrame>
       </div>
 
       <div className="mt-28 rounded-[2.5rem] border border-amber-300/20 bg-gradient-to-br from-stone-950 to-black p-7 md:p-12">

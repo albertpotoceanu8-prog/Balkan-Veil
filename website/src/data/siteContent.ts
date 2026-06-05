@@ -115,8 +115,27 @@ type InterfacePreviewContent = {
   eyebrow: string;
   title: string;
   text: string;
+  systemLabel: string;
+  statusLine: string;
+  moduleLabel: string;
   metrics: string[];
   rows: string[];
+};
+
+type HeroDossierContent = {
+  stampCode: string;
+  stampLabel: string;
+  status: string;
+  ledgerLabel: string;
+  items: string[];
+  note: string;
+};
+
+type ServiceArchitectureContent = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  nodes: string[];
 };
 
 export type SiteContent = {
@@ -183,6 +202,7 @@ export type SiteContent = {
       steps: string[];
     };
     interfacePreview: InterfacePreviewContent;
+    dossier: HeroDossierContent;
     subscriptionIntro: TitledText & { eyebrow: string; points: string[] };
     beforeAfter: BeforeAfterContent;
     finalCta: SectionCtaContent;
@@ -225,6 +245,7 @@ export type SiteContent = {
       title: string;
       items: TitledText[];
     };
+    architecture: ServiceArchitectureContent;
     subscription: {
       eyebrow: string;
       title: string;
@@ -249,6 +270,8 @@ export type SiteContent = {
     bestForLabel: string;
     includedLabel: string;
     notIncludedLabel: string;
+    planIndexLabel: string;
+    ledgerLabel: string;
     plans: PricingPlan[];
     subscriptionSteps: {
       eyebrow: string;
@@ -485,14 +508,14 @@ export const siteContent: Record<Language, SiteContent> = {
     home: {
       badge: "Website-uri / sisteme mici",
       hero: "Site-uri clare, cu atmosfera.",
-      text: "Balkan Veil este la inceput si lucreaza pe proiecte compacte: website-uri, landing pages, formulare, dashboard-uri simple si automatizari usoare. Ideea e simpla: arata bine, spune clar ce vinzi si nu complica inutil lucrurile.",
+      text: "Balkan Veil construieste prezente web administrate pentru business-uri care au nevoie de claritate, atmosfera si un traseu curat catre cereri. Ideea ramane simpla: arata distinct, explica oferta si nu incarca inutil sistemul.",
       primaryCta: "Trimite un Brief",
       secondaryCta: "Vezi Studio",
       builtAround: "Mod de lucru",
       builtTitle: "Incepem cu ce poate fi livrat bine.",
       valueProps: [
         { title: "Cu picioarele pe pamant", text: "Nu incercam sa parem mai mari decat suntem. Preferam un proiect mic, finalizat bine, in locul unei promisiuni mari." },
-        { title: "Design cu functie", text: "Look-ul dark ramane, dar fiecare sectiune trebuie sa explice, sa califice sau sa duca omul mai aproape de contact." },
+        { title: "Design cu functie", text: "Look-ul dark ramane, dar fiecare sectiune trebuie sa explice, sa califice sau sa duca omul mai aproape de inquiry." },
         { title: "Scope sanatos", text: "Daca ceva nu ajuta prima versiune, nu-l bagam doar ca sa para complex. Mai curat inseamna de multe ori mai bun." },
       ],
       audience: [
@@ -503,7 +526,7 @@ export const siteContent: Record<Language, SiteContent> = {
         "Echipe mici care vor ordine in cereri si statusuri",
         "Proiecte care au nevoie de un MVP vizual decent",
       ],
-      signalStrip: ["Strategie inainte de design", "Lansare rapida", "CMS pregatit", "Conversie clara", "Retainer optional"],
+      signalStrip: ["Signal clarity", "Launch protocol", "CMS layer", "Inquiry path", "Operating layer"],
       launchChanges: {
         eyebrow: "Dupa lansare",
         title: "Site-ul trebuie sa schimbe felul in care esti perceput.",
@@ -521,16 +544,27 @@ export const siteContent: Record<Language, SiteContent> = {
       },
       interfacePreview: {
         eyebrow: "Preview",
-        title: "Website-ul ca interfata de business.",
-        text: "Balkan Veil trateaza pagina publica ca pe un sistem: mesaj, incredere, traseu de contact si spatiu pentru continut care poate creste.",
-        metrics: ["offer clear", "mobile ready", "brief path"],
-        rows: ["Homepage structure locked", "Inquiry flow connected", "Launch pass scheduled"],
+        title: "Website-ul ca interfata publica de business.",
+        text: "Balkan Veil trateaza pagina publica ca pe un sistem operational: mesaj, incredere, traseu de inquiry si continut care poate fi administrat.",
+        systemLabel: "Balkan Veil OS",
+        statusLine: "status: public interface mapped",
+        moduleLabel: "module ledger",
+        metrics: ["Signal clarity", "Offer frame", "Launch path"],
+        rows: ["Inquiry flow mapped", "CMS layer prepared", "Monthly support queued"],
+      },
+      dossier: {
+        stampCode: "BV / 01",
+        stampLabel: "digital dossier",
+        status: "signal audit ready",
+        ledgerLabel: "Operating signals",
+        items: ["Clear offer interface", "Guided inquiry path", "Monthly operating layer"],
+        note: "O prezenta publica trebuie sa arate ca o decizie, nu ca o tema reetichetata.",
       },
       subscriptionIntro: {
         eyebrow: "Abonament administrat",
-        title: "Website-uri premium pe abonament pentru business-uri care vor o prezenta serioasa online fara sa gestioneze partea tehnica.",
-        text: "Platesti lunar pentru build, hosting, mentenanta si suport. Contract minim 12 luni, ca proiectul sa poata fi construit, lansat si imbunatatit corect.",
-        points: ["Website custom", "Hosting si deploy incluse", "Suport lunar", "Imbunatatiri controlate"],
+        title: "Prezenta web administrata pentru business-uri care vor claritate online fara sa gestioneze stratul tehnic.",
+        text: "Platesti lunar pentru build, hosting, mentenanta si suport. Contract minim 12 luni, ca sistemul public sa fie construit, lansat si imbunatatit corect.",
+        points: ["Interfata publica custom", "Hosting si deploy incluse", "Strat lunar de suport", "Imbunatatiri controlate"],
       },
       beforeAfter: {
         eyebrow: "Before / After",
@@ -541,9 +575,9 @@ export const siteContent: Record<Language, SiteContent> = {
         after: ["Pozitionare clara", "Sistem vizual premium", "Flow ghidat de inquiry", "Continut pregatit pentru CMS", "Suport lunar definit"],
       },
       finalCta: {
-        eyebrow: "Start",
-        title: "O prima versiune buna este suficienta pentru inceput.",
-        text: "Trimite ideea bruta. O transformam intr-un scope mai mic, mai clar si mai usor de lansat.",
+        eyebrow: "Signal audit",
+        title: "Trimite brief-ul. Mapam interfata publica.",
+        text: "Pornim de la ideea bruta si o transformam intr-un scope clar: oferta, pagini, traseu de inquiry si lansare.",
         primary: "Trimite Brief",
         secondary: "Vezi Abonamente",
       },
@@ -569,11 +603,11 @@ export const siteContent: Record<Language, SiteContent> = {
     servicesPage: {
       eyebrow: "Capabilitati",
       title: "Lucruri concrete pe care le putem construi.",
-      text: "Nu incercam sa acoperim tot. Incepem cu suprafete mici care conteaza: site, landing page, formular, dashboard simplu sau automatizare punctuala.",
+      text: "Nu incercam sa acoperim tot. Construim suprafete publice si sisteme mici care clarifica oferta, traseul de inquiry si operarea lunara.",
       projectTypesLabel: "Tipuri de proiecte",
       ctaLabel: "Brief",
-      ctaTitle: "Ai un proiect concret?",
-      ctaText: "Trimite varianta bruta. O transformam intr-un scope mic, clar si realist.",
+      ctaTitle: "Trimite brief-ul. Mapam interfata.",
+      ctaText: "Pornim de la varianta bruta si definim un scope mic, clar si realist pentru lansare.",
       ctaAction: "Trimite Brief",
       services: [
         {
@@ -645,16 +679,22 @@ export const siteContent: Record<Language, SiteContent> = {
           { title: "Interfata de business", text: "Pagina publica devine primul sistem simplu prin care clientul intelege si intra in discutie." },
         ],
       },
+      architecture: {
+        eyebrow: "Service architecture",
+        title: "Ce contine sistemul public.",
+        text: "Fiecare proiect este mapat ca o arhitectura mica: ce vede clientul, ce administrezi intern si cum ajunge cererea in locul potrivit.",
+        nodes: ["Interface", "Structure", "CMS", "Inquiry", "Support", "Launch"],
+      },
       subscription: {
         eyebrow: "Livrare pe abonament",
-        title: "Serviciile sunt gandite ca website administrat lunar.",
-        text: "Nu primesti doar un build si apoi ramai singur cu partea tehnica. Pachetele includ lansare, hosting/deploy, suport si un cadru lunar pentru modificari mici.",
+        title: "Serviciile sunt gandite ca prezenta web administrata lunar.",
+        text: "Nu primesti doar un build si apoi ramai singur cu partea tehnica. Pachetele includ launch protocol, hosting/deploy, suport si un cadru lunar pentru modificari mici.",
         ctaPrimary: "Vezi Abonamente",
         ctaSecondary: "Trimite Brief",
       },
       monthly: {
         eyebrow: "Lunar",
-        title: "Ce se intampla dupa lansare.",
+        title: "Stratul operational de dupa lansare.",
         items: [
           { title: "Update-uri mici", text: "Ajustari de text, imagini, linkuri, sectiuni simple sau detalii de continut." },
           { title: "Ajustari continut", text: "Pagina poate ramane actuala pe masura ce oferta se schimba." },
@@ -666,44 +706,46 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     pricing: {
       eyebrow: "Abonamente",
-      title: "Website-uri premium administrate pe abonament lunar.",
-      text: "Pentru business-uri care vor o prezenta serioasa online fara sa gestioneze hosting, deploy, mentenanta si modificari mici.",
-      seoTitle: "Abonamente Balkan Veil â€” Website-uri premium administrate",
-      seoDescription: "Abonamente pentru website-uri premium, CMS, suport tehnic si imbunatatiri lunare.",
+      title: "Prezenta web administrata pe abonament lunar.",
+      text: "Pentru business-uri care vor o interfata publica distincta fara sa gestioneze hosting, deploy, mentenanta si modificarile mici.",
+      seoTitle: "Abonamente Balkan Veil — Prezenta web administrata",
+      seoDescription: "Abonamente pentru prezenta web administrata, CMS, suport tehnic si imbunatatiri lunare.",
       minimumLabel: "Contract minim 12 luni",
       supportLabel: "Suport inclus",
       bestForLabel: "Recomandat pentru",
       includedLabel: "Inclus",
       notIncludedLabel: "Nu este inclus",
+      planIndexLabel: "dossier",
+      ledgerLabel: "plan ledger",
       plans: [
         {
           name: "Launch",
           price: "199 EUR",
           period: "/luna",
-          label: "Prezenta premium rapida",
-          description: "Pentru business-uri mici care au nevoie de o prezenta serioasa si usor de lansat.",
-          included: ["1-3 pagini", "Design custom", "Responsive", "Formular contact", "Basic SEO", "Hosting/deploy inclus", "Modificari mici"],
+          label: "Prezenta initiala",
+          description: "Pentru business-uri mici care au nevoie de o interfata publica clara si usor de lansat.",
+          included: ["1-3 pagini", "Design custom", "Responsive", "Inquiry path", "Basic SEO", "Hosting/deploy inclus", "Modificari mici"],
           support: "30 min suport/luna",
-          bestFor: "Business-uri mici care vor prezenta premium rapid.",
+          bestFor: "Business-uri mici care vor interfata publica rapid.",
         },
         {
           name: "Premium",
           price: "399 EUR",
           period: "/luna",
-          label: "Pachet principal",
+          label: "Operating layer",
           description: "Pentru servicii si branduri care au nevoie de continut mai amplu, CMS si iteratii lunare.",
           recommended: "Recomandat",
-          included: ["5-7 pagini", "CMS inclus", "RO/EN optional", "Formular lead-uri", "SEO tehnic", "Analytics basic", "Modificari lunare", "O sectiune noua trimestrial"],
+          included: ["5-7 pagini", "CMS inclus", "RO/EN optional", "Inquiry form", "SEO tehnic", "Analytics basic", "Modificari lunare", "O sectiune noua trimestrial"],
           support: "2 ore suport/luna",
-          bestFor: "Business-uri care vor o prezenta premium administrata.",
+          bestFor: "Business-uri care vor prezenta web administrata.",
         },
         {
           name: "Studio System",
           price: "699 EUR",
           period: "/luna",
-          label: "Sistem web administrat",
-          description: "Pentru business-uri care vor website complet, CMS/admin si optimizare lunara.",
-          included: ["Website premium complet", "CMS/admin separat", "Landing pages extra", "Lead pipeline basic", "Optimizare lunara", "Raport lunar", "Suport prioritar"],
+          label: "Sistem administrat",
+          description: "Pentru business-uri care vor prezenta web completa, CMS/admin si optimizare lunara.",
+          included: ["Prezenta web completa", "CMS/admin separat", "Landing pages extra", "Lead pipeline basic", "Optimizare lunara", "Raport lunar", "Suport prioritar"],
           support: "4-5 ore suport/luna",
           bestFor: "Business-uri care vor sistem web administrat.",
         },
@@ -739,8 +781,8 @@ export const siteContent: Record<Language, SiteContent> = {
       ],
       finalCta: {
         eyebrow: "Urmatorul pas",
-        title: "Alege directia, apoi trimite un brief scurt.",
-        text: "Daca nu stii ce pachet se potriveste, trimite brief-ul si facem verificarea de fit.",
+        title: "Alege stratul operational, apoi trimite brief-ul.",
+        text: "Daca nu stii ce pachet se potriveste, trimite contextul si facem verificarea de fit.",
         primary: "Trimite Brief",
         secondary: "Vezi Servicii",
       },
@@ -793,8 +835,8 @@ export const siteContent: Record<Language, SiteContent> = {
         result: "Ce ar iesi",
       },
       nextLabel: "Brief",
-      nextTitle: "Ai ceva concret? Incepem cu o versiune mica.",
-      nextText: "Trimite ideea in forma bruta. O curatam, taiem ce nu trebuie si pastram ce poate fi construit bine.",
+      nextTitle: "Ai ceva concret? Il asezam intr-un dossier de lansare.",
+      nextText: "Trimite ideea in forma bruta. O curatam, taiem ce nu trebuie si pastram ce poate deveni prima interfata publica.",
       cta: "Trimite Brief",
       conceptLabel: "Directii conceptuale",
       conceptTitle: "Scenarii pe care le putem transforma in sisteme reale.",
@@ -1094,14 +1136,14 @@ export const siteContent: Record<Language, SiteContent> = {
     home: {
       badge: "Websites / small systems",
       hero: "Clear sites with atmosphere.",
-      text: "Balkan Veil is early and works on compact projects: websites, landing pages, forms, simple dashboards and light automations. The idea is simple: look good, explain what you sell and avoid pointless complexity.",
+      text: "Balkan Veil builds managed web presences for businesses that need clarity, atmosphere and a clean path to qualified inquiries. The idea stays simple: look distinct, explain the offer and avoid pointless system weight.",
       primaryCta: "Send Brief",
       secondaryCta: "View Studio",
       builtAround: "Working Style",
       builtTitle: "Start with what can be delivered well.",
       valueProps: [
         { title: "Grounded", text: "We are not trying to look bigger than we are. A small project finished well beats a large promise." },
-        { title: "Design with a job", text: "The dark look stays, but every section needs to explain, qualify or move people closer to contact." },
+        { title: "Design with a job", text: "The dark look stays, but every section needs to explain, qualify or move people closer to inquiry." },
         { title: "Healthy scope", text: "If something does not help the first version, it does not go in just to make the project look complex." },
       ],
       audience: [
@@ -1112,7 +1154,7 @@ export const siteContent: Record<Language, SiteContent> = {
         "Small teams that need order in requests and statuses",
         "Projects that need a decent visual MVP",
       ],
-      signalStrip: ["Strategy first", "Fast launch", "CMS ready", "Conversion focused", "Retainer optional"],
+      signalStrip: ["Signal clarity", "Launch protocol", "CMS layer", "Inquiry path", "Operating layer"],
       launchChanges: {
         eyebrow: "After launch",
         title: "The site should change how the business is perceived.",
@@ -1130,16 +1172,27 @@ export const siteContent: Record<Language, SiteContent> = {
       },
       interfacePreview: {
         eyebrow: "Preview",
-        title: "The website as a business interface.",
-        text: "Balkan Veil treats the public page like a small system: message, trust, contact path and room for content that can grow.",
-        metrics: ["offer clear", "mobile ready", "brief path"],
-        rows: ["Homepage structure locked", "Inquiry flow connected", "Launch pass scheduled"],
+        title: "The website as a public business interface.",
+        text: "Balkan Veil treats the public page like an operating system: message, trust, inquiry path and content that can be managed.",
+        systemLabel: "Balkan Veil OS",
+        statusLine: "status: public interface mapped",
+        moduleLabel: "module ledger",
+        metrics: ["Signal clarity", "Offer frame", "Launch path"],
+        rows: ["Inquiry flow mapped", "CMS layer prepared", "Monthly support queued"],
+      },
+      dossier: {
+        stampCode: "BV / 01",
+        stampLabel: "digital dossier",
+        status: "signal audit ready",
+        ledgerLabel: "Operating signals",
+        items: ["Clear offer interface", "Guided inquiry path", "Monthly operating layer"],
+        note: "A public presence should feel like a decision, not a renamed theme.",
       },
       subscriptionIntro: {
         eyebrow: "Managed subscription",
-        title: "Premium websites on monthly subscription for businesses that want a serious online presence without managing tech.",
-        text: "You pay monthly for build, hosting, maintenance and support. Minimum 12-month contract, so the project can be built, launched and improved properly.",
-        points: ["Custom website", "Hosting and deploy included", "Monthly support", "Controlled improvements"],
+        title: "Managed web presence for businesses that want clarity online without handling the technical layer.",
+        text: "You pay monthly for build, hosting, maintenance and support. Minimum 12-month contract, so the public system can be built, launched and improved properly.",
+        points: ["Custom public interface", "Hosting and deploy included", "Monthly support layer", "Controlled improvements"],
       },
       beforeAfter: {
         eyebrow: "Before / After",
@@ -1150,9 +1203,9 @@ export const siteContent: Record<Language, SiteContent> = {
         after: ["Clear positioning", "Premium visual system", "Guided inquiry flow", "CMS-ready content", "Monthly support path"],
       },
       finalCta: {
-        eyebrow: "Start",
-        title: "A good first version is enough to begin.",
-        text: "Send the rough idea. We turn it into a smaller, clearer and easier-to-launch scope.",
+        eyebrow: "Signal audit",
+        title: "Send the brief. We will map the public interface.",
+        text: "We start from the rough idea and turn it into a clear scope: offer, pages, inquiry path and launch.",
         primary: "Send Brief",
         secondary: "View Pricing",
       },
@@ -1178,11 +1231,11 @@ export const siteContent: Record<Language, SiteContent> = {
     servicesPage: {
       eyebrow: "Capabilities",
       title: "Concrete things we can build.",
-      text: "We are not trying to cover everything. We start with small surfaces that matter: a site, landing page, form, simple dashboard or targeted automation.",
+      text: "We are not trying to cover everything. We build public surfaces and small systems that clarify the offer, inquiry path and monthly operation.",
       projectTypesLabel: "Project Types",
       ctaLabel: "Brief",
-      ctaTitle: "Have something concrete?",
-      ctaText: "Send the rough version. We turn it into a small, clear and realistic scope.",
+      ctaTitle: "Send the brief. We map the interface.",
+      ctaText: "We start from the rough version and define a small, clear and realistic launch scope.",
       ctaAction: "Send Brief",
       services: [
         {
@@ -1254,16 +1307,22 @@ export const siteContent: Record<Language, SiteContent> = {
           { title: "Business interface", text: "The public page becomes the first simple system through which people understand and enter the conversation." },
         ],
       },
+      architecture: {
+        eyebrow: "Service architecture",
+        title: "What the public system contains.",
+        text: "Each project is mapped as a small architecture: what the client sees, what you manage internally and how the inquiry reaches the right place.",
+        nodes: ["Interface", "Structure", "CMS", "Inquiry", "Support", "Launch"],
+      },
       subscription: {
         eyebrow: "Delivered as subscription",
-        title: "The services are packaged as a managed monthly website.",
-        text: "You do not receive a build and then get left alone with the technical side. Plans include launch, hosting/deploy, support and a monthly frame for small changes.",
+        title: "The services are packaged as a managed monthly web presence.",
+        text: "You do not receive a build and then get left alone with the technical side. Plans include launch protocol, hosting/deploy, support and a monthly frame for small changes.",
         ctaPrimary: "View Pricing",
         ctaSecondary: "Send Brief",
       },
       monthly: {
         eyebrow: "Monthly",
-        title: "What happens after launch.",
+        title: "The operating layer after launch.",
         items: [
           { title: "Small updates", text: "Text, image, link, simple section or content-detail adjustments." },
           { title: "Content adjustments", text: "The page can stay current as the offer changes." },
@@ -1275,44 +1334,46 @@ export const siteContent: Record<Language, SiteContent> = {
     },
     pricing: {
       eyebrow: "Pricing",
-      title: "Managed premium websites on monthly subscription.",
-      text: "For businesses that want a serious online presence without managing hosting, deployment, maintenance and small changes.",
-      seoTitle: "Balkan Veil Pricing â€” Managed Premium Websites",
-      seoDescription: "Subscription plans for premium websites, CMS setup, technical support and monthly improvements.",
+      title: "Managed web presence on monthly subscription.",
+      text: "For businesses that want a distinct public interface without managing hosting, deployment, maintenance and small changes.",
+      seoTitle: "Balkan Veil Pricing — Managed Web Presence",
+      seoDescription: "Subscription plans for managed web presence, CMS setup, technical support and monthly improvements.",
       minimumLabel: "Minimum 12-month contract",
       supportLabel: "Included support",
       bestForLabel: "Best for",
       includedLabel: "Included",
       notIncludedLabel: "Not included",
+      planIndexLabel: "dossier",
+      ledgerLabel: "plan ledger",
       plans: [
         {
           name: "Launch",
           price: "199 EUR",
           period: "/month",
-          label: "Fast premium presence",
-          description: "For small businesses that need a serious presence that can launch quickly.",
-          included: ["1-3 pages", "Custom design", "Responsive", "Contact form", "Basic SEO", "Hosting/deploy included", "Small changes"],
+          label: "Initial presence",
+          description: "For small businesses that need a clear public interface that can launch quickly.",
+          included: ["1-3 pages", "Custom design", "Responsive", "Inquiry path", "Basic SEO", "Hosting/deploy included", "Small changes"],
           support: "30 min support/month",
-          bestFor: "Small businesses that need premium presence quickly.",
+          bestFor: "Small businesses that need a public interface quickly.",
         },
         {
           name: "Premium",
           price: "399 EUR",
           period: "/month",
-          label: "Main package",
+          label: "Operating layer",
           description: "For services and brands that need more content, CMS and monthly iteration.",
           recommended: "Recommended",
-          included: ["5-7 pages", "CMS included", "Optional RO/EN", "Lead form", "Technical SEO", "Basic analytics", "Monthly changes", "One new section quarterly"],
+          included: ["5-7 pages", "CMS included", "Optional RO/EN", "Inquiry form", "Technical SEO", "Basic analytics", "Monthly changes", "One new section quarterly"],
           support: "2 hours support/month",
-          bestFor: "Businesses that want a managed premium presence.",
+          bestFor: "Businesses that want a managed web presence.",
         },
         {
           name: "Studio System",
           price: "699 EUR",
           period: "/month",
-          label: "Managed web system",
-          description: "For businesses that want a full website, CMS/admin and monthly optimization.",
-          included: ["Complete premium website", "Separate CMS/admin", "Extra landing pages", "Basic lead pipeline", "Monthly optimization", "Monthly report", "Priority support"],
+          label: "Managed system",
+          description: "For businesses that want a full web presence, CMS/admin and monthly optimization.",
+          included: ["Complete web presence", "Separate CMS/admin", "Extra landing pages", "Basic lead pipeline", "Monthly optimization", "Monthly report", "Priority support"],
           support: "4-5 hours support/month",
           bestFor: "Businesses that want a managed web system.",
         },
@@ -1348,8 +1409,8 @@ export const siteContent: Record<Language, SiteContent> = {
       ],
       finalCta: {
         eyebrow: "Next step",
-        title: "Choose the direction, then send a short brief.",
-        text: "If you are not sure which plan fits, send the brief and we will do the fit check.",
+        title: "Choose the operating layer, then send the brief.",
+        text: "If you are not sure which plan fits, send the context and we will do the fit check.",
         primary: "Send Brief",
         secondary: "View Services",
       },
@@ -1402,8 +1463,8 @@ export const siteContent: Record<Language, SiteContent> = {
         result: "What comes out",
       },
       nextLabel: "Brief",
-      nextTitle: "Have something concrete? Start with a small version.",
-      nextText: "Send the rough idea. We clean it up, cut what is not needed and keep what can be built well.",
+      nextTitle: "Have something concrete? Put it into a launch dossier.",
+      nextText: "Send the rough idea. We clean it up, cut what is not needed and keep what can become the first public interface.",
       cta: "Start Project",
       conceptLabel: "Concept directions",
       conceptTitle: "Scenarios we can turn into real systems.",
