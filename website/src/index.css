@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --veil-black: #050505;
+  --veil-panel: #0e0d0a;
+  --veil-gold: #d4af37;
+  --veil-muted-gold: #8f7835;
+  --veil-text: #f3ead2;
+  --veil-muted: #8e8878;
+  background: #050505;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #050505;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}

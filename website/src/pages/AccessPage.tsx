@@ -1,0 +1,243 @@
+import React from "react";
+import { ArrowRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { PageShell } from "@/components/PageShell";
+import { DecodeText } from "@/components/DecodeText";
+import { TerminalPanel } from "@/components/TerminalPanel";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { cardClass, cardMotion, panelClass } from "@/components/motionConfig";
+import { supabase, supabaseConfigured } from "@/lib/supabase/client";
+import type { SiteContent } from "@/data/siteContent";
+
+type AccessPageProps = {
+  content: SiteContent["access"];
+  terminal: SiteContent["terminal"];
+  cinematic: boolean;
+  compactMotion?: boolean;
+};
+
+export function AccessPage({ content, terminal, cinematic, compactMotion = false }: AccessPageProps) {
+  const [selectedProjectIndex, setSelectedProjectIndex] = React.useState(0);
+  const [selectedBudgetIndex, setSelectedBudgetIndex] = React.useState(1);
+  const [submitted, setSubmitted] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState("");
+  const [form, setForm] = React.useState({
+    name: "",
+    contact: "",
+    brand: "",
+    message: "",
+  });
+  const selectedProject = content.projectOptions[selectedProjectIndex] ?? content.projectOptions[0];
+  const selectedBudget = content.budgetOptions[selectedBudgetIndex] ?? content.budgetOptions[0];
+
+  const submitAccessRequest = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitError("");
+
+    if (!form.name.trim()) {
+      setSubmitError(content.form.requiredName);
+      return;
+    }
+
+    if (!form.contact.trim()) {
+      setSubmitError(content.form.requiredContact);
+      return;
+    }
+
+    if (!supabaseConfigured) {
+      setSubmitError(content.form.backendMissing);
+      return;
+    }
+
+    setSubmitting(true);
+
+    const message = [`Contact: ${form.contact.trim()}`, form.message.trim()].filter(Boolean).join("\n\n");
+    const { error } = await supabase.from("access_requests").insert({
+      name: form.name.trim(),
+      brand: form.brand.trim() || null,
+      project_type: selectedProject,
+      budget_range: selectedBudget,
+      message,
+      status: "new",
+      priority: 1,
+    });
+
+    if (error) {
+      setSubmitting(false);
+      setSubmitError(error.message);
+      return;
+    }
+
+    setSubmitting(false);
+    setSubmitted(true);
+    setForm({ name: "", contact: "", brand: "", message: "" });
+  };
+
+  return (
+    <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
+      <AnimatePresence>
+        {submitted && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/80 px-6 backdrop-blur-md md:backdrop-blur-xl">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 24 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 24 }}
+              transition={{ duration: 0.32 }}
+              className="max-w-xl rounded-[2.5rem] border border-amber-300/20 bg-stone-950 p-10 text-center shadow-[0_0_90px_rgba(251,191,36,0.14)]"
+            >
+              <p className="text-xs uppercase tracking-[0.35em] text-amber-300">{content.modalLabel}</p>
+              <h2 className="mt-6 font-serif text-5xl text-stone-100">{content.modalTitle}</h2>
+              <p className="mt-6 text-lg leading-8 text-stone-500">{content.modalText}</p>
+              <button onClick={() => setSubmitted(false)} className="mt-9 rounded-full border border-amber-300/35 bg-amber-300/10 px-8 py-4 text-xs uppercase tracking-[0.26em] text-amber-100 transition hover:bg-amber-300 hover:text-black">
+                {content.modalButton}
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <Card className="rounded-[2rem] border border-amber-300/20 bg-stone-950/70 text-stone-100 transition duration-500 hover:border-amber-300/35 hover:shadow-[0_0_55px_rgba(251,191,36,0.08)] md:rounded-[2.5rem]">
+          <CardContent className="p-7 md:p-12">
+            <h2 className="font-serif text-4xl text-amber-100">
+              <DecodeText text={content.panelTitle} />
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-stone-500">{content.panelText}</p>
+            <div className="mt-10 space-y-4 text-stone-400">
+              {content.steps.map((step, index) => (
+                <p key={step}>
+                  <span className="text-amber-200">{String(index + 1).padStart(2, "0")}</span> {step}
+                </p>
+              ))}
+            </div>
+            <Button className="mt-10 rounded-full bg-amber-300 px-9 py-7 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)]">
+              contact@balkanveil.com
+            </Button>
+          </CardContent>
+        </Card>
+
+        <div className="relative lg:translate-y-10">
+          <TerminalPanel cinematic={cinematic} loop slow compact={compactMotion} lines={terminal.lines} header={terminal.header} />
+        </div>
+      </div>
+
+      <div className="mt-20 rounded-[2rem] border border-amber-300/15 bg-black/45 p-5 md:mt-28 md:rounded-[2.75rem] md:p-12 md:backdrop-blur-xl">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.inquiryLabel}</p>
+            <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.inquiryTitle}</h2>
+            <p className="mt-6 text-lg leading-8 text-stone-500">{content.inquiryText}</p>
+          </div>
+
+          <form onSubmit={submitAccessRequest} className="grid gap-5">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
+                <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.name}</label>
+                <input value={form.name} onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))} placeholder={content.form.namePlaceholder} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
+              </div>
+              <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
+                <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.contact}</label>
+                <input value={form.contact} onChange={(event) => setForm((current) => ({ ...current, contact: event.target.value }))} placeholder={content.form.contactPlaceholder} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
+              </div>
+              <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
+                <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.brand}</label>
+                <input value={form.brand} onChange={(event) => setForm((current) => ({ ...current, brand: event.target.value }))} placeholder={content.form.brandPlaceholder} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-4 md:p-5">
+              <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.projectType}</label>
+              <div className="mt-5 flex flex-wrap gap-3">
+                {content.projectOptions.map((item, index) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setSelectedProjectIndex(index)}
+                    className={`rounded-full border px-4 py-2 text-sm transition ${selectedProjectIndex === index ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/40 text-stone-400 hover:border-amber-300/35 hover:text-amber-100"}`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-4 md:p-5">
+              <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.budgetRange}</label>
+              <div className="mt-5 flex flex-wrap gap-3">
+                {content.budgetOptions.map((item, index) => (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => setSelectedBudgetIndex(index)}
+                    className={`rounded-full border px-4 py-2 text-sm transition ${selectedBudgetIndex === index ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/40 text-stone-400 hover:border-amber-300/35 hover:text-amber-100"}`}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
+              <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.message}</label>
+              <textarea value={form.message} onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))} placeholder={content.form.messagePlaceholder} className="mt-4 min-h-28 w-full resize-none rounded-xl border border-stone-900 bg-black/30 p-4 text-stone-200 outline-none placeholder:text-stone-700" />
+            </div>
+
+            <div className="rounded-2xl border border-amber-300/15 bg-black/35 p-5">
+              <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.selectedBrief}</p>
+              <p className="mt-3 text-stone-300">
+                <span className="text-amber-200">{content.form.project}:</span> {selectedProject}
+              </p>
+              <p className="mt-1 text-stone-300">
+                <span className="text-amber-200">{content.form.budget}:</span> {selectedBudget}
+              </p>
+            </div>
+
+            {submitError ? <p className="text-sm text-red-300" role="alert">{submitError}</p> : null}
+
+            <Button type="submit" disabled={submitting} className="rounded-full bg-amber-300 px-9 py-7 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)] disabled:opacity-70">
+              {submitting ? content.form.sending : content.form.submit} <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </form>
+        </div>
+      </div>
+
+      <div className="mt-28">
+        <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.packagesLabel}</p>
+        <div className="mt-8 grid gap-8 lg:grid-cols-3">
+          {content.packages.map((item) => (
+            <motion.div key={item.name} {...cardMotion}>
+              <Card className={cardClass}>
+                <CardContent className="p-9">
+                  <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{item.label}</p>
+                  <h3 className="mt-6 font-serif text-4xl text-amber-100">{item.name}</h3>
+                  <p className="mt-5 text-lg leading-8 text-stone-500">{item.text}</p>
+                  <div className="mt-8 space-y-3">
+                    {item.points.map((point) => (
+                      <p key={point} className="text-stone-400">
+                        {"\u2014"} {point}
+                      </p>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-28">
+        <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.faqLabel}</p>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {content.faq.map((item) => (
+            <motion.div key={item.q} {...cardMotion} className={panelClass + " p-8"}>
+              <h3 className="font-serif text-3xl text-stone-100">{item.q}</h3>
+              <p className="mt-5 text-lg leading-8 text-stone-500">{item.a}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </PageShell>
+  );
+}
