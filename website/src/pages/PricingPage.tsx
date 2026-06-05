@@ -34,7 +34,8 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
                   <ArchiveStamp code={String(index + 1).padStart(2, "0")} label={content.minimumLabel} status={plan.recommended} align="right" className="hidden sm:flex" />
                 </div>
 
-                <div className="mt-9 border-y border-stone-800 py-6">
+                <div className="relative mt-9 border-y border-stone-800 py-6">
+                  <span className={plan.recommended ? "absolute right-0 top-6 h-2 w-16 bg-emerald-300/35" : "absolute right-0 top-6 h-2 w-16 bg-amber-300/20"} aria-hidden="true" />
                   <div className="flex items-end gap-2">
                     <p className="font-serif text-5xl text-amber-100 md:text-6xl">{plan.price}</p>
                     <p className="pb-2 text-sm uppercase tracking-[0.2em] text-stone-500">{plan.period}</p>
@@ -71,7 +72,8 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
         <SignalLedger items={content.notIncluded.items} label={content.notIncludedLabel} />
       </DossierPanel>
 
-      <motion.div {...cardMotion} className="mt-28 rounded-[2.5rem] border border-amber-300/20 bg-black/55 p-7 md:p-12">
+      <motion.div {...cardMotion} className="operator-surface mt-28 border border-amber-300/20 bg-black/55 p-7 md:p-12">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.buyoutNote.eyebrow}</p>
         <h2 className="mt-5 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.buyoutNote.title}</h2>
         <p className="mt-6 max-w-4xl text-lg leading-8 text-stone-500">{content.buyoutNote.text}</p>

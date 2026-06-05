@@ -26,10 +26,12 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
   return (
     <>
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-120px)] max-w-[1500px] flex-col justify-center overflow-hidden px-5 py-12 md:min-h-[calc(100vh-160px)] md:px-8 md:py-20">
-        <div className="absolute inset-x-0 top-12 h-96 veil-lines opacity-25" aria-hidden="true" />
+        <div className="absolute inset-x-0 top-12 h-96 operator-grid opacity-25" aria-hidden="true" />
+        <div className="absolute left-5 top-16 hidden h-40 w-px bg-gradient-to-b from-emerald-300/45 via-amber-300/25 to-transparent md:block" aria-hidden="true" />
+        <div className="absolute right-8 top-24 hidden h-2 w-28 bg-red-300/10 md:block" aria-hidden="true" />
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="relative grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
           <div>
-            <div className="mb-8 inline-flex max-w-full items-center gap-2 border border-amber-300/20 bg-amber-300/5 px-4 py-3 text-xs uppercase tracking-[0.24em] text-amber-200 sm:px-5 sm:text-sm sm:tracking-[0.3em]">
+            <div className="mb-8 inline-flex max-w-full items-center gap-2 border border-amber-300/20 bg-amber-300/5 px-4 py-3 text-xs uppercase tracking-[0.24em] text-amber-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] sm:px-5 sm:text-sm sm:tracking-[0.3em]">
               <Lock className="h-4 w-4 shrink-0" aria-hidden="true" /> <span>{content.badge}</span>
             </div>
             <h1 className="max-w-6xl font-serif text-[clamp(3.2rem,16vw,5.75rem)] leading-[0.95] text-stone-100 sm:text-6xl md:text-8xl md:leading-[0.9] lg:text-[8.8rem]">
@@ -63,7 +65,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
       <section className="relative z-10 mx-auto max-w-[1500px] px-5 py-10 md:px-8">
         <div className="grid max-w-6xl gap-4 md:grid-cols-[1.2fr_0.8fr_1fr]">
           {content.valueProps.map((item, index) => (
-            <motion.div key={item.title} {...cardMotion} className={`${panelClass} ${index === 0 ? "md:row-span-2" : ""} p-5 md:p-7 md:backdrop-blur-xl`}>
+            <motion.div key={item.title} {...cardMotion} className={`operator-surface ${panelClass} ${index === 0 ? "md:row-span-2" : ""} p-5 md:p-7 md:backdrop-blur-xl`}>
+              <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
               <p className="font-mono text-xs text-amber-300/70">BV {String(index + 1).padStart(2, "0")}</p>
               <h3 className="mt-5 font-serif text-2xl text-amber-100 md:text-3xl">{item.title}</h3>
               <p className="mt-4 text-base leading-7 text-stone-500">{item.text}</p>
@@ -95,7 +98,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {content.launchChanges.items.map((item, index) => (
-              <motion.div key={item.title} {...cardMotion} className="relative overflow-hidden rounded-[2rem] border border-stone-800 bg-black/45 p-6 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-stone-950/70">
+              <motion.div key={item.title} {...cardMotion} className="operator-surface relative overflow-hidden border border-stone-800 bg-black/45 p-6 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-stone-950/70">
+                <div className="absolute inset-0 operator-scan opacity-25" aria-hidden="true" />
                 <p className="font-serif text-5xl text-amber-100/20">0{index + 1}</p>
                 <h3 className="mt-8 font-serif text-2xl text-amber-100">{item.title}</h3>
                 <p className="mt-4 text-base leading-7 text-stone-500">{item.text}</p>
@@ -113,7 +117,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
         </div>
 
         <div className="mt-24 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          <div className="rounded-[2.5rem] border border-amber-300/20 bg-black/55 p-7 md:p-10 md:backdrop-blur-xl">
+          <div className="operator-surface border border-amber-300/20 bg-black/55 p-7 md:p-10 md:backdrop-blur-xl">
+            <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.subscriptionIntro.eyebrow}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.subscriptionIntro.title}</h2>
             <p className="mt-6 text-lg leading-8 text-stone-500">{content.subscriptionIntro.text}</p>
@@ -128,7 +133,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           </div>
         </div>
 
-        <div className="mt-24 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+        <div className="operator-surface mt-24 border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+          <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
           <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.beforeAfter.eyebrow}</p>
           <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.beforeAfter.title}</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -136,11 +142,11 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
               { label: content.beforeAfter.beforeLabel, items: content.beforeAfter.before },
               { label: content.beforeAfter.afterLabel, items: content.beforeAfter.after },
             ].map((group) => (
-              <div key={group.label} className="rounded-[2rem] border border-stone-800 bg-black/45 p-6">
+              <div key={group.label} className="border border-stone-800 bg-black/45 p-6">
                 <p className="text-xs uppercase tracking-[0.3em] text-amber-300">{group.label}</p>
                 <div className="mt-6 space-y-3">
                   {group.items.map((item) => (
-                    <p key={item} className="rounded-2xl border border-stone-900 bg-stone-950/55 px-4 py-3 text-stone-400">{item}</p>
+                    <p key={item} className="border border-stone-900 bg-stone-950/55 px-4 py-3 text-stone-400">{item}</p>
                   ))}
                 </div>
               </div>

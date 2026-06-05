@@ -17,7 +17,8 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
       <div className="grid gap-6 md:grid-cols-2">
         {content.items.map((item) => (
-          <motion.div key={item.title} {...cardMotion} className="rounded-[2rem] border border-stone-800 bg-black/50 p-9 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/70 hover:shadow-[0_0_45px_rgba(251,191,36,0.08)]">
+          <motion.div key={item.title} {...cardMotion} className="operator-surface border border-stone-800 bg-black/50 p-9 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/70 hover:shadow-[0_0_45px_rgba(251,191,36,0.08)]">
+            <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
             <p className="font-serif text-3xl text-amber-100">{item.title}</p>
             <p className="mt-5 text-lg leading-8 text-stone-500">{item.text}</p>
           </motion.div>
@@ -43,7 +44,8 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
         <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.processLabel}</p>
         <div className="mt-8 grid gap-6 lg:grid-cols-4">
           {content.processSteps.map((item) => (
-            <motion.div key={item.step} {...cardMotion} className={panelClass + " p-8"}>
+            <motion.div key={item.step} {...cardMotion} className={panelClass + " operator-surface rounded-none p-8"}>
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-emerald-300/35 via-amber-300/30 to-red-300/25" aria-hidden="true" />
               <p className="font-mono text-sm text-amber-300">{item.step}</p>
               <h3 className="mt-8 font-serif text-3xl text-stone-100">{item.title}</h3>
               <p className="mt-5 text-base leading-7 text-stone-500">{item.text}</p>
@@ -57,7 +59,7 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.phaseTitle}</h2>
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
           {content.phases.map((phase) => (
-            <motion.div key={phase.step} {...cardMotion} className="rounded-[2rem] border border-amber-300/15 bg-black/45 p-7">
+            <motion.div key={phase.step} {...cardMotion} className="operator-surface border border-amber-300/15 bg-black/45 p-7">
               <p className="font-mono text-sm text-amber-300">{phase.step}</p>
               <h3 className="mt-6 font-serif text-3xl text-amber-100">{phase.title}</h3>
               <p className="mt-5 text-base leading-7 text-stone-500">{phase.text}</p>
@@ -74,7 +76,8 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
         </div>
       </div>
 
-      <div className="mt-28 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+      <div className="operator-surface mt-28 border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.responsibilityLabel}</p>
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.responsibilityTitle}</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -82,11 +85,11 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
             { label: content.clientLabel, items: content.clientProvides },
             { label: content.veilLabel, items: content.veilBuilds },
           ].map((group) => (
-            <div key={group.label} className="rounded-[2rem] border border-stone-800 bg-black/45 p-7">
+            <div key={group.label} className="border border-stone-800 bg-black/45 p-7">
               <p className="text-xs uppercase tracking-[0.3em] text-amber-300">{group.label}</p>
               <div className="mt-6 grid gap-3">
                 {group.items.map((item) => (
-                  <p key={item} className="rounded-2xl border border-stone-900 bg-stone-950/50 px-4 py-3 text-stone-400">{item}</p>
+                  <p key={item} className="border border-stone-900 bg-stone-950/50 px-4 py-3 text-stone-400">{item}</p>
                 ))}
               </div>
             </div>
@@ -99,7 +102,7 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.howItWorks.title}</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {content.howItWorks.steps.map((step) => (
-            <motion.div key={step.step} {...cardMotion} className={panelClass + " p-7"}>
+            <motion.div key={step.step} {...cardMotion} className={panelClass + " operator-surface rounded-none p-7"}>
               <p className="font-mono text-sm text-amber-300">{step.step}</p>
               <h3 className="mt-6 font-serif text-3xl text-stone-100">{step.title}</h3>
               <div className="mt-6 space-y-4 text-base leading-7 text-stone-500">

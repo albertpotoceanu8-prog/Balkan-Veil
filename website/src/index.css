@@ -55,6 +55,50 @@ textarea {
   background-size: 22px 22px, auto;
 }
 
+.operator-grid {
+  background-image:
+    linear-gradient(rgba(34, 197, 94, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(239, 68, 68, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 78% 14%, rgba(212, 175, 55, 0.12), transparent 18rem);
+  background-size: 42px 42px, 42px 42px, auto;
+}
+
+.operator-scan {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 9px),
+    linear-gradient(135deg, rgba(212, 175, 55, 0.06), transparent 42%);
+}
+
+.operator-surface {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.operator-surface::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.06), transparent 46%),
+    linear-gradient(180deg, rgba(239, 68, 68, 0.04), transparent 34%);
+  content: "";
+  pointer-events: none;
+}
+
+.operator-surface::after {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: -1;
+  width: 5rem;
+  height: 5rem;
+  border-right: 1px solid rgba(212, 175, 55, 0.26);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.26);
+  content: "";
+  pointer-events: none;
+}
+
 .veil-frame::before,
 .veil-frame::after {
   position: absolute;

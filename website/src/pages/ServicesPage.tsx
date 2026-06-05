@@ -38,11 +38,13 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         ))}
       </div>
 
-      <div className="mt-16 rounded-[2rem] border border-amber-300/15 bg-black/45 p-5 md:p-8 md:backdrop-blur-xl">
+      <div className="operator-surface mt-16 border border-amber-300/15 bg-black/45 p-5 md:p-8 md:backdrop-blur-xl">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{content.outcomes.eyebrow}</p>
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {content.outcomes.items.map((item, index) => (
-            <div key={item} className="rounded-2xl border border-stone-800 bg-stone-950/55 p-5">
+            <div key={item} className="relative border border-stone-800 bg-stone-950/55 p-5">
+              <span className="absolute right-4 top-4 h-2 w-2 bg-emerald-300/45" aria-hidden="true" />
               <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
               <p className="mt-3 font-serif text-2xl text-stone-100">{item}</p>
             </div>
@@ -59,7 +61,8 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         <VeilFrame label={content.architecture.eyebrow} index="BV MAP" className="archive-noise p-5 md:p-8">
           <div className="grid gap-3 sm:grid-cols-2">
             {content.architecture.nodes.map((node, index) => (
-              <div key={node} className={`border border-stone-800 bg-black/45 p-5 ${index === 0 || index === 5 ? "sm:col-span-2" : ""}`}>
+              <div key={node} className={`relative border border-stone-800 bg-black/45 p-5 ${index === 0 || index === 5 ? "sm:col-span-2" : ""}`}>
+                <span className={index % 4 === 2 ? "absolute right-4 top-4 h-2 w-2 bg-red-300/45" : "absolute right-4 top-4 h-2 w-2 bg-emerald-300/45"} aria-hidden="true" />
                 <p className="font-mono text-xs text-amber-300/70">{String(index + 1).padStart(2, "0")}</p>
                 <p className="mt-4 font-serif text-3xl text-stone-100">{node}</p>
               </div>
@@ -68,7 +71,8 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         </VeilFrame>
       </div>
 
-      <div className="mt-28 rounded-[2.5rem] border border-amber-300/20 bg-gradient-to-br from-stone-950 to-black p-7 md:p-12">
+      <div className="operator-surface mt-28 border border-amber-300/20 bg-gradient-to-br from-stone-950 to-black p-7 md:p-12">
+        <div className="absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.subscription.eyebrow}</p>
@@ -91,7 +95,7 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.monthly.title}</h2>
         <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
           {content.monthly.items.map((item, index) => (
-            <motion.div key={item.title} {...cardMotion} className="rounded-[2rem] border border-stone-800 bg-black/45 p-6">
+            <motion.div key={item.title} {...cardMotion} className="operator-surface border border-stone-800 bg-black/45 p-6">
               <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
               <h3 className="mt-6 font-serif text-2xl text-amber-100">{item.title}</h3>
               <p className="mt-4 text-sm leading-6 text-stone-500">{item.text}</p>
@@ -105,7 +109,7 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.layers.title}</h2>
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
           {content.layers.items.map((item, index) => (
-            <motion.div key={item.title} {...cardMotion} className={panelClass + " p-8"}>
+            <motion.div key={item.title} {...cardMotion} className={panelClass + " operator-surface rounded-none p-8"}>
               <p className="font-serif text-5xl text-amber-100/20">0{index + 1}</p>
               <h3 className="mt-8 font-serif text-3xl text-amber-100">{item.title}</h3>
               <p className="mt-5 text-base leading-7 text-stone-500">{item.text}</p>
@@ -118,14 +122,15 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.projectTypesLabel}</p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {content.projectTypes.map((item) => (
-            <motion.div key={item} {...cardMotion} className="rounded-2xl border border-stone-800 bg-black/40 p-6 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/60 hover:shadow-[0_0_35px_rgba(251,191,36,0.08)]">
+            <motion.div key={item} {...cardMotion} className="border border-stone-800 bg-black/40 p-6 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/60 hover:shadow-[0_0_35px_rgba(251,191,36,0.08)]">
               <p className="font-serif text-2xl text-stone-100">{item}</p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      <div className="mt-28 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+      <div className="operator-surface mt-28 border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.comparison.eyebrow}</p>
@@ -133,7 +138,7 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {content.comparison.items.map((item) => (
-              <motion.div key={item.title} {...cardMotion} className="rounded-[2rem] border border-amber-300/15 bg-black/45 p-6">
+              <motion.div key={item.title} {...cardMotion} className="border border-amber-300/15 bg-black/45 p-6">
                 <h3 className="font-serif text-2xl text-amber-100">{item.title}</h3>
                 <p className="mt-4 text-base leading-7 text-stone-500">{item.text}</p>
               </motion.div>
@@ -142,7 +147,8 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         </div>
       </div>
 
-      <div className="mt-20 rounded-[2rem] border border-amber-300/15 bg-black/45 p-6 md:mt-28 md:p-10 md:backdrop-blur-xl">
+      <div className="operator-surface mt-20 border border-amber-300/15 bg-black/45 p-6 md:mt-28 md:p-10 md:backdrop-blur-xl">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{content.ctaLabel}</p>

@@ -26,7 +26,8 @@ type FooterProps = {
 export function Footer({ navItems, labels, activeCinematic, goToPage }: FooterProps) {
   return (
     <footer className="relative z-10 mx-auto max-w-[1500px] px-5 py-16 md:px-8 md:py-20">
-      <div className="rounded-[2rem] border border-stone-900 bg-black/40 p-6 md:rounded-[2.5rem] md:p-12 md:backdrop-blur-xl">
+      <div className="operator-surface border border-stone-900 bg-black/45 p-6 md:p-12 md:backdrop-blur-xl">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div>
             <div className="flex items-center gap-4">
@@ -63,7 +64,7 @@ export function Footer({ navItems, labels, activeCinematic, goToPage }: FooterPr
 
           <div>
             <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{labels.nodeStatus}</p>
-            <div className="mt-6 rounded-2xl border border-stone-800 bg-stone-950/60 p-5 font-mono text-sm text-stone-500">
+            <div className="mt-6 border border-stone-800 bg-stone-950/60 p-5 font-mono text-sm text-stone-500">
               <p>
                 <span className="text-amber-300">studio</span>: balkan-veil
               </p>

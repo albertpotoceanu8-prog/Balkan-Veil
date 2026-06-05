@@ -15,8 +15,9 @@ type SectionCTAProps = {
 
 export function SectionCTA({ eyebrow, title, text, primaryLabel, secondaryLabel, primaryTarget, secondaryTarget, goToPage }: SectionCTAProps) {
   return (
-    <section className="relative z-10 overflow-hidden rounded-[2.25rem] border border-amber-300/20 bg-gradient-to-br from-stone-950 via-black to-stone-950 p-7 text-center shadow-[0_0_90px_rgba(251,191,36,0.08)] md:rounded-[2.75rem] md:p-14">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(251,191,36,0.16),transparent_38%)]" aria-hidden="true" />
+    <section className="operator-surface relative z-10 overflow-hidden border border-amber-300/20 bg-gradient-to-br from-stone-950 via-black to-stone-950 p-7 text-center shadow-[0_0_90px_rgba(251,191,36,0.08)] md:p-14">
+      <div className="absolute inset-0 operator-grid opacity-25" aria-hidden="true" />
+      <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/55 to-transparent" aria-hidden="true" />
       <div className="relative mx-auto max-w-4xl">
         <p className="text-xs uppercase tracking-[0.35em] text-amber-300">{eyebrow}</p>
         <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-7xl">{title}</h2>

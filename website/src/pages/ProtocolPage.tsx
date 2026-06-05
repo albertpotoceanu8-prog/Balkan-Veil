@@ -14,10 +14,12 @@ type ProtocolPageProps = {
 export function ProtocolPage({ content, goToPage }: ProtocolPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
-      <div className="rounded-[2.5rem] border border-amber-300/20 bg-gradient-to-br from-stone-950 to-black p-10 md:p-16 lg:p-20">
+      <div className="operator-surface border border-amber-300/20 bg-gradient-to-br from-stone-950 to-black p-10 md:p-16 lg:p-20">
+        <div className="absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {content.protocol.map((item) => (
-            <motion.div key={item} {...cardMotion} className="rounded-3xl border border-stone-800 bg-black/50 p-8 text-center transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/70 hover:shadow-[0_0_35px_rgba(251,191,36,0.08)]">
+            <motion.div key={item} {...cardMotion} className="relative border border-stone-800 bg-black/50 p-8 text-center transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/70 hover:shadow-[0_0_35px_rgba(251,191,36,0.08)]">
+              <span className="absolute right-5 top-5 h-2 w-2 border border-emerald-300/45" aria-hidden="true" />
               <p className="font-serif text-3xl text-amber-100">{item}</p>
             </motion.div>
           ))}
@@ -43,7 +45,7 @@ export function ProtocolPage({ content, goToPage }: ProtocolPageProps) {
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.checklistTitle}</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {content.checklist.map((item, index) => (
-            <motion.div key={item.title} {...cardMotion} className={panelClass + " p-7"}>
+            <motion.div key={item.title} {...cardMotion} className={panelClass + " operator-surface rounded-none p-7"}>
               <p className="font-serif text-5xl text-amber-100/20">0{index + 1}</p>
               <h3 className="mt-8 font-serif text-3xl text-amber-100">{item.title}</h3>
               <p className="mt-5 text-base leading-7 text-stone-500">{item.text}</p>

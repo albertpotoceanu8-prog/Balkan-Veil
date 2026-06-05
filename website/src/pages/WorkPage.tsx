@@ -14,7 +14,7 @@ type WorkPageProps = {
 export function WorkPage({ content, goToPage }: WorkPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
-      <p className="mb-10 max-w-3xl border-l border-amber-300/25 pl-5 text-sm leading-6 text-stone-500">{content.disclaimer}</p>
+      <p className="mb-10 max-w-3xl border-l border-amber-300/25 bg-black/25 py-3 pl-5 pr-4 text-sm leading-6 text-stone-500">{content.disclaimer}</p>
 
       <div className="space-y-8">
         {content.projects.map((project) => (
@@ -22,14 +22,15 @@ export function WorkPage({ content, goToPage }: WorkPageProps) {
         ))}
       </div>
 
-      <div className="mt-28 border border-stone-800 bg-stone-950/35 p-6 md:p-10">
+      <div className="operator-surface mt-28 border border-stone-800 bg-stone-950/35 p-6 md:p-10">
+        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.conceptLabel}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.conceptTitle}</h2>
             <p className="mt-6 text-lg leading-8 text-stone-500">{content.conceptText}</p>
           </div>
-          <div className="divide-y divide-stone-800 border-y border-stone-800">
+          <div className="relative divide-y divide-stone-800 border-y border-stone-800">
             {content.concepts.map((item, index) => (
               <article key={item.title} className="grid gap-5 py-6 md:grid-cols-[4rem_0.75fr_1.25fr] md:items-start">
                 <p className="font-mono text-xs text-amber-300/60">0{index + 1}</p>

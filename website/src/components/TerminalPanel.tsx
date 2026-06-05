@@ -157,18 +157,18 @@ export function TerminalPanel({ cinematic = true, loop = false, slow = false, co
       whileHover={effectiveCinematic ? { y: -8, scale: 1.01 } : undefined}
       className="relative mx-auto max-w-5xl"
     >
-      <div className="absolute -inset-16 hidden rounded-full bg-amber-400/10 blur-3xl md:block" />
-      <Card className="relative overflow-hidden rounded-[2.5rem] border border-amber-300/20 bg-black/70 shadow-2xl transition duration-500 hover:border-amber-300/35 hover:shadow-[0_0_70px_rgba(251,191,36,0.12)] md:backdrop-blur-xl">
+      <div className="absolute -inset-8 hidden border border-amber-300/10 bg-amber-400/[0.025] blur-2xl md:block" />
+      <Card className="operator-surface relative overflow-hidden border border-amber-300/20 bg-black/70 shadow-2xl transition duration-500 hover:border-amber-300/35 hover:shadow-[0_0_70px_rgba(251,191,36,0.12)] md:backdrop-blur-xl">
         <CardContent className="p-0">
           <div className="border-b border-stone-800 bg-stone-950/80 px-6 py-5">
             <div className="flex items-center gap-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-stone-700" />
-              <span className="h-2.5 w-2.5 rounded-full bg-stone-700" />
-              <motion.span animate={loop && !shouldReduceMotion ? { opacity: [0.25, 1, 0.25] } : undefined} transition={{ repeat: Infinity, duration: 1.4 }} className="h-2.5 w-2.5 rounded-full bg-amber-300/70" />
+              <span className="h-2 w-7 border border-stone-700 bg-stone-800/70" />
+              <span className="h-2 w-4 border border-red-300/25 bg-red-300/10" />
+              <motion.span animate={loop && !shouldReduceMotion ? { opacity: [0.25, 1, 0.25] } : undefined} transition={{ repeat: Infinity, duration: 1.4 }} className="h-2 w-7 border border-emerald-300/35 bg-emerald-300/15" />
               <span className="ml-4 text-xs uppercase tracking-[0.24em] text-stone-500">{header}</span>
             </div>
           </div>
-          <div className="min-h-[390px] space-y-5 p-8 font-mono text-base text-stone-300 md:p-12 md:text-lg">
+          <div className="operator-scan min-h-[390px] space-y-5 p-8 font-mono text-base text-stone-300 md:p-12 md:text-lg">
             {visibleLines.map((line, index) => (
               <TerminalLine key={`${line}-${index}-${cycle}`} line={line} index={index} cycle={cycle} slow={slow} compact={effectiveCompact} />
             ))}

@@ -75,7 +75,7 @@ export function Navbar({
         <button
           type="button"
           onClick={() => setCommandOpen(true)}
-          className="rounded-full border border-stone-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-stone-400 transition hover:border-amber-300/35 hover:text-amber-200"
+          className="border border-stone-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-stone-400 transition hover:border-amber-300/35 hover:text-amber-200"
         >
           {labels.command}
         </button>
@@ -84,7 +84,7 @@ export function Navbar({
           <button
             type="button"
             onClick={() => setLanguageOpen((value) => !value)}
-            className="flex items-center gap-2 rounded-full border border-stone-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-stone-400 transition hover:border-amber-300/35 hover:text-amber-200"
+            className="flex items-center gap-2 border border-stone-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-stone-400 transition hover:border-amber-300/35 hover:text-amber-200"
             aria-label={labels.language}
             aria-expanded={languageOpen}
             aria-controls={languageMenuId}
@@ -102,13 +102,13 @@ export function Navbar({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.18 }}
-                className="absolute right-0 mt-3 w-40 overflow-hidden rounded-2xl border border-amber-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(251,191,36,0.10)]"
+                className="absolute right-0 mt-3 w-40 overflow-hidden border border-amber-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(251,191,36,0.10)]"
               >
                 <button
                   type="button"
                   onClick={() => chooseLanguage("ro")}
                   aria-pressed={language === "ro"}
-                  className={`block w-full rounded-xl px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
+                  className={`block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "border-amber-300/20 bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
                 >
                   {labels.ro}
                 </button>
@@ -116,7 +116,7 @@ export function Navbar({
                   type="button"
                   onClick={() => chooseLanguage("en")}
                   aria-pressed={language === "en"}
-                  className={`mt-1 block w-full rounded-xl px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
+                  className={`mt-1 block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "border-amber-300/20 bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
                 >
                   {labels.en}
                 </button>
@@ -129,7 +129,7 @@ export function Navbar({
           type="button"
           onClick={() => setCinematic((value) => !value)}
           aria-pressed={activeCinematic}
-          className={`rounded-full border px-4 py-2 text-[10px] uppercase tracking-[0.24em] transition ${activeCinematic ? "border-amber-300/40 bg-amber-300/10 text-amber-200" : "border-stone-800 bg-black/30 text-stone-500"}`}
+          className={`border px-4 py-2 text-[10px] uppercase tracking-[0.24em] transition ${activeCinematic ? "border-amber-300/40 bg-amber-300/10 text-amber-200" : "border-stone-800 bg-black/30 text-stone-500"}`}
         >
           {prefersReducedMotion ? labels.reducedMotion : activeCinematic ? labels.cinematicOn : labels.standard}
         </button>
@@ -138,7 +138,7 @@ export function Navbar({
       <button
         type="button"
         onClick={() => setMobileOpen((value) => !value)}
-        className="flex h-11 w-11 items-center justify-center rounded-full border border-stone-800 bg-black/40 text-stone-300 lg:hidden"
+        className="flex h-11 w-11 items-center justify-center border border-stone-800 bg-black/40 text-stone-300 lg:hidden"
         aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={mobileOpen}
         aria-controls="mobile-menu"
