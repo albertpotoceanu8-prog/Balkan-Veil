@@ -1,4 +1,4 @@
-name: CI
+name: Quality
 
 on:
   pull_request:
@@ -10,12 +10,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
+  group: quality-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   website:
-    name: Website checks
+    name: Website quality checks
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -40,6 +40,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Test
+        run: npm run test
 
       - name: Build
         run: npm run build

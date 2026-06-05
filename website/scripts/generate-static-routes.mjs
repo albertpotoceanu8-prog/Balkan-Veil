@@ -6,6 +6,22 @@ const siteOrigin = normalizeOrigin(process.env.VITE_SITE_ORIGIN || fallbackSiteO
 const distDir = path.resolve("dist");
 const indexPath = path.join(distDir, "index.html");
 const ogImage = `${siteOrigin}/balkan-veil-logo.png`;
+const expectedRoutePaths = [
+  "/ro",
+  "/ro/studio",
+  "/ro/servicii",
+  "/ro/lucrari",
+  "/ro/build",
+  "/ro/protocol",
+  "/ro/acces",
+  "/en",
+  "/en/studio",
+  "/en/services",
+  "/en/work",
+  "/en/build",
+  "/en/protocol",
+  "/en/access",
+];
 
 const routes = [
   {
@@ -108,7 +124,9 @@ const routes = [
   },
 ];
 
-const template = await readFile(indexPath, "utf8");
+validateRoutes(routes);
+
+const template = await readTemplate();
 
 await Promise.all(
   routes.map(async (route) => {
@@ -144,6 +162,28 @@ function applyMeta(templateHtml, route) {
   html = upsertLink(html, "alternate", "x-default", `${siteOrigin}/ro`);
 
   return html;
+}
+
+async function readTemplate() {
+  try {
+    return await readFile(indexPath, "utf8");
+  } catch (error) {
+    throw new Error(`Static route generation requires ${indexPath}. Run vite build before this script. Original error: ${error.message}`);
+  }
+}
+
+function validateRoutes(routeList) {
+  const routePaths = new Set(routeList.map((route) => route.path));
+  const missingRoutes = expectedRoutePaths.filter((routePath) => !routePaths.has(routePath));
+
+  if (missingRoutes.length) {
+    throw new Error(`Missing static route metadata for: ${missingRoutes.join(", ")}`);
+  }
+
+  const incompleteRoute = routeList.find((route) => !route.title || !route.description || !route.alternate?.ro || !route.alternate?.en);
+  if (incompleteRoute) {
+    throw new Error(`Incomplete static route metadata for: ${incompleteRoute.path}`);
+  }
 }
 
 function replaceTag(html, tag, content) {

@@ -70,16 +70,6 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
       return;
     }
 
-    if (!parsed.data.name) {
-      setSubmitError(content.form.requiredName);
-      return;
-    }
-
-    if (!parsed.data.contact) {
-      setSubmitError(content.form.requiredContact);
-      return;
-    }
-
     if (!supabaseConfigured) {
       setSubmitError(content.form.backendMissing);
       return;
@@ -87,26 +77,30 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
 
     setSubmitting(true);
 
-    const message = [`Contact: ${parsed.data.contact}`, parsed.data.message].filter(Boolean).join("\n\n");
-    const { error } = await supabase.from("access_requests").insert({
-      name: parsed.data.name,
-      brand: parsed.data.brand || null,
-      project_type: selectedProject,
-      budget_range: selectedBudget,
-      message,
-      status: "new",
-      priority: 1,
-    });
+    try {
+      const message = [`Contact: ${parsed.data.contact}`, parsed.data.message].filter(Boolean).join("\n\n");
+      const { error } = await supabase.from("access_requests").insert({
+        name: parsed.data.name,
+        brand: parsed.data.brand || null,
+        project_type: selectedProject,
+        budget_range: selectedBudget,
+        message,
+        status: "new",
+        priority: 1,
+      });
 
-    if (error) {
-      setSubmitting(false);
+      if (error) {
+        setSubmitError(content.form.submitError || genericSubmitError);
+        return;
+      }
+
+      setSubmitted(true);
+      setForm({ name: "", contact: "", brand: "", message: "", website: "" });
+    } catch {
       setSubmitError(content.form.submitError || genericSubmitError);
-      return;
+    } finally {
+      setSubmitting(false);
     }
-
-    setSubmitting(false);
-    setSubmitted(true);
-    setForm({ name: "", contact: "", brand: "", message: "", website: "" });
   };
 
   return (
