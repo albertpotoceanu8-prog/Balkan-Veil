@@ -74,7 +74,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
         <SignalStrip items={content.signalStrip} />
 
         <div className="mt-20 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <div>
+          <div className="lg:self-start">
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.builtAround}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-7xl">
               <DecodeText text={content.builtTitle} />
