@@ -152,6 +152,46 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         </div>
       </div>
 
+      <div className="mt-24 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.beforeApply.eyebrow}</p>
+            <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.beforeApply.title}</h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {content.beforeApply.items.map((item, index) => (
+              <motion.div key={item.title} {...cardMotion} className="rounded-[2rem] border border-amber-300/15 bg-black/45 p-6">
+                <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
+                <h3 className="mt-6 font-serif text-2xl text-amber-100">{item.title}</h3>
+                <p className="mt-4 text-base leading-7 text-stone-500">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-20 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.fit.eyebrow}</p>
+          <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.fit.title}</h2>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          {[
+            { label: content.fit.goodLabel, items: content.fit.good },
+            { label: content.fit.badLabel, items: content.fit.bad },
+          ].map((group) => (
+            <div key={group.label} className="rounded-[2rem] border border-stone-800 bg-black/45 p-6">
+              <p className="text-xs uppercase tracking-[0.3em] text-amber-300">{group.label}</p>
+              <div className="mt-6 space-y-3">
+                {group.items.map((item) => (
+                  <p key={item} className="rounded-2xl border border-stone-900 bg-stone-950/55 px-4 py-3 text-stone-400">{item}</p>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-20 rounded-[2rem] border border-amber-300/15 bg-black/45 p-5 md:mt-28 md:rounded-[2.75rem] md:p-12 md:backdrop-blur-xl">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
@@ -237,6 +277,20 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               {submitting ? content.form.sending : content.form.submit} <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
             </Button>
           </form>
+        </div>
+      </div>
+
+      <div className="mt-28">
+        <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.afterSubmit.eyebrow}</p>
+        <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.afterSubmit.title}</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-3">
+          {content.afterSubmit.steps.map((step, index) => (
+            <motion.div key={step.title} {...cardMotion} className={panelClass + " p-7"}>
+              <p className="font-serif text-5xl text-amber-100/20">0{index + 1}</p>
+              <h3 className="mt-8 font-serif text-3xl text-amber-100">{step.title}</h3>
+              <p className="mt-5 text-base leading-7 text-stone-500">{step.text}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
 

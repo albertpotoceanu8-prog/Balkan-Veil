@@ -64,6 +64,27 @@ type Principle = {
   text: string;
 };
 
+type TitledText = {
+  title: string;
+  text: string;
+};
+
+type SectionCtaContent = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  primary: string;
+  secondary?: string;
+};
+
+type InterfacePreviewContent = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  metrics: string[];
+  rows: string[];
+};
+
 export type SiteContent = {
   navItems: NavItem[];
   commandItems: CommandItem[];
@@ -115,6 +136,20 @@ export type SiteContent = {
     builtTitle: string;
     valueProps: Array<{ title: string; text: string }>;
     audience: string[];
+    signalStrip: string[];
+    launchChanges: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      items: TitledText[];
+    };
+    methodPreview: {
+      eyebrow: string;
+      title: string;
+      steps: string[];
+    };
+    interfacePreview: InterfacePreviewContent;
+    finalCta: SectionCtaContent;
   };
   studio: {
     eyebrow: string;
@@ -140,6 +175,20 @@ export type SiteContent = {
     ctaAction: string;
     services: Service[];
     projectTypes: string[];
+    layers: {
+      eyebrow: string;
+      title: string;
+      items: TitledText[];
+    };
+    outcomes: {
+      eyebrow: string;
+      items: string[];
+    };
+    comparison: {
+      eyebrow: string;
+      title: string;
+      items: TitledText[];
+    };
   };
   work: {
     eyebrow: string;
@@ -155,6 +204,10 @@ export type SiteContent = {
     nextTitle: string;
     nextText: string;
     cta: string;
+    conceptLabel: string;
+    conceptTitle: string;
+    conceptText: string;
+    concepts: Array<TitledText & { tag: string }>;
   };
   build: {
     eyebrow: string;
@@ -169,6 +222,16 @@ export type SiteContent = {
     processSteps: ProcessStep[];
     caseStudies: CaseStudy[];
     resultLabel: string;
+    phaseLabel: string;
+    phaseTitle: string;
+    phases: Array<ProcessStep & { deliverables: string[] }>;
+    responsibilityLabel: string;
+    responsibilityTitle: string;
+    clientLabel: string;
+    veilLabel: string;
+    clientProvides: string[];
+    veilBuilds: string[];
+    finalCta: SectionCtaContent;
   };
   protocol: {
     eyebrow: string;
@@ -178,6 +241,10 @@ export type SiteContent = {
     positioningLabel: string;
     decodeTitle: string;
     paragraphs: string[];
+    checklistLabel: string;
+    checklistTitle: string;
+    checklist: TitledText[];
+    finalCta: SectionCtaContent;
   };
   access: {
     eyebrow: string;
@@ -216,6 +283,24 @@ export type SiteContent = {
     };
     packagesLabel: string;
     faqLabel: string;
+    beforeApply: {
+      eyebrow: string;
+      title: string;
+      items: TitledText[];
+    };
+    fit: {
+      eyebrow: string;
+      title: string;
+      goodLabel: string;
+      badLabel: string;
+      good: string[];
+      bad: string[];
+    };
+    afterSubmit: {
+      eyebrow: string;
+      title: string;
+      steps: TitledText[];
+    };
     projectOptions: string[];
     budgetOptions: string[];
     packages: PackageItem[];
@@ -309,6 +394,36 @@ export const siteContent: Record<Language, SiteContent> = {
         "Echipe mici care vor ordine in cereri si statusuri",
         "Proiecte care au nevoie de un MVP vizual decent",
       ],
+      signalStrip: ["Strategie inainte de design", "Lansare rapida", "CMS pregatit", "Conversie clara", "Retainer optional"],
+      launchChanges: {
+        eyebrow: "Dupa lansare",
+        title: "Site-ul trebuie sa schimbe felul in care esti perceput.",
+        text: "Nu promitem miracole. Construim o prima versiune care face oferta mai clara, mai credibila si mai usor de trimis mai departe.",
+        items: [
+          { title: "Oferta devine citibila", text: "Vizitatorul intelege repede ce faci, pentru cine si de ce merita sa continue." },
+          { title: "Prezenta nu mai pare improvizata", text: "Structura, ritmul vizual si detaliile mici dau senzatia de business asezat." },
+          { title: "Cererea are un traseu", text: "CTA-urile, formularul si selectia de scope muta discutia spre un brief concret." },
+        ],
+      },
+      methodPreview: {
+        eyebrow: "Metoda",
+        title: "Un proces mic, dar cu margini clare.",
+        steps: ["Diagnose", "Frame", "Build", "Polish", "Launch"],
+      },
+      interfacePreview: {
+        eyebrow: "Preview",
+        title: "Website-ul ca interfata de business.",
+        text: "Balkan Veil trateaza pagina publica ca pe un sistem: mesaj, incredere, traseu de contact si spatiu pentru continut care poate creste.",
+        metrics: ["offer clear", "mobile ready", "brief path"],
+        rows: ["Homepage structure locked", "Inquiry flow connected", "Launch pass scheduled"],
+      },
+      finalCta: {
+        eyebrow: "Start",
+        title: "O prima versiune buna este suficienta pentru inceput.",
+        text: "Trimite ideea bruta. O transformam intr-un scope mai mic, mai clar si mai usor de lansat.",
+        primary: "Trimite Brief",
+        secondary: "Vezi Servicii",
+      },
     },
     studio: {
       eyebrow: "Studio",
@@ -385,6 +500,28 @@ export const siteContent: Record<Language, SiteContent> = {
         "Tool-uri asistate de AI",
         "Pagini de prezentare brand",
       ],
+      layers: {
+        eyebrow: "Straturi",
+        title: "Cum impachetam munca.",
+        items: [
+          { title: "Pozitionare", text: "Clarificam oferta, publicul si actiunea principala inainte sa incarcam pagina cu sectiuni." },
+          { title: "Interfata", text: "Construim layout-ul, mobile-ul, ritmul vizual si componentele care fac site-ul usor de parcurs." },
+          { title: "Lansare", text: "Conectam formularul, verificam rutele, pregatim deployment-ul si lasam loc pentru continut viitor." },
+        ],
+      },
+      outcomes: {
+        eyebrow: "Outcomes",
+        items: ["Mesaj mai clar", "Mobile mai solid", "Brief-uri mai bune", "Lansare controlata"],
+      },
+      comparison: {
+        eyebrow: "Pozitie",
+        title: "Nu este doar o tema frumoasa.",
+        items: [
+          { title: "Nu template", text: "Folosim structura potrivita ofertei, nu o pagina generica reetichetata." },
+          { title: "Nu doar vizual", text: "Designul trebuie sa ajute intelegerea, contactul si decizia, nu doar sa arate intunecat." },
+          { title: "Interfata de business", text: "Pagina publica devine primul sistem simplu prin care clientul intelege si intra in discutie." },
+        ],
+      },
     },
     work: {
       eyebrow: "Directii",
@@ -437,6 +574,15 @@ export const siteContent: Record<Language, SiteContent> = {
       nextTitle: "Ai ceva concret? Incepem cu o versiune mica.",
       nextText: "Trimite ideea in forma bruta. O curatam, taiem ce nu trebuie si pastram ce poate fi construit bine.",
       cta: "Trimite Brief",
+      conceptLabel: "Directii conceptuale",
+      conceptTitle: "Scenarii pe care le putem transforma in sisteme reale.",
+      conceptText: "Acestea nu sunt clienti reali sau studii de caz. Sunt exemple de contexte unde o prima versiune Balkan Veil poate aduce claritate.",
+      concepts: [
+        { tag: "Premium local", title: "Serviciu local premium", text: "O pagina care explica oferta, filtreaza cererile nepotrivite si ridica perceptia business-ului." },
+        { tag: "Hospitality", title: "Boutique hospitality", text: "O prezenta vizuala pentru locatie, experienta si rezervare, fara sa para un template de turism." },
+        { tag: "Expert brand", title: "Consultant / expert", text: "Un profil serios, cu proof selectiv, servicii clare si traseu catre discutie." },
+        { tag: "Operations", title: "Dashboard operational mic", text: "Un tool intern pentru cereri, statusuri si prioritati, construit doar cat are sens pentru prima versiune." },
+      ],
     },
     build: {
       eyebrow: "Build Digital",
@@ -487,6 +633,26 @@ export const siteContent: Record<Language, SiteContent> = {
         },
       ],
       resultLabel: "Output",
+      phaseLabel: "Faze",
+      phaseTitle: "De la idee la lansare controlata.",
+      phases: [
+        { step: "01", title: "Clarificare", text: "Stabilim oferta, publicul, obiectivul si ce trebuie sa faca prima versiune.", deliverables: ["Brief curatat", "Structura pagina", "Lista de riscuri"] },
+        { step: "02", title: "Constructie", text: "Ridicam interfata, componentele, continutul si fluxul principal de contact sau operare.", deliverables: ["Frontend responsive", "Formular / flow", "Stari cheie"] },
+        { step: "03", title: "Lansare", text: "Verificam mobile, viteza perceputa, SEO de baza si detaliile care fac livrarea credibila.", deliverables: ["QA final", "Deployment", "Note de predare"] },
+      ],
+      responsibilityLabel: "Responsabilitati",
+      responsibilityTitle: "Ce aduci tu si ce construim noi.",
+      clientLabel: "Client",
+      veilLabel: "Balkan Veil",
+      clientProvides: ["Oferta bruta", "Exemple de clienti", "Ton si limite", "Feedback rapid"],
+      veilBuilds: ["Structura", "Interfata", "Flow de contact", "Lansare tehnica"],
+      finalCta: {
+        eyebrow: "Build",
+        title: "Pastreaza prima versiune suficient de mica.",
+        text: "Daca ideea are sens, o transformam intr-un build care poate fi lansat, vazut si imbunatatit.",
+        primary: "Trimite Brief",
+        secondary: "Vezi Protocol",
+      },
     },
     protocol: {
       eyebrow: "Protocolul Studioului",
@@ -499,6 +665,21 @@ export const siteContent: Record<Language, SiteContent> = {
         "Balkan Veil pastreaza partea vizuala intunecata, dar nu vrem ca site-ul sa para o masca. Daca suntem la inceput, asta trebuie sa se simta normal, nu ascuns.",
         "Se potriveste proiectelor care au nevoie de o prima versiune prezentabila: destul de buna ca sa fie folosita, destul de simpla ca sa poata fi imbunatatita repede.",
       ],
+      checklistLabel: "Checklist",
+      checklistTitle: "Ce verificam inainte sa numim proiectul gata.",
+      checklist: [
+        { title: "Mesaj", text: "Oferta poate fi inteleasa fara explicatii suplimentare." },
+        { title: "Traseu", text: "Exista o actiune clara pentru vizitatorul potrivit." },
+        { title: "Mobil", text: "Pagina pastreaza ritmul, citibilitatea si CTA-ul pe ecrane mici." },
+        { title: "Extensibil", text: "Structura permite continut nou fara sa refacem tot." },
+      ],
+      finalCta: {
+        eyebrow: "Protocol",
+        title: "Daca regulile au sens, urmatorul pas este un brief scurt.",
+        text: "Scrie versiunea bruta. Stabilim repede daca scope-ul poate fi construit bine.",
+        primary: "Trimite Brief",
+        secondary: "Vezi Servicii",
+      },
     },
     access: {
       eyebrow: "Acces",
@@ -536,6 +717,32 @@ export const siteContent: Record<Language, SiteContent> = {
       },
       packagesLabel: "Pachete",
       faqLabel: "FAQ",
+      beforeApply: {
+        eyebrow: "Inainte de brief",
+        title: "Nu ai nevoie de un plan perfect.",
+        items: [
+          { title: "Problema", text: "Spune ce nu functioneaza acum sau ce trebuie sa devina mai clar." },
+          { title: "Prima versiune", text: "Descrie ce ar trebui sa existe la lansare, nu tot ce ar putea exista vreodata." },
+          { title: "Limite", text: "Mentioneaza buget, termen, continut disponibil si ce trebuie evitat." },
+        ],
+      },
+      fit: {
+        eyebrow: "Fit",
+        title: "Alegem scope-uri unde prima versiune poate iesi bine.",
+        goodLabel: "Good fit",
+        badLabel: "Not a fit",
+        good: ["Site sau landing page clar", "Portal mic / dashboard simplu", "Workflow care se repeta deja", "Business cu oferta reala"],
+        bad: ["Platforma uriasa din prima", "Promisiuni de crestere nerealiste", "Brand fara oferta clara", "Deadline imposibil"],
+      },
+      afterSubmit: {
+        eyebrow: "Dupa trimitere",
+        title: "Ce se intampla dupa ce trimiti brief-ul.",
+        steps: [
+          { title: "Citire", text: "Verificam rapid problema, obiectivul si tipul de proiect." },
+          { title: "Scope", text: "Daca se potriveste, propunem o prima versiune mai clara." },
+          { title: "Decizie", text: "Confirmam daca merita construit acum sau daca trebuie taiat din scope." },
+        ],
+      },
       projectOptions: ["Website", "Landing Page", "Portal Client", "Dashboard", "Automatizare", "Prezenta Brand"],
       budgetOptions: ["Sub €500", "€500-€1.5k", "€1.5k-€3k", "€3k+", "Nu sunt sigur inca"],
       packages: [
@@ -654,6 +861,36 @@ export const siteContent: Record<Language, SiteContent> = {
         "Small teams that need order in requests and statuses",
         "Projects that need a decent visual MVP",
       ],
+      signalStrip: ["Strategy first", "Fast launch", "CMS ready", "Conversion focused", "Retainer optional"],
+      launchChanges: {
+        eyebrow: "After launch",
+        title: "The site should change how the business is perceived.",
+        text: "No miracle claims. The first version should make the offer clearer, more credible and easier to send to someone else.",
+        items: [
+          { title: "The offer becomes readable", text: "A visitor quickly understands what you do, who it is for and why they should continue." },
+          { title: "The presence stops feeling improvised", text: "Structure, visual rhythm and small details create a more considered business surface." },
+          { title: "The inquiry gets a path", text: "Calls to action, form choices and scope framing move the conversation toward a useful brief." },
+        ],
+      },
+      methodPreview: {
+        eyebrow: "Method",
+        title: "A small process with clear edges.",
+        steps: ["Diagnose", "Frame", "Build", "Polish", "Launch"],
+      },
+      interfacePreview: {
+        eyebrow: "Preview",
+        title: "The website as a business interface.",
+        text: "Balkan Veil treats the public page like a small system: message, trust, contact path and room for content that can grow.",
+        metrics: ["offer clear", "mobile ready", "brief path"],
+        rows: ["Homepage structure locked", "Inquiry flow connected", "Launch pass scheduled"],
+      },
+      finalCta: {
+        eyebrow: "Start",
+        title: "A good first version is enough to begin.",
+        text: "Send the rough idea. We turn it into a smaller, clearer and easier-to-launch scope.",
+        primary: "Send Brief",
+        secondary: "View Services",
+      },
     },
     studio: {
       eyebrow: "Studio",
@@ -730,6 +967,28 @@ export const siteContent: Record<Language, SiteContent> = {
         "AI-assisted tools",
         "Brand presentation pages",
       ],
+      layers: {
+        eyebrow: "Layers",
+        title: "How we package the work.",
+        items: [
+          { title: "Positioning", text: "We clarify the offer, audience and primary action before loading the page with sections." },
+          { title: "Interface", text: "We build the layout, mobile experience, visual rhythm and components that make the site easy to scan." },
+          { title: "Launch", text: "We connect the form, check routes, prepare deployment and leave room for future content." },
+        ],
+      },
+      outcomes: {
+        eyebrow: "Outcomes",
+        items: ["Clearer message", "Stronger mobile", "Better briefs", "Controlled launch"],
+      },
+      comparison: {
+        eyebrow: "Position",
+        title: "Not just a pretty theme.",
+        items: [
+          { title: "Not a template", text: "The structure follows the offer, not a generic page with a renamed logo." },
+          { title: "Not just visuals", text: "The design has to improve understanding, contact and decision, not only look dark." },
+          { title: "Business interface", text: "The public page becomes the first simple system through which people understand and enter the conversation." },
+        ],
+      },
     },
     work: {
       eyebrow: "Directions",
@@ -782,6 +1041,15 @@ export const siteContent: Record<Language, SiteContent> = {
       nextTitle: "Have something concrete? Start with a small version.",
       nextText: "Send the rough idea. We clean it up, cut what is not needed and keep what can be built well.",
       cta: "Start Project",
+      conceptLabel: "Concept directions",
+      conceptTitle: "Scenarios we can turn into real systems.",
+      conceptText: "These are not real clients or case studies. They are examples of contexts where a Balkan Veil first version can create clarity.",
+      concepts: [
+        { tag: "Premium local", title: "Premium local service", text: "A page that explains the offer, filters poor-fit inquiries and raises how the business is perceived." },
+        { tag: "Hospitality", title: "Boutique hospitality", text: "A visual presence for place, experience and booking without feeling like a tourism template." },
+        { tag: "Expert brand", title: "Consultant / expert", text: "A serious profile with selective proof, clear services and a path toward a conversation." },
+        { tag: "Operations", title: "Small operations dashboard", text: "An internal tool for requests, statuses and priorities, built only as far as the first version needs." },
+      ],
     },
     build: {
       eyebrow: "Digital Build",
@@ -832,6 +1100,26 @@ export const siteContent: Record<Language, SiteContent> = {
         },
       ],
       resultLabel: "Output",
+      phaseLabel: "Phases",
+      phaseTitle: "From idea to controlled launch.",
+      phases: [
+        { step: "01", title: "Clarify", text: "We define the offer, audience, goal and what the first version needs to do.", deliverables: ["Clean brief", "Page structure", "Risk list"] },
+        { step: "02", title: "Build", text: "We assemble the interface, components, content and main contact or operations flow.", deliverables: ["Responsive frontend", "Form / flow", "Key states"] },
+        { step: "03", title: "Launch", text: "We check mobile, perceived speed, basic SEO and the details that make delivery credible.", deliverables: ["Final QA", "Deployment", "Handover notes"] },
+      ],
+      responsibilityLabel: "Responsibilities",
+      responsibilityTitle: "What you bring and what we build.",
+      clientLabel: "Client",
+      veilLabel: "Balkan Veil",
+      clientProvides: ["Rough offer", "Client examples", "Tone and limits", "Fast feedback"],
+      veilBuilds: ["Structure", "Interface", "Contact flow", "Technical launch"],
+      finalCta: {
+        eyebrow: "Build",
+        title: "Keep the first version small enough to finish.",
+        text: "If the idea makes sense, we turn it into a build that can be launched, seen and improved.",
+        primary: "Send Brief",
+        secondary: "View Protocol",
+      },
     },
     protocol: {
       eyebrow: "The Studio Protocol",
@@ -844,6 +1132,21 @@ export const siteContent: Record<Language, SiteContent> = {
         "Balkan Veil keeps the dark visual side, but the site should not feel like a mask. If we are early, that should feel normal, not hidden.",
         "It fits projects that need a presentable first version: good enough to use, simple enough to improve quickly.",
       ],
+      checklistLabel: "Checklist",
+      checklistTitle: "What we check before calling the project ready.",
+      checklist: [
+        { title: "Message", text: "The offer can be understood without extra explanation." },
+        { title: "Path", text: "There is a clear action for the right visitor." },
+        { title: "Mobile", text: "The page keeps rhythm, readability and CTA access on small screens." },
+        { title: "Extendable", text: "The structure allows new content without rebuilding everything." },
+      ],
+      finalCta: {
+        eyebrow: "Protocol",
+        title: "If the rules make sense, the next step is a short brief.",
+        text: "Write the rough version. We quickly decide whether the scope can be built well.",
+        primary: "Send Brief",
+        secondary: "View Services",
+      },
     },
     access: {
       eyebrow: "Access",
@@ -881,6 +1184,32 @@ export const siteContent: Record<Language, SiteContent> = {
       },
       packagesLabel: "Packages",
       faqLabel: "FAQ",
+      beforeApply: {
+        eyebrow: "Before you apply",
+        title: "You do not need a perfect plan.",
+        items: [
+          { title: "Problem", text: "Say what is not working now or what needs to become clearer." },
+          { title: "First version", text: "Describe what should exist at launch, not everything that could exist one day." },
+          { title: "Limits", text: "Mention budget, timing, available content and anything that should be avoided." },
+        ],
+      },
+      fit: {
+        eyebrow: "Fit",
+        title: "We choose scopes where a first version can be built well.",
+        goodLabel: "Good fit",
+        badLabel: "Not a fit",
+        good: ["Clear website or landing page", "Small portal / simple dashboard", "Workflow that already repeats", "Business with a real offer"],
+        bad: ["Huge platform from day one", "Unrealistic growth promises", "Brand with no clear offer", "Impossible deadline"],
+      },
+      afterSubmit: {
+        eyebrow: "After sending",
+        title: "What happens after you send the brief.",
+        steps: [
+          { title: "Read", text: "We quickly check the problem, goal and project type." },
+          { title: "Scope", text: "If it fits, we propose a clearer first version." },
+          { title: "Decision", text: "We confirm whether it is worth building now or needs a smaller scope." },
+        ],
+      },
       projectOptions: ["Website", "Landing Page", "Client Portal", "Dashboard", "Automation", "Brand Presence"],
       budgetOptions: ["Under €500", "€500-€1.5k", "€1.5k-€3k", "€3k+", "Not sure yet"],
       packages: [

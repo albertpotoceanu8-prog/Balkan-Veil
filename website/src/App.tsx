@@ -240,8 +240,8 @@ function PublicSite() {
             {page === "studio" && <StudioPage content={content.studio} />}
             {page === "services" && <ServicesPage content={content.servicesPage} goToPage={goToPage} />}
             {page === "work" && <WorkPage content={content.work} goToPage={goToPage} />}
-            {page === "build" && <BuildPage content={content.build} />}
-            {page === "protocol" && <ProtocolPage content={content.protocol} />}
+            {page === "build" && <BuildPage content={content.build} goToPage={goToPage} />}
+            {page === "protocol" && <ProtocolPage content={content.protocol} goToPage={goToPage} />}
             {page === "access" && <AccessPage content={content.access} terminal={content.terminal} cinematic={activeCinematic} compactMotion={isMobile} />}
           </motion.div>
         </AnimatePresence>

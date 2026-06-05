@@ -2,6 +2,10 @@ import { ArrowRight, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { DecodeText } from "@/components/DecodeText";
+import { InterfaceMockup } from "@/components/InterfaceMockup";
+import { ProcessPreview } from "@/components/ProcessPreview";
+import { SectionCTA } from "@/components/SectionCTA";
+import { SignalStrip } from "@/components/SignalStrip";
 import { cardMotion, panelClass } from "@/components/motionConfig";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
@@ -47,7 +51,9 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
       </section>
 
       <section className="relative z-10 mx-auto max-w-[1500px] px-5 py-10 md:px-8">
-        <div className="mb-16 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+        <SignalStrip items={content.signalStrip} />
+
+        <div className="mt-20 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.builtAround}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-7xl">
@@ -61,6 +67,35 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
               </motion.div>
             ))}
           </div>
+        </div>
+
+        <div className="mt-24 grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.launchChanges.eyebrow}</p>
+            <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.launchChanges.title}</h2>
+            <p className="mt-6 text-lg leading-8 text-stone-500">{content.launchChanges.text}</p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-3">
+            {content.launchChanges.items.map((item, index) => (
+              <motion.div key={item.title} {...cardMotion} className="relative overflow-hidden rounded-[2rem] border border-stone-800 bg-black/45 p-6 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-stone-950/70">
+                <p className="font-serif text-5xl text-amber-100/20">0{index + 1}</p>
+                <h3 className="mt-8 font-serif text-2xl text-amber-100">{item.title}</h3>
+                <p className="mt-4 text-base leading-7 text-stone-500">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-24">
+          <ProcessPreview eyebrow={content.methodPreview.eyebrow} title={content.methodPreview.title} steps={content.methodPreview.steps} />
+        </div>
+
+        <div className="mt-24">
+          <InterfaceMockup eyebrow={content.interfacePreview.eyebrow} title={content.interfacePreview.title} text={content.interfacePreview.text} metrics={content.interfacePreview.metrics} rows={content.interfacePreview.rows} />
+        </div>
+
+        <div className="mt-24">
+          <SectionCTA eyebrow={content.finalCta.eyebrow} title={content.finalCta.title} text={content.finalCta.text} primaryLabel={content.finalCta.primary} secondaryLabel={content.finalCta.secondary} primaryTarget="access" secondaryTarget="services" goToPage={goToPage} />
         </div>
       </section>
     </>
