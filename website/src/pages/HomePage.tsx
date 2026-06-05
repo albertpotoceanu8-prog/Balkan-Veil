@@ -77,7 +77,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           <div className="lg:self-start">
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.builtAround}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-7xl">
-              <DecodeText text={content.builtTitle} />
+              <DecodeText text={content.builtTitle} disabled />
             </h2>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">

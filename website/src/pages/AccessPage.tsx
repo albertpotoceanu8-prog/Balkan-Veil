@@ -140,7 +140,7 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         <Card className="rounded-[2rem] border border-amber-300/20 bg-stone-950/70 text-stone-100 transition duration-500 hover:border-amber-300/35 hover:shadow-[0_0_55px_rgba(251,191,36,0.08)] md:rounded-[2.5rem]">
           <CardContent className="p-7 md:p-12">
             <h2 className="font-serif text-4xl text-amber-100">
-              <DecodeText text={content.panelTitle} />
+              <DecodeText text={content.panelTitle} disabled />
             </h2>
             <p className="mt-6 text-lg leading-8 text-stone-500">{content.panelText}</p>
             <div className="mt-10 space-y-4 text-stone-400">

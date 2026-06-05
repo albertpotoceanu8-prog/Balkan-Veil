@@ -80,8 +80,22 @@ textarea {
   border-bottom-width: 1px;
 }
 
+.decode-cursor {
+  animation: decode-cursor-blink 0.8s steps(2, start) infinite;
+}
+
+@keyframes decode-cursor-blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .decode-cursor {
+    animation: none;
   }
 }

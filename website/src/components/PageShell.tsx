@@ -25,7 +25,7 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
       <header className="max-w-5xl">
         <p className="text-sm uppercase tracking-[0.38em] text-amber-300">{eyebrow}</p>
         <h1 className="mt-6 max-w-[12ch] font-serif text-[clamp(3rem,14vw,5.75rem)] leading-[0.95] text-stone-100 sm:max-w-5xl sm:text-6xl md:text-8xl lg:text-[8rem]">
-          <DecodeText text={title} />
+          <DecodeText text={title} disabled />
         </h1>
         {text && <p className="mt-7 max-w-4xl text-lg leading-8 text-stone-400 md:mt-8 md:text-2xl md:leading-10">{text}</p>}
       </header>

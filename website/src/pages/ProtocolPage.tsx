@@ -28,7 +28,7 @@ export function ProtocolPage({ content, goToPage }: ProtocolPageProps) {
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.positioningLabel}</p>
           <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">
-            <DecodeText text={content.decodeTitle} />
+            <DecodeText text={content.decodeTitle} disabled />
           </h2>
         </div>
         <div className="space-y-6 text-xl leading-9 text-stone-400">
