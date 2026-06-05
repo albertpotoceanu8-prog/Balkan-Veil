@@ -43,6 +43,7 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
   });
   const selectedProject = content.projectOptions[selectedProjectIndex] ?? content.projectOptions[0];
   const selectedBudget = content.budgetOptions[selectedBudgetIndex] ?? content.budgetOptions[0];
+  const hasSubmitError = Boolean(submitError);
 
   const submitAccessRequest = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -107,7 +108,7 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
       <AnimatePresence>
         {submitted && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/80 px-6 backdrop-blur-md md:backdrop-blur-xl">
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[1001] flex items-center justify-center bg-black/80 px-6 backdrop-blur-md md:backdrop-blur-xl" role="dialog" aria-modal="true" aria-labelledby="access-success-title" aria-describedby="access-success-description">
             <motion.div
               initial={{ opacity: 0, scale: 0.94, y: 24 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -116,9 +117,9 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               className="max-w-xl rounded-[2.5rem] border border-amber-300/20 bg-stone-950 p-10 text-center shadow-[0_0_90px_rgba(251,191,36,0.14)]"
             >
               <p className="text-xs uppercase tracking-[0.35em] text-amber-300">{content.modalLabel}</p>
-              <h2 className="mt-6 font-serif text-5xl text-stone-100">{content.modalTitle}</h2>
-              <p className="mt-6 text-lg leading-8 text-stone-500">{content.modalText}</p>
-              <button onClick={() => setSubmitted(false)} className="mt-9 rounded-full border border-amber-300/35 bg-amber-300/10 px-8 py-4 text-xs uppercase tracking-[0.26em] text-amber-100 transition hover:bg-amber-300 hover:text-black">
+              <h2 id="access-success-title" className="mt-6 font-serif text-5xl text-stone-100">{content.modalTitle}</h2>
+              <p id="access-success-description" className="mt-6 text-lg leading-8 text-stone-500">{content.modalText}</p>
+              <button type="button" onClick={() => setSubmitted(false)} className="mt-9 rounded-full border border-amber-300/35 bg-amber-300/10 px-8 py-4 text-xs uppercase tracking-[0.26em] text-amber-100 transition hover:bg-amber-300 hover:text-black">
                 {content.modalButton}
               </button>
             </motion.div>
@@ -140,9 +141,9 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
                 </p>
               ))}
             </div>
-            <Button className="mt-10 rounded-full bg-amber-300 px-9 py-7 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)]">
+            <a href="mailto:contact@balkanveil.com" className="mt-10 inline-flex min-h-14 items-center justify-center rounded-full bg-amber-300 px-9 py-4 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)]">
               contact@balkanveil.com
-            </Button>
+            </a>
           </CardContent>
         </Card>
 
@@ -159,36 +160,37 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
             <p className="mt-6 text-lg leading-8 text-stone-500">{content.inquiryText}</p>
           </div>
 
-          <form onSubmit={submitAccessRequest} className="grid gap-5">
+          <form onSubmit={submitAccessRequest} className="grid gap-5" aria-describedby={hasSubmitError ? "access-form-error" : undefined} noValidate>
             <div className="hidden" aria-hidden="true">
-              <label>
+              <label htmlFor="access-website">
                 Website
-                <input tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} />
+                <input id="access-website" name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} />
               </label>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
-                <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.name}</label>
-                <input value={form.name} onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))} placeholder={content.form.namePlaceholder} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
+                <label htmlFor="access-name" className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.name}</label>
+                <input id="access-name" name="name" value={form.name} onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))} placeholder={content.form.namePlaceholder} autoComplete="name" required maxLength={80} aria-invalid={hasSubmitError && form.name.trim().length < 2} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
               </div>
               <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
-                <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.contact}</label>
-                <input value={form.contact} onChange={(event) => setForm((current) => ({ ...current, contact: event.target.value }))} placeholder={content.form.contactPlaceholder} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
+                <label htmlFor="access-contact" className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.contact}</label>
+                <input id="access-contact" name="contact" value={form.contact} onChange={(event) => setForm((current) => ({ ...current, contact: event.target.value }))} placeholder={content.form.contactPlaceholder} autoComplete="email" required maxLength={120} aria-invalid={hasSubmitError && form.contact.trim().length < 3} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
               </div>
               <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
-                <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.brand}</label>
-                <input value={form.brand} onChange={(event) => setForm((current) => ({ ...current, brand: event.target.value }))} placeholder={content.form.brandPlaceholder} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
+                <label htmlFor="access-brand" className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.brand}</label>
+                <input id="access-brand" name="organization" value={form.brand} onChange={(event) => setForm((current) => ({ ...current, brand: event.target.value }))} placeholder={content.form.brandPlaceholder} autoComplete="organization" maxLength={120} className="mt-3 h-10 w-full border-b border-stone-800 bg-transparent text-stone-200 outline-none placeholder:text-stone-700" />
               </div>
             </div>
 
             <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-4 md:p-5">
-              <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.projectType}</label>
+              <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.projectType}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {content.projectOptions.map((item, index) => (
                   <button
                     key={item}
                     type="button"
                     onClick={() => setSelectedProjectIndex(index)}
+                    aria-pressed={selectedProjectIndex === index}
                     className={`rounded-full border px-4 py-2 text-sm transition ${selectedProjectIndex === index ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/40 text-stone-400 hover:border-amber-300/35 hover:text-amber-100"}`}
                   >
                     {item}
@@ -198,13 +200,14 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
             </div>
 
             <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-4 md:p-5">
-              <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.budgetRange}</label>
+              <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.budgetRange}</p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {content.budgetOptions.map((item, index) => (
                   <button
                     key={item}
                     type="button"
                     onClick={() => setSelectedBudgetIndex(index)}
+                    aria-pressed={selectedBudgetIndex === index}
                     className={`rounded-full border px-4 py-2 text-sm transition ${selectedBudgetIndex === index ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/40 text-stone-400 hover:border-amber-300/35 hover:text-amber-100"}`}
                   >
                     {item}
@@ -214,11 +217,11 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
             </div>
 
             <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
-              <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.message}</label>
-              <textarea value={form.message} onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))} placeholder={content.form.messagePlaceholder} className="mt-4 min-h-28 w-full resize-none rounded-xl border border-stone-900 bg-black/30 p-4 text-stone-200 outline-none placeholder:text-stone-700" />
+              <label htmlFor="access-message" className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.message}</label>
+              <textarea id="access-message" name="message" value={form.message} onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))} placeholder={content.form.messagePlaceholder} maxLength={2000} className="mt-4 min-h-28 w-full resize-none rounded-xl border border-stone-900 bg-black/30 p-4 text-stone-200 outline-none placeholder:text-stone-700" />
             </div>
 
-            <div className="rounded-2xl border border-amber-300/15 bg-black/35 p-5">
+            <div className="rounded-2xl border border-amber-300/15 bg-black/35 p-5" aria-live="polite">
               <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.selectedBrief}</p>
               <p className="mt-3 text-stone-300">
                 <span className="text-amber-200">{content.form.project}:</span> {selectedProject}
@@ -228,10 +231,10 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               </p>
             </div>
 
-            {submitError ? <p className="text-sm text-red-300" role="alert">{submitError}</p> : null}
+            <p id="access-form-error" className="min-h-5 text-sm text-red-300" role="alert" aria-live="polite">{submitError}</p>
 
-            <Button type="submit" disabled={submitting} className="rounded-full bg-amber-300 px-9 py-7 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)] disabled:opacity-70">
-              {submitting ? content.form.sending : content.form.submit} <ArrowRight className="ml-2 h-4 w-4" />
+            <Button type="submit" disabled={submitting} aria-busy={submitting} className="inline-flex min-h-14 items-center justify-center rounded-full bg-amber-300 px-9 py-4 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)] disabled:cursor-not-allowed disabled:opacity-70">
+              {submitting ? content.form.sending : content.form.submit} <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
             </Button>
           </form>
         </div>

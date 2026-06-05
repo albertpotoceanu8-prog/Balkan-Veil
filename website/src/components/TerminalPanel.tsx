@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 
 const terminalLines = [
@@ -115,18 +115,21 @@ type TerminalPanelProps = {
 
 export function TerminalPanel({ cinematic = true, loop = false, slow = false, compact = false, lines = terminalLines, header = "veil://brief" }: TerminalPanelProps) {
   const activeLines = React.useMemo(() => [...lines], [lines]);
-  const [visibleLines, setVisibleLines] = React.useState<string[]>(cinematic ? [] : activeLines);
+  const shouldReduceMotion = useReducedMotion();
+  const effectiveCinematic = cinematic && !shouldReduceMotion;
+  const effectiveCompact = compact || Boolean(shouldReduceMotion);
+  const [visibleLines, setVisibleLines] = React.useState<string[]>(effectiveCinematic ? [] : activeLines);
   const [cycle, setCycle] = React.useState(0);
 
   React.useEffect(() => {
-    if (!cinematic) {
+    if (!effectiveCinematic) {
       setVisibleLines(activeLines);
       return;
     }
 
     const timers: number[] = [];
-    const lineDelay = compact ? 420 : slow ? 2600 : 650;
-    const restartDelay = compact ? 1400 : slow ? 9500 : 1800;
+    const lineDelay = effectiveCompact ? 420 : slow ? 2600 : 650;
+    const restartDelay = effectiveCompact ? 1400 : slow ? 9500 : 1800;
 
     activeLines.forEach((_, index) => {
       const timer = window.setTimeout(() => {
@@ -140,18 +143,18 @@ export function TerminalPanel({ cinematic = true, loop = false, slow = false, co
     });
 
     return () => timers.forEach((timer) => window.clearTimeout(timer));
-  }, [cinematic, loop, slow, compact, activeLines, cycle]);
+  }, [effectiveCinematic, loop, slow, effectiveCompact, activeLines, cycle]);
 
   React.useEffect(() => {
-    if (cinematic) setVisibleLines([]);
-  }, [cycle, cinematic]);
+    if (effectiveCinematic) setVisibleLines([]);
+  }, [cycle, effectiveCinematic]);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.65, delay: 0.15 }}
-      whileHover={cinematic ? { y: -8, scale: 1.01 } : undefined}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.65, delay: shouldReduceMotion ? 0 : 0.15 }}
+      whileHover={effectiveCinematic ? { y: -8, scale: 1.01 } : undefined}
       className="relative mx-auto max-w-5xl"
     >
       <div className="absolute -inset-16 hidden rounded-full bg-amber-400/10 blur-3xl md:block" />
@@ -161,15 +164,15 @@ export function TerminalPanel({ cinematic = true, loop = false, slow = false, co
             <div className="flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-stone-700" />
               <span className="h-2.5 w-2.5 rounded-full bg-stone-700" />
-              <motion.span animate={loop ? { opacity: [0.25, 1, 0.25] } : undefined} transition={{ repeat: Infinity, duration: 1.4 }} className="h-2.5 w-2.5 rounded-full bg-amber-300/70" />
+              <motion.span animate={loop && !shouldReduceMotion ? { opacity: [0.25, 1, 0.25] } : undefined} transition={{ repeat: Infinity, duration: 1.4 }} className="h-2.5 w-2.5 rounded-full bg-amber-300/70" />
               <span className="ml-4 text-xs uppercase tracking-[0.24em] text-stone-500">{header}</span>
             </div>
           </div>
           <div className="min-h-[390px] space-y-5 p-8 font-mono text-base text-stone-300 md:p-12 md:text-lg">
             {visibleLines.map((line, index) => (
-              <TerminalLine key={`${line}-${index}-${cycle}`} line={line} index={index} cycle={cycle} slow={slow} compact={compact} />
+              <TerminalLine key={`${line}-${index}-${cycle}`} line={line} index={index} cycle={cycle} slow={slow} compact={effectiveCompact} />
             ))}
-            {cinematic && visibleLines.length < activeLines.length && (
+            {effectiveCinematic && visibleLines.length < activeLines.length && (
               <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: slow ? 1.25 : 0.75 }} className="h-5 w-3 bg-amber-300/80" />
             )}
           </div>

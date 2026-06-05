@@ -144,8 +144,8 @@ function PublicSite() {
   }, [prefersReducedMotion, isMobile]);
 
   React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [page, language]);
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  }, [page, language, prefersReducedMotion]);
 
   React.useEffect(() => {
     if (!decorativeCinematic) return;
@@ -238,7 +238,7 @@ function PublicSite() {
             {route.isNotFound && <NotFoundPage language={language} goHome={() => goToPage("home")} />}
             {!route.isNotFound && page === "home" && <HomePage content={content.home} goToPage={goToPage} cinematic={activeCinematic} introDone={introDone} />}
             {page === "studio" && <StudioPage content={content.studio} />}
-            {page === "services" && <ServicesPage content={content.servicesPage} />}
+            {page === "services" && <ServicesPage content={content.servicesPage} goToPage={goToPage} />}
             {page === "work" && <WorkPage content={content.work} goToPage={goToPage} />}
             {page === "build" && <BuildPage content={content.build} />}
             {page === "protocol" && <ProtocolPage content={content.protocol} />}
@@ -273,7 +273,7 @@ function NotFoundPage({ language, goHome }: { language: Language; goHome: () => 
       <p className="text-sm uppercase tracking-[0.38em] text-amber-300">{copy.eyebrow}</p>
       <h1 className="mt-6 font-serif text-5xl leading-tight text-stone-100 md:text-8xl">{copy.title}</h1>
       <p className="mt-7 max-w-2xl text-lg leading-8 text-stone-400 md:text-2xl md:leading-10">{copy.text}</p>
-      <button onClick={goHome} className="mt-10 rounded-full bg-amber-300 px-8 py-4 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-amber-200">
+      <button type="button" onClick={goHome} className="mt-10 rounded-full bg-amber-300 px-8 py-4 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-amber-200">
         {copy.action}
       </button>
     </section>

@@ -25,8 +25,8 @@ type FooterProps = {
 
 export function Footer({ navItems, labels, activeCinematic, goToPage }: FooterProps) {
   return (
-    <footer className="relative z-10 mx-auto max-w-[1500px] px-8 py-20">
-      <div className="rounded-[2.5rem] border border-stone-900 bg-black/40 p-8 md:p-12 md:backdrop-blur-xl">
+    <footer className="relative z-10 mx-auto max-w-[1500px] px-5 py-16 md:px-8 md:py-20">
+      <div className="rounded-[2rem] border border-stone-900 bg-black/40 p-6 md:rounded-[2.5rem] md:p-12 md:backdrop-blur-xl">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div>
             <div className="flex items-center gap-4">
@@ -43,19 +43,19 @@ export function Footer({ navItems, labels, activeCinematic, goToPage }: FooterPr
 
           <div>
             <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{labels.navigate}</p>
-            <div className="mt-6 space-y-3">
+            <nav className="mt-6 space-y-3" aria-label="Footer navigation">
               {navItems.map(([key, label]) => (
-                <button key={key} onClick={() => goToPage(key)} className="block text-stone-500 transition hover:text-amber-200">
+                <button key={key} type="button" onClick={() => goToPage(key)} className="block text-stone-500 transition hover:text-amber-200">
                   {label}
                 </button>
               ))}
-            </div>
+            </nav>
           </div>
 
           <div>
             <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{labels.contact}</p>
             <div className="mt-6 space-y-3 text-stone-500">
-              <p>contact@balkanveil.com</p>
+              <a href="mailto:contact@balkanveil.com" className="inline-block transition hover:text-amber-200">contact@balkanveil.com</a>
               <p>{labels.contactLineOne}</p>
               <p>{labels.contactLineTwo}</p>
             </div>

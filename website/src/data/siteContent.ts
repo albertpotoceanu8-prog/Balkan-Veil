@@ -134,6 +134,10 @@ export type SiteContent = {
     title: string;
     text: string;
     projectTypesLabel: string;
+    ctaLabel: string;
+    ctaTitle: string;
+    ctaText: string;
+    ctaAction: string;
     services: Service[];
     projectTypes: string[];
   };
@@ -329,6 +333,10 @@ export const siteContent: Record<Language, SiteContent> = {
       title: "Lucruri concrete pe care le putem construi.",
       text: "Nu incercam sa acoperim tot. Incepem cu suprafete mici care conteaza: site, landing page, formular, dashboard simplu sau automatizare punctuala.",
       projectTypesLabel: "Tipuri de proiecte",
+      ctaLabel: "Brief",
+      ctaTitle: "Ai un proiect concret?",
+      ctaText: "Trimite varianta bruta. O transformam intr-un scope mic, clar si realist.",
+      ctaAction: "Trimite Brief",
       services: [
         {
           icon: "Terminal",
@@ -670,6 +678,10 @@ export const siteContent: Record<Language, SiteContent> = {
       title: "Concrete things we can build.",
       text: "We are not trying to cover everything. We start with small surfaces that matter: a site, landing page, form, simple dashboard or targeted automation.",
       projectTypesLabel: "Project Types",
+      ctaLabel: "Brief",
+      ctaTitle: "Have something concrete?",
+      ctaText: "Send the rough version. We turn it into a small, clear and realistic scope.",
+      ctaAction: "Send Brief",
       services: [
         {
           icon: "Terminal",

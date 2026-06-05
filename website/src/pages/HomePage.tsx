@@ -18,10 +18,10 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
     <>
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-120px)] max-w-[1500px] flex-col justify-center overflow-hidden px-5 py-12 md:min-h-[calc(100vh-160px)] md:px-8 md:py-20">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-6xl">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/5 px-5 py-3 text-sm uppercase tracking-[0.3em] text-amber-200">
-            <Lock className="h-4 w-4" /> {content.badge}
+          <div className="mb-8 inline-flex max-w-full items-center gap-2 rounded-full border border-amber-300/20 bg-amber-300/5 px-4 py-3 text-xs uppercase tracking-[0.24em] text-amber-200 sm:px-5 sm:text-sm sm:tracking-[0.3em]">
+            <Lock className="h-4 w-4 shrink-0" aria-hidden="true" /> <span>{content.badge}</span>
           </div>
-          <h1 className="max-w-6xl font-serif text-5xl leading-[0.95] tracking-tight text-stone-100 sm:text-6xl md:text-8xl md:leading-[0.9] lg:text-[8.8rem]">
+          <h1 className="max-w-6xl font-serif text-[clamp(3.2rem,16vw,5.75rem)] leading-[0.95] text-stone-100 sm:text-6xl md:text-8xl md:leading-[0.9] lg:text-[8.8rem]">
             {cinematic ? <DecodeText text={content.hero} canStart={introDone} /> : content.hero}
           </h1>
           <p className="mt-8 max-w-4xl text-lg leading-8 text-stone-400 md:mt-12 md:text-2xl md:leading-10">{content.text}</p>
@@ -35,11 +35,11 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
             ))}
           </div>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row md:mt-14 md:gap-5">
-            <Button onClick={() => goToPage("access")} className="relative overflow-hidden rounded-full bg-amber-300 px-9 py-7 text-base font-semibold uppercase tracking-[0.24em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)]">
-              {content.primaryCta} <ArrowRight className="ml-2 h-4 w-4" />
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row md:mt-14 md:gap-5" aria-label="Primary actions">
+            <Button type="button" onClick={() => goToPage("access")} className="relative inline-flex min-h-14 items-center justify-center overflow-hidden rounded-full bg-amber-300 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-black transition duration-500 hover:bg-amber-200 hover:shadow-[0_0_45px_rgba(251,191,36,0.28)] sm:px-9 md:text-base md:tracking-[0.24em]">
+              {content.primaryCta} <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
             </Button>
-            <Button onClick={() => goToPage("protocol")} variant="outline" className="rounded-full border-stone-700 bg-transparent px-9 py-7 text-base uppercase tracking-[0.24em] text-stone-200 transition duration-500 hover:border-amber-300/35 hover:bg-stone-900 hover:text-amber-200 hover:shadow-[0_0_35px_rgba(251,191,36,0.10)]">
+            <Button type="button" onClick={() => goToPage("protocol")} variant="outline" className="inline-flex min-h-14 items-center justify-center rounded-full border border-stone-700 bg-transparent px-8 py-4 text-sm uppercase tracking-[0.2em] text-stone-200 transition duration-500 hover:border-amber-300/35 hover:bg-stone-900 hover:text-amber-200 hover:shadow-[0_0_35px_rgba(251,191,36,0.10)] sm:px-9 md:text-base md:tracking-[0.24em]">
               {content.secondaryCta}
             </Button>
           </div>
@@ -57,7 +57,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           <div className="grid gap-4 sm:grid-cols-2">
             {content.audience.map((item) => (
               <motion.div key={item} {...cardMotion} className="rounded-2xl border border-stone-800 bg-stone-950/50 p-5 transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-stone-950/80 hover:shadow-[0_0_35px_rgba(251,191,36,0.08)]">
-                <p className="font-serif text-2xl text-stone-100">{item}</p>
+                <p className="font-serif text-xl leading-snug text-stone-100 md:text-2xl">{item}</p>
               </motion.div>
             ))}
           </div>

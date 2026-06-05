@@ -1,7 +1,7 @@
 export const cardMotion = {
   initial: { opacity: 0, y: 22 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: false, amount: 0.22, margin: "-8% 0px -8% 0px" },
+  viewport: { once: true, amount: 0.22, margin: "-8% 0px -8% 0px" },
   transition: { duration: 0.58, ease: "easeOut" },
 } as const;
 

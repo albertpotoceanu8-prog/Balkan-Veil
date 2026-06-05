@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 type DecodeTextProps = {
   text: string;
@@ -15,17 +15,26 @@ const frameStepMs = 45;
 export function DecodeText({ text, className = "", canStart = true }: DecodeTextProps) {
   const ref = React.useRef<HTMLSpanElement | null>(null);
   const isInView = useInView(ref, { once: true, amount: 0.35, margin: "-10% 0px -10% 0px" });
+  const shouldReduceMotion = useReducedMotion();
   const [display, setDisplay] = React.useState("");
   const [started, setStarted] = React.useState(false);
   const [finished, setFinished] = React.useState(false);
 
   React.useEffect(() => {
+    if (shouldReduceMotion) {
+      setDisplay(text);
+      setStarted(true);
+      setFinished(true);
+      return;
+    }
+
     setDisplay("");
     setStarted(false);
     setFinished(false);
-  }, [text]);
+  }, [text, shouldReduceMotion]);
 
   React.useEffect(() => {
+    if (shouldReduceMotion) return;
     if (!canStart || finished || started) return;
 
     if (isInView) {
@@ -35,9 +44,10 @@ export function DecodeText({ text, className = "", canStart = true }: DecodeText
 
       return () => window.clearTimeout(timer);
     }
-  }, [isInView, canStart, finished, started]);
+  }, [isInView, canStart, finished, started, shouldReduceMotion]);
 
   React.useEffect(() => {
+    if (shouldReduceMotion) return;
     if (!started || finished || !canStart) return;
 
     const startedAt = window.performance.now();
@@ -67,24 +77,24 @@ export function DecodeText({ text, className = "", canStart = true }: DecodeText
     }, frameStepMs);
 
     return () => window.clearInterval(interval);
-  }, [started, finished, text, canStart]);
+  }, [started, finished, text, canStart, shouldReduceMotion]);
 
-  const animatedText = finished ? text : display;
+  const animatedText = shouldReduceMotion || finished ? text : display;
 
   return (
     <motion.span
       ref={ref}
       className={`relative inline-grid min-h-[1em] align-baseline ${className}`}
       initial={{ opacity: 0 }}
-      animate={started || finished ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.3 }}
+      animate={shouldReduceMotion || started || finished ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: shouldReduceMotion ? 0 : 0.3 }}
     >
       <span className="col-start-1 row-start-1 select-none whitespace-pre-wrap opacity-0" aria-hidden="true">
         {text}
       </span>
       <span className="col-start-1 row-start-1 whitespace-pre-wrap">
         {animatedText}
-        {started && !finished && display !== text && (
+        {!shouldReduceMotion && started && !finished && display !== text && (
           <motion.span animate={{ opacity: [0.15, 1, 0.15] }} transition={{ repeat: Infinity, duration: 0.75 }} className="ml-1 inline-block text-amber-300">
             {"\u258c"}
           </motion.span>
