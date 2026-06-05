@@ -38,6 +38,66 @@ export function StudioPage({ content }: StudioPageProps) {
           <p className="text-lg leading-8 text-stone-500 lg:col-span-2">{content.whatText}</p>
         </div>
       </div>
+
+      <div className="mt-28 grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+        <div className="border-y border-amber-300/20 py-8">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-amber-300/80">{content.aesthetic.eyebrow}</p>
+          <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.aesthetic.title}</h2>
+          <p className="mt-6 text-lg leading-8 text-stone-500">{content.aesthetic.text}</p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          {content.aesthetic.points.map((point, index) => (
+            <motion.div key={point} {...cardMotion} className="border border-stone-800 bg-black/40 p-6">
+              <p className="font-mono text-xs text-amber-300/60">0{index + 1}</p>
+              <p className="mt-5 font-serif text-2xl leading-tight text-stone-100">{point}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-28 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="relative overflow-hidden border border-stone-800 bg-stone-950/40 p-7 md:p-10">
+          <div className="pointer-events-none absolute inset-0 veil-lines opacity-20" aria-hidden="true" />
+          <div className="relative">
+            <p className="font-mono text-xs uppercase tracking-[0.32em] text-amber-300/80">{content.materials.eyebrow}</p>
+            <h2 className="mt-5 max-w-3xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.materials.title}</h2>
+            <div className="mt-10 grid gap-4 md:grid-cols-2">
+              {content.materials.items.map((item, index) => (
+                <motion.article key={item.title} {...cardMotion} className="border-l border-amber-300/25 bg-black/35 px-5 py-4">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-stone-500">material {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-4 font-serif text-2xl text-amber-100">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-stone-500">{item.text}</p>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="border border-amber-300/15 bg-black/45 p-7 md:p-10">
+          <p className="font-mono text-xs uppercase tracking-[0.32em] text-amber-300/80">{content.avoids.eyebrow}</p>
+          <h2 className="mt-5 font-serif text-4xl leading-tight text-stone-100">{content.avoids.title}</h2>
+          <div className="mt-8 divide-y divide-stone-800 border-y border-stone-800">
+            {content.avoids.items.map((item, index) => (
+              <p key={item} className="grid grid-cols-[3rem_1fr] gap-4 py-4 text-base leading-7 text-stone-400">
+                <span className="font-mono text-xs text-amber-300/60">{String(index + 1).padStart(2, "0")}</span>
+                <span>{item}</span>
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-28 border border-stone-800 bg-black/35 p-6 md:p-10">
+        <div className="grid gap-4 md:grid-cols-2">
+          {content.notes.map((note, index) => (
+            <p key={note} className="border-t border-stone-800 pt-5 text-lg leading-8 text-stone-400">
+              <span className="mr-4 font-mono text-xs text-amber-300/70">NOTE {String(index + 1).padStart(2, "0")}</span>
+              {note}
+            </p>
+          ))}
+        </div>
+      </div>
     </PageShell>
   );
 }

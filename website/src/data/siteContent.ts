@@ -221,6 +221,23 @@ export type SiteContent = {
     whatTitle: string;
     whatText: string;
     principles: Principle[];
+    notes: string[];
+    aesthetic: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      points: string[];
+    };
+    avoids: {
+      eyebrow: string;
+      title: string;
+      items: string[];
+    };
+    materials: {
+      eyebrow: string;
+      title: string;
+      items: TitledText[];
+    };
   };
   servicesPage: {
     eyebrow: string;
@@ -605,6 +622,33 @@ export const siteContent: Record<Language, SiteContent> = {
         { title: "Construieste pentru folosire", text: "Formularul, CTA-ul, flow-ul si versiunea de mobil conteaza la fel de mult ca imaginea de pe primul ecran." },
         { title: "Pastreaza caracterul", text: "Site-ul poate fi clar fara sa arate generic. Aici ramane partea de atmosfera Balkan Veil." },
       ],
+      notes: [
+        "Intunericul nu este decor. Este spatiu pentru contrast, liniste si selectie.",
+        "Un site bun trebuie sa para decis, nu incarcat.",
+        "Detaliile mici conteaza mai mult decat efectele mari.",
+        "Daca estetica nu ajuta oferta sa fie citita, estetica nu este terminata.",
+      ],
+      aesthetic: {
+        eyebrow: "Pozitie estetica",
+        title: "Dark premium, dar cu disciplina editoriala.",
+        text: "Balkan Veil foloseste atmosfera ca sa creeze incredere si tensiune vizuala, nu ca sa ascunda o structura slaba. Pagina trebuie sa se simta calma, precisa si construita pentru un business real.",
+        points: ["Serif mare, dar controlat", "Linii subtiri, nu ornamente grele", "Auriu folosit ca semnal, nu ca fundal", "Spatiu negru care lasa continutul sa respire"],
+      },
+      avoids: {
+        eyebrow: "Ce evitam",
+        title: "Nu tot ce pare premium ajuta.",
+        items: ["Hero-uri generice cu promisiuni mari", "Carduri repetate doar ca sa umple pagina", "Glow-uri agresive si efecte cyberpunk", "Mockup-uri false care nu spun nimic", "Copy care suna ca orice agentie", "Animatii care misca layout-ul"],
+      },
+      materials: {
+        eyebrow: "Material vizual",
+        title: "Din ce este construit limbajul Balkan Veil.",
+        items: [
+          { title: "Archive lines", text: "Hairlines, cadre subtile si margini care dau senzatia de dosar editorial." },
+          { title: "Signal gold", text: "Auriu folosit pentru directie, status si accent, nu pentru suprafete mari." },
+          { title: "Stone texture", text: "Tonuri inchise, usor mate, care pastreaza pagina serioasa si lizibila." },
+          { title: "Cinematic restraint", text: "Miscare putina, tensiune vizuala controlata si spatiu pentru text." },
+        ],
+      },
     },
     servicesPage: {
       eyebrow: "Capabilitati",
@@ -1245,6 +1289,33 @@ export const siteContent: Record<Language, SiteContent> = {
         { title: "Build for use", text: "The form, CTA, flow and mobile version matter as much as the first screen." },
         { title: "Keep character", text: "A site can be clear without looking generic. That is where the Balkan Veil atmosphere stays useful." },
       ],
+      notes: [
+        "Darkness is not decoration. It is room for contrast, quiet and selection.",
+        "A good site should feel decided, not loaded.",
+        "Small details matter more than large effects.",
+        "If the aesthetic does not help the offer read clearly, the aesthetic is not finished.",
+      ],
+      aesthetic: {
+        eyebrow: "Aesthetic position",
+        title: "Dark premium, held with editorial discipline.",
+        text: "Balkan Veil uses atmosphere to create trust and visual tension, not to hide weak structure. The page should feel calm, precise and built for a real business.",
+        points: ["Large serif, but controlled", "Thin lines, not heavy ornaments", "Gold as signal, not background", "Black space that lets content breathe"],
+      },
+      avoids: {
+        eyebrow: "What we avoid",
+        title: "Not everything that looks premium helps.",
+        items: ["Generic hero promises", "Repeated cards just to fill space", "Aggressive glow and cyberpunk effects", "Fake mockups that say nothing", "Copy that sounds like any agency", "Animations that move the layout"],
+      },
+      materials: {
+        eyebrow: "Visual material",
+        title: "What the Balkan Veil language is built from.",
+        items: [
+          { title: "Archive lines", text: "Hairlines, subtle frames and margins that feel like an editorial dossier." },
+          { title: "Signal gold", text: "Gold used for direction, status and accent, not large surfaces." },
+          { title: "Stone texture", text: "Dark, matte tones that keep the page serious and readable." },
+          { title: "Cinematic restraint", text: "Less motion, controlled visual tension and room for text." },
+        ],
+      },
     },
     servicesPage: {
       eyebrow: "Capabilities",
