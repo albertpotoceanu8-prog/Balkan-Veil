@@ -77,6 +77,40 @@ type SectionCtaContent = {
   secondary?: string;
 };
 
+type PricingPlan = {
+  name: string;
+  price: string;
+  period: string;
+  label: string;
+  description: string;
+  recommended?: string;
+  included: string[];
+  support: string;
+  bestFor: string;
+};
+
+type PricingFaq = {
+  q: string;
+  a: string;
+};
+
+type BeforeAfterContent = {
+  eyebrow: string;
+  title: string;
+  beforeLabel: string;
+  afterLabel: string;
+  before: string[];
+  after: string[];
+};
+
+type SubscriptionStep = {
+  step: string;
+  title: string;
+  client: string;
+  veil: string;
+  output: string;
+};
+
 type InterfacePreviewContent = {
   eyebrow: string;
   title: string;
@@ -149,6 +183,8 @@ export type SiteContent = {
       steps: string[];
     };
     interfacePreview: InterfacePreviewContent;
+    subscriptionIntro: TitledText & { eyebrow: string; points: string[] };
+    beforeAfter: BeforeAfterContent;
     finalCta: SectionCtaContent;
   };
   studio: {
@@ -189,6 +225,50 @@ export type SiteContent = {
       title: string;
       items: TitledText[];
     };
+    subscription: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      ctaPrimary: string;
+      ctaSecondary: string;
+    };
+    monthly: {
+      eyebrow: string;
+      title: string;
+      items: TitledText[];
+    };
+  };
+  pricing: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    seoTitle: string;
+    seoDescription: string;
+    minimumLabel: string;
+    supportLabel: string;
+    bestForLabel: string;
+    includedLabel: string;
+    notIncludedLabel: string;
+    plans: PricingPlan[];
+    subscriptionSteps: {
+      eyebrow: string;
+      title: string;
+      steps: string[];
+    };
+    notIncluded: {
+      eyebrow: string;
+      title: string;
+      items: string[];
+    };
+    buyoutNote: {
+      eyebrow: string;
+      title: string;
+      text: string;
+    };
+    faqLabel: string;
+    faqTitle: string;
+    faq: PricingFaq[];
+    finalCta: SectionCtaContent;
   };
   work: {
     eyebrow: string;
@@ -207,7 +287,20 @@ export type SiteContent = {
     conceptLabel: string;
     conceptTitle: string;
     conceptText: string;
-    concepts: Array<TitledText & { tag: string }>;
+    conceptLabels: {
+      problem: string;
+      direction: string;
+      system: string;
+      package: string;
+    };
+    concepts: Array<{
+      tag: string;
+      title: string;
+      problem: string;
+      direction: string;
+      system: string;
+      package: string;
+    }>;
   };
   build: {
     eyebrow: string;
@@ -232,6 +325,14 @@ export type SiteContent = {
     clientProvides: string[];
     veilBuilds: string[];
     finalCta: SectionCtaContent;
+    howItWorks: {
+      eyebrow: string;
+      title: string;
+      clientLabel: string;
+      veilLabel: string;
+      outputLabel: string;
+      steps: SubscriptionStep[];
+    };
   };
   protocol: {
     eyebrow: string;
@@ -301,6 +402,12 @@ export type SiteContent = {
       title: string;
       steps: TitledText[];
     };
+    qualification: {
+      interestedLabel: string;
+      startLabel: string;
+      interestedOptions: string[];
+      startOptions: string[];
+    };
     projectOptions: string[];
     budgetOptions: string[];
     packages: PackageItem[];
@@ -314,6 +421,7 @@ export const siteContent: Record<Language, SiteContent> = {
       ["home", "Acasa"],
       ["studio", "Studio"],
       ["services", "Servicii"],
+      ["pricing", "Abonamente"],
       ["work", "Lucrari"],
       ["build", "Build"],
       ["protocol", "Protocol"],
@@ -322,6 +430,7 @@ export const siteContent: Record<Language, SiteContent> = {
     commandItems: [
       { page: "studio", title: "Deschide Studio", description: "Vezi cum lucram si ce tip de proiect are sens." },
       { page: "services", title: "Deschide Servicii", description: "Vezi ce putem construi concret." },
+      { page: "pricing", title: "Vezi Abonamente", description: "Compara Launch, Premium si Studio System." },
       { page: "work", title: "Vezi Directii", description: "Exemple de proiecte si cum le-am aborda." },
       { page: "build", title: "Vezi Procesul", description: "Cum trece o idee bruta spre o versiune folosibila." },
       { page: "protocol", title: "Deschide Protocolul", description: "Regulile simple dupa care construim." },
@@ -417,12 +526,26 @@ export const siteContent: Record<Language, SiteContent> = {
         metrics: ["offer clear", "mobile ready", "brief path"],
         rows: ["Homepage structure locked", "Inquiry flow connected", "Launch pass scheduled"],
       },
+      subscriptionIntro: {
+        eyebrow: "Abonament administrat",
+        title: "Website-uri premium pe abonament pentru business-uri care vor o prezenta serioasa online fara sa gestioneze partea tehnica.",
+        text: "Platesti lunar pentru build, hosting, mentenanta si suport. Contract minim 12 luni, ca proiectul sa poata fi construit, lansat si imbunatatit corect.",
+        points: ["Website custom", "Hosting si deploy incluse", "Suport lunar", "Imbunatatiri controlate"],
+      },
+      beforeAfter: {
+        eyebrow: "Before / After",
+        title: "Ce se schimba cand site-ul este tratat ca sistem administrat.",
+        beforeLabel: "Inainte",
+        afterLabel: "Dupa",
+        before: ["Oferta neclara", "Aspect de template generic", "Traseu slab catre contact", "Fara structura de continut", "Fara suport administrat"],
+        after: ["Pozitionare clara", "Sistem vizual premium", "Flow ghidat de inquiry", "Continut pregatit pentru CMS", "Suport lunar definit"],
+      },
       finalCta: {
         eyebrow: "Start",
         title: "O prima versiune buna este suficienta pentru inceput.",
         text: "Trimite ideea bruta. O transformam intr-un scope mai mic, mai clar si mai usor de lansat.",
         primary: "Trimite Brief",
-        secondary: "Vezi Servicii",
+        secondary: "Vezi Abonamente",
       },
     },
     studio: {
@@ -522,6 +645,105 @@ export const siteContent: Record<Language, SiteContent> = {
           { title: "Interfata de business", text: "Pagina publica devine primul sistem simplu prin care clientul intelege si intra in discutie." },
         ],
       },
+      subscription: {
+        eyebrow: "Livrare pe abonament",
+        title: "Serviciile sunt gandite ca website administrat lunar.",
+        text: "Nu primesti doar un build si apoi ramai singur cu partea tehnica. Pachetele includ lansare, hosting/deploy, suport si un cadru lunar pentru modificari mici.",
+        ctaPrimary: "Vezi Abonamente",
+        ctaSecondary: "Trimite Brief",
+      },
+      monthly: {
+        eyebrow: "Lunar",
+        title: "Ce se intampla dupa lansare.",
+        items: [
+          { title: "Update-uri mici", text: "Ajustari de text, imagini, linkuri, sectiuni simple sau detalii de continut." },
+          { title: "Ajustari continut", text: "Pagina poate ramane actuala pe masura ce oferta se schimba." },
+          { title: "Monitorizare tehnica", text: "Verificari de baza pentru deploy, formular si functionare publica." },
+          { title: "Imbunatatiri controlate", text: "Iteratii lunare sau trimestriale in functie de pachet." },
+          { title: "Fereastra suport", text: "Timp lunar inclus pentru intrebari, modificari si prioritizare." },
+        ],
+      },
+    },
+    pricing: {
+      eyebrow: "Abonamente",
+      title: "Website-uri premium administrate pe abonament lunar.",
+      text: "Pentru business-uri care vor o prezenta serioasa online fara sa gestioneze hosting, deploy, mentenanta si modificari mici.",
+      seoTitle: "Abonamente Balkan Veil — Website-uri premium administrate",
+      seoDescription: "Abonamente pentru website-uri premium, CMS, suport tehnic si imbunatatiri lunare.",
+      minimumLabel: "Contract minim 12 luni",
+      supportLabel: "Suport inclus",
+      bestForLabel: "Recomandat pentru",
+      includedLabel: "Inclus",
+      notIncludedLabel: "Nu este inclus",
+      plans: [
+        {
+          name: "Launch",
+          price: "199 EUR",
+          period: "/luna",
+          label: "Prezenta premium rapida",
+          description: "Pentru business-uri mici care au nevoie de o prezenta serioasa si usor de lansat.",
+          included: ["1-3 pagini", "Design custom", "Responsive", "Formular contact", "Basic SEO", "Hosting/deploy inclus", "Modificari mici"],
+          support: "30 min suport/luna",
+          bestFor: "Business-uri mici care vor prezenta premium rapid.",
+        },
+        {
+          name: "Premium",
+          price: "399 EUR",
+          period: "/luna",
+          label: "Pachet principal",
+          description: "Pentru servicii si branduri care au nevoie de continut mai amplu, CMS si iteratii lunare.",
+          recommended: "Recomandat",
+          included: ["5-7 pagini", "CMS inclus", "RO/EN optional", "Formular lead-uri", "SEO tehnic", "Analytics basic", "Modificari lunare", "O sectiune noua trimestrial"],
+          support: "2 ore suport/luna",
+          bestFor: "Business-uri care vor o prezenta premium administrata.",
+        },
+        {
+          name: "Studio System",
+          price: "699 EUR",
+          period: "/luna",
+          label: "Sistem web administrat",
+          description: "Pentru business-uri care vor website complet, CMS/admin si optimizare lunara.",
+          included: ["Website premium complet", "CMS/admin separat", "Landing pages extra", "Lead pipeline basic", "Optimizare lunara", "Raport lunar", "Suport prioritar"],
+          support: "4-5 ore suport/luna",
+          bestFor: "Business-uri care vor sistem web administrat.",
+        },
+      ],
+      subscriptionSteps: {
+        eyebrow: "Cum functioneaza",
+        title: "De la brief la suport lunar.",
+        steps: ["Trimite brief", "Verificare potrivire", "Structura si oferta", "Construire", "Lansare", "Suport lunar"],
+      },
+      notIncluded: {
+        eyebrow: "Limite",
+        title: "Ce nu este inclus in abonament.",
+        items: ["Branding/logo complet", "Fotografie/video", "Reclame Meta/Google", "Ecommerce complex", "Integrari custom avansate", "Modificari nelimitate", "Suport 24/7", "Copywriting complet nelimitat"],
+      },
+      buyoutNote: {
+        eyebrow: "Dupa 12 luni",
+        title: "Buyout sau transfer se pot discuta dupa perioada minima.",
+        text: "Abonamentul are contract minim 12 luni. Dupa aceasta perioada putem discuta continuarea suportului, transferul sau un buyout, in functie de proiect si infrastructura.",
+      },
+      faqLabel: "FAQ",
+      faqTitle: "Intrebari comerciale despre abonamente.",
+      faq: [
+        { q: "Hosting-ul este inclus?", a: "Da, hosting/deploy este inclus in pachete, in limite rezonabile pentru website-uri de prezentare si sisteme mici." },
+        { q: "Pot cere modificari lunar?", a: "Da. Fiecare pachet include o fereastra de suport pentru modificari mici si ajustari de continut." },
+        { q: "Ce inseamna modificare mica?", a: "Text, imagini, linkuri, mici ajustari de layout, sectiuni simple sau update-uri de continut deja existent." },
+        { q: "Ce nu este inclus?", a: "Feature-uri mari, ecommerce complex, reclame, branding complet, fotografie/video si integrari avansate se quoteaza separat." },
+        { q: "Pot anula?", a: "Exista contract minim 12 luni. Dupa perioada minima putem continua, ajusta sau discuta transferul/buyout-ul." },
+        { q: "Ce se intampla dupa 12 luni?", a: "Putem continua abonamentul, schimba nivelul de suport sau discuta buyout/transfer." },
+        { q: "Detin website-ul?", a: "Ai drept de folosire pe durata abonamentului. Detaliile de proprietate, transfer si buyout se clarifica in oferta." },
+        { q: "Pot cumpara sau transfera site-ul?", a: "Da, se poate discuta dupa perioada minima de 12 luni, in functie de proiect." },
+        { q: "CMS-ul este inclus?", a: "Este inclus in Premium si Studio System. Pentru Launch se poate discuta separat daca este necesar." },
+        { q: "Copywriting-ul este inclus?", a: "Structura si ajustari de copy sunt incluse. Copywriting complet sau volum mare de continut se quoteaza separat." },
+      ],
+      finalCta: {
+        eyebrow: "Urmatorul pas",
+        title: "Alege directia, apoi trimite un brief scurt.",
+        text: "Daca nu stii ce pachet se potriveste, trimite brief-ul si facem verificarea de fit.",
+        primary: "Trimite Brief",
+        secondary: "Vezi Servicii",
+      },
     },
     work: {
       eyebrow: "Directii",
@@ -577,11 +799,17 @@ export const siteContent: Record<Language, SiteContent> = {
       conceptLabel: "Directii conceptuale",
       conceptTitle: "Scenarii pe care le putem transforma in sisteme reale.",
       conceptText: "Acestea nu sunt clienti reali sau studii de caz. Sunt exemple de contexte unde o prima versiune Balkan Veil poate aduce claritate.",
+      conceptLabels: {
+        problem: "Problema",
+        direction: "Directie",
+        system: "Sistem",
+        package: "Pachet",
+      },
       concepts: [
-        { tag: "Premium local", title: "Serviciu local premium", text: "O pagina care explica oferta, filtreaza cererile nepotrivite si ridica perceptia business-ului." },
-        { tag: "Hospitality", title: "Boutique hospitality", text: "O prezenta vizuala pentru locatie, experienta si rezervare, fara sa para un template de turism." },
-        { tag: "Expert brand", title: "Consultant / expert", text: "Un profil serios, cu proof selectiv, servicii clare si traseu catre discutie." },
-        { tag: "Operations", title: "Dashboard operational mic", text: "Un tool intern pentru cereri, statusuri si prioritati, construit doar cat are sens pentru prima versiune." },
+        { tag: "Premium local", title: "Serviciu local premium", problem: "Oferta exista, dar site-ul nu sustine pretul sau nivelul serviciului.", direction: "Pagina clara, vizual premium, cu traseu de lead si proof selectiv.", system: "Website 5-7 pagini cu formular lead-uri si CMS.", package: "Premium" },
+        { tag: "Hospitality", title: "Boutique hospitality", problem: "Locatia are atmosfera, dar prezenta online pare generica.", direction: "Website cinematic cu pagini pentru experienta, camere/servicii si cereri.", system: "Website administrat cu sectiuni sezoniere si optimizari lunare.", package: "Premium / Studio System" },
+        { tag: "Expert brand", title: "Consultant / expert", problem: "Expertiza nu este explicata suficient de clar pentru clienti noi.", direction: "Pozitionare, servicii, proof si formular de calificare.", system: "Website custom cu continut CMS-ready si suport lunar.", package: "Launch / Premium" },
+        { tag: "Operations", title: "Sistem operational mic", problem: "Cererile si statusurile raman in mesaje separate.", direction: "Interfata simpla pentru lead-uri, prioritati si status.", system: "Dashboard basic + website public + pipeline simplu.", package: "Studio System" },
       ],
     },
     build: {
@@ -652,6 +880,21 @@ export const siteContent: Record<Language, SiteContent> = {
         text: "Daca ideea are sens, o transformam intr-un build care poate fi lansat, vazut si imbunatatit.",
         primary: "Trimite Brief",
         secondary: "Vezi Protocol",
+      },
+      howItWorks: {
+        eyebrow: "How it works",
+        title: "Procesul comercial ramane simplu.",
+        clientLabel: "Client",
+        veilLabel: "Balkan Veil",
+        outputLabel: "Livrabil",
+        steps: [
+          { step: "01", title: "Apply", client: "Trimiti brief-ul si alegi pachetul de interes.", veil: "Verificam fit-ul si riscurile de scope.", output: "Directie initiala" },
+          { step: "02", title: "Fit check", client: "Clarifici oferta, bugetul si termenul.", veil: "Confirmam daca abonamentul este potrivit.", output: "Recomandare pachet" },
+          { step: "03", title: "Offer structure", client: "Aprobi structura si limitele.", veil: "Definim pagini, continut si flow.", output: "Scope de lucru" },
+          { step: "04", title: "Build", client: "Dai feedback rapid pe iteratii.", veil: "Construim website-ul si conexiunile necesare.", output: "Versiune pregatita" },
+          { step: "05", title: "Launch", client: "Confirmi continutul final.", veil: "Facem QA, deploy si verificari.", output: "Site live" },
+          { step: "06", title: "Monthly support", client: "Trimiti update-uri si prioritati.", veil: "Aplicam suportul lunar inclus.", output: "Website administrat" },
+        ],
       },
     },
     protocol: {
@@ -743,6 +986,12 @@ export const siteContent: Record<Language, SiteContent> = {
           { title: "Decizie", text: "Confirmam daca merita construit acum sau daca trebuie taiat din scope." },
         ],
       },
+      qualification: {
+        interestedLabel: "Interesat de",
+        startLabel: "Start preferat",
+        interestedOptions: ["Launch subscription", "Premium subscription", "Studio System", "Nu sunt sigur inca"],
+        startOptions: ["ASAP", "Luna aceasta", "Luna viitoare", "Doar explorez"],
+      },
       projectOptions: ["Website", "Landing Page", "Portal Client", "Dashboard", "Automatizare", "Prezenta Brand"],
       budgetOptions: ["Sub €500", "€500-€1.5k", "€1.5k-€3k", "€3k+", "Nu sunt sigur inca"],
       packages: [
@@ -781,6 +1030,7 @@ export const siteContent: Record<Language, SiteContent> = {
       ["home", "Home"],
       ["studio", "Studio"],
       ["services", "Services"],
+      ["pricing", "Pricing"],
       ["work", "Work"],
       ["build", "Build"],
       ["protocol", "Protocol"],
@@ -789,6 +1039,7 @@ export const siteContent: Record<Language, SiteContent> = {
     commandItems: [
       { page: "studio", title: "Open Studio", description: "See how we work and what kind of project makes sense." },
       { page: "services", title: "Open Services", description: "See what we can build concretely." },
+      { page: "pricing", title: "View Pricing", description: "Compare Launch, Premium and Studio System." },
       { page: "work", title: "View Directions", description: "Project examples and how we would approach them." },
       { page: "build", title: "View Process", description: "How a rough idea becomes something usable." },
       { page: "protocol", title: "Open Protocol", description: "The simple rules behind the work." },
@@ -884,12 +1135,26 @@ export const siteContent: Record<Language, SiteContent> = {
         metrics: ["offer clear", "mobile ready", "brief path"],
         rows: ["Homepage structure locked", "Inquiry flow connected", "Launch pass scheduled"],
       },
+      subscriptionIntro: {
+        eyebrow: "Managed subscription",
+        title: "Premium websites on monthly subscription for businesses that want a serious online presence without managing tech.",
+        text: "You pay monthly for build, hosting, maintenance and support. Minimum 12-month contract, so the project can be built, launched and improved properly.",
+        points: ["Custom website", "Hosting and deploy included", "Monthly support", "Controlled improvements"],
+      },
+      beforeAfter: {
+        eyebrow: "Before / After",
+        title: "What changes when the website is treated as a managed system.",
+        beforeLabel: "Before",
+        afterLabel: "After",
+        before: ["Unclear offer", "Generic template feel", "Weak contact path", "No content structure", "No managed support"],
+        after: ["Clear positioning", "Premium visual system", "Guided inquiry flow", "CMS-ready content", "Monthly support path"],
+      },
       finalCta: {
         eyebrow: "Start",
         title: "A good first version is enough to begin.",
         text: "Send the rough idea. We turn it into a smaller, clearer and easier-to-launch scope.",
         primary: "Send Brief",
-        secondary: "View Services",
+        secondary: "View Pricing",
       },
     },
     studio: {
@@ -989,6 +1254,105 @@ export const siteContent: Record<Language, SiteContent> = {
           { title: "Business interface", text: "The public page becomes the first simple system through which people understand and enter the conversation." },
         ],
       },
+      subscription: {
+        eyebrow: "Delivered as subscription",
+        title: "The services are packaged as a managed monthly website.",
+        text: "You do not receive a build and then get left alone with the technical side. Plans include launch, hosting/deploy, support and a monthly frame for small changes.",
+        ctaPrimary: "View Pricing",
+        ctaSecondary: "Send Brief",
+      },
+      monthly: {
+        eyebrow: "Monthly",
+        title: "What happens after launch.",
+        items: [
+          { title: "Small updates", text: "Text, image, link, simple section or content-detail adjustments." },
+          { title: "Content adjustments", text: "The page can stay current as the offer changes." },
+          { title: "Technical monitoring", text: "Basic checks for deployment, form flow and public functionality." },
+          { title: "Controlled improvements", text: "Monthly or quarterly iterations depending on the plan." },
+          { title: "Support window", text: "Included monthly time for questions, changes and prioritization." },
+        ],
+      },
+    },
+    pricing: {
+      eyebrow: "Pricing",
+      title: "Managed premium websites on monthly subscription.",
+      text: "For businesses that want a serious online presence without managing hosting, deployment, maintenance and small changes.",
+      seoTitle: "Balkan Veil Pricing — Managed Premium Websites",
+      seoDescription: "Subscription plans for premium websites, CMS setup, technical support and monthly improvements.",
+      minimumLabel: "Minimum 12-month contract",
+      supportLabel: "Included support",
+      bestForLabel: "Best for",
+      includedLabel: "Included",
+      notIncludedLabel: "Not included",
+      plans: [
+        {
+          name: "Launch",
+          price: "199 EUR",
+          period: "/month",
+          label: "Fast premium presence",
+          description: "For small businesses that need a serious presence that can launch quickly.",
+          included: ["1-3 pages", "Custom design", "Responsive", "Contact form", "Basic SEO", "Hosting/deploy included", "Small changes"],
+          support: "30 min support/month",
+          bestFor: "Small businesses that need premium presence quickly.",
+        },
+        {
+          name: "Premium",
+          price: "399 EUR",
+          period: "/month",
+          label: "Main package",
+          description: "For services and brands that need more content, CMS and monthly iteration.",
+          recommended: "Recommended",
+          included: ["5-7 pages", "CMS included", "Optional RO/EN", "Lead form", "Technical SEO", "Basic analytics", "Monthly changes", "One new section quarterly"],
+          support: "2 hours support/month",
+          bestFor: "Businesses that want a managed premium presence.",
+        },
+        {
+          name: "Studio System",
+          price: "699 EUR",
+          period: "/month",
+          label: "Managed web system",
+          description: "For businesses that want a full website, CMS/admin and monthly optimization.",
+          included: ["Complete premium website", "Separate CMS/admin", "Extra landing pages", "Basic lead pipeline", "Monthly optimization", "Monthly report", "Priority support"],
+          support: "4-5 hours support/month",
+          bestFor: "Businesses that want a managed web system.",
+        },
+      ],
+      subscriptionSteps: {
+        eyebrow: "How it works",
+        title: "From brief to monthly support.",
+        steps: ["Apply", "Fit check", "Structure", "Build", "Launch", "Monthly support"],
+      },
+      notIncluded: {
+        eyebrow: "Limits",
+        title: "What is not included in the subscription.",
+        items: ["Complete branding/logo", "Photography/video", "Meta/Google ads", "Complex ecommerce", "Advanced custom integrations", "Unlimited changes", "24/7 support", "Unlimited full copywriting"],
+      },
+      buyoutNote: {
+        eyebrow: "After 12 months",
+        title: "Buyout or transfer can be discussed after the minimum period.",
+        text: "The subscription has a minimum 12-month contract. After that period we can discuss continued support, transfer or buyout depending on the project and infrastructure.",
+      },
+      faqLabel: "FAQ",
+      faqTitle: "Commercial questions about subscriptions.",
+      faq: [
+        { q: "Is hosting included?", a: "Yes, hosting/deploy is included within reasonable limits for presentation websites and small systems." },
+        { q: "Can I request changes every month?", a: "Yes. Each plan includes a support window for small changes and content adjustments." },
+        { q: "What counts as a small change?", a: "Text, images, links, small layout adjustments, simple sections or updates to existing content." },
+        { q: "What is not included?", a: "Large features, complex ecommerce, ads, full branding, photo/video and advanced integrations are quoted separately." },
+        { q: "Can I cancel?", a: "There is a minimum 12-month contract. After the minimum period we can continue, adjust or discuss transfer/buyout." },
+        { q: "What happens after 12 months?", a: "We can continue the subscription, change the support level or discuss buyout/transfer." },
+        { q: "Do I own the website?", a: "You have usage rights during the subscription. Ownership, transfer and buyout details are clarified in the offer." },
+        { q: "Can I buy out / transfer the website?", a: "Yes, this can be discussed after the minimum 12-month period, depending on the project." },
+        { q: "Is CMS included?", a: "It is included in Premium and Studio System. For Launch it can be discussed separately if needed." },
+        { q: "Is copywriting included?", a: "Structure and copy adjustments are included. Full copywriting or large content volume is quoted separately." },
+      ],
+      finalCta: {
+        eyebrow: "Next step",
+        title: "Choose the direction, then send a short brief.",
+        text: "If you are not sure which plan fits, send the brief and we will do the fit check.",
+        primary: "Send Brief",
+        secondary: "View Services",
+      },
     },
     work: {
       eyebrow: "Directions",
@@ -1044,11 +1408,17 @@ export const siteContent: Record<Language, SiteContent> = {
       conceptLabel: "Concept directions",
       conceptTitle: "Scenarios we can turn into real systems.",
       conceptText: "These are not real clients or case studies. They are examples of contexts where a Balkan Veil first version can create clarity.",
+      conceptLabels: {
+        problem: "Problem",
+        direction: "Direction",
+        system: "System",
+        package: "Package",
+      },
       concepts: [
-        { tag: "Premium local", title: "Premium local service", text: "A page that explains the offer, filters poor-fit inquiries and raises how the business is perceived." },
-        { tag: "Hospitality", title: "Boutique hospitality", text: "A visual presence for place, experience and booking without feeling like a tourism template." },
-        { tag: "Expert brand", title: "Consultant / expert", text: "A serious profile with selective proof, clear services and a path toward a conversation." },
-        { tag: "Operations", title: "Small operations dashboard", text: "An internal tool for requests, statuses and priorities, built only as far as the first version needs." },
+        { tag: "Premium local", title: "Premium local service", problem: "The offer exists, but the site does not support the price or level of service.", direction: "Clear page, premium visual system, lead path and selective proof.", system: "5-7 page website with lead form and CMS.", package: "Premium" },
+        { tag: "Hospitality", title: "Boutique hospitality", problem: "The location has atmosphere, but the online presence feels generic.", direction: "Cinematic website for experience, rooms/services and inquiries.", system: "Managed website with seasonal sections and monthly optimization.", package: "Premium / Studio System" },
+        { tag: "Expert brand", title: "Consultant / expert", problem: "The expertise is not explained clearly enough for new clients.", direction: "Positioning, services, proof and qualification form.", system: "Custom website with CMS-ready content and monthly support.", package: "Launch / Premium" },
+        { tag: "Operations", title: "Small operations system", problem: "Requests and statuses stay scattered across messages.", direction: "Simple interface for leads, priorities and status.", system: "Basic dashboard + public website + simple pipeline.", package: "Studio System" },
       ],
     },
     build: {
@@ -1119,6 +1489,21 @@ export const siteContent: Record<Language, SiteContent> = {
         text: "If the idea makes sense, we turn it into a build that can be launched, seen and improved.",
         primary: "Send Brief",
         secondary: "View Protocol",
+      },
+      howItWorks: {
+        eyebrow: "How it works",
+        title: "The commercial process stays simple.",
+        clientLabel: "Client",
+        veilLabel: "Balkan Veil",
+        outputLabel: "Output",
+        steps: [
+          { step: "01", title: "Apply", client: "You send the brief and choose the plan you are interested in.", veil: "We check fit and scope risks.", output: "Initial direction" },
+          { step: "02", title: "Fit check", client: "You clarify offer, budget and timing.", veil: "We confirm whether the subscription model fits.", output: "Plan recommendation" },
+          { step: "03", title: "Offer structure", client: "You approve structure and limits.", veil: "We define pages, content and flow.", output: "Work scope" },
+          { step: "04", title: "Build", client: "You give fast feedback on iterations.", veil: "We build the website and required connections.", output: "Prepared version" },
+          { step: "05", title: "Launch", client: "You confirm final content.", veil: "We run QA, deploy and checks.", output: "Live website" },
+          { step: "06", title: "Monthly support", client: "You send updates and priorities.", veil: "We apply the included monthly support.", output: "Managed website" },
+        ],
       },
     },
     protocol: {
@@ -1209,6 +1594,12 @@ export const siteContent: Record<Language, SiteContent> = {
           { title: "Scope", text: "If it fits, we propose a clearer first version." },
           { title: "Decision", text: "We confirm whether it is worth building now or needs a smaller scope." },
         ],
+      },
+      qualification: {
+        interestedLabel: "Interested in",
+        startLabel: "Preferred start",
+        interestedOptions: ["Launch subscription", "Premium subscription", "Studio System", "Not sure yet"],
+        startOptions: ["ASAP", "This month", "Next month", "Just exploring"],
       },
       projectOptions: ["Website", "Landing Page", "Client Portal", "Dashboard", "Automation", "Brand Presence"],
       budgetOptions: ["Under €500", "€500-€1.5k", "€1.5k-€3k", "€3k+", "Not sure yet"],

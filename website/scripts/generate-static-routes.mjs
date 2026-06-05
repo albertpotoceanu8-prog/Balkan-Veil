@@ -10,6 +10,7 @@ const expectedRoutePaths = [
   "/ro",
   "/ro/studio",
   "/ro/servicii",
+  "/ro/abonamente",
   "/ro/lucrari",
   "/ro/build",
   "/ro/protocol",
@@ -17,6 +18,7 @@ const expectedRoutePaths = [
   "/en",
   "/en/studio",
   "/en/services",
+  "/en/pricing",
   "/en/work",
   "/en/build",
   "/en/protocol",
@@ -44,6 +46,13 @@ const routes = [
     title: "Lucruri concrete pe care le putem construi. | Balkan Veil",
     description: "Site-uri, landing pages, formulare, dashboard-uri simple si automatizari punctuale.",
     alternate: { ro: "/ro/servicii", en: "/en/services" },
+  },
+  {
+    path: "/ro/abonamente",
+    lang: "ro",
+    title: "Abonamente Balkan Veil — Website-uri premium administrate | Balkan Veil",
+    description: "Abonamente pentru website-uri premium, CMS, suport tehnic si imbunatatiri lunare.",
+    alternate: { ro: "/ro/abonamente", en: "/en/pricing" },
   },
   {
     path: "/ro/lucrari",
@@ -93,6 +102,13 @@ const routes = [
     title: "Concrete things we can build. | Balkan Veil",
     description: "Sites, landing pages, forms, simple dashboards and targeted automations.",
     alternate: { ro: "/ro/servicii", en: "/en/services" },
+  },
+  {
+    path: "/en/pricing",
+    lang: "en",
+    title: "Balkan Veil Pricing — Managed Premium Websites | Balkan Veil",
+    description: "Subscription plans for premium websites, CMS setup, technical support and monthly improvements.",
+    alternate: { ro: "/ro/abonamente", en: "/en/pricing" },
   },
   {
     path: "/en/work",

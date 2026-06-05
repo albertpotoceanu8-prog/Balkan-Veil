@@ -94,6 +94,24 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
         </div>
       </div>
 
+      <div className="mt-28">
+        <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.howItWorks.eyebrow}</p>
+        <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.howItWorks.title}</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {content.howItWorks.steps.map((step) => (
+            <motion.div key={step.step} {...cardMotion} className={panelClass + " p-7"}>
+              <p className="font-mono text-sm text-amber-300">{step.step}</p>
+              <h3 className="mt-6 font-serif text-3xl text-stone-100">{step.title}</h3>
+              <div className="mt-6 space-y-4 text-base leading-7 text-stone-500">
+                <p><span className="text-amber-200">{content.howItWorks.clientLabel}:</span> {step.client}</p>
+                <p><span className="text-amber-200">{content.howItWorks.veilLabel}:</span> {step.veil}</p>
+                <p><span className="text-amber-200">{content.howItWorks.outputLabel}:</span> {step.output}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-28 grid gap-8 lg:grid-cols-3">
         {content.caseStudies.map((item) => (
           <motion.div key={item.title} {...cardMotion}>

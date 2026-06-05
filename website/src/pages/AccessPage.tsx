@@ -31,6 +31,8 @@ const genericSubmitError = "We could not send the brief right now. Please try ag
 export function AccessPage({ content, terminal, cinematic, compactMotion = false }: AccessPageProps) {
   const [selectedProjectIndex, setSelectedProjectIndex] = React.useState(0);
   const [selectedBudgetIndex, setSelectedBudgetIndex] = React.useState(1);
+  const [selectedInterestIndex, setSelectedInterestIndex] = React.useState(1);
+  const [selectedStartIndex, setSelectedStartIndex] = React.useState(1);
   const [submitted, setSubmitted] = React.useState(false);
   const [submitting, setSubmitting] = React.useState(false);
   const [submitError, setSubmitError] = React.useState("");
@@ -43,6 +45,8 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
   });
   const selectedProject = content.projectOptions[selectedProjectIndex] ?? content.projectOptions[0];
   const selectedBudget = content.budgetOptions[selectedBudgetIndex] ?? content.budgetOptions[0];
+  const selectedInterest = content.qualification.interestedOptions[selectedInterestIndex] ?? content.qualification.interestedOptions[0];
+  const selectedStart = content.qualification.startOptions[selectedStartIndex] ?? content.qualification.startOptions[0];
   const hasSubmitError = Boolean(submitError);
 
   const submitAccessRequest = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -79,7 +83,12 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
     setSubmitting(true);
 
     try {
-      const message = [`Contact: ${parsed.data.contact}`, parsed.data.message].filter(Boolean).join("\n\n");
+      const message = [
+        `Contact: ${parsed.data.contact}`,
+        `${content.qualification.interestedLabel}: ${selectedInterest}`,
+        `${content.qualification.startLabel}: ${selectedStart}`,
+        parsed.data.message,
+      ].filter(Boolean).join("\n\n");
       const { error } = await supabase.from("access_requests").insert({
         name: parsed.data.name,
         brand: parsed.data.brand || null,
@@ -256,6 +265,42 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               </div>
             </div>
 
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-4 md:p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.qualification.interestedLabel}</p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {content.qualification.interestedOptions.map((item, index) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setSelectedInterestIndex(index)}
+                      aria-pressed={selectedInterestIndex === index}
+                      className={`rounded-full border px-4 py-2 text-sm transition ${selectedInterestIndex === index ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/40 text-stone-400 hover:border-amber-300/35 hover:text-amber-100"}`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-4 md:p-5">
+                <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.qualification.startLabel}</p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {content.qualification.startOptions.map((item, index) => (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setSelectedStartIndex(index)}
+                      aria-pressed={selectedStartIndex === index}
+                      className={`rounded-full border px-4 py-2 text-sm transition ${selectedStartIndex === index ? "border-amber-300/50 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/40 text-stone-400 hover:border-amber-300/35 hover:text-amber-100"}`}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
               <label htmlFor="access-message" className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.message}</label>
               <textarea id="access-message" name="message" value={form.message} onChange={(event) => setForm((current) => ({ ...current, message: event.target.value }))} placeholder={content.form.messagePlaceholder} maxLength={2000} className="mt-4 min-h-28 w-full resize-none rounded-xl border border-stone-900 bg-black/30 p-4 text-stone-200 outline-none placeholder:text-stone-700" />
@@ -268,6 +313,12 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               </p>
               <p className="mt-1 text-stone-300">
                 <span className="text-amber-200">{content.form.budget}:</span> {selectedBudget}
+              </p>
+              <p className="mt-1 text-stone-300">
+                <span className="text-amber-200">{content.qualification.interestedLabel}:</span> {selectedInterest}
+              </p>
+              <p className="mt-1 text-stone-300">
+                <span className="text-amber-200">{content.qualification.startLabel}:</span> {selectedStart}
               </p>
             </div>
 

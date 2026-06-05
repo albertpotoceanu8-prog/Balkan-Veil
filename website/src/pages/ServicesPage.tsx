@@ -58,6 +58,38 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         </div>
       </div>
 
+      <div className="mt-28 rounded-[2.5rem] border border-amber-300/20 bg-gradient-to-br from-stone-950 to-black p-7 md:p-12">
+        <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.subscription.eyebrow}</p>
+            <h2 className="mt-6 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.subscription.title}</h2>
+            <p className="mt-6 max-w-3xl text-lg leading-8 text-stone-500">{content.subscription.text}</p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <Button type="button" onClick={() => goToPage("pricing")} className="inline-flex min-h-14 items-center justify-center rounded-full bg-amber-300 px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-black transition duration-500 hover:bg-amber-200 md:text-base">
+              {content.subscription.ctaPrimary}
+            </Button>
+            <Button type="button" onClick={() => goToPage("access")} className="inline-flex min-h-14 items-center justify-center rounded-full border border-stone-700 bg-transparent px-8 py-4 text-sm uppercase tracking-[0.2em] text-stone-200 transition duration-500 hover:border-amber-300/35 hover:bg-stone-900 hover:text-amber-200 md:text-base">
+              {content.subscription.ctaSecondary}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-28">
+        <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.monthly.eyebrow}</p>
+        <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.monthly.title}</h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+          {content.monthly.items.map((item, index) => (
+            <motion.div key={item.title} {...cardMotion} className="rounded-[2rem] border border-stone-800 bg-black/45 p-6">
+              <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
+              <h3 className="mt-6 font-serif text-2xl text-amber-100">{item.title}</h3>
+              <p className="mt-4 text-sm leading-6 text-stone-500">{item.text}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-28">
         <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.layers.eyebrow}</p>
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.layers.title}</h2>

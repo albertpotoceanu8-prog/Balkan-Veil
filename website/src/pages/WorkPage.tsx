@@ -36,7 +36,12 @@ export function WorkPage({ content, goToPage }: WorkPageProps) {
                   <p className="font-serif text-4xl text-amber-100/20">0{index + 1}</p>
                 </div>
                 <h3 className="mt-6 font-serif text-3xl text-stone-100">{item.title}</h3>
-                <p className="mt-5 text-base leading-7 text-stone-500">{item.text}</p>
+                <div className="mt-6 space-y-4 text-base leading-7 text-stone-500">
+                  <p><span className="text-amber-200">{content.conceptLabels.problem}:</span> {item.problem}</p>
+                  <p><span className="text-amber-200">{content.conceptLabels.direction}:</span> {item.direction}</p>
+                  <p><span className="text-amber-200">{content.conceptLabels.system}:</span> {item.system}</p>
+                  <p><span className="text-amber-200">{content.conceptLabels.package}:</span> {item.package}</p>
+                </div>
               </motion.div>
             ))}
           </div>

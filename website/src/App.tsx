@@ -14,6 +14,7 @@ import type { PageKey } from "@/types/navigation";
 const HomePage = React.lazy(() => import("@/pages/HomePage").then((module) => ({ default: module.HomePage })));
 const StudioPage = React.lazy(() => import("@/pages/StudioPage").then((module) => ({ default: module.StudioPage })));
 const ServicesPage = React.lazy(() => import("@/pages/ServicesPage").then((module) => ({ default: module.ServicesPage })));
+const PricingPage = React.lazy(() => import("@/pages/PricingPage").then((module) => ({ default: module.PricingPage })));
 const WorkPage = React.lazy(() => import("@/pages/WorkPage").then((module) => ({ default: module.WorkPage })));
 const BuildPage = React.lazy(() => import("@/pages/BuildPage").then((module) => ({ default: module.BuildPage })));
 const ProtocolPage = React.lazy(() => import("@/pages/ProtocolPage").then((module) => ({ default: module.ProtocolPage })));
@@ -239,6 +240,7 @@ function PublicSite() {
             {!route.isNotFound && page === "home" && <HomePage content={content.home} goToPage={goToPage} cinematic={activeCinematic} introDone={introDone} />}
             {page === "studio" && <StudioPage content={content.studio} />}
             {page === "services" && <ServicesPage content={content.servicesPage} goToPage={goToPage} />}
+            {page === "pricing" && <PricingPage content={content.pricing} goToPage={goToPage} />}
             {page === "work" && <WorkPage content={content.work} goToPage={goToPage} />}
             {page === "build" && <BuildPage content={content.build} goToPage={goToPage} />}
             {page === "protocol" && <ProtocolPage content={content.protocol} goToPage={goToPage} />}

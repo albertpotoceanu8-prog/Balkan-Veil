@@ -1,4 +1,4 @@
-export type PageKey = "home" | "studio" | "services" | "work" | "build" | "protocol" | "access";
+export type PageKey = "home" | "studio" | "services" | "pricing" | "work" | "build" | "protocol" | "access";
 
 export type NavItem = readonly [PageKey, string];
 

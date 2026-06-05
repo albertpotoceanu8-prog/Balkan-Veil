@@ -94,8 +94,44 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           <InterfaceMockup eyebrow={content.interfacePreview.eyebrow} title={content.interfacePreview.title} text={content.interfacePreview.text} metrics={content.interfacePreview.metrics} rows={content.interfacePreview.rows} />
         </div>
 
+        <div className="mt-24 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div className="rounded-[2.5rem] border border-amber-300/20 bg-black/55 p-7 md:p-10 md:backdrop-blur-xl">
+            <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.subscriptionIntro.eyebrow}</p>
+            <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.subscriptionIntro.title}</h2>
+            <p className="mt-6 text-lg leading-8 text-stone-500">{content.subscriptionIntro.text}</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {content.subscriptionIntro.points.map((point, index) => (
+              <motion.div key={point} {...cardMotion} className={panelClass + " p-6"}>
+                <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
+                <p className="mt-5 font-serif text-2xl leading-tight text-stone-100">{point}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-24 rounded-[2.5rem] border border-stone-800 bg-stone-950/45 p-7 md:p-12">
+          <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.beforeAfter.eyebrow}</p>
+          <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.beforeAfter.title}</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {[
+              { label: content.beforeAfter.beforeLabel, items: content.beforeAfter.before },
+              { label: content.beforeAfter.afterLabel, items: content.beforeAfter.after },
+            ].map((group) => (
+              <div key={group.label} className="rounded-[2rem] border border-stone-800 bg-black/45 p-6">
+                <p className="text-xs uppercase tracking-[0.3em] text-amber-300">{group.label}</p>
+                <div className="mt-6 space-y-3">
+                  {group.items.map((item) => (
+                    <p key={item} className="rounded-2xl border border-stone-900 bg-stone-950/55 px-4 py-3 text-stone-400">{item}</p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         <div className="mt-24">
-          <SectionCTA eyebrow={content.finalCta.eyebrow} title={content.finalCta.title} text={content.finalCta.text} primaryLabel={content.finalCta.primary} secondaryLabel={content.finalCta.secondary} primaryTarget="access" secondaryTarget="services" goToPage={goToPage} />
+          <SectionCTA eyebrow={content.finalCta.eyebrow} title={content.finalCta.title} text={content.finalCta.text} primaryLabel={content.finalCta.primary} secondaryLabel={content.finalCta.secondary} primaryTarget="access" secondaryTarget="pricing" goToPage={goToPage} />
         </div>
       </section>
     </>

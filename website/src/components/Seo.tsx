@@ -49,6 +49,8 @@ function getPageMeta(page: PageKey, content: SiteContent) {
       return { title: content.studio.title, description: content.studio.text };
     case "services":
       return { title: content.servicesPage.title, description: content.servicesPage.text };
+    case "pricing":
+      return { title: content.pricing.seoTitle, description: content.pricing.seoDescription };
     case "work":
       return { title: content.work.title, description: content.work.text };
     case "build":
