@@ -207,6 +207,7 @@ export type SiteContent = {
       sending: string;
       requiredName: string;
       requiredContact: string;
+      submitError?: string;
       backendMissing: string;
     };
     packagesLabel: string;

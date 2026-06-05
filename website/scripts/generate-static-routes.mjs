@@ -1,7 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const siteOrigin = "https://website-balkan-veil.vercel.app";
+const fallbackSiteOrigin = "https://website-balkan-veil.vercel.app";
+const siteOrigin = normalizeOrigin(process.env.VITE_SITE_ORIGIN || fallbackSiteOrigin);
 const distDir = path.resolve("dist");
 const indexPath = path.join(distDir, "index.html");
 const ogImage = `${siteOrigin}/balkan-veil-logo.png`;
@@ -179,4 +180,8 @@ function escapeHtml(value) {
 
 function escapeRegExp(value) {
   return String(value).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normalizeOrigin(origin) {
+  return String(origin).trim().replace(/\/+$/, "");
 }

@@ -1,12 +1,29 @@
 import React from "react";
+import { z } from "zod";
 
 import { AdminPanel, EmptyState, Field, ModuleHeader, StatusMessage, inputClass } from "@/admin/AdminModule";
 import { supabase } from "@/lib/supabase/client";
 import type { Prospect, ProspectStatus } from "@/types/database";
 
-const statuses: ProspectStatus[] = ["found", "contacted", "replied", "call_booked", "proposal_sent", "won", "lost"];
+const statuses = ["found", "contacted", "replied", "call_booked", "proposal_sent", "won", "lost"] as const satisfies readonly ProspectStatus[];
 
-const empty = {
+type ProspectForm = {
+  id?: string;
+  business_name: string;
+  industry: string;
+  location: string;
+  website: string;
+  instagram: string;
+  observed_problem: string;
+  opportunity: string;
+  suggested_offer: string;
+  estimated_value: number | "";
+  status: ProspectStatus;
+  priority: number;
+  notes: string;
+};
+
+const empty: ProspectForm = {
   business_name: "",
   industry: "",
   location: "",
@@ -15,13 +32,31 @@ const empty = {
   observed_problem: "",
   opportunity: "",
   suggested_offer: "",
-  estimated_value: 0,
+  estimated_value: "",
   status: "found" as ProspectStatus,
   priority: 1,
   notes: "",
 };
 
-type ProspectForm = typeof empty & { id?: string };
+const prospectSchema = z.object({
+  business_name: z.string().trim().min(2).max(120),
+  industry: z.string().trim().max(120),
+  location: z.string().trim().max(120),
+  website: z.string().trim().max(240),
+  instagram: z.string().trim().max(120),
+  observed_problem: z.string().trim().max(2000),
+  opportunity: z.string().trim().max(2000),
+  suggested_offer: z.string().trim().max(240),
+  estimated_value: z.coerce.number().min(0).nullable(),
+  status: z.enum(statuses),
+  priority: z.coerce.number().int().min(1).max(5),
+  notes: z.string().trim().max(2000),
+});
+
+function emptyToNull(value: string) {
+  const trimmed = value.trim();
+  return trimmed || null;
+}
 
 export function AdminProspects() {
   const [items, setItems] = React.useState<Prospect[]>([]);
@@ -52,24 +87,32 @@ export function AdminProspects() {
 
   const save = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!form.business_name.trim()) {
-      setError("Business name is required.");
+    setError("");
+    setStatus("");
+
+    const parsed = prospectSchema.safeParse({
+      ...form,
+      estimated_value: form.estimated_value === "" ? null : form.estimated_value,
+    });
+
+    if (!parsed.success) {
+      setError("Check required fields.");
       return;
     }
 
     const payload = {
-      business_name: form.business_name,
-      industry: form.industry || null,
-      location: form.location || null,
-      website: form.website || null,
-      instagram: form.instagram || null,
-      observed_problem: form.observed_problem || null,
-      opportunity: form.opportunity || null,
-      suggested_offer: form.suggested_offer || null,
-      estimated_value: Number(form.estimated_value) || null,
-      status: form.status,
-      priority: Number(form.priority) || 1,
-      notes: form.notes || null,
+      business_name: parsed.data.business_name,
+      industry: emptyToNull(parsed.data.industry),
+      location: emptyToNull(parsed.data.location),
+      website: emptyToNull(parsed.data.website),
+      instagram: emptyToNull(parsed.data.instagram),
+      observed_problem: emptyToNull(parsed.data.observed_problem),
+      opportunity: emptyToNull(parsed.data.opportunity),
+      suggested_offer: emptyToNull(parsed.data.suggested_offer),
+      estimated_value: parsed.data.estimated_value,
+      status: parsed.data.status,
+      priority: parsed.data.priority,
+      notes: emptyToNull(parsed.data.notes),
     };
 
     const result = form.id
@@ -97,7 +140,7 @@ export function AdminProspects() {
       observed_problem: item.observed_problem || "",
       opportunity: item.opportunity || "",
       suggested_offer: item.suggested_offer || "",
-      estimated_value: item.estimated_value || 0,
+      estimated_value: item.estimated_value ?? "",
       status: item.status,
       priority: item.priority,
       notes: item.notes || "",
@@ -146,7 +189,7 @@ export function AdminProspects() {
             <div className="grid grid-cols-3 gap-3">
               <Field label="Status"><select className={inputClass} value={form.status} onChange={(e) => setField("status", e.target.value as ProspectStatus)}>{statuses.map((option) => <option key={option}>{option}</option>)}</select></Field>
               <Field label="Priority"><input className={inputClass} type="number" value={form.priority} onChange={(e) => setField("priority", Number(e.target.value))} /></Field>
-              <Field label="Value"><input className={inputClass} type="number" value={form.estimated_value} onChange={(e) => setField("estimated_value", Number(e.target.value))} /></Field>
+              <Field label="Value"><input className={inputClass} type="number" value={form.estimated_value} onChange={(e) => setField("estimated_value", e.target.value === "" ? "" : Number(e.target.value))} /></Field>
             </div>
             <Field label="Notes"><textarea className={inputClass} rows={3} value={form.notes} onChange={(e) => setField("notes", e.target.value)} /></Field>
             <div className="flex gap-3">

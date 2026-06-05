@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { z } from "zod";
 import { PageShell } from "@/components/PageShell";
 import { DecodeText } from "@/components/DecodeText";
 import { TerminalPanel } from "@/components/TerminalPanel";
@@ -17,6 +18,16 @@ type AccessPageProps = {
   compactMotion?: boolean;
 };
 
+const accessRequestSchema = z.object({
+  name: z.string().trim().min(2).max(80),
+  contact: z.string().trim().min(3).max(120),
+  brand: z.string().trim().max(120),
+  message: z.string().trim().max(2000),
+  website: z.string().trim(),
+});
+
+const genericSubmitError = "We could not send the brief right now. Please try again or contact us directly.";
+
 export function AccessPage({ content, terminal, cinematic, compactMotion = false }: AccessPageProps) {
   const [selectedProjectIndex, setSelectedProjectIndex] = React.useState(0);
   const [selectedBudgetIndex, setSelectedBudgetIndex] = React.useState(1);
@@ -28,6 +39,7 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
     contact: "",
     brand: "",
     message: "",
+    website: "",
   });
   const selectedProject = content.projectOptions[selectedProjectIndex] ?? content.projectOptions[0];
   const selectedBudget = content.budgetOptions[selectedBudgetIndex] ?? content.budgetOptions[0];
@@ -36,12 +48,34 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
     event.preventDefault();
     setSubmitError("");
 
-    if (!form.name.trim()) {
+    if (form.website.trim()) {
+      return;
+    }
+
+    const parsed = accessRequestSchema.safeParse(form);
+
+    if (!parsed.success) {
+      const fieldErrors = parsed.error.flatten().fieldErrors;
+      if (fieldErrors.name?.length) {
+        setSubmitError(content.form.requiredName);
+        return;
+      }
+
+      if (fieldErrors.contact?.length) {
+        setSubmitError(content.form.requiredContact);
+        return;
+      }
+
+      setSubmitError(content.form.submitError || genericSubmitError);
+      return;
+    }
+
+    if (!parsed.data.name) {
       setSubmitError(content.form.requiredName);
       return;
     }
 
-    if (!form.contact.trim()) {
+    if (!parsed.data.contact) {
       setSubmitError(content.form.requiredContact);
       return;
     }
@@ -53,10 +87,10 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
 
     setSubmitting(true);
 
-    const message = [`Contact: ${form.contact.trim()}`, form.message.trim()].filter(Boolean).join("\n\n");
+    const message = [`Contact: ${parsed.data.contact}`, parsed.data.message].filter(Boolean).join("\n\n");
     const { error } = await supabase.from("access_requests").insert({
-      name: form.name.trim(),
-      brand: form.brand.trim() || null,
+      name: parsed.data.name,
+      brand: parsed.data.brand || null,
       project_type: selectedProject,
       budget_range: selectedBudget,
       message,
@@ -66,13 +100,13 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
 
     if (error) {
       setSubmitting(false);
-      setSubmitError(error.message);
+      setSubmitError(content.form.submitError || genericSubmitError);
       return;
     }
 
     setSubmitting(false);
     setSubmitted(true);
-    setForm({ name: "", contact: "", brand: "", message: "" });
+    setForm({ name: "", contact: "", brand: "", message: "", website: "" });
   };
 
   return (
@@ -132,6 +166,12 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
           </div>
 
           <form onSubmit={submitAccessRequest} className="grid gap-5">
+            <div className="hidden" aria-hidden="true">
+              <label>
+                Website
+                <input tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} />
+              </label>
+            </div>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="rounded-2xl border border-stone-800 bg-stone-950/60 p-5 transition focus-within:border-amber-300/35">
                 <label className="text-xs uppercase tracking-[0.28em] text-stone-500">{content.form.name}</label>

@@ -2,7 +2,10 @@ import type { Language } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
 export const defaultLanguage: Language = "ro";
-export const siteOrigin = "https://website-balkan-veil.vercel.app";
+const fallbackSiteOrigin = "https://website-balkan-veil.vercel.app";
+const configuredSiteOrigin = import.meta.env.VITE_SITE_ORIGIN?.trim();
+
+export const siteOrigin = normalizeOrigin(configuredSiteOrigin || fallbackSiteOrigin);
 
 export const pageSlugs: Record<Language, Record<PageKey, string>> = {
   ro: {
@@ -99,6 +102,10 @@ export function parsePublicRoute(pathname: string): PublicRoute {
 
 export function buildCanonicalUrl(path: string) {
   return `${siteOrigin}${path}`;
+}
+
+function normalizeOrigin(origin: string) {
+  return origin.replace(/\/+$/, "");
 }
 
 function normalizePath(pathname: string) {

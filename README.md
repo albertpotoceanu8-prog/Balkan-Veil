@@ -27,10 +27,19 @@ Create `website/.env.local` from `website/.env.example` when Supabase-backed fea
 ```bash
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
+VITE_SITE_ORIGIN=
 VITE_APP_MODE=full
 ```
 
 Do not commit real environment values.
+
+`VITE_SITE_ORIGIN` should be the canonical production origin, for example:
+
+```bash
+VITE_SITE_ORIGIN=https://website-balkan-veil.vercel.app
+```
+
+The Supabase anon key is public by design in browser applications. Security must be enforced with Supabase Row Level Security policies, not by hiding the anon key.
 
 ## Quality Checks
 
@@ -38,6 +47,7 @@ Do not commit real environment values.
 cd website
 npm run typecheck
 npm run lint
+npm run test
 npm run build
 ```
 
@@ -53,6 +63,12 @@ Recommended Vercel settings:
 - Build command: `npm run build`
 - Output directory: `dist`
 - Environment variables: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_APP_MODE`
+
+Also configure `VITE_SITE_ORIGIN` in Vercel so static SEO metadata, canonical URLs, Open Graph URLs, and hreflang URLs point to the correct production domain.
+
+## Supabase Security
+
+Keep RLS enabled on all public tables. Public inserts such as access requests should have narrow `insert` policies, while admin-only reads and writes should be restricted to approved authenticated users or custom admin claims.
 
 ## Repository Hygiene
 
