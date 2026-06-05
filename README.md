@@ -28,7 +28,7 @@ Create `website/.env.local` from `website/.env.example` when Supabase-backed fea
 VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
 VITE_SITE_ORIGIN=
-VITE_APP_MODE=full
+VITE_APP_MODE=site
 ```
 
 Do not commit real environment values.
@@ -40,6 +40,12 @@ VITE_SITE_ORIGIN=https://website-balkan-veil.vercel.app
 ```
 
 The Supabase anon key is public by design in browser applications. Security must be enforced with Supabase Row Level Security policies, not by hiding the anon key.
+
+`VITE_APP_MODE` controls which side of the app is exposed:
+
+- `site`: public website only; `/admin` renders the public 404/noindex route.
+- `admin`: admin/CMS only; non-admin paths are normalized to `/admin`.
+- `full`: local development mode with both public site and `/admin`.
 
 ## Quality Checks
 
@@ -65,6 +71,8 @@ Recommended Vercel settings:
 - Environment variables: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`, `VITE_APP_MODE`
 
 Also configure `VITE_SITE_ORIGIN` in Vercel so static SEO metadata, canonical URLs, Open Graph URLs, and hreflang URLs point to the correct production domain.
+
+Use `VITE_APP_MODE=site` for the public Vercel deployment and `VITE_APP_MODE=admin` for a separate CMS deployment.
 
 ## Supabase Security
 

@@ -7,6 +7,7 @@ import { MobileMenu } from "@/components/MobileMenu";
 import { Navbar } from "@/components/Navbar";
 import { Seo } from "@/components/Seo";
 import { siteContent, type Language } from "@/data/siteContent";
+import { getAppMode } from "@/lib/appMode";
 import { buildPublicPath, parsePublicRoute, type PublicRoute } from "@/lib/routing";
 import type { PageKey } from "@/types/navigation";
 
@@ -20,38 +21,46 @@ const AccessPage = React.lazy(() => import("@/pages/AccessPage").then((module) =
 const AdminApp = React.lazy(() => import("@/admin/AdminApp").then((module) => ({ default: module.AdminApp })));
 
 export default function App() {
-  const appMode = import.meta.env.VITE_APP_MODE ?? "full";
+  // VITE_APP_MODE controls deploy separation: public site, admin-only CMS, or local full mode.
+  const appMode = getAppMode();
   const isAdminRoute = typeof window !== "undefined" && window.location.pathname.startsWith("/admin");
 
   if (appMode === "admin") {
-    return (
-      <React.Suspense
-        fallback={
-          <main className="grid min-h-screen place-items-center bg-[#050505] text-[#D4AF37]">
-            <p className="font-mono text-xs uppercase tracking-[0.28em]">Loading VEIL OS</p>
-          </main>
-        }
-      >
-        <AdminApp />
-      </React.Suspense>
-    );
+    return <AdminMode />;
   }
 
-  if (appMode !== "site" && isAdminRoute) {
-    return (
-      <React.Suspense
-        fallback={
-          <main className="grid min-h-screen place-items-center bg-[#050505] text-[#D4AF37]">
-            <p className="font-mono text-xs uppercase tracking-[0.28em]">Loading VEIL OS</p>
-          </main>
-        }
-      >
-        <AdminApp />
-      </React.Suspense>
-    );
+  if (appMode === "full" && isAdminRoute) {
+    return <AdminMode />;
   }
 
+  // site mode never renders AdminApp; /admin falls through to the public 404/noindex route.
   return <PublicSite />;
+}
+
+function AdminMode() {
+  const [ready, setReady] = React.useState(() => typeof window === "undefined" || window.location.pathname.startsWith("/admin"));
+
+  React.useEffect(() => {
+    if (ready) return;
+    window.history.replaceState({}, "", "/admin");
+    setReady(true);
+  }, [ready]);
+
+  if (!ready) return <AdminLoading />;
+
+  return (
+    <React.Suspense fallback={<AdminLoading />}>
+      <AdminApp />
+    </React.Suspense>
+  );
+}
+
+function AdminLoading() {
+  return (
+    <main className="grid min-h-screen place-items-center bg-[#050505] text-[#D4AF37]">
+      <p className="font-mono text-xs uppercase tracking-[0.28em]">Loading VEIL OS</p>
+    </main>
+  );
 }
 
 function PublicSite() {
