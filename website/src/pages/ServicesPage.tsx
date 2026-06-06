@@ -44,7 +44,7 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {content.outcomes.items.map((item, index) => (
             <div key={item} className="relative border border-stone-800 bg-stone-950/55 p-5">
-              <span className="absolute right-4 top-4 h-2 w-2 bg-emerald-300/45" aria-hidden="true" />
+              <span className="absolute right-4 top-4 h-2 w-2 bg-amber-300/40" aria-hidden="true" />
               <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
               <p className="mt-3 font-serif text-2xl text-stone-100">{item}</p>
             </div>
@@ -62,7 +62,7 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
           <div className="grid gap-3 sm:grid-cols-2">
             {content.architecture.nodes.map((node, index) => (
               <div key={node} className={`relative border border-stone-800 bg-black/45 p-5 ${index === 0 || index === 5 ? "sm:col-span-2" : ""}`}>
-                <span className={index % 4 === 2 ? "absolute right-4 top-4 h-2 w-2 bg-red-300/45" : "absolute right-4 top-4 h-2 w-2 bg-emerald-300/45"} aria-hidden="true" />
+                <span className={index % 4 === 2 ? "absolute right-4 top-4 h-2 w-2 bg-red-300/35" : "absolute right-4 top-4 h-2 w-2 bg-amber-300/35"} aria-hidden="true" />
                 <p className="font-mono text-xs text-amber-300/70">{String(index + 1).padStart(2, "0")}</p>
                 <p className="mt-4 font-serif text-3xl text-stone-100">{node}</p>
               </div>

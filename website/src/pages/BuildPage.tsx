@@ -45,7 +45,7 @@ export function BuildPage({ content, goToPage }: BuildPageProps) {
         <div className="mt-8 grid gap-6 lg:grid-cols-4">
           {content.processSteps.map((item) => (
             <motion.div key={item.step} {...cardMotion} className={panelClass + " operator-surface rounded-none p-8"}>
-              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-emerald-300/35 via-amber-300/30 to-red-300/25" aria-hidden="true" />
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/40 to-transparent" aria-hidden="true" />
               <p className="font-mono text-sm text-amber-300">{item.step}</p>
               <h3 className="mt-8 font-serif text-3xl text-stone-100">{item.title}</h3>
               <p className="mt-5 text-base leading-7 text-stone-500">{item.text}</p>

@@ -25,8 +25,8 @@ export function InterfaceMockup({ eyebrow, title, text, systemLabel, statusLine,
         <div className="relative border border-stone-800 bg-stone-950/85">
           <div className="flex flex-col gap-3 border-b border-stone-800 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-2" aria-hidden="true">
-              <span className="h-2 w-8 border border-emerald-300/35 bg-emerald-300/10" />
-              <span className="h-2 w-5 border border-red-300/30 bg-red-300/10" />
+              <span className="h-2 w-8 border border-amber-300/30 bg-amber-300/10" />
+              <span className="h-2 w-5 border border-emerald-300/30 bg-emerald-300/10" />
             </div>
             <span className="font-mono text-xs uppercase tracking-[0.24em] text-amber-200">{systemLabel}</span>
           </div>
@@ -50,7 +50,7 @@ export function InterfaceMockup({ eyebrow, title, text, systemLabel, statusLine,
                   <div key={row} className="grid grid-cols-[3rem_1fr_auto] items-center gap-4 py-4">
                     <span className="font-mono text-xs text-amber-300/70">0{index + 1}</span>
                     <span className="text-sm text-stone-300">{row}</span>
-                    <span className={index % 3 === 1 ? "h-2 w-2 border border-red-300/45" : "h-2 w-2 border border-emerald-300/45"} aria-hidden="true" />
+                    <span className={index % 3 === 1 ? "h-2 w-2 border border-red-300/35" : "h-2 w-2 border border-amber-300/45"} aria-hidden="true" />
                   </div>
                 ))}
               </div>

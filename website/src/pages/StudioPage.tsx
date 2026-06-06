@@ -48,10 +48,10 @@ export function StudioPage({ content }: StudioPageProps) {
         </div>
 
         <div className="relative overflow-hidden border border-stone-800 bg-stone-950/45 p-6 md:p-8">
-          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(239,68,68,0.07)_1px,transparent_1px)] bg-[size:42px_42px] opacity-25" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
           <div className="relative">
             <div className="flex items-center justify-between gap-4 border-b border-stone-800 pb-4">
-              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-emerald-300/75">RECON CONSOLE</p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-amber-300/75">RECON CONSOLE</p>
               <span className="h-2 w-2 bg-emerald-300/70" aria-hidden="true" />
             </div>
             <div className="mt-5 divide-y divide-stone-800/90">
@@ -59,7 +59,7 @@ export function StudioPage({ content }: StudioPageProps) {
                 <div key={note} className="grid gap-3 py-4 md:grid-cols-[4rem_1fr_auto] md:items-center">
                   <span className="font-mono text-xs text-amber-300/60">{String(index + 1).padStart(2, "0")}</span>
                   <span className="text-base leading-7 text-stone-400">{note}</span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-red-300/70">TRACE</span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-amber-300/60">TRACE</span>
                 </div>
               ))}
             </div>
@@ -96,7 +96,7 @@ export function StudioPage({ content }: StudioPageProps) {
               {content.visualVectors.items.map((item) => (
                 <motion.article key={item.title} {...cardMotion} className="border border-stone-800 bg-black/35 p-5">
                   <div className="flex items-center justify-between gap-4">
-                    <h3 className="font-mono text-sm uppercase tracking-[0.28em] text-emerald-300/75">{item.title}</h3>
+                    <h3 className="font-mono text-sm uppercase tracking-[0.28em] text-amber-300/75">{item.title}</h3>
                     <span className="h-px flex-1 bg-amber-300/20" aria-hidden="true" />
                   </div>
                   <p className="mt-4 text-sm leading-6 text-stone-500">{item.text}</p>

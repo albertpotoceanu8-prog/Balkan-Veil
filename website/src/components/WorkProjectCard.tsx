@@ -35,7 +35,7 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
             <div className="mt-10 flex items-end justify-between gap-6 border-t border-amber-300/20 pt-6">
               <p className="font-serif text-7xl leading-none text-amber-100/15 md:text-8xl">{project.number}</p>
               <div className="max-w-44 text-right">
-                <span className="mb-4 ml-auto block h-2 w-14 bg-emerald-300/30" aria-hidden="true" />
+                <span className="mb-4 ml-auto block h-2 w-14 bg-amber-300/25" aria-hidden="true" />
                 <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-stone-500">{labels.status}</p>
               </div>
             </div>
@@ -46,7 +46,7 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
               {dossierRows.map(([label, value], index) => (
                 <div key={label} className="grid gap-3 py-5 md:grid-cols-[10rem_1fr] md:gap-6">
                   <div className="flex items-center gap-3">
-                    <span className={index === 0 ? "h-2 w-2 bg-red-300/55" : "h-2 w-2 bg-emerald-300/45"} aria-hidden="true" />
+                    <span className={index === 0 ? "h-2 w-2 bg-red-300/40" : "h-2 w-2 bg-amber-300/35"} aria-hidden="true" />
                     <span className="font-mono text-xs text-amber-300/60">{String(index + 1).padStart(2, "0")}</span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/80">{label}</span>
                   </div>

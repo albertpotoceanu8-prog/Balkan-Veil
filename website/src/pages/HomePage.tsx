@@ -27,8 +27,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
     <>
       <section className="relative z-10 mx-auto flex min-h-[calc(100vh-120px)] max-w-[1500px] flex-col justify-center overflow-hidden px-5 py-12 md:min-h-[calc(100vh-160px)] md:px-8 md:py-20">
         <div className="absolute inset-x-0 top-12 h-96 operator-grid opacity-25" aria-hidden="true" />
-        <div className="absolute left-5 top-16 hidden h-40 w-px bg-gradient-to-b from-emerald-300/45 via-amber-300/25 to-transparent md:block" aria-hidden="true" />
-        <div className="absolute right-8 top-24 hidden h-2 w-28 bg-red-300/10 md:block" aria-hidden="true" />
+        <div className="absolute left-5 top-16 hidden h-40 w-px bg-gradient-to-b from-amber-300/45 via-amber-300/25 to-transparent md:block" aria-hidden="true" />
+        <div className="absolute right-8 top-24 hidden h-2 w-28 bg-amber-300/10 md:block" aria-hidden="true" />
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="relative grid gap-10 lg:grid-cols-[1.12fr_0.88fr] lg:items-center">
           <div>
             <div className="mb-8 inline-flex max-w-full items-center gap-2 border border-amber-300/20 bg-amber-300/5 px-4 py-3 text-xs uppercase tracking-[0.24em] text-amber-200 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)] sm:px-5 sm:text-sm sm:tracking-[0.3em]">

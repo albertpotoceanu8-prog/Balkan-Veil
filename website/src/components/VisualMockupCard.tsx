@@ -13,8 +13,8 @@ export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
       <div className="absolute inset-0 operator-grid opacity-25" aria-hidden="true" />
       <div className="mb-5 flex items-center justify-between border-b border-stone-800 pb-4">
         <div className="flex items-center gap-2" aria-hidden="true">
-          <span className="h-2 w-8 border border-emerald-300/35 bg-emerald-300/10" />
-          <span className="h-2 w-4 border border-red-300/30 bg-red-300/10" />
+          <span className="h-2 w-8 border border-amber-300/30 bg-amber-300/10" />
+          <span className="h-2 w-4 border border-emerald-300/30 bg-emerald-300/10" />
         </div>
         <p className="font-mono text-xs text-stone-600">BV-0{index + 1}</p>
       </div>
@@ -29,9 +29,9 @@ export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
         ))}
       </div>
       <div className="mt-8 grid h-28 grid-cols-4 border border-stone-800 bg-black/35" aria-hidden="true">
-        <div className="border-r border-stone-800 bg-emerald-300/[0.03]" />
+        <div className="border-r border-stone-800 bg-amber-300/[0.035]" />
         <div className="border-r border-stone-800 bg-amber-300/[0.04]" />
-        <div className="border-r border-stone-800 bg-red-300/[0.035]" />
+        <div className="border-r border-stone-800 bg-stone-300/[0.025]" />
         <div className="operator-scan" />
       </div>
     </motion.div>

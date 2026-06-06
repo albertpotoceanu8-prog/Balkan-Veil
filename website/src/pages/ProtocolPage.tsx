@@ -19,7 +19,7 @@ export function ProtocolPage({ content, goToPage }: ProtocolPageProps) {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {content.protocol.map((item) => (
             <motion.div key={item} {...cardMotion} className="relative border border-stone-800 bg-black/50 p-8 text-center transition duration-500 hover:-translate-y-1 hover:border-amber-300/30 hover:bg-black/70 hover:shadow-[0_0_35px_rgba(251,191,36,0.08)]">
-              <span className="absolute right-5 top-5 h-2 w-2 border border-emerald-300/45" aria-hidden="true" />
+              <span className="absolute right-5 top-5 h-2 w-2 border border-amber-300/45" aria-hidden="true" />
               <p className="font-serif text-3xl text-amber-100">{item}</p>
             </motion.div>
           ))}

@@ -35,7 +35,7 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
                 </div>
 
                 <div className="relative mt-9 border-y border-stone-800 py-6">
-                  <span className={plan.recommended ? "absolute right-0 top-6 h-2 w-16 bg-emerald-300/35" : "absolute right-0 top-6 h-2 w-16 bg-amber-300/20"} aria-hidden="true" />
+                  <span className={plan.recommended ? "absolute right-0 top-6 h-2 w-16 bg-amber-300/35" : "absolute right-0 top-6 h-2 w-16 bg-amber-300/20"} aria-hidden="true" />
                   <div className="flex items-end gap-2">
                     <p className="font-serif text-5xl text-amber-100 md:text-6xl">{plan.price}</p>
                     <p className="pb-2 text-sm uppercase tracking-[0.2em] text-stone-500">{plan.period}</p>
