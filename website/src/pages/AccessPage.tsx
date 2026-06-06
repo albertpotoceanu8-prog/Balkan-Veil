@@ -203,8 +203,8 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
       </div>
 
       <div className="operator-surface mt-20 border border-amber-300/15 bg-black/45 p-5 md:mt-28 md:p-12 md:backdrop-blur-xl">
-        <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="pointer-events-none absolute inset-0 z-0 operator-grid opacity-15" aria-hidden="true" />
+        <div className="relative z-10 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.inquiryLabel}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-stone-100 md:text-6xl">{content.inquiryTitle}</h2>
