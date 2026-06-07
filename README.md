@@ -68,10 +68,10 @@ See [website/supabase/PUBLIC_SITE_CONTRACT.md](website/supabase/PUBLIC_SITE_CONT
 After deploying the public website, verify that static route HTML contains the expected canonical, Open Graph, Twitter, and hreflang metadata:
 
 ```text
-view-source:https://website-balkan-veil.vercel.app/ro
-view-source:https://website-balkan-veil.vercel.app/en
-view-source:https://website-balkan-veil.vercel.app/ro/servicii
-view-source:https://website-balkan-veil.vercel.app/en/services
+view-source:https://balkanveil.com/ro
+view-source:https://balkanveil.com/en
+view-source:https://balkanveil.com/ro/servicii
+view-source:https://balkanveil.com/en/services
 ```
 
 Also confirm that the public deployment uses `VITE_APP_MODE=site`.

@@ -2,7 +2,7 @@ import type { Language } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
 export const defaultLanguage: Language = "ro";
-const fallbackSiteOrigin = "https://website-balkan-veil.vercel.app";
+const fallbackSiteOrigin = "https://balkanveil.com";
 const configuredSiteOrigin = import.meta.env.VITE_SITE_ORIGIN?.trim();
 
 export const siteOrigin = normalizeOrigin(configuredSiteOrigin || fallbackSiteOrigin);

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin
 
-Sitemap: https://website-balkan-veil.vercel.app/sitemap.xml
+Sitemap: https://balkanveil.com/sitemap.xml

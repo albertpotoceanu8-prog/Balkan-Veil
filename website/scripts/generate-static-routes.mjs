@@ -1,7 +1,7 @@
 ﻿import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-const fallbackSiteOrigin = "https://website-balkan-veil.vercel.app";
+const fallbackSiteOrigin = "https://balkanveil.com";
 const siteOrigin = normalizeOrigin(process.env.VITE_SITE_ORIGIN || fallbackSiteOrigin);
 const distDir = path.resolve("dist");
 const indexPath = path.join(distDir, "index.html");
