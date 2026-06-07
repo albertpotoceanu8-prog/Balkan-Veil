@@ -152,6 +152,8 @@ await Promise.all(
     await writeFile(path.join(outputDir, "index.html"), html, "utf8");
   }),
 );
+await writeFile(path.join(distDir, "robots.txt"), buildRobotsTxt(), "utf8");
+await writeFile(path.join(distDir, "sitemap.xml"), buildSitemapXml(routes), "utf8");
 
 function applyMeta(templateHtml, route) {
   const canonicalUrl = `${siteOrigin}${route.path}`;
@@ -202,6 +204,53 @@ function validateRoutes(routeList) {
   }
 }
 
+function buildRobotsTxt() {
+  return [
+    "User-agent: *",
+    "Allow: /",
+    "Disallow: /admin",
+    "",
+    `Sitemap: ${siteOrigin}/sitemap.xml`,
+    "",
+  ].join("\n");
+}
+
+function buildSitemapXml(routeList) {
+  const lastModified = new Date().toISOString().slice(0, 10);
+  const entries = routeList.map((route) => {
+    const priority = getSitemapPriority(route.path);
+    const changeFrequency = getSitemapChangeFrequency(route.path);
+
+    return `  <url>
+    <loc>${escapeXml(`${siteOrigin}${route.path}`)}</loc>
+    <lastmod>${lastModified}</lastmod>
+    <changefreq>${changeFrequency}</changefreq>
+    <priority>${priority}</priority>
+    <xhtml:link rel="alternate" hreflang="ro" href="${escapeXml(`${siteOrigin}${route.alternate.ro}`)}" />
+    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(`${siteOrigin}${route.alternate.en}`)}" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${siteOrigin}/ro`)}" />
+  </url>`;
+  }).join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${entries}
+</urlset>
+`;
+}
+
+function getSitemapPriority(routePath) {
+  if (routePath === "/ro" || routePath === "/en") return "1.0";
+  if (["servicii", "services", "abonamente", "pricing", "acces", "access"].some((slug) => routePath.includes(slug))) return "0.9";
+  return "0.8";
+}
+
+function getSitemapChangeFrequency(routePath) {
+  if (routePath === "/ro" || routePath === "/en") return "weekly";
+  if (["acces", "access"].some((slug) => routePath.includes(slug))) return "weekly";
+  return "monthly";
+}
+
 function replaceTag(html, tag, content) {
   return html.replace(new RegExp(`<${tag}>.*?</${tag}>`, "s"), `<${tag}>${content}</${tag}>`);
 }
@@ -232,6 +281,10 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
+}
+
+function escapeXml(value) {
+  return escapeHtml(value).replaceAll("'", "&apos;");
 }
 
 function escapeRegExp(value) {
