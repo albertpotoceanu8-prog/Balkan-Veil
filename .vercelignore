@@ -1,0 +1,13 @@
+**/node_modules
+**/.vercel
+**/.env
+**/.env.*
+**/*.log
+**/.tmp
+**/.tools
+**/dist
+**/out
+**/outputs
+**/spreadsheet-work
+.git
+.playwright-cli
