@@ -13,10 +13,10 @@ type DecodeTextProps = {
 
 const stableChars = new Set([" ", ".", ",", "-", ":", ";", "!", "?", "\n"]);
 const decodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const defaultDurationMs = 2400;
+const defaultDurationMs = 3000;
 const defaultMaxLength = 90;
 const defaultRevealChunkSize = 1;
-const minFrameMs = 48;
+const minFrameMs = 96;
 
 type DecodeFrame = {
   activeChars: Record<number, string>;
@@ -24,19 +24,11 @@ type DecodeFrame = {
 };
 
 function clampDuration(durationMs: number) {
-  return Math.min(3200, Math.max(1800, durationMs));
-}
-
-function easeOutCubic(progress: number) {
-  return 1 - Math.pow(1 - progress, 3);
+  return Math.min(4200, Math.max(2400, durationMs));
 }
 
 function randomDecodeChar() {
   return decodeChars[Math.floor(Math.random() * decodeChars.length)] ?? "A";
-}
-
-function placeholderDecodeChar(index: number) {
-  return decodeChars[index % decodeChars.length] ?? "A";
 }
 
 function getRevealableIndexes(chars: string[]) {
@@ -47,7 +39,7 @@ function getRevealableIndexes(chars: string[]) {
 }
 
 function buildFrame(revealableIndexes: number[], progress: number, revealChunkSize: number): DecodeFrame {
-  const revealedCount = Math.min(revealableIndexes.length, Math.floor(revealableIndexes.length * easeOutCubic(progress)));
+  const revealedCount = Math.min(revealableIndexes.length, Math.floor(revealableIndexes.length * progress));
   const activeIndexes = revealableIndexes.slice(revealedCount, revealedCount + Math.max(1, revealChunkSize));
 
   return {
@@ -71,7 +63,6 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
   const revealOrderByIndex = React.useMemo(() => new Map(revealableIndexes.map((index, revealOrder) => [index, revealOrder])), [revealableIndexes]);
   const shouldAnimate = !disabled && !shouldReduceMotion && text.length <= maxLength;
   const [frame, setFrame] = React.useState<DecodeFrame>(() => ({ activeChars: {}, revealedCount: revealableIndexes.length }));
-  const [isAnimating, setIsAnimating] = React.useState(false);
 
   React.useEffect(() => {
     if (frameRef.current !== null) {
@@ -81,7 +72,6 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
 
     startedRef.current = false;
     lastFrameAtRef.current = 0;
-    setIsAnimating(false);
     setFrame({ activeChars: {}, revealedCount: revealableIndexes.length });
   }, [revealableIndexes.length, text]);
 
@@ -91,7 +81,6 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
     }
 
     startedRef.current = true;
-    setIsAnimating(true);
     setFrame({ activeChars: {}, revealedCount: 0 });
 
     const startedAt = window.performance.now();
@@ -109,7 +98,6 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
         frameRef.current = window.requestAnimationFrame(tick);
       } else {
         frameRef.current = null;
-        setIsAnimating(false);
       }
     };
 
@@ -132,33 +120,28 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
   }
 
   return (
-    <span ref={ref} className={`relative inline-block max-w-full whitespace-pre-wrap align-baseline ${className}`} aria-label={text} role="text">
-      <span aria-hidden="true">
-        {chars.map((char, index) => {
-          const revealOrder = revealOrderByIndex.get(index);
-          const isRevealed = revealOrder === undefined || revealOrder < frame.revealedCount;
-
+    <span ref={ref} className={`inline whitespace-pre-wrap align-baseline ${className}`} aria-label={text} role="text">
+      {chars.map((char, index) => {
+        if (stableChars.has(char)) {
           return (
-            <span key={`final-${char}-${index}`} className={isRevealed ? undefined : "opacity-0"}>
+            <span key={`stable-${char}-${index}`} aria-hidden="true">
               {char}
             </span>
           );
-        })}
-      </span>
-      <span aria-hidden="true" className="pointer-events-none absolute inset-0 whitespace-pre-wrap">
-        {chars.map((char, index) => {
-          const revealOrder = revealOrderByIndex.get(index);
-          const isRevealed = revealOrder === undefined || revealOrder < frame.revealedCount;
-          const visibleChar = frame.activeChars[index] ?? placeholderDecodeChar(index);
+        }
 
-          return (
-            <span key={`decode-${char}-${index}`} className={isRevealed ? "opacity-0" : index in frame.activeChars ? "text-amber-200" : "text-stone-100/35"}>
-              {visibleChar}
-            </span>
-          );
-        })}
-        {isAnimating ? <span className="ml-1 inline-block text-amber-300/75 decode-cursor" aria-hidden="true">{"\u258c"}</span> : null}
-      </span>
+        const revealOrder = revealOrderByIndex.get(index);
+        const isRevealed = revealOrder === undefined || revealOrder < frame.revealedCount;
+        const isActive = index in frame.activeChars;
+        const visibleChar = isActive ? frame.activeChars[index] : char;
+
+        return (
+          <span key={`cell-${char}-${index}`} aria-hidden="true" className="relative inline-grid align-baseline [grid-template-areas:'cell']">
+            <span className={`[grid-area:cell] ${isRevealed ? undefined : "opacity-0"}`}>{char}</span>
+            <span className={`pointer-events-none [grid-area:cell] place-self-center text-center ${isRevealed || !isActive ? "opacity-0" : "text-amber-200"}`}>{visibleChar}</span>
+          </span>
+        );
+      })}
     </span>
   );
 }
