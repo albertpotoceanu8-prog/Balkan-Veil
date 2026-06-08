@@ -23,34 +23,34 @@ export function MobileMenu({ page, navItems, labels, language, onLanguageChange,
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -12 }}
       transition={{ duration: 0.24 }}
-      className="operator-surface relative z-30 mx-6 border border-amber-300/15 bg-black/85 p-5 backdrop-blur-md lg:hidden"
+      className="operator-surface relative z-30 mx-5 max-h-[calc(100svh-6.5rem)] !overflow-y-auto border border-amber-300/15 bg-black/90 p-4 backdrop-blur-md lg:hidden"
       role="dialog"
       aria-label="Mobile navigation"
     >
-      <div className="grid gap-3">
+      <div className="grid gap-2.5">
         {navItems.map(([key, label]) => (
           <button
             key={key}
             type="button"
             onClick={() => goToPage(key)}
             aria-current={page === key ? "page" : undefined}
-            className={`border px-5 py-4 text-left font-serif text-2xl transition ${page === key ? "border-amber-300/35 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-stone-950/60 text-stone-300"}`}
+            className={`min-h-12 border px-4 py-3 text-left font-serif text-xl leading-tight transition ${page === key ? "border-amber-300/35 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-stone-950/60 text-stone-300"}`}
           >
             {label}
           </button>
         ))}
-        <button type="button" onClick={openCommandMenu} className="mt-2 border border-stone-800 bg-black/50 px-5 py-4 text-left text-xs uppercase tracking-[0.28em] text-amber-200">
+        <button type="button" onClick={openCommandMenu} className="mt-1 min-h-12 border border-stone-800 bg-black/50 px-4 py-3 text-left text-[11px] uppercase tracking-[0.22em] text-amber-200">
           {labels.openCommandMenu}
         </button>
 
-        <div className="mt-2 border border-stone-800 bg-black/50 p-4">
-          <p className="text-xs uppercase tracking-[0.28em] text-stone-500">{labels.language}</p>
+        <div className="mt-1 border border-stone-800 bg-black/50 p-3">
+          <p className="text-[11px] uppercase tracking-[0.22em] text-stone-500">{labels.language}</p>
           <div className="mt-3 grid grid-cols-2 gap-3">
             <button
               type="button"
               onClick={() => onLanguageChange("ro")}
               aria-pressed={language === "ro"}
-              className={`border px-4 py-3 text-xs uppercase tracking-[0.24em] transition ${language === "ro" ? "border-amber-300/40 bg-amber-300/10 text-amber-100" : "border-stone-800 text-stone-500"}`}
+              className={`min-h-11 border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "border-amber-300/40 bg-amber-300/10 text-amber-100" : "border-stone-800 text-stone-500"}`}
             >
               RO
             </button>
@@ -58,7 +58,7 @@ export function MobileMenu({ page, navItems, labels, language, onLanguageChange,
               type="button"
               onClick={() => onLanguageChange("en")}
               aria-pressed={language === "en"}
-              className={`border px-4 py-3 text-xs uppercase tracking-[0.24em] transition ${language === "en" ? "border-amber-300/40 bg-amber-300/10 text-amber-100" : "border-stone-800 text-stone-500"}`}
+              className={`min-h-11 border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "border-amber-300/40 bg-amber-300/10 text-amber-100" : "border-stone-800 text-stone-500"}`}
             >
               ENG
             </button>

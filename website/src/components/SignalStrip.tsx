@@ -11,10 +11,10 @@ export function SignalStrip({ items }: SignalStripProps) {
       <div className="absolute inset-0 operator-grid opacity-25" aria-hidden="true" />
       <div className="relative grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         {items.map((item, index) => (
-          <div key={item} className="relative border border-stone-800 bg-stone-950/60 px-5 py-5 transition duration-500 hover:border-amber-300/30">
+          <div key={item} className="relative border border-stone-800 bg-stone-950/60 px-4 py-4 transition duration-500 hover:border-amber-300/30 md:px-5 md:py-5">
             <span className="absolute right-4 top-4 h-2 w-2 bg-amber-300/40" aria-hidden="true" />
             <p className="font-mono text-xs text-amber-300/70">0{index + 1}</p>
-            <p className="mt-3 font-serif text-xl leading-tight text-stone-100 md:text-2xl">{item}</p>
+            <p className="mt-3 font-serif text-lg leading-tight text-stone-100 md:text-2xl">{item}</p>
           </div>
         ))}
       </div>

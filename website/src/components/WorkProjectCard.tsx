@@ -24,16 +24,16 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
           <div className="border-b border-stone-800/90 p-6 md:p-8 lg:border-b-0 lg:border-r">
             <div className="flex items-start justify-between gap-5">
               <div>
-                <p className="font-mono text-xs uppercase tracking-[0.3em] text-amber-300/80">{project.category}</p>
-                <h3 className="mt-6 max-w-xl font-serif text-4xl leading-tight text-stone-100 md:text-5xl">{project.title}</h3>
+                <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-amber-300/80 md:text-xs md:tracking-[0.3em]">{project.category}</p>
+                <h3 className="mt-5 max-w-xl font-serif text-3xl leading-tight text-stone-100 md:mt-6 md:text-5xl">{project.title}</h3>
               </div>
               <ArchiveStamp code={project.number} label="BV" status={labels.scenario} align="right" className="hidden sm:flex" />
             </div>
 
-            <p className="mt-8 max-w-xl text-lg leading-8 text-stone-400">{project.summary}</p>
+            <p className="mt-6 max-w-xl text-base leading-7 text-stone-400 md:mt-8 md:text-lg md:leading-8">{project.summary}</p>
 
-            <div className="mt-10 flex items-end justify-between gap-6 border-t border-amber-300/20 pt-6">
-              <p className="font-serif text-7xl leading-none text-amber-100/15 md:text-8xl">{project.number}</p>
+            <div className="mt-8 flex items-end justify-between gap-6 border-t border-amber-300/20 pt-6 md:mt-10">
+              <p className="font-serif text-6xl leading-none text-amber-100/15 md:text-8xl">{project.number}</p>
               <div className="max-w-44 text-right">
                 <span className="mb-4 ml-auto block h-2 w-14 bg-amber-300/25" aria-hidden="true" />
                 <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-stone-500">{labels.status}</p>
@@ -50,7 +50,7 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
                     <span className="font-mono text-xs text-amber-300/60">{String(index + 1).padStart(2, "0")}</span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/80">{label}</span>
                   </div>
-                  <p className={`text-base leading-7 ${index === dossierRows.length - 1 ? "font-serif text-2xl text-amber-100" : "text-stone-400"}`}>{value}</p>
+                  <p className={`text-base leading-7 ${index === dossierRows.length - 1 ? "font-serif text-xl text-amber-100 md:text-2xl" : "text-stone-400"}`}>{value}</p>
                 </div>
               ))}
             </div>
