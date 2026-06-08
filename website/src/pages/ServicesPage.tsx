@@ -52,6 +52,35 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
         </div>
       </div>
 
+      <div className="operator-surface mt-20 border border-stone-800 bg-stone-950/45 p-6 md:p-10 md:backdrop-blur-xl">
+        <div className="absolute inset-0 operator-grid opacity-10" aria-hidden="true" />
+        <div className="relative grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <div className="mb-6 flex h-12 w-12 items-center justify-center border border-amber-300/20 bg-amber-300/5 text-amber-200" aria-hidden="true">
+              <Shield className="h-5 w-5" />
+            </div>
+            <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.trust.eyebrow}</p>
+            <h2 className="mt-5 font-serif text-4xl leading-tight text-stone-100 md:text-5xl">{content.trust.title}</h2>
+            <p className="mt-5 text-base leading-7 text-stone-500 md:text-lg md:leading-8">{content.trust.text}</p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {content.trust.groups.map((group) => (
+              <div key={group.title} className="border border-stone-800 bg-black/45 p-5">
+                <p className="font-mono text-xs uppercase tracking-[0.24em] text-amber-300/75">{group.title}</p>
+                <ul className="mt-4 space-y-3">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm leading-6 text-stone-400">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-amber-300/55" aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="mt-28 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-amber-300">{content.architecture.eyebrow}</p>

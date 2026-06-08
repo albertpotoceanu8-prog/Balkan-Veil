@@ -83,6 +83,9 @@ type PricingPlan = {
   name: string;
   price: string;
   period: string;
+  promoPrice?: string;
+  promoLabel?: string;
+  promoNote?: string;
   label: string;
   description: string;
   recommended?: string;
@@ -286,6 +289,15 @@ export type SiteContent = {
       eyebrow: string;
       items: string[];
     };
+    trust: {
+      eyebrow: string;
+      title: string;
+      text: string;
+      groups: {
+        title: string;
+        items: string[];
+      }[];
+    };
     comparison: {
       eyebrow: string;
       title: string;
@@ -318,6 +330,11 @@ export type SiteContent = {
     notIncludedLabel: string;
     planIndexLabel: string;
     ledgerLabel: string;
+    scopeNote: {
+      eyebrow: string;
+      title: string;
+      text: string;
+    };
     plans: PricingPlan[];
     subscriptionSteps: {
       eyebrow: string;
@@ -784,6 +801,29 @@ export const siteContent: Record<Language, SiteContent> = {
         eyebrow: "Outcomes",
         items: ["Mesaj mai clar", "Mobile mai solid", "Brief-uri mai bune", "Lansare controlata"],
       },
+      trust: {
+        eyebrow: "Cadru clar",
+        title: "Lucram premium, dar cu margini clare.",
+        text: "Balkan Veil construieste prezente web, aplicatii mici si sisteme digitale pentru business-uri care au nevoie de claritate, incredere si executie tehnica. Nu vindem ideea ca facem orice. Alegem proiecte unde rezultatul poate fi construit bine si intretinut corect.",
+        groups: [
+          {
+            title: "Ce construim",
+            items: ["Website-uri, landing pages si pagini de prezentare premium", "Aplicatii web mici, portaluri client si dashboard-uri", "Formulare, flow-uri de lead si sisteme de cereri", "CMS, panouri admin si integrari utile"],
+          },
+          {
+            title: "Ce sustinem",
+            items: ["Setup tehnic SEO de baza", "Analytics, pixeli si masurare basic", "Domeniu, DNS si deploy pe platforme moderne", "Integrari cu email, CRM, booking, formulare sau plati"],
+          },
+          {
+            title: "Ce nu promitem",
+            items: ["Pozitii garantate in Google", "Vanzari, lead-uri sau performanta ads garantate", "Revizii nelimitate si suport 24/7 enterprise", "Hosting proprietar sau infrastructura enterprise"],
+          },
+          {
+            title: "Pentru cine",
+            items: ["Business-uri mici si medii", "Branduri locale premium si servicii specializate", "Consultanti, creatori, antreprenori si startup-uri", "Echipe care au nevoie de executie tehnica clara"],
+          },
+        ],
+      },
       comparison: {
         eyebrow: "Pozitie",
         title: "Nu este doar o tema frumoasa.",
@@ -831,13 +871,21 @@ export const siteContent: Record<Language, SiteContent> = {
       notIncludedLabel: "Nu este inclus",
       planIndexLabel: "dossier",
       ledgerLabel: "plan ledger",
+      scopeNote: {
+        eyebrow: "Cadru de pret",
+        title: "Preturile de mai jos sunt pentru website-uri administrate.",
+        text: "Aplicatiile web custom, portalurile client, dashboard-urile avansate, automatizarile complexe si integrarile speciale se estimeaza separat dupa brief. Abonamentele de aici acopera prezenta web, lansarea, hosting/deploy-ul si suportul lunar inclus.",
+      },
       plans: [
         {
           name: "Launch",
           price: "199 EUR",
           period: "/luna",
+          promoPrice: "149 EUR",
+          promoLabel: "primul an",
+          promoNote: "pret fondator pentru primele 12 luni",
           label: "Prezenta initiala",
-          description: "Pentru business-uri mici care au nevoie de o interfata publica clara si usor de lansat.",
+          description: "Pentru business-uri mici care au nevoie de 1-3 pagini clare, usor de lansat si administrat.",
           included: ["1-3 pagini", "Design custom", "Responsive", "Inquiry path", "Basic SEO", "Hosting/deploy inclus", "Modificari mici"],
           support: "30 min suport/luna",
           bestFor: "Business-uri mici care vor interfata publica rapid.",
@@ -872,12 +920,12 @@ export const siteContent: Record<Language, SiteContent> = {
       notIncluded: {
         eyebrow: "Limite",
         title: "Ce nu este inclus in abonament.",
-        items: ["Branding/logo complet", "Fotografie/video", "Reclame Meta/Google", "Ecommerce complex", "Integrari custom avansate", "Modificari nelimitate", "Suport 24/7", "Copywriting complet nelimitat"],
+        items: ["Aplicatii web custom complexe", "Portaluri sau dashboard-uri avansate", "Branding/logo complet", "Fotografie/video", "Reclame Meta/Google", "Ecommerce complex", "Integrari custom avansate", "Modificari nelimitate", "Suport 24/7", "Copywriting complet nelimitat"],
       },
       buyoutNote: {
         eyebrow: "Dupa 12 luni",
         title: "Buyout sau transfer se pot discuta dupa perioada minima.",
-        text: "Abonamentul are contract minim 12 luni. Dupa aceasta perioada putem discuta continuarea suportului, transferul sau un buyout, in functie de proiect si infrastructura.",
+        text: "Abonamentul are contract minim 12 luni. Dupa aceasta perioada website-ul ramane la client, iar suportul lunar poate continua optional la acelasi nivel sau printr-o oferta noua, in functie de proiect si infrastructura.",
       },
       faqLabel: "FAQ",
       faqTitle: "Intrebari comerciale despre abonamente.",
@@ -886,10 +934,11 @@ export const siteContent: Record<Language, SiteContent> = {
         { q: "Pot cere modificari lunar?", a: "Da. Fiecare pachet include o fereastra de suport pentru modificari mici si ajustari de continut." },
         { q: "Ce inseamna modificare mica?", a: "Text, imagini, linkuri, mici ajustari de layout, sectiuni simple sau update-uri de continut deja existent." },
         { q: "Ce nu este inclus?", a: "Feature-uri mari, ecommerce complex, reclame, branding complet, fotografie/video si integrari avansate se quoteaza separat." },
-        { q: "Pot anula?", a: "Exista contract minim 12 luni. Dupa perioada minima putem continua, ajusta sau discuta transferul/buyout-ul." },
-        { q: "Ce se intampla dupa 12 luni?", a: "Putem continua abonamentul, schimba nivelul de suport sau discuta buyout/transfer." },
-        { q: "Detin website-ul?", a: "Ai drept de folosire pe durata abonamentului. Detaliile de proprietate, transfer si buyout se clarifica in oferta." },
-        { q: "Pot cumpara sau transfera site-ul?", a: "Da, se poate discuta dupa perioada minima de 12 luni, in functie de proiect." },
+        { q: "Preturile sunt si pentru aplicatii sau portaluri?", a: "Nu. Preturile de pe pagina sunt pentru website-uri si prezenta web administrata. Aplicatiile custom, portalurile si dashboard-urile se estimeaza separat dupa scope." },
+        { q: "Pot anula?", a: "Exista contract minim 12 luni. Dupa perioada minima putem continua suportul, ajusta nivelul lunar sau opri colaborarea." },
+        { q: "Ce se intampla dupa 12 luni?", a: "Website-ul ramane la client. Dupa primul an putem continua suportul lunar optional, pastra acelasi nivel sau ajusta oferta in functie de proiect." },
+        { q: "Detin website-ul?", a: "Da. Dupa perioada minima, website-ul ramane la client. Detaliile tehnice de transfer, acces si infrastructura se clarifica in oferta." },
+        { q: "Pot continua suportul dupa primul an?", a: "Da. Suportul poate continua optional, inclusiv la acelasi nivel lunar daca proiectul ramane in acelasi scope." },
         { q: "CMS-ul este inclus?", a: "Este inclus in Premium si Studio System. Pentru Launch se poate discuta separat daca este necesar." },
         { q: "Copywriting-ul este inclus?", a: "Structura si ajustari de copy sunt incluse. Copywriting complet sau volum mare de continut se quoteaza separat." },
       ],
@@ -1488,6 +1537,29 @@ export const siteContent: Record<Language, SiteContent> = {
         eyebrow: "Outcomes",
         items: ["Clearer message", "Stronger mobile", "Better briefs", "Controlled launch"],
       },
+      trust: {
+        eyebrow: "Clear frame",
+        title: "Premium execution, with clear edges.",
+        text: "Balkan Veil builds web presences, small applications and digital systems for businesses that need clarity, trust and technical execution. We do not sell the idea that we do everything. We choose projects where the result can be built well and maintained properly.",
+        groups: [
+          {
+            title: "What we build",
+            items: ["Premium websites, landing pages and presentation pages", "Small web apps, client portals and dashboards", "Forms, lead flows and request systems", "CMS, admin panels and useful integrations"],
+          },
+          {
+            title: "What we support",
+            items: ["Basic technical SEO setup", "Analytics, pixels and basic measurement", "Domain, DNS and deployment on modern platforms", "Email, CRM, booking, forms or payment integrations"],
+          },
+          {
+            title: "What we do not promise",
+            items: ["Guaranteed Google positions", "Guaranteed sales, leads or ad performance", "Unlimited revisions or 24/7 enterprise support", "Proprietary hosting or enterprise infrastructure"],
+          },
+          {
+            title: "Best suited for",
+            items: ["Small and medium businesses", "Premium local brands and specialized services", "Consultants, creators, entrepreneurs and startups", "Teams that need clear technical execution"],
+          },
+        ],
+      },
       comparison: {
         eyebrow: "Position",
         title: "Not just a pretty theme.",
@@ -1535,13 +1607,21 @@ export const siteContent: Record<Language, SiteContent> = {
       notIncludedLabel: "Not included",
       planIndexLabel: "dossier",
       ledgerLabel: "plan ledger",
+      scopeNote: {
+        eyebrow: "Pricing frame",
+        title: "The plans below are for managed websites.",
+        text: "Custom web apps, client portals, advanced dashboards, complex automations and special integrations are estimated separately after the brief. These subscriptions cover web presence, launch, hosting/deploy and the included monthly support layer.",
+      },
       plans: [
         {
           name: "Launch",
           price: "199 EUR",
           period: "/month",
+          promoPrice: "149 EUR",
+          promoLabel: "first year",
+          promoNote: "founder price for the first 12 months",
           label: "Initial presence",
-          description: "For small businesses that need a clear public interface that can launch quickly.",
+          description: "For small businesses that need 1-3 clear pages that can launch and be managed properly.",
           included: ["1-3 pages", "Custom design", "Responsive", "Inquiry path", "Basic SEO", "Hosting/deploy included", "Small changes"],
           support: "30 min support/month",
           bestFor: "Small businesses that need a public interface quickly.",
@@ -1576,12 +1656,12 @@ export const siteContent: Record<Language, SiteContent> = {
       notIncluded: {
         eyebrow: "Limits",
         title: "What is not included in the subscription.",
-        items: ["Complete branding/logo", "Photography/video", "Meta/Google ads", "Complex ecommerce", "Advanced custom integrations", "Unlimited changes", "24/7 support", "Unlimited full copywriting"],
+        items: ["Complex custom web applications", "Advanced portals or dashboards", "Complete branding/logo", "Photography/video", "Meta/Google ads", "Complex ecommerce", "Advanced custom integrations", "Unlimited changes", "24/7 support", "Unlimited full copywriting"],
       },
       buyoutNote: {
         eyebrow: "After 12 months",
         title: "Buyout or transfer can be discussed after the minimum period.",
-        text: "The subscription has a minimum 12-month contract. After that period we can discuss continued support, transfer or buyout depending on the project and infrastructure.",
+        text: "The subscription has a minimum 12-month contract. After that period the website stays with the client, and monthly support can continue optionally at the same level or through a new offer, depending on the project and infrastructure.",
       },
       faqLabel: "FAQ",
       faqTitle: "Commercial questions about subscriptions.",
@@ -1590,10 +1670,11 @@ export const siteContent: Record<Language, SiteContent> = {
         { q: "Can I request changes every month?", a: "Yes. Each plan includes a support window for small changes and content adjustments." },
         { q: "What counts as a small change?", a: "Text, images, links, small layout adjustments, simple sections or updates to existing content." },
         { q: "What is not included?", a: "Large features, complex ecommerce, ads, full branding, photo/video and advanced integrations are quoted separately." },
-        { q: "Can I cancel?", a: "There is a minimum 12-month contract. After the minimum period we can continue, adjust or discuss transfer/buyout." },
-        { q: "What happens after 12 months?", a: "We can continue the subscription, change the support level or discuss buyout/transfer." },
-        { q: "Do I own the website?", a: "You have usage rights during the subscription. Ownership, transfer and buyout details are clarified in the offer." },
-        { q: "Can I buy out / transfer the website?", a: "Yes, this can be discussed after the minimum 12-month period, depending on the project." },
+        { q: "Do these prices include apps or portals?", a: "No. The prices on this page are for managed websites and web presence. Custom apps, portals and dashboards are estimated separately after scope." },
+        { q: "Can I cancel?", a: "There is a minimum 12-month contract. After the minimum period we can continue support, adjust the monthly level or stop the collaboration." },
+        { q: "What happens after 12 months?", a: "The website stays with the client. After the first year, monthly support can continue optionally, stay at the same level or be adjusted depending on the project." },
+        { q: "Do I own the website?", a: "Yes. After the minimum period, the website stays with the client. Technical transfer, access and infrastructure details are clarified in the offer." },
+        { q: "Can support continue after the first year?", a: "Yes. Support can continue optionally, including at the same monthly level if the project stays within the same scope." },
         { q: "Is CMS included?", a: "It is included in Premium and Studio System. For Launch it can be discussed separately if needed." },
         { q: "Is copywriting included?", a: "Structure and copy adjustments are included. Full copywriting or large content volume is quoted separately." },
       ],

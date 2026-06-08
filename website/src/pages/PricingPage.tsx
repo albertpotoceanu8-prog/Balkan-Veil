@@ -21,6 +21,15 @@ type PricingPageProps = {
 export function PricingPage({ content, goToPage }: PricingPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
+      <div className="operator-surface mb-10 border border-amber-300/15 bg-black/45 p-5 md:p-7">
+        <div className="absolute inset-0 operator-grid opacity-10" aria-hidden="true" />
+        <div className="relative max-w-4xl">
+          <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{content.scopeNote.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-3xl leading-tight text-stone-100 md:text-4xl">{content.scopeNote.title}</h2>
+          <p className="mt-4 text-base leading-7 text-stone-500">{content.scopeNote.text}</p>
+        </div>
+      </div>
+
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.12fr_0.9fr] lg:items-start">
         {content.plans.map((plan, index) => (
           <motion.div key={plan.name} {...cardMotion} className={`h-full ${plan.recommended ? "lg:-mt-8" : "lg:mt-10"}`}>
@@ -37,9 +46,14 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
                 <div className="relative mt-9 border-y border-stone-800 py-6">
                   <span className={plan.recommended ? "absolute right-0 top-6 h-2 w-16 bg-amber-300/35" : "absolute right-0 top-6 h-2 w-16 bg-amber-300/20"} aria-hidden="true" />
                   <div className="flex items-end gap-2">
-                    <p className="font-serif text-5xl text-amber-100 md:text-6xl">{plan.price}</p>
+                    <p className="font-serif text-5xl text-amber-100 md:text-6xl">{plan.promoPrice ?? plan.price}</p>
                     <p className="pb-2 text-sm uppercase tracking-[0.2em] text-stone-500">{plan.period}</p>
                   </div>
+                  {plan.promoPrice ? (
+                    <p className="mt-3 text-sm leading-6 text-stone-500">
+                      <span className="text-amber-200">{plan.promoLabel}:</span> {plan.promoNote}
+                    </p>
+                  ) : null}
                   <p className="mt-4 text-base leading-7 text-stone-500">{plan.description}</p>
                 </div>
 
