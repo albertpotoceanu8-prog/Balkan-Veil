@@ -13,19 +13,18 @@ type DecodeTextProps = {
 
 const stableChars = new Set([" ", ".", ",", "-", ":", ";", "!", "?", "\n"]);
 const decodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-const defaultDurationMs = 1800;
+const defaultDurationMs = 2400;
 const defaultMaxLength = 90;
 const defaultRevealChunkSize = 1;
-const minFrameMs = 120;
+const minFrameMs = 48;
 
 type DecodeFrame = {
-  activeIndex: number;
   activeChars: Record<number, string>;
   revealedCount: number;
 };
 
 function clampDuration(durationMs: number) {
-  return Math.min(2200, Math.max(1600, durationMs));
+  return Math.min(3200, Math.max(1800, durationMs));
 }
 
 function easeOutCubic(progress: number) {
@@ -36,6 +35,10 @@ function randomDecodeChar() {
   return decodeChars[Math.floor(Math.random() * decodeChars.length)] ?? "A";
 }
 
+function placeholderDecodeChar(index: number) {
+  return decodeChars[index % decodeChars.length] ?? "A";
+}
+
 function getRevealableIndexes(chars: string[]) {
   return chars.reduce<number[]>((indexes, char, index) => {
     if (!stableChars.has(char)) indexes.push(index);
@@ -43,14 +46,11 @@ function getRevealableIndexes(chars: string[]) {
   }, []);
 }
 
-function buildFrame(text: string, progress: number, revealChunkSize: number): DecodeFrame {
-  const chars = Array.from(text);
-  const revealableIndexes = getRevealableIndexes(chars);
+function buildFrame(revealableIndexes: number[], progress: number, revealChunkSize: number): DecodeFrame {
   const revealedCount = Math.min(revealableIndexes.length, Math.floor(revealableIndexes.length * easeOutCubic(progress)));
   const activeIndexes = revealableIndexes.slice(revealedCount, revealedCount + Math.max(1, revealChunkSize));
 
   return {
-    activeIndex: activeIndexes[0] ?? -1,
     activeChars: activeIndexes.reduce<Record<number, string>>((activeChars, index) => {
       activeChars[index] = randomDecodeChar();
       return activeChars;
@@ -68,8 +68,9 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
   const shouldReduceMotion = useReducedMotion();
   const chars = React.useMemo(() => Array.from(text), [text]);
   const revealableIndexes = React.useMemo(() => getRevealableIndexes(chars), [chars]);
+  const revealOrderByIndex = React.useMemo(() => new Map(revealableIndexes.map((index, revealOrder) => [index, revealOrder])), [revealableIndexes]);
   const shouldAnimate = !disabled && !shouldReduceMotion && text.length <= maxLength;
-  const [frame, setFrame] = React.useState<DecodeFrame>(() => ({ activeIndex: -1, activeChars: {}, revealedCount: revealableIndexes.length }));
+  const [frame, setFrame] = React.useState<DecodeFrame>(() => ({ activeChars: {}, revealedCount: revealableIndexes.length }));
   const [isAnimating, setIsAnimating] = React.useState(false);
 
   React.useEffect(() => {
@@ -81,7 +82,7 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
     startedRef.current = false;
     lastFrameAtRef.current = 0;
     setIsAnimating(false);
-    setFrame({ activeIndex: -1, activeChars: {}, revealedCount: revealableIndexes.length });
+    setFrame({ activeChars: {}, revealedCount: revealableIndexes.length });
   }, [revealableIndexes.length, text]);
 
   React.useEffect(() => {
@@ -91,6 +92,7 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
 
     startedRef.current = true;
     setIsAnimating(true);
+    setFrame({ activeChars: {}, revealedCount: 0 });
 
     const startedAt = window.performance.now();
     const duration = clampDuration(durationMs);
@@ -100,7 +102,7 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
 
       if (now - lastFrameAtRef.current >= minFrameMs || progress >= 1) {
         lastFrameAtRef.current = now;
-        setFrame(progress >= 1 ? { activeIndex: -1, activeChars: {}, revealedCount: revealableIndexes.length } : buildFrame(text, progress, revealChunkSize));
+        setFrame(progress >= 1 ? { activeChars: {}, revealedCount: revealableIndexes.length } : buildFrame(revealableIndexes, progress, revealChunkSize));
       }
 
       if (progress < 1) {
@@ -119,7 +121,7 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
         frameRef.current = null;
       }
     };
-  }, [canStart, durationMs, isInView, revealChunkSize, revealableIndexes.length, shouldAnimate, text]);
+  }, [canStart, durationMs, isInView, revealChunkSize, revealableIndexes, shouldAnimate]);
 
   if (!shouldAnimate) {
     return (
@@ -129,20 +131,28 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
     );
   }
 
-  let revealableSeen = 0;
-
   return (
-    <span ref={ref} className={`inline whitespace-pre-wrap align-baseline ${className}`} aria-label={text} role="text">
+    <span ref={ref} className={`relative inline-block max-w-full whitespace-pre-wrap align-baseline ${className}`} aria-label={text} role="text">
       <span aria-hidden="true">
         {chars.map((char, index) => {
-          const isStable = stableChars.has(char);
-          const revealOrder = isStable ? -1 : revealableSeen++;
-          const isRevealed = isStable || revealOrder < frame.revealedCount;
-          const isActive = index in frame.activeChars;
-          const visibleChar = isActive ? frame.activeChars[index] : char;
+          const revealOrder = revealOrderByIndex.get(index);
+          const isRevealed = revealOrder === undefined || revealOrder < frame.revealedCount;
 
           return (
-            <span key={`${char}-${index}`} className={isActive ? "text-amber-200" : isRevealed ? undefined : "text-stone-100/35"}>
+            <span key={`final-${char}-${index}`} className={isRevealed ? undefined : "opacity-0"}>
+              {char}
+            </span>
+          );
+        })}
+      </span>
+      <span aria-hidden="true" className="pointer-events-none absolute inset-0 whitespace-pre-wrap">
+        {chars.map((char, index) => {
+          const revealOrder = revealOrderByIndex.get(index);
+          const isRevealed = revealOrder === undefined || revealOrder < frame.revealedCount;
+          const visibleChar = frame.activeChars[index] ?? placeholderDecodeChar(index);
+
+          return (
+            <span key={`decode-${char}-${index}`} className={isRevealed ? "opacity-0" : index in frame.activeChars ? "text-amber-200" : "text-stone-100/35"}>
               {visibleChar}
             </span>
           );
