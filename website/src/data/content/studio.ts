@@ -1,0 +1,168 @@
+import type { Language, SiteContent } from "../contentTypes";
+
+export const studioContent = {
+  ro: {
+      eyebrow: "Studio",
+      title: "Mic acum. Atent la detalii.",
+      text: "Balkan Veil e un studio web la inceput. Lucram pe proiecte unde o prima versiune buna chiar ajuta: un site mai clar, un landing page, un formular, un dashboard simplu sau un flow automatizat.",
+      positionLabel: "Pozitie",
+      positionTitle: "Pozitie simpla.",
+      positionText: "Nu avem nevoie sa sunam ca o agentie mare. Mai util este sa fim clari: alegem putine proiecte, le tinem usor de inteles si le construim pana la capat.",
+      signature: "scope mic / design bun / livrare curata",
+      whatLabel: "Ce este",
+      whatTitle: "Look bun, lucru practic.",
+      whatText: "Estetica ramane intunecata si premium, dar proiectul trebuie sa fie usor de folosit. Daca vizitatorul nu intelege ce faci si cum te contacteaza, designul nu si-a facut treaba.",
+      principles: [
+        { title: "Spune direct", text: "Clientul nu trebuie sa ghiceasca ce vinzi, cui se adreseaza si ce ar trebui sa faca dupa ce intra pe site." },
+        { title: "Taie surplusul", text: "Un proiect mic poate arata foarte bine daca nu este incarcat cu sectiuni puse doar ca sa para mai mare." },
+        { title: "Construieste pentru folosire", text: "Formularul, CTA-ul, flow-ul si versiunea de mobil conteaza la fel de mult ca imaginea de pe primul ecran." },
+        { title: "Pastreaza caracterul", text: "Site-ul poate fi clar fara sa arate generic. Aici ramane partea de atmosfera Balkan Veil." },
+      ],
+      notes: [
+        "Intunericul nu este decor. Este spatiu pentru contrast, liniste si selectie.",
+        "Un site bun trebuie sa para decis, nu incarcat.",
+        "Detaliile mici conteaza mai mult decat efectele mari.",
+        "Daca estetica nu ajuta oferta sa fie citita, estetica nu este terminata.",
+      ],
+      aesthetic: {
+        eyebrow: "Pozitie estetica",
+        title: "Dark premium, dar cu disciplina editoriala.",
+        text: "Balkan Veil foloseste atmosfera ca sa creeze incredere si tensiune vizuala, nu ca sa ascunda o structura slaba. Pagina trebuie sa se simta calma, precisa si construita pentru un business real.",
+        points: ["Serif mare, dar controlat", "Linii subtiri, nu ornamente grele", "Auriu folosit ca semnal, nu ca fundal", "Spatiu negru care lasa continutul sa respire"],
+      },
+      avoids: {
+        eyebrow: "Ce evitam",
+        title: "Nu tot ce pare premium ajuta.",
+        items: ["Hero-uri generice cu promisiuni mari", "Carduri repetate doar ca sa umple pagina", "Glow-uri agresive si efecte cyberpunk", "Mockup-uri false care nu spun nimic", "Copy care suna ca orice agentie", "Animatii care misca layout-ul"],
+      },
+      materials: {
+        eyebrow: "Material vizual",
+        title: "Din ce este construit limbajul Balkan Veil.",
+        items: [
+          { title: "Archive lines", text: "Hairlines, cadre subtile si margini care dau senzatia de dosar editorial." },
+          { title: "Signal gold", text: "Auriu folosit pentru directie, status si accent, nu pentru suprafete mari." },
+          { title: "Stone texture", text: "Tonuri inchise, usor mate, care pastreaza pagina serioasa si lizibila." },
+          { title: "Cinematic restraint", text: "Miscare putina, tensiune vizuala controlata si spatiu pentru text." },
+        ],
+      },
+      operator: {
+        eyebrow: "Operator mindset",
+        title: "Interfata publica este tratata ca suprafata controlata.",
+        text: "Nu cautam spectacol. Scanam semnalele vizibile, izolam zgomotul si facem pagina sa para activa, clara si sub control.",
+        statuses: ["RECON active", "SURFACE mapped", "SIGNAL clean", "TRACE sealed"],
+      },
+      attackSurface: {
+        eyebrow: "Attack surface",
+        title: "Ce vede vizitatorul in primele secunde.",
+        text: "In branding, suprafata de atac este tot ce poate slabi increderea: mesaj ambiguu, ritm vizual slab, CTA neclar, dovada prost asezata. Balkan Veil inchide aceste puncte fara teatru.",
+        items: [
+          { title: "Oferta expusa", text: "Se vede rapid ce vinzi, pentru cine si de ce merita continuat." },
+          { title: "Traseu de inquiry", text: "Actiunea urmatoare este vizibila, nu ascunsa intr-o pagina obosita." },
+          { title: "Autoritate vizuala", text: "Compozitia sustine pretul si nivelul serviciului, fara decor ieftin." },
+          { title: "Suprafata mobila", text: "Prima impresie ramane controlata si pe ecrane mici." },
+        ],
+      },
+      reconNotes: {
+        eyebrow: "Recon notes",
+        title: "Semnale slabe detectate in interfete publice.",
+        items: ["Headline care promite mult dar nu fixeaza oferta", "Carduri multe, dar fara ierarhie reala", "Sectiuni care arata premium doar prin gradient", "CTA-uri care cer contact inainte sa existe incredere", "Mobile care pierde ritmul si face brandul sa para improvizat"],
+      },
+      visualVectors: {
+        eyebrow: "Visual vectors",
+        title: "Directii tactice pentru un site mai ascutit.",
+        items: [
+          { title: "RECON", text: "Citire rapida a semnalelor publice: mesaj, ritm, incredere, actiune." },
+          { title: "SURFACE", text: "Asezare a sectiunilor ca suprafete clare, nu blocuri decorative." },
+          { title: "VECTOR", text: "Directie vizuala catre oferta si inquiry, fara trasee moarte." },
+          { title: "SEALED", text: "Eliminarea zgomotului care slabeste perceptia de control." },
+        ],
+      },
+      neutralizedNoise: {
+        eyebrow: "Neutralized noise",
+        title: "Ce scoatem dintr-o prezenta care vrea sa para serioasa.",
+        items: ["Template energy", "Mockup-uri fara functie", "Glitch agresiv", "Copy vag de agentie", "Decor fara semnal", "Animatie care distrage de la decizie"],
+      },
+    },
+  en: {
+      eyebrow: "Studio",
+      title: "Small now. Careful with details.",
+      text: "Balkan Veil is an early web studio. We work on projects where a good first version actually helps: a clearer site, a landing page, a form, a simple dashboard or an automated flow.",
+      positionLabel: "Position",
+      positionTitle: "Plain position.",
+      positionText: "We do not need to sound like a large agency. It is more useful to be clear: choose fewer projects, keep them easy to understand and build them properly.",
+      signature: "small scope / good design / clean delivery",
+      whatLabel: "What it is",
+      whatTitle: "Good look, practical work.",
+      whatText: "The aesthetic stays dark and premium, but the project still has to be easy to use. If visitors do not understand what you do and how to contact you, the design missed the point.",
+      principles: [
+        { title: "Say it directly", text: "A client should not have to guess what you sell, who it is for and what they should do after landing on the site." },
+        { title: "Cut the excess", text: "A small project can look strong when it is not loaded with sections that only exist to make it feel bigger." },
+        { title: "Build for use", text: "The form, CTA, flow and mobile version matter as much as the first screen." },
+        { title: "Keep character", text: "A site can be clear without looking generic. That is where the Balkan Veil atmosphere stays useful." },
+      ],
+      notes: [
+        "Darkness is not decoration. It is room for contrast, quiet and selection.",
+        "A good site should feel decided, not loaded.",
+        "Small details matter more than large effects.",
+        "If the aesthetic does not help the offer read clearly, the aesthetic is not finished.",
+      ],
+      aesthetic: {
+        eyebrow: "Aesthetic position",
+        title: "Dark premium, held with editorial discipline.",
+        text: "Balkan Veil uses atmosphere to create trust and visual tension, not to hide weak structure. The page should feel calm, precise and built for a real business.",
+        points: ["Large serif, but controlled", "Thin lines, not heavy ornaments", "Gold as signal, not background", "Black space that lets content breathe"],
+      },
+      avoids: {
+        eyebrow: "What we avoid",
+        title: "Not everything that looks premium helps.",
+        items: ["Generic hero promises", "Repeated cards just to fill space", "Aggressive glow and cyberpunk effects", "Fake mockups that say nothing", "Copy that sounds like any agency", "Animations that move the layout"],
+      },
+      materials: {
+        eyebrow: "Visual material",
+        title: "What the Balkan Veil language is built from.",
+        items: [
+          { title: "Archive lines", text: "Hairlines, subtle frames and margins that feel like an editorial dossier." },
+          { title: "Signal gold", text: "Gold used for direction, status and accent, not large surfaces." },
+          { title: "Stone texture", text: "Dark, matte tones that keep the page serious and readable." },
+          { title: "Cinematic restraint", text: "Less motion, controlled visual tension and room for text." },
+        ],
+      },
+      operator: {
+        eyebrow: "Operator mindset",
+        title: "The public interface is treated as a controlled surface.",
+        text: "We are not chasing spectacle. We scan visible signals, isolate noise and make the page feel active, clear and under control.",
+        statuses: ["RECON active", "SURFACE mapped", "SIGNAL clean", "TRACE sealed"],
+      },
+      attackSurface: {
+        eyebrow: "Attack surface",
+        title: "What the visitor sees in the first seconds.",
+        text: "In brand terms, the attack surface is everything that can weaken trust: ambiguous message, weak visual rhythm, unclear CTA, poorly placed proof. Balkan Veil closes those points without theatre.",
+        items: [
+          { title: "Exposed offer", text: "It is clear quickly what you sell, who it is for and why someone should continue." },
+          { title: "Inquiry path", text: "The next action is visible, not buried inside a tired page." },
+          { title: "Visual authority", text: "The composition supports price and level of service without cheap decoration." },
+          { title: "Mobile surface", text: "The first impression stays controlled on small screens." },
+        ],
+      },
+      reconNotes: {
+        eyebrow: "Recon notes",
+        title: "Weak signals detected in public interfaces.",
+        items: ["Headline that promises a lot but does not frame the offer", "Many cards without real hierarchy", "Sections that look premium only because of a gradient", "CTAs asking for contact before trust exists", "Mobile rhythm that makes the brand feel improvised"],
+      },
+      visualVectors: {
+        eyebrow: "Visual vectors",
+        title: "Tactical directions for a sharper site.",
+        items: [
+          { title: "RECON", text: "Fast reading of public signals: message, rhythm, trust, action." },
+          { title: "SURFACE", text: "Sections arranged as clear surfaces, not decorative blocks." },
+          { title: "VECTOR", text: "Visual direction toward the offer and inquiry, without dead paths." },
+          { title: "SEALED", text: "Removing noise that weakens the perception of control." },
+        ],
+      },
+      neutralizedNoise: {
+        eyebrow: "Neutralized noise",
+        title: "What we remove from a presence that wants to feel serious.",
+        items: ["Template energy", "Mockups without function", "Aggressive glitch", "Vague agency copy", "Decoration without signal", "Motion that distracts from decision"],
+      },
+    },
+} satisfies Record<Language, SiteContent["studio"]>;
