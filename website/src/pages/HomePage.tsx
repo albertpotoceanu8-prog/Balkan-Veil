@@ -1,12 +1,6 @@
-import { Activity, ArrowRight, CheckCircle2, CircuitBoard, Lock, Radar, Server, Shield, Terminal } from "lucide-react";
+import { ArrowRight, CircleDot, Lock, Radio, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { DecodeText } from "@/components/DecodeText";
-import { InterfaceMockup } from "@/components/InterfaceMockup";
-import { ProcessPreview } from "@/components/ProcessPreview";
-import { SectionCTA } from "@/components/SectionCTA";
-import { SignalStrip } from "@/components/SignalStrip";
-import { cardMotion } from "@/components/motionConfig";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
@@ -17,252 +11,240 @@ type HomePageProps = {
   introDone: boolean;
 };
 
-const commandPanel =
-  "operator-surface relative overflow-hidden rounded-[6px] border border-amber-300/20 bg-[#050505]/88 shadow-[0_0_70px_rgba(212,175,55,0.10),inset_0_1px_0_rgba(255,255,255,0.04)]";
+const archivePanel =
+  "relative overflow-hidden border border-[#2a2418] bg-[#030303]/92 shadow-[inset_0_1px_0_rgba(212,175,55,0.08)]";
 
-const mutedPanel =
-  "relative overflow-hidden rounded-[6px] border border-stone-800 bg-[#090909]/78 shadow-[inset_0_1px_0_rgba(255,255,255,0.035)]";
+const filePanel =
+  "relative overflow-hidden border border-[#241f16] bg-[#050505]/88 transition duration-300 hover:border-[#8f7835]/55 hover:bg-[#090704]";
+
+const goldText = "text-[#b9924b]";
+const mutedGoldText = "text-[#7f6a39]";
 
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
-      <section className="relative z-10 mx-auto min-h-[calc(100svh-96px)] max-w-[1500px] overflow-hidden px-5 py-8 md:min-h-[calc(100vh-160px)] md:px-8 md:py-12">
-        <div className="absolute inset-0 operator-grid opacity-35" aria-hidden="true" />
-        <div className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-amber-300/70 to-transparent" aria-hidden="true" />
-        <div className="absolute bottom-0 left-5 top-0 hidden w-px bg-gradient-to-b from-amber-300/70 via-amber-300/15 to-transparent md:block" aria-hidden="true" />
-        <div className="absolute bottom-0 right-5 top-0 hidden w-px bg-gradient-to-b from-transparent via-amber-300/15 to-amber-300/60 md:block" aria-hidden="true" />
+      <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-6 pt-2.5 text-[#c7b99a] sm:px-5 sm:pb-8 md:px-8 md:pb-12">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(143,120,53,0.10),transparent_28rem)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#8f7835]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
-        <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }} className="relative grid min-h-[calc(100svh-140px)] gap-5 lg:grid-cols-[0.98fr_1.02fr] lg:items-stretch">
-          <div className="flex flex-col justify-between gap-6">
-            <div className={`${commandPanel} p-5 md:p-7 lg:p-8`}>
-              <div className="absolute inset-0 operator-scan opacity-30" aria-hidden="true" />
-              <div className="relative flex flex-wrap items-center justify-between gap-3 border-b border-amber-300/15 pb-5">
-                <div className="inline-flex items-center gap-2 border border-amber-300/35 bg-amber-300/10 px-3 py-2 text-[10px] uppercase tracking-[0.22em] text-amber-100 shadow-[0_0_32px_rgba(212,175,55,0.18)] md:text-xs">
-                  <Lock className="h-3.5 w-3.5" aria-hidden="true" />
-                  {content.badge}
-                </div>
-                <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/75">
-                  <span className="h-2 w-2 bg-emerald-300 shadow-[0_0_16px_rgba(110,231,183,0.8)]" aria-hidden="true" />
-                  command center online
-                </div>
-              </div>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)]`}>
+          <div className="pointer-events-none absolute inset-0 opacity-[0.24] [background-image:linear-gradient(rgba(212,175,55,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.18]" aria-hidden="true" />
 
-              <div className="relative pt-7 md:pt-10">
-                <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.28em] text-amber-300/80">Balkan Veil / Public Interface</p>
-                <h1 className="max-w-6xl font-serif text-[clamp(3rem,14vw,6.6rem)] leading-[0.86] text-stone-50 drop-shadow-[0_0_28px_rgba(212,175,55,0.14)] md:text-[clamp(5.5rem,9vw,9.2rem)]">
+          <header className="relative grid min-h-12 grid-cols-[1fr_auto] items-center gap-3 border-b border-[#241f16] px-3 py-2.5 sm:min-h-14 sm:px-4 sm:py-3 md:grid-cols-[1fr_auto_1fr] md:px-7">
+            <div className="flex min-w-0 items-center gap-4">
+              <span className="hidden h-4 w-4 border border-[#7f6a39]/60 sm:block" aria-hidden="true" />
+              <button type="button" onClick={() => goToPage("home")} className="min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.2em] text-[#b9924b] sm:text-[11px] sm:tracking-[0.28em] md:text-sm">
+                Balkan Veil
+              </button>
+            </div>
+            <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-[#9e8141] md:flex">
+              <span>// access terminal</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-[#b9924b]" aria-hidden="true" />
+            </div>
+            <button type="button" onClick={() => goToPage("access")} className="justify-self-end font-mono text-[9px] uppercase tracking-[0.2em] text-[#7f6a39] transition hover:text-[#d5bd7c] sm:text-[10px] sm:tracking-[0.26em]">
+              Menu
+            </button>
+          </header>
+
+          <div className="relative grid gap-0 lg:grid-cols-[0.78fr_2fr_0.85fr]">
+            <aside className="hidden border-r border-[#241f16] p-5 xl:block">
+              <SideIntel content={content} />
+            </aside>
+
+            <main className="relative min-h-[28rem] border-[#241f16] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
+              <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#8f7835]/35 to-transparent md:block" aria-hidden="true" />
+              <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#8f7835]/20 to-transparent md:block" aria-hidden="true" />
+
+              <div className="mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem]">
+                <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
+                <h1 className="mt-6 max-w-4xl font-serif text-[clamp(3.1rem,18vw,5rem)] leading-[0.84] text-[#d8c8a7] drop-shadow-[0_0_22px_rgba(212,175,55,0.12)] sm:mt-8 sm:text-[clamp(4rem,17vw,8rem)] md:mt-10 md:text-[clamp(7rem,10vw,10.5rem)]">
                   {cinematic ? <DecodeText text={content.hero} canStart={introDone} /> : content.hero}
                 </h1>
-                <p className="mt-7 max-w-4xl border-l-2 border-amber-300/55 pl-5 text-base leading-8 text-stone-300 md:mt-9 md:text-xl md:leading-9">{content.text}</p>
-              </div>
+                <p className="mt-6 max-w-[30rem] font-mono text-[10px] leading-6 text-[#8f856f] sm:mt-8 sm:text-[11px] sm:leading-7 md:max-w-[34rem] md:text-sm md:leading-8">{content.text}</p>
 
-              <div className="relative mt-8 grid gap-3 sm:grid-cols-2 md:mt-10">
-                <Button type="button" onClick={() => goToPage("access")} className="inline-flex min-h-14 items-center justify-center rounded-[5px] border border-amber-200/70 bg-amber-300 px-6 py-4 text-sm font-black uppercase tracking-[0.18em] text-black shadow-[0_0_42px_rgba(212,175,55,0.35)] transition duration-300 hover:bg-amber-100 hover:shadow-[0_0_58px_rgba(212,175,55,0.45)]">
-                  {content.primaryCta}
-                  <ArrowRight className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
-                </Button>
-                <Button type="button" onClick={() => goToPage("protocol")} variant="outline" className="inline-flex min-h-14 items-center justify-center rounded-[5px] border border-amber-300/40 bg-black/45 px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-amber-100 transition duration-300 hover:border-amber-200 hover:bg-amber-300/10 hover:text-amber-50 hover:shadow-[0_0_38px_rgba(212,175,55,0.18)]">
-                  {content.secondaryCta}
-                </Button>
+                <div className="mt-7 grid w-full max-w-[30rem] border border-[#3a301e] bg-[#030303] sm:mt-9 sm:max-w-[34rem] sm:grid-cols-[1fr_auto]">
+                  <button type="button" onClick={() => goToPage("access")} className="min-h-12 px-4 text-left font-mono text-[9px] uppercase tracking-[0.16em] text-[#9e8141] transition hover:bg-[#090704] hover:text-[#d5bd7c] sm:min-h-14 sm:px-5 sm:text-[10px] sm:tracking-[0.2em] md:px-7">
+                    &gt; {content.primaryCta}
+                    <span className="ml-2 inline-block h-3 w-px translate-y-0.5 bg-[#b9924b]" aria-hidden="true" />
+                  </button>
+                  <button type="button" onClick={() => goToPage("protocol")} className="min-h-12 border-t border-[#3a301e] px-4 font-mono text-[9px] uppercase tracking-[0.18em] text-[#7f6a39] transition hover:bg-[#b9924b] hover:text-black sm:min-h-14 sm:border-l sm:border-t-0 sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+                    Authenticate
+                  </button>
+                </div>
+                <p className="mt-4 font-mono text-[8px] uppercase tracking-[0.2em] text-[#5d5238] sm:mt-5 sm:text-[9px] sm:tracking-[0.28em]">Only authorized projects proceed</p>
               </div>
-            </div>
+            </main>
 
-            <div className="grid gap-3 sm:grid-cols-3">
-              {content.methodPreview.steps.slice(0, 3).map((step, index) => (
-                <motion.div key={step} {...cardMotion} className={`${mutedPanel} p-4`}>
-                  <div className="absolute inset-x-0 top-0 h-px bg-amber-300/40" aria-hidden="true" />
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/65">phase 0{index + 1}</p>
-                  <p className="mt-3 font-serif text-xl leading-tight text-stone-100">{step}</p>
-                </motion.div>
-              ))}
-            </div>
+            <aside className="border-t border-[#241f16] p-3 sm:p-5 lg:border-t-0">
+              <RightIntel content={content} />
+            </aside>
           </div>
 
-          <CommandCenter content={content} />
+          <BottomRail content={content} goToPage={goToPage} />
         </motion.div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-[1500px] px-5 py-8 md:px-8 md:py-12">
-        <SignalStrip items={content.signalStrip} />
-
-        <div className="mt-10 grid gap-4 lg:grid-cols-[0.92fr_1.08fr]">
-          <section className={`${commandPanel} p-5 md:p-8`}>
-            <div className="absolute inset-0 operator-grid opacity-25" aria-hidden="true" />
-            <div className="relative flex items-center gap-3">
-              <Terminal className="h-5 w-5 text-amber-300" aria-hidden="true" />
-              <p className="font-mono text-xs uppercase tracking-[0.28em] text-amber-300">{content.builtAround}</p>
-            </div>
-            <h2 className="relative mt-6 max-w-3xl font-serif text-4xl leading-[0.95] text-stone-50 md:text-7xl">
-              <DecodeText text={content.builtTitle} disabled />
-            </h2>
-          </section>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {content.valueProps.map((item, index) => (
-              <motion.article key={item.title} {...cardMotion} className={`${mutedPanel} p-5 transition duration-300 hover:border-amber-300/45 hover:bg-[#0d0a04]`}>
-                <div className="absolute right-0 top-0 h-14 w-14 border-b border-l border-amber-300/20" aria-hidden="true" />
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/70">directive 0{index + 1}</p>
-                <h3 className="mt-5 font-serif text-2xl leading-tight text-amber-100">{item.title}</h3>
-                <p className="mt-4 text-sm leading-7 text-stone-500">{item.text}</p>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-10 grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
-          <div className={`${commandPanel} p-5 md:p-7`}>
-            <div className="absolute inset-0 operator-scan opacity-20" aria-hidden="true" />
-            <div className="relative flex flex-wrap items-center justify-between gap-4 border-b border-stone-800 pb-5">
-              <div>
-                <p className="font-mono text-xs uppercase tracking-[0.28em] text-amber-300">{content.launchChanges.eyebrow}</p>
-                <h2 className="mt-3 max-w-4xl font-serif text-3xl leading-tight text-stone-50 md:text-5xl">{content.launchChanges.title}</h2>
-              </div>
-              <Radar className="h-10 w-10 text-amber-300 drop-shadow-[0_0_18px_rgba(212,175,55,0.35)]" aria-hidden="true" />
-            </div>
-            <p className="relative mt-5 max-w-4xl text-base leading-7 text-stone-500 md:text-lg md:leading-8">{content.launchChanges.text}</p>
-            <div className="relative mt-7 grid gap-4 md:grid-cols-3">
-              {content.launchChanges.items.map((item, index) => (
-                <motion.article key={item.title} {...cardMotion} className="rounded-[5px] border border-stone-800 bg-black/45 p-5 transition duration-300 hover:border-amber-300/45 hover:bg-amber-300/[0.04]">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/70">output 0{index + 1}</p>
-                  <h3 className="mt-5 font-serif text-2xl leading-tight text-amber-100">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-stone-500">{item.text}</p>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-
-          <section className={`${mutedPanel} p-5 md:p-7`}>
-            <p className="font-mono text-xs uppercase tracking-[0.28em] text-amber-300">Target fit</p>
-            <div className="mt-5 grid gap-3">
-              {content.audience.map((item, index) => (
-                <div key={item} className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 rounded-[4px] border border-stone-800 bg-black/45 px-4 py-3">
-                  <span className="font-mono text-xs text-amber-300/75">0{index + 1}</span>
-                  <span className="text-sm leading-6 text-stone-300">{item}</span>
-                  <CheckCircle2 className="h-4 w-4 text-amber-300/80" aria-hidden="true" />
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-
-        <div className="mt-12 md:mt-16">
-          <InterfaceMockup eyebrow={content.interfacePreview.eyebrow} title={content.interfacePreview.title} text={content.interfacePreview.text} systemLabel={content.interfacePreview.systemLabel} statusLine={content.interfacePreview.statusLine} moduleLabel={content.interfacePreview.moduleLabel} metrics={content.interfacePreview.metrics} rows={content.interfacePreview.rows} />
-        </div>
-
-        <div className="mt-12 grid gap-4 md:mt-16 lg:grid-cols-[0.9fr_1.1fr]">
-          <section className={`${commandPanel} p-5 md:p-8`}>
-            <div className="absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
-            <p className="relative font-mono text-xs uppercase tracking-[0.28em] text-amber-300">{content.subscriptionIntro.eyebrow}</p>
-            <h2 className="relative mt-5 font-serif text-3xl leading-tight text-stone-50 md:text-5xl">{content.subscriptionIntro.title}</h2>
-            <p className="relative mt-5 text-base leading-7 text-stone-500 md:text-lg md:leading-8">{content.subscriptionIntro.text}</p>
-          </section>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {content.subscriptionIntro.points.map((point, index) => (
-              <motion.div key={point} {...cardMotion} className={`${mutedPanel} p-6`}>
-                <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/70">module 0{index + 1}</p>
-                <p className="mt-5 font-serif text-2xl leading-tight text-stone-100">{point}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-12 md:mt-16">
-          <ProcessPreview eyebrow={content.methodPreview.eyebrow} title={content.methodPreview.title} steps={content.methodPreview.steps} />
-        </div>
-
-        <div className={`${commandPanel} mt-12 p-5 md:mt-16 md:p-8`}>
-          <div className="absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
-          <p className="relative font-mono text-xs uppercase tracking-[0.28em] text-amber-300">{content.beforeAfter.eyebrow}</p>
-          <h2 className="relative mt-5 max-w-5xl font-serif text-3xl leading-tight text-stone-50 md:text-5xl">{content.beforeAfter.title}</h2>
-          <div className="relative mt-8 grid gap-4 md:grid-cols-2">
-            {[
-              { label: content.beforeAfter.beforeLabel, items: content.beforeAfter.before, tone: "border-red-300/25 text-red-200/80" },
-              { label: content.beforeAfter.afterLabel, items: content.beforeAfter.after, tone: "border-amber-300/35 text-amber-100" },
-            ].map((group) => (
-              <div key={group.label} className="rounded-[5px] border border-stone-800 bg-black/50 p-5">
-                <p className={`inline-flex border px-3 py-2 font-mono text-[10px] uppercase tracking-[0.24em] ${group.tone}`}>{group.label}</p>
-                <div className="mt-5 space-y-3">
-                  {group.items.map((item) => (
-                    <p key={item} className="rounded-[4px] border border-stone-800 bg-stone-950/65 px-4 py-3 text-sm leading-6 text-stone-400">{item}</p>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-12 md:mt-16">
-          <SectionCTA eyebrow={content.finalCta.eyebrow} title={content.finalCta.title} text={content.finalCta.text} primaryLabel={content.finalCta.primary} secondaryLabel={content.finalCta.secondary} primaryTarget="access" secondaryTarget="pricing" goToPage={goToPage} />
-        </div>
-      </section>
+      <ArchiveModules content={content} goToPage={goToPage} />
     </>
   );
 }
 
-function CommandCenter({ content }: { content: SiteContent["home"] }) {
+function SideIntel({ content }: { content: SiteContent["home"] }) {
   return (
-    <div className={`${commandPanel} grid min-h-[620px] grid-rows-[auto_1fr_auto] p-4 md:p-5 lg:min-h-0`}>
-      <div className="absolute inset-0 operator-grid opacity-35" aria-hidden="true" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(212,175,55,0.18),transparent_36%)]" aria-hidden="true" />
-
-      <div className="relative flex flex-wrap items-center justify-between gap-4 border-b border-amber-300/15 pb-4">
+    <div className="space-y-6">
+      <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
+      <div className={`${filePanel} p-4`}>
+        <div className="h-24 opacity-80 [background-image:radial-gradient(circle_at_24%_42%,rgba(185,146,75,0.45)_0_1px,transparent_2px),radial-gradient(circle_at_68%_36%,rgba(185,146,75,0.35)_0_1px,transparent_2px),linear-gradient(120deg,transparent,rgba(185,146,75,0.08),transparent)] [background-size:18px_18px,24px_24px,auto]" />
+      </div>
+      <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
+      <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
+      <div className={`${filePanel} grid grid-cols-2 gap-4 p-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6040]`}>
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-amber-300">VEIL OS</p>
-          <p className="mt-1 font-serif text-2xl text-stone-50">{content.interfacePreview.systemLabel}</p>
+          <p className={goldText}>Time</p>
+          <p className="mt-2">21:42:17</p>
         </div>
-        <div className="grid grid-cols-3 gap-2">
-          {["LIVE", "SYNC", "QA"].map((label) => (
-            <span key={label} className="rounded-[3px] border border-amber-300/25 bg-amber-300/10 px-3 py-2 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-amber-100">
-              {label}
-            </span>
-          ))}
+        <div>
+          <p className={goldText}>Mode</p>
+          <p className="mt-2">Live</p>
         </div>
-      </div>
-
-      <div className="relative grid gap-4 py-4 xl:grid-cols-[0.72fr_1.28fr]">
-        <div className="grid gap-4">
-          <StatusBlock icon={<Activity className="h-4 w-4" />} label="signal" value={content.interfacePreview.metrics[0] || "Signal clarity"} />
-          <StatusBlock icon={<Shield className="h-4 w-4" />} label="control" value={content.interfacePreview.metrics[1] || "Offer frame"} />
-          <StatusBlock icon={<Server className="h-4 w-4" />} label="launch" value={content.interfacePreview.metrics[2] || "Launch path"} />
-        </div>
-
-        <div className="rounded-[5px] border border-amber-300/20 bg-black/58 p-4 shadow-[0_0_60px_rgba(212,175,55,0.08)]">
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-amber-300">{content.interfacePreview.moduleLabel}</p>
-            <CircuitBoard className="h-5 w-5 text-amber-300/80" aria-hidden="true" />
-          </div>
-          <div className="grid gap-3">
-            {content.interfacePreview.rows.map((row, index) => (
-              <div key={row} className="grid grid-cols-[2.6rem_1fr_auto] items-center gap-3 rounded-[4px] border border-stone-800 bg-[#080808]/85 px-4 py-3">
-                <span className="font-mono text-[11px] text-amber-300/70">0{index + 1}</span>
-                <span className="text-sm text-stone-300">{row}</span>
-                <span className={index === 1 ? "h-2.5 w-2.5 border border-amber-300/60" : "h-2.5 w-2.5 bg-amber-300 shadow-[0_0_14px_rgba(212,175,55,0.65)]"} aria-hidden="true" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <div className="relative grid gap-3 border-t border-amber-300/15 pt-4 md:grid-cols-3">
-        {content.dossier.items.map((item, index) => (
-          <div key={item} className="rounded-[4px] border border-stone-800 bg-black/50 p-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-amber-300/65">node 0{index + 1}</p>
-            <p className="mt-3 text-sm leading-6 text-stone-300">{item}</p>
-          </div>
-        ))}
       </div>
     </div>
   );
 }
 
-function StatusBlock({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+function RightIntel({ content }: { content: SiteContent["home"] }) {
   return (
-    <div className="rounded-[5px] border border-stone-800 bg-black/55 p-4">
-      <div className="flex items-center justify-between gap-4">
-        <div className="grid h-9 w-9 place-items-center rounded-[4px] border border-amber-300/30 bg-amber-300/10 text-amber-200">{icon}</div>
-        <span className="h-2 w-2 bg-emerald-300 shadow-[0_0_14px_rgba(110,231,183,0.75)]" aria-hidden="true" />
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+      <div className={`${filePanel} p-3 sm:p-4`}>
+        <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Active files</p>
+        <div className="mt-4 space-y-2.5 font-mono text-[9px] uppercase tracking-[0.1em] text-[#7f6a39] sm:mt-5 sm:space-y-3 sm:text-[10px] sm:tracking-[0.12em]">
+          {content.signalStrip.slice(0, 5).map((item, index) => (
+            <button key={item} type="button" className="block max-w-full break-all text-left transition hover:text-[#d5bd7c]">
+              0{index}_{item.replace(/\s+/g, "_")}.vel
+            </button>
+          ))}
+        </div>
+        <p className="mt-4 border-t border-[#241f16] pt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-[#51472f] sm:mt-5 sm:text-[10px] sm:tracking-[0.2em]">5 files</p>
       </div>
-      <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.24em] text-amber-300/65">{label}</p>
-      <p className="mt-2 font-serif text-2xl leading-tight text-stone-50">{value}</p>
+
+      <div className={`${filePanel} p-3 sm:p-4`}>
+        <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Signal feed</p>
+        <div className="mt-5 h-9 [background-image:linear-gradient(90deg,transparent_0_4%,rgba(185,146,75,0.7)_4%_4.6%,transparent_4.6%_8%),linear-gradient(0deg,transparent_45%,rgba(185,146,75,0.35)_45%_55%,transparent_55%)] [background-size:22px_100%,100%_100%] sm:mt-7 sm:h-10" />
+      </div>
+
+      <div className={`${filePanel} hidden p-4 sm:block`}>
+        <p className={`font-mono text-[10px] uppercase tracking-[0.24em] ${goldText}`}>Encryption</p>
+        <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7f6a39]">AES-256 / SHA-512</p>
+        <div className="mt-7 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#7f6a39]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#b9924b]" aria-hidden="true" />
+          online
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToPage: (target: PageKey) => void }) {
+  return (
+    <div className="relative grid border-t border-[#241f16] md:grid-cols-[0.42fr_1fr_0.45fr_0.85fr]">
+      <div className="hidden border-r border-[#241f16] p-4 md:block">
+        <div className="h-20 bg-[radial-gradient(circle_at_35%_35%,rgba(185,146,75,0.25),transparent_36%),linear-gradient(145deg,#0c0c0c,#030303)]" />
+      </div>
+      <div className="border-b border-[#241f16] p-4 md:border-b-0 md:border-r md:p-5">
+        <p className="max-w-xl font-mono text-[10px] uppercase leading-6 tracking-[0.14em] text-[#b9aa8a] sm:text-xs sm:leading-7 sm:tracking-[0.18em]">{content.dossier.note}</p>
+      </div>
+      <button type="button" onClick={() => goToPage("work")} className="border-b border-[#241f16] p-4 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#7f6a39] transition hover:bg-[#090704] hover:text-[#d5bd7c] sm:text-[10px] sm:tracking-[0.24em] md:border-b-0 md:border-r md:p-5">
+        Scroll to decrypt
+        <ArrowRight className="mt-3 h-4 w-4 sm:mt-4" aria-hidden="true" />
+      </button>
+      <div className="relative hidden min-h-24 overflow-hidden p-5 sm:block">
+        <div className="absolute right-8 top-5 h-14 w-14 rounded-full border border-[#b9924b]/70 shadow-[0_0_30px_rgba(185,146,75,0.12)]" aria-hidden="true" />
+        <div className="absolute right-9 top-6 h-12 w-12 rounded-full border border-[#b9924b]/25" aria-hidden="true" />
+        <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#8f7835]/60 to-transparent" aria-hidden="true" />
+      </div>
+    </div>
+  );
+}
+
+function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; goToPage: (target: PageKey) => void }) {
+  return (
+    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-10 sm:px-5 sm:pb-14 md:px-8 md:pb-20">
+      <div className="grid gap-px border border-[#241f16] bg-[#241f16] lg:grid-cols-3">
+        {content.valueProps.map((item, index) => (
+          <article key={item.title} className="bg-[#030303] p-4 sm:p-5 md:p-7">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] sm:tracking-[0.26em] ${mutedGoldText}`}>file 0{index + 1}</p>
+            <h2 className="mt-5 font-serif text-2xl leading-tight text-[#d8c8a7] sm:mt-6 sm:text-3xl md:text-4xl">{item.title}</h2>
+            <p className="mt-4 text-sm leading-7 text-[#756d5d] sm:mt-5">{item.text}</p>
+          </article>
+        ))}
+      </div>
+
+      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className={`${archivePanel} p-4 sm:p-5 md:p-7`}>
+          <div className="flex items-start justify-between gap-4 border-b border-[#241f16] pb-5">
+            <div>
+              <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.26em] ${goldText}`}>{content.launchChanges.eyebrow}</p>
+              <h2 className="mt-4 max-w-3xl font-serif text-2xl leading-tight text-[#d8c8a7] sm:mt-5 sm:text-3xl md:text-5xl">{content.launchChanges.title}</h2>
+            </div>
+            <Radio className="hidden h-8 w-8 text-[#b9924b] md:block" aria-hidden="true" />
+          </div>
+          <p className="mt-5 max-w-4xl text-sm leading-7 text-[#756d5d] md:text-base md:leading-8">{content.launchChanges.text}</p>
+          <div className="mt-6 grid gap-3 sm:mt-7 md:grid-cols-3">
+            {content.launchChanges.items.map((item, index) => (
+              <div key={item.title} className={`${filePanel} p-3 sm:p-4`}>
+                <p className={`font-mono text-[9px] uppercase tracking-[0.18em] sm:text-[10px] sm:tracking-[0.2em] ${mutedGoldText}`}>output 0{index + 1}</p>
+                <h3 className="mt-4 font-serif text-lg text-[#d8c8a7] sm:text-xl">{item.title}</h3>
+                <p className="mt-4 text-sm leading-6 text-[#6f6758]">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className={`${archivePanel} p-4 sm:p-5 md:p-7`}>
+          <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.26em] ${goldText}`}>Target files</p>
+          <div className="mt-6 grid gap-3">
+            {content.audience.map((item, index) => (
+              <div key={item} className="grid grid-cols-[1.8rem_1fr_auto] items-center gap-2 border border-[#241f16] bg-[#050505] px-3 py-3 sm:grid-cols-[2.2rem_1fr_auto] sm:gap-3 sm:px-4">
+                <span className={`font-mono text-[9px] sm:text-[10px] ${mutedGoldText}`}>0{index + 1}</span>
+                <span className="text-sm leading-6 text-[#8a806c]">{item}</span>
+                <CircleDot className="h-3.5 w-3.5 text-[#8f7835]" aria-hidden="true" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className={`${archivePanel} mt-4 p-4 text-center sm:mt-5 sm:p-5 md:p-9`}>
+        <ShieldCheck className="mx-auto h-7 w-7 text-[#b9924b] sm:h-8 sm:w-8" aria-hidden="true" />
+        <p className={`mt-5 font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] sm:tracking-[0.28em] ${goldText}`}>{content.finalCta.eyebrow}</p>
+        <h2 className="mx-auto mt-5 max-w-4xl font-serif text-2xl leading-tight text-[#d8c8a7] sm:text-3xl md:text-6xl">{content.finalCta.title}</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#756d5d] md:text-base md:leading-8">{content.finalCta.text}</p>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <button type="button" onClick={() => goToPage("access")} className="min-h-12 border border-[#b9924b] bg-[#b9924b] px-5 font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#d8c8a7] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+            {content.finalCta.primary}
+          </button>
+          <button type="button" onClick={() => goToPage("pricing")} className="min-h-12 border border-[#3a301e] bg-transparent px-5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#8f7835] transition hover:border-[#b9924b] hover:text-[#d8c8a7] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+            {content.finalCta.secondary}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MicroBlock({ label, lines, icon }: { label: string; lines: readonly string[]; icon?: React.ReactNode }) {
+  return (
+    <div className={`${filePanel} p-4`}>
+      <div className="flex items-center justify-between gap-4">
+        <p className={`font-mono text-[10px] uppercase tracking-[0.24em] ${goldText}`}>&gt; {label}</p>
+        {icon}
+      </div>
+      <div className="mt-4 space-y-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#756d5d]">
+        {lines.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+      </div>
     </div>
   );
 }
