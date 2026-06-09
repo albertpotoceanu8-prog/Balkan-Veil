@@ -2,6 +2,12 @@ export type PageKey = "home" | "studio" | "services" | "pricing" | "work" | "bui
 
 export type NavItem = readonly [PageKey, string];
 
+export type NavigationGroup = {
+  page: PageKey;
+  label: string;
+  children?: readonly NavItem[];
+};
+
 export type CommandItem = {
   page: PageKey;
   title: string;

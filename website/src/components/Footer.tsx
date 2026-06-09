@@ -1,8 +1,8 @@
 import { LOGO_SRC } from "@/data/logo";
-import type { NavItem, PageKey } from "@/types/navigation";
+import type { NavigationGroup, PageKey } from "@/types/navigation";
 
 type FooterProps = {
-  navItems: readonly NavItem[];
+  navigationGroups: readonly NavigationGroup[];
   labels: {
     brandLine: string;
     description: string;
@@ -23,7 +23,7 @@ type FooterProps = {
   goToPage: (target: PageKey) => void;
 };
 
-export function Footer({ navItems, labels, activeCinematic, goToPage }: FooterProps) {
+export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: FooterProps) {
   return (
     <footer className="relative z-10 mx-auto max-w-[1500px] px-5 py-16 md:px-8 md:py-20">
       <div className="operator-surface border border-stone-900 bg-black/45 p-6 md:p-12 md:backdrop-blur-xl">
@@ -44,11 +44,22 @@ export function Footer({ navItems, labels, activeCinematic, goToPage }: FooterPr
 
           <div>
             <p className="text-xs uppercase tracking-[0.32em] text-amber-300">{labels.navigate}</p>
-            <nav className="mt-6 space-y-3" aria-label="Footer navigation">
-              {navItems.map(([key, label]) => (
-                <button key={key} type="button" onClick={() => goToPage(key)} className="block text-stone-500 transition hover:text-amber-200">
-                  {label}
-                </button>
+            <nav className="mt-6 space-y-4" aria-label="Footer navigation">
+              {navigationGroups.map((group) => (
+                <div key={group.page}>
+                  <button type="button" onClick={() => goToPage(group.page)} className="block text-stone-400 transition hover:text-amber-200">
+                    {group.label}
+                  </button>
+                  {group.children?.length ? (
+                    <div className="mt-2 space-y-2 border-l border-stone-800 pl-3">
+                      {group.children.map(([key, label]) => (
+                        <button key={key} type="button" onClick={() => goToPage(key)} className="block text-sm text-stone-600 transition hover:text-amber-200">
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               ))}
             </nav>
           </div>

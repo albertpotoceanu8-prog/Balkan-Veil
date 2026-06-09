@@ -2,6 +2,7 @@ export type {
   CommandItem,
   Language,
   NavItem,
+  NavigationGroup,
   Service,
   ServiceIcon,
   SiteContent,

@@ -1,6 +1,6 @@
 import type { Language, SiteContent } from "../contentTypes";
 
-type SharedContent = Pick<SiteContent, "navItems" | "commandItems" | "navigation" | "mobileMenu" | "commandMenu" | "footer" | "terminal">;
+type SharedContent = Pick<SiteContent, "navItems" | "navigationGroups" | "commandItems" | "navigation" | "mobileMenu" | "commandMenu" | "footer" | "terminal">;
 
 export const sharedContent = {
   ro: {
@@ -8,11 +8,27 @@ export const sharedContent = {
       ["home", "Acasa"],
       ["studio", "Studio"],
       ["services", "Servicii"],
-      ["pricing", "Abonamente"],
-      ["work", "Lucrari"],
-      ["build", "Build"],
-      ["protocol", "Protocol"],
       ["access", "Acces"],
+    ],
+    navigationGroups: [
+      { page: "home", label: "Acasa" },
+      {
+        page: "studio",
+        label: "Studio",
+        children: [
+          ["protocol", "Protocol"],
+          ["work", "Lucrari"],
+        ],
+      },
+      {
+        page: "services",
+        label: "Servicii",
+        children: [
+          ["build", "Build"],
+          ["pricing", "Abonamente"],
+        ],
+      },
+      { page: "access", label: "Acces" },
     ],
     commandItems: [
       { page: "studio", title: "Deschide Studio", description: "Vezi cum lucram si ce tip de proiect are sens." },
@@ -75,11 +91,27 @@ export const sharedContent = {
       ["home", "Home"],
       ["studio", "Studio"],
       ["services", "Services"],
-      ["pricing", "Pricing"],
-      ["work", "Work"],
-      ["build", "Build"],
-      ["protocol", "Protocol"],
       ["access", "Access"],
+    ],
+    navigationGroups: [
+      { page: "home", label: "Home" },
+      {
+        page: "studio",
+        label: "Studio",
+        children: [
+          ["protocol", "Protocol"],
+          ["work", "Work"],
+        ],
+      },
+      {
+        page: "services",
+        label: "Services",
+        children: [
+          ["build", "Build"],
+          ["pricing", "Pricing"],
+        ],
+      },
+      { page: "access", label: "Access" },
     ],
     commandItems: [
       { page: "studio", title: "Open Studio", description: "See how we work and what kind of project makes sense." },

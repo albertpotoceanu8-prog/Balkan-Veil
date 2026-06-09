@@ -3,6 +3,11 @@
 export type Language = "ro" | "en";
 export type ServiceIcon = "Terminal" | "Network" | "Eye" | "Lock" | "Shield" | "ArrowRight";
 export type NavItem = readonly [PageKey, string];
+export type NavigationGroup = {
+  page: PageKey;
+  label: string;
+  children?: readonly NavItem[];
+};
 
 export type CommandItem = {
   page: PageKey;
@@ -145,6 +150,7 @@ type ServiceArchitectureContent = {
 
 export type SiteContent = {
   navItems: NavItem[];
+  navigationGroups: NavigationGroup[];
   commandItems: CommandItem[];
   navigation: {
     brandLine: string;

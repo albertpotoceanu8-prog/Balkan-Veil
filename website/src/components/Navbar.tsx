@@ -3,11 +3,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Languages, Menu, X } from "lucide-react";
 import { LOGO_SRC } from "@/data/logo";
 import type { Language } from "@/data/siteContent";
-import type { NavItem, PageKey } from "@/types/navigation";
+import type { NavigationGroup, PageKey } from "@/types/navigation";
 
 type NavbarProps = {
   page: PageKey;
-  navItems: readonly NavItem[];
+  navigationGroups: readonly NavigationGroup[];
   labels: {
     brandLine: string;
     command: string;
@@ -31,7 +31,7 @@ type NavbarProps = {
 
 export function Navbar({
   page,
-  navItems,
+  navigationGroups,
   labels,
   language,
   onLanguageChange,
@@ -44,12 +44,21 @@ export function Navbar({
   goToPage,
 }: NavbarProps) {
   const [languageOpen, setLanguageOpen] = React.useState(false);
+  const [openGroup, setOpenGroup] = React.useState<PageKey | null>(null);
   const languageMenuId = "language-menu";
 
   const chooseLanguage = (nextLanguage: Language) => {
     onLanguageChange(nextLanguage);
     setLanguageOpen(false);
   };
+
+  const choosePage = (target: PageKey) => {
+    setOpenGroup(null);
+    setLanguageOpen(false);
+    goToPage(target);
+  };
+
+  const isGroupActive = (group: NavigationGroup) => page === group.page || Boolean(group.children?.some(([key]) => key === page));
 
   return (
     <nav className="relative z-20 mx-auto flex max-w-[1500px] items-center justify-between px-5 py-5 md:px-8 md:py-8" aria-label="Primary navigation">
@@ -64,11 +73,50 @@ export function Navbar({
       </button>
 
       <div className="hidden items-center gap-6 text-xs uppercase tracking-[0.28em] text-stone-400 lg:flex">
-        {navItems.map(([key, label]) => (
-          <button key={key} type="button" onClick={() => goToPage(key)} aria-current={page === key ? "page" : undefined} className={`transition hover:text-amber-200 ${page === key ? "text-amber-200" : ""}`}>
-            {label}
-          </button>
-        ))}
+        {navigationGroups.map((group) => {
+          const active = isGroupActive(group);
+          const hasChildren = Boolean(group.children?.length);
+
+          return (
+            <div key={group.page} className="relative" onMouseEnter={() => setOpenGroup(group.page)} onMouseLeave={() => setOpenGroup(null)}>
+              <button
+                type="button"
+                onClick={() => choosePage(group.page)}
+                onFocus={() => setOpenGroup(group.page)}
+                aria-current={page === group.page ? "page" : undefined}
+                aria-expanded={hasChildren ? openGroup === group.page : undefined}
+                className={`flex items-center gap-1.5 transition hover:text-amber-200 ${active ? "text-amber-200" : ""}`}
+              >
+                {group.label}
+                {hasChildren && <ChevronDown className={`h-3 w-3 transition ${openGroup === group.page ? "rotate-180" : ""}`} aria-hidden="true" />}
+              </button>
+
+              <AnimatePresence>
+                {hasChildren && openGroup === group.page && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.16 }}
+                    className="absolute left-0 top-full mt-4 min-w-44 border border-amber-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(251,191,36,0.10)]"
+                  >
+                    {group.children?.map(([key, label]) => (
+                      <button
+                        key={key}
+                        type="button"
+                        onClick={() => choosePage(key)}
+                        onFocus={() => setOpenGroup(group.page)}
+                        className={`block w-full border border-transparent px-3 py-2 text-left text-[10px] uppercase tracking-[0.22em] transition ${page === key ? "border-amber-300/20 bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
 
       <div className="hidden items-center gap-3 lg:flex">

@@ -206,7 +206,7 @@ function PublicSite() {
 
       <Navbar
         page={page}
-        navItems={content.navItems}
+        navigationGroups={content.navigationGroups}
         labels={content.navigation}
         language={language}
         onLanguageChange={changeLanguage}
@@ -220,7 +220,7 @@ function PublicSite() {
       />
 
       <AnimatePresence>
-        {mobileOpen && <MobileMenu page={page} navItems={content.navItems} labels={content.mobileMenu} language={language} onLanguageChange={changeLanguage} goToPage={goToPage} openCommandMenu={() => setCommandOpen(true)} />}
+        {mobileOpen && <MobileMenu page={page} navigationGroups={content.navigationGroups} labels={content.mobileMenu} language={language} onLanguageChange={changeLanguage} goToPage={goToPage} openCommandMenu={() => setCommandOpen(true)} />}
       </AnimatePresence>
 
       <AnimatePresence>
@@ -249,7 +249,7 @@ function PublicSite() {
         </AnimatePresence>
       </React.Suspense>
 
-      <Footer navItems={content.navItems} labels={content.footer} activeCinematic={activeCinematic} goToPage={goToPage} />
+      <Footer navigationGroups={content.navigationGroups} labels={content.footer} activeCinematic={activeCinematic} goToPage={goToPage} />
     </main>
   );
 }

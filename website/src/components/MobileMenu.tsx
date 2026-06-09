@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import type { Language } from "@/data/siteContent";
-import type { NavItem, PageKey } from "@/types/navigation";
+import type { NavigationGroup, PageKey } from "@/types/navigation";
 
 type MobileMenuProps = {
   page: PageKey;
-  navItems: readonly NavItem[];
+  navigationGroups: readonly NavigationGroup[];
   labels: {
     openCommandMenu: string;
     language: string;
@@ -15,7 +15,9 @@ type MobileMenuProps = {
   openCommandMenu: () => void;
 };
 
-export function MobileMenu({ page, navItems, labels, language, onLanguageChange, goToPage, openCommandMenu }: MobileMenuProps) {
+export function MobileMenu({ page, navigationGroups, labels, language, onLanguageChange, goToPage, openCommandMenu }: MobileMenuProps) {
+  const isGroupActive = (group: NavigationGroup) => page === group.page || Boolean(group.children?.some(([key]) => key === page));
+
   return (
     <motion.div
       id="mobile-menu"
@@ -28,16 +30,32 @@ export function MobileMenu({ page, navItems, labels, language, onLanguageChange,
       aria-label="Mobile navigation"
     >
       <div className="grid gap-2.5">
-        {navItems.map(([key, label]) => (
-          <button
-            key={key}
-            type="button"
-            onClick={() => goToPage(key)}
-            aria-current={page === key ? "page" : undefined}
-            className={`min-h-12 border px-4 py-3 text-left font-serif text-xl leading-tight transition ${page === key ? "border-amber-300/35 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-stone-950/60 text-stone-300"}`}
-          >
-            {label}
-          </button>
+        {navigationGroups.map((group) => (
+          <div key={group.page} className="grid gap-2">
+            <button
+              type="button"
+              onClick={() => goToPage(group.page)}
+              aria-current={page === group.page ? "page" : undefined}
+              className={`min-h-12 border px-4 py-3 text-left font-serif text-xl leading-tight transition ${isGroupActive(group) ? "border-amber-300/35 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-stone-950/60 text-stone-300"}`}
+            >
+              {group.label}
+            </button>
+            {group.children?.length ? (
+              <div className="grid grid-cols-2 gap-2 pl-3">
+                {group.children.map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => goToPage(key)}
+                    aria-current={page === key ? "page" : undefined}
+                    className={`min-h-10 border px-3 py-2 text-left text-[11px] uppercase tracking-[0.2em] transition ${page === key ? "border-amber-300/30 bg-amber-300/10 text-amber-100" : "border-stone-800 bg-black/45 text-stone-500"}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
         ))}
         <button type="button" onClick={openCommandMenu} className="mt-1 min-h-12 border border-stone-800 bg-black/50 px-4 py-3 text-left text-[11px] uppercase tracking-[0.22em] text-amber-200">
           {labels.openCommandMenu}
