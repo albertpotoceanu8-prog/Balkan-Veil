@@ -130,7 +130,7 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
 
       <div className={`${filePanel} p-3 sm:p-4`}>
         <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Signal feed</p>
-        <div className="mt-5 h-9 [background-image:linear-gradient(90deg,transparent_0_4%,rgba(185,146,75,0.7)_4%_4.6%,transparent_4.6%_8%),linear-gradient(0deg,transparent_45%,rgba(185,146,75,0.35)_45%_55%,transparent_55%)] [background-size:22px_100%,100%_100%] sm:mt-7 sm:h-10" />
+        <div className="signal-feed-wave mt-5 h-9 sm:mt-7 sm:h-10" aria-hidden="true" />
       </div>
 
       <div className={`${filePanel} hidden p-4 sm:block`}>

@@ -99,6 +99,47 @@ textarea {
   pointer-events: none;
 }
 
+.signal-feed-wave {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(36, 31, 22, 0.9);
+  border-bottom: 1px solid rgba(36, 31, 22, 0.9);
+  background:
+    linear-gradient(0deg, transparent 45%, rgba(76, 175, 115, 0.16) 50%, transparent 55%),
+    repeating-linear-gradient(90deg, transparent 0 14px, rgba(185, 146, 75, 0.12) 14px 15px, transparent 15px 22px);
+}
+
+.signal-feed-wave::before,
+.signal-feed-wave::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+}
+
+.signal-feed-wave::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.18), transparent),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 5%,
+      rgba(74, 222, 128, 0.85) 5% 5.45%,
+      transparent 5.45% 8%,
+      rgba(74, 222, 128, 0.22) 8% 8.35%,
+      transparent 8.35% 13%
+    );
+  background-size: 180px 100%, 160px 100%;
+  filter: drop-shadow(0 0 9px rgba(74, 222, 128, 0.55));
+  opacity: 0.78;
+  animation: signal-wave-travel 2.4s linear infinite;
+}
+
+.signal-feed-wave::after {
+  background: radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.36), transparent 42%);
+  opacity: 0;
+  animation: signal-wave-pulse 1.7s ease-in-out infinite;
+}
+
 .veil-frame::before,
 .veil-frame::after {
   position: absolute;
@@ -134,12 +175,40 @@ textarea {
   }
 }
 
+@keyframes signal-wave-travel {
+  from {
+    background-position: -180px 0, 0 0;
+  }
+
+  to {
+    background-position: 180px 0, 160px 0;
+  }
+}
+
+@keyframes signal-wave-pulse {
+  0%,
+  100% {
+    opacity: 0.08;
+    transform: scaleX(0.82);
+  }
+
+  50% {
+    opacity: 0.42;
+    transform: scaleX(1.04);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .decode-cursor {
+    animation: none;
+  }
+
+  .signal-feed-wave::before,
+  .signal-feed-wave::after {
     animation: none;
   }
 }
