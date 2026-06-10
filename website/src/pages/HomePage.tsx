@@ -18,6 +18,7 @@ const archivePanel =
 
 const filePanel =
   "relative overflow-hidden border border-[#202224] bg-[#020100]/88 transition duration-300 hover:border-[#7d6a45]/55 hover:bg-[#090503]";
+const sidePanel = "relative overflow-hidden border border-transparent bg-[#020100]/58";
 
 const goldText = "text-[#b98a32]";
 const mutedGoldText = "text-[#b98a32]";
@@ -111,12 +112,12 @@ function SideIntel({ content }: { content: SiteContent["home"] }) {
   return (
     <div className="space-y-6">
       <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
-      <div className={`${filePanel} p-4`}>
+      <div className={`${sidePanel} p-4`}>
         <div className="h-24 opacity-80 [background-image:radial-gradient(circle_at_24%_42%,rgba(185,138,50,0.45)_0_1px,transparent_2px),radial-gradient(circle_at_68%_36%,rgba(185,138,50,0.35)_0_1px,transparent_2px),linear-gradient(120deg,transparent,rgba(185,138,50,0.08),transparent)] [background-size:18px_18px,24px_24px,auto]" />
       </div>
       <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
       <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
-      <div className={`${filePanel} grid grid-cols-2 gap-4 p-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654]`}>
+      <div className={`${sidePanel} grid grid-cols-2 gap-4 p-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654]`}>
         <div>
           <p className={goldText}>Time</p>
           <p className="mt-2">21:42:17</p>
@@ -260,7 +261,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
 
 function MicroBlock({ label, lines, icon }: { label: string; lines: readonly string[]; icon?: React.ReactNode }) {
   return (
-    <div className={`${filePanel} p-4`}>
+    <div className={`${sidePanel} p-4`}>
       <div className="flex items-center justify-between gap-4">
         <p className={`font-mono text-[10px] uppercase tracking-[0.24em] ${goldText}`}>&gt; {label}</p>
         {icon}
