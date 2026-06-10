@@ -130,7 +130,16 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
 
       <div className={`${filePanel} p-3 sm:p-4`}>
         <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Signal feed</p>
-        <div className="signal-feed-wave mt-5 h-9 sm:mt-7 sm:h-10" aria-hidden="true" />
+        <div className="signal-feed-wave mt-5 h-9 sm:mt-7 sm:h-10" aria-hidden="true">
+          <svg className="signal-feed-svg" viewBox="0 0 360 64" preserveAspectRatio="none" focusable="false">
+            <g className="signal-feed-track">
+              <SignalWavePath />
+              <g transform="translate(360 0)">
+                <SignalWavePath />
+              </g>
+            </g>
+          </svg>
+        </div>
       </div>
 
       <div className={`${filePanel} hidden p-4 sm:block`}>
@@ -246,5 +255,14 @@ function MicroBlock({ label, lines, icon }: { label: string; lines: readonly str
         ))}
       </div>
     </div>
+  );
+}
+
+function SignalWavePath() {
+  return (
+    <>
+      <polyline className="signal-feed-line signal-feed-line-soft" points="0,32 18,32 28,26 38,38 48,20 58,45 68,32 84,32 94,24 104,40 114,31 128,31 138,16 148,49 158,29 172,32 188,32 198,27 208,36 218,23 228,42 238,31 252,31 262,18 272,47 282,32 298,32 308,26 318,38 328,30 344,32 360,32" />
+      <polyline className="signal-feed-line" points="0,32 18,32 28,26 38,38 48,20 58,45 68,32 84,32 94,24 104,40 114,31 128,31 138,16 148,49 158,29 172,32 188,32 198,27 208,36 218,23 228,42 238,31 252,31 262,18 272,47 282,32 298,32 308,26 318,38 328,30 344,32 360,32" />
+    </>
   );
 }
