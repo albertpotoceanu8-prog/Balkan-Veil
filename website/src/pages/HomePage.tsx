@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ArrowRight, CircleDot, Lock, Radio, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
+import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
@@ -56,9 +57,10 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
               <SideIntel content={content} />
             </aside>
 
-            <main className="relative min-h-[28rem] border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
+            <main className="relative min-h-[28rem] overflow-hidden border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
               <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/35 to-transparent md:block" aria-hidden="true" />
               <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/20 to-transparent md:block" aria-hidden="true" />
+              <ThreeWireGlobe className="pointer-events-none absolute bottom-3 right-3 z-0 h-[140px] w-[140px] opacity-[0.15] sm:bottom-5 sm:right-5 sm:h-[160px] sm:w-[160px] md:bottom-6 md:right-6 md:h-[240px] md:w-[240px] lg:h-[260px] lg:w-[260px]" />
 
               <div className="relative z-10 mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem]">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
@@ -183,43 +185,10 @@ function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToP
         Scroll to decrypt
         <ArrowRight className="mt-3 h-4 w-4 sm:mt-4" aria-hidden="true" />
       </button>
-      <div className="relative min-h-28 overflow-hidden border-t border-[#202224] p-5 sm:min-h-32 md:border-t-0">
-        <WireGlobe />
+      <div className="relative hidden min-h-24 overflow-hidden p-5 sm:block">
         <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/60 to-transparent" aria-hidden="true" />
       </div>
     </div>
-  );
-}
-
-function WireGlobe() {
-  return (
-    <svg
-      data-testid="hero-wire-globe"
-      className="pointer-events-none absolute bottom-[-3.8rem] right-[-1.6rem] h-[140px] w-[140px] opacity-[0.14] sm:bottom-[-4.8rem] sm:right-[-2.2rem] sm:h-[180px] sm:w-[180px] md:bottom-[-5.7rem] md:right-[-2.7rem] md:h-[240px] md:w-[240px] lg:h-[260px] lg:w-[260px]"
-      viewBox="0 0 240 240"
-      fill="none"
-      aria-hidden="true"
-    >
-      <motion.g
-        stroke="#c8ad72"
-        strokeWidth="1"
-        vectorEffect="non-scaling-stroke"
-        style={{ transformOrigin: "120px 120px" }}
-        initial={{ rotate: 0 }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 58, repeat: Infinity, ease: "linear" }}
-      >
-        <circle cx="120" cy="120" r="78" />
-        <ellipse cx="120" cy="120" rx="78" ry="28" />
-        <ellipse cx="120" cy="120" rx="78" ry="48" />
-        <ellipse cx="120" cy="120" rx="28" ry="78" />
-        <ellipse cx="120" cy="120" rx="48" ry="78" />
-        <path d="M42 120H198" />
-        <path d="M120 42V198" />
-        <path d="M64 70C82 86 101 94 120 94C139 94 158 86 176 70" />
-        <path d="M64 170C82 154 101 146 120 146C139 146 158 154 176 170" />
-      </motion.g>
-    </svg>
   );
 }
 
