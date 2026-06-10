@@ -57,10 +57,9 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
               <SideIntel content={content} />
             </aside>
 
-            <main className="relative min-h-[28rem] overflow-hidden border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
+            <main className="relative min-h-[28rem] border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
               <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/35 to-transparent md:block" aria-hidden="true" />
               <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/20 to-transparent md:block" aria-hidden="true" />
-              <ThreeWireGlobe className="pointer-events-none absolute bottom-3 right-3 z-0 h-[140px] w-[140px] opacity-[0.15] sm:bottom-5 sm:right-5 sm:h-[160px] sm:w-[160px] md:bottom-6 md:right-6 md:h-[240px] md:w-[240px] lg:h-[260px] lg:w-[260px]" />
 
               <div className="relative z-10 mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem]">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
@@ -186,6 +185,7 @@ function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToP
         <ArrowRight className="mt-3 h-4 w-4 sm:mt-4" aria-hidden="true" />
       </button>
       <div className="relative hidden min-h-24 overflow-hidden p-5 sm:block">
+        <ThreeWireGlobe className="pointer-events-none absolute bottom-[-3.2rem] right-[-1.8rem] h-[150px] w-[150px] opacity-[0.16] md:bottom-[-3.8rem] md:right-[-2.2rem] md:h-[180px] md:w-[180px] lg:h-[190px] lg:w-[190px]" />
         <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/60 to-transparent" aria-hidden="true" />
       </div>
     </div>
