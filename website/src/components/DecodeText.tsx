@@ -138,7 +138,7 @@ export function DecodeText({ text, className = "", canStart = true, disabled = f
         return (
           <span key={`cell-${char}-${index}`} aria-hidden="true" className="relative inline-grid align-baseline [grid-template-areas:'cell']">
             <span className={`[grid-area:cell] ${isRevealed ? undefined : "opacity-0"}`}>{char}</span>
-            <span className={`pointer-events-none [grid-area:cell] place-self-center text-center ${isRevealed || !isActive ? "opacity-0" : "text-amber-200"}`}>{visibleChar}</span>
+            <span className={`pointer-events-none [grid-area:cell] place-self-center text-center ${isRevealed || !isActive ? "opacity-0" : "text-neutral-200"}`}>{visibleChar}</span>
           </span>
         );
       })}

@@ -85,18 +85,18 @@ function TerminalLine({ line, index, cycle, slow, compact }: TerminalLineProps) 
       initial={{ opacity: 0, x: -8 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: slow ? 0.55 : 0.28 }}
-      className={index === 1 ? "text-stone-500" : ""}
+      className={index === 1 ? "text-neutral-500" : ""}
     >
       {index === 0 ? (
         <>
-          <span className="text-amber-300">root@balkanveil</span>
+          <span className="text-neutral-300">root@balkanveil</span>
           {display.replace("root@balkanveil", "")}
         </>
       ) : (
-        <span className={index >= 2 ? "text-amber-100" : ""}>{display}</span>
+        <span className={index >= 2 ? "text-neutral-100" : ""}>{display}</span>
       )}
       {display !== line && (
-        <motion.span animate={{ opacity: [0.15, 1, 0.15] }} transition={{ repeat: Infinity, duration: slow ? 1.1 : 0.7 }} className="ml-1 text-amber-300">
+        <motion.span animate={{ opacity: [0.15, 1, 0.15] }} transition={{ repeat: Infinity, duration: slow ? 1.1 : 0.7 }} className="ml-1 text-neutral-300">
           {"\u258c"}
         </motion.span>
       )}
@@ -157,23 +157,23 @@ export function TerminalPanel({ cinematic = true, loop = false, slow = false, co
       whileHover={effectiveCinematic ? { y: -8, scale: 1.01 } : undefined}
       className="relative mx-auto max-w-5xl"
     >
-      <div className="absolute -inset-8 hidden border border-amber-300/10 bg-amber-400/[0.025] blur-2xl md:block" />
-      <Card className="operator-surface relative overflow-hidden border border-amber-300/20 bg-black/70 shadow-2xl transition duration-500 hover:border-amber-300/35 hover:shadow-[0_0_70px_rgba(251,191,36,0.12)] md:backdrop-blur-xl">
+      <div className="absolute -inset-8 hidden border border-neutral-300/10 bg-neutral-400/[0.025] blur-2xl md:block" />
+      <Card className="operator-surface relative overflow-hidden border border-neutral-300/20 bg-black/70 shadow-2xl transition duration-500 hover:border-neutral-300/35 hover:shadow-[0_0_70px_rgba(155,155,148,0.12)] md:backdrop-blur-xl">
         <CardContent className="p-0">
-          <div className="border-b border-stone-800 bg-stone-950/80 px-4 py-4 md:px-6 md:py-5">
+          <div className="border-b border-neutral-800 bg-neutral-950/80 px-4 py-4 md:px-6 md:py-5">
             <div className="flex items-center gap-2">
-              <span className="h-2 w-7 border border-stone-700 bg-stone-800/70" />
+              <span className="h-2 w-7 border border-stone-700 bg-neutral-800/70" />
               <span className="h-2 w-4 border border-red-300/25 bg-red-300/10" />
               <motion.span animate={loop && !shouldReduceMotion ? { opacity: [0.25, 1, 0.25] } : undefined} transition={{ repeat: Infinity, duration: 1.4 }} className="h-2 w-7 border border-emerald-300/35 bg-emerald-300/15" />
-              <span className="ml-2 min-w-0 truncate text-[11px] uppercase tracking-[0.18em] text-stone-500 md:ml-4 md:text-xs md:tracking-[0.24em]">{header}</span>
+              <span className="ml-2 min-w-0 truncate text-[11px] uppercase tracking-[0.18em] text-neutral-500 md:ml-4 md:text-xs md:tracking-[0.24em]">{header}</span>
             </div>
           </div>
-          <div className="operator-scan min-h-[280px] space-y-4 p-5 font-mono text-sm leading-6 text-stone-300 md:min-h-[390px] md:space-y-5 md:p-12 md:text-lg">
+          <div className="operator-scan min-h-[280px] space-y-4 p-5 font-mono text-sm leading-6 text-neutral-300 md:min-h-[390px] md:space-y-5 md:p-12 md:text-lg">
             {visibleLines.map((line, index) => (
               <TerminalLine key={`${line}-${index}-${cycle}`} line={line} index={index} cycle={cycle} slow={slow} compact={effectiveCompact} />
             ))}
             {effectiveCinematic && visibleLines.length < activeLines.length && (
-              <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: slow ? 1.25 : 0.75 }} className="h-5 w-3 bg-amber-300/80" />
+              <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: slow ? 1.25 : 0.75 }} className="h-5 w-3 bg-neutral-300/80" />
             )}
           </div>
         </CardContent>

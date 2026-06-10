@@ -63,16 +63,16 @@ export function Navbar({
   return (
     <nav className="relative z-20 mx-auto flex max-w-[1500px] items-center justify-between px-5 py-5 md:px-8 md:py-8" aria-label="Primary navigation">
       <button type="button" onClick={() => goToPage("home")} className="flex items-center gap-4 text-left" aria-label="Balkan Veil home">
-        <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-amber-400/30 bg-black shadow-[0_0_40px_rgba(245,158,11,0.18)] md:h-14 md:w-14">
+        <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black shadow-[0_0_40px_rgba(155,155,148,0.18)] md:h-14 md:w-14">
           <img src={LOGO_SRC} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full object-cover" />
         </div>
         <div>
-          <p className="font-serif text-lg tracking-[0.18em] text-amber-200 md:text-2xl md:tracking-[0.24em]">BALKAN VEIL</p>
-          <p className="hidden text-xs uppercase tracking-[0.35em] text-stone-500 sm:block">{labels.brandLine}</p>
+          <p className="font-serif text-lg tracking-[0.18em] text-neutral-200 md:text-2xl md:tracking-[0.24em]">BALKAN VEIL</p>
+          <p className="hidden text-xs uppercase tracking-[0.35em] text-neutral-500 sm:block">{labels.brandLine}</p>
         </div>
       </button>
 
-      <div className="hidden items-center gap-6 text-xs uppercase tracking-[0.28em] text-stone-400 lg:flex">
+      <div className="hidden items-center gap-6 text-xs uppercase tracking-[0.28em] text-neutral-400 lg:flex">
         {navigationGroups.map((group) => {
           const active = isGroupActive(group);
           const hasChildren = Boolean(group.children?.length);
@@ -85,7 +85,7 @@ export function Navbar({
                 onFocus={() => setOpenGroup(group.page)}
                 aria-current={page === group.page ? "page" : undefined}
                 aria-expanded={hasChildren ? openGroup === group.page : undefined}
-                className={`flex items-center gap-1.5 transition hover:text-amber-200 ${active ? "text-amber-200" : ""}`}
+                className={`flex items-center gap-1.5 transition hover:text-neutral-200 ${active ? "text-neutral-200" : ""}`}
               >
                 {group.label}
                 {hasChildren && <ChevronDown className={`h-3 w-3 transition ${openGroup === group.page ? "rotate-180" : ""}`} aria-hidden="true" />}
@@ -98,7 +98,7 @@ export function Navbar({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.16 }}
-                    className="absolute left-0 top-full mt-4 min-w-44 border border-amber-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(251,191,36,0.10)]"
+                    className="absolute left-0 top-full mt-4 min-w-44 border border-neutral-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(155,155,148,0.10)]"
                   >
                     {group.children?.map(([key, label]) => (
                       <button
@@ -106,7 +106,7 @@ export function Navbar({
                         type="button"
                         onClick={() => choosePage(key)}
                         onFocus={() => setOpenGroup(group.page)}
-                        className={`block w-full border border-transparent px-3 py-2 text-left text-[10px] uppercase tracking-[0.22em] transition ${page === key ? "border-amber-300/20 bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
+                        className={`block w-full border border-transparent px-3 py-2 text-left text-[10px] uppercase tracking-[0.22em] transition ${page === key ? "border-neutral-300/20 bg-neutral-300/10 text-neutral-100" : "text-neutral-500 hover:bg-neutral-900 hover:text-neutral-200"}`}
                       >
                         {label}
                       </button>
@@ -123,7 +123,7 @@ export function Navbar({
         <button
           type="button"
           onClick={() => setCommandOpen(true)}
-          className="border border-stone-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-stone-400 transition hover:border-amber-300/35 hover:text-amber-200"
+          className="border border-neutral-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-neutral-400 transition hover:border-neutral-300/35 hover:text-neutral-200"
         >
           {labels.command}
         </button>
@@ -132,7 +132,7 @@ export function Navbar({
           <button
             type="button"
             onClick={() => setLanguageOpen((value) => !value)}
-            className="flex items-center gap-2 border border-stone-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-stone-400 transition hover:border-amber-300/35 hover:text-amber-200"
+            className="flex items-center gap-2 border border-neutral-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-neutral-400 transition hover:border-neutral-300/35 hover:text-neutral-200"
             aria-label={labels.language}
             aria-expanded={languageOpen}
             aria-controls={languageMenuId}
@@ -150,13 +150,13 @@ export function Navbar({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.18 }}
-                className="absolute right-0 mt-3 w-40 overflow-hidden border border-amber-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(251,191,36,0.10)]"
+                className="absolute right-0 mt-3 w-40 overflow-hidden border border-neutral-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(155,155,148,0.10)]"
               >
                 <button
                   type="button"
                   onClick={() => chooseLanguage("ro")}
                   aria-pressed={language === "ro"}
-                  className={`block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "border-amber-300/20 bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
+                  className={`block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "border-neutral-300/20 bg-neutral-300/10 text-neutral-100" : "text-neutral-500 hover:bg-neutral-900 hover:text-neutral-200"}`}
                 >
                   {labels.ro}
                 </button>
@@ -164,7 +164,7 @@ export function Navbar({
                   type="button"
                   onClick={() => chooseLanguage("en")}
                   aria-pressed={language === "en"}
-                  className={`mt-1 block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "border-amber-300/20 bg-amber-300/10 text-amber-100" : "text-stone-500 hover:bg-stone-900 hover:text-amber-200"}`}
+                  className={`mt-1 block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "border-neutral-300/20 bg-neutral-300/10 text-neutral-100" : "text-neutral-500 hover:bg-neutral-900 hover:text-neutral-200"}`}
                 >
                   {labels.en}
                 </button>
@@ -177,7 +177,7 @@ export function Navbar({
           type="button"
           onClick={() => setCinematic((value) => !value)}
           aria-pressed={activeCinematic}
-          className={`border px-4 py-2 text-[10px] uppercase tracking-[0.24em] transition ${activeCinematic ? "border-amber-300/40 bg-amber-300/10 text-amber-200" : "border-stone-800 bg-black/30 text-stone-500"}`}
+          className={`border px-4 py-2 text-[10px] uppercase tracking-[0.24em] transition ${activeCinematic ? "border-neutral-300/40 bg-neutral-300/10 text-neutral-200" : "border-neutral-800 bg-black/30 text-neutral-500"}`}
         >
           {prefersReducedMotion ? labels.reducedMotion : activeCinematic ? labels.cinematicOn : labels.standard}
         </button>
@@ -186,7 +186,7 @@ export function Navbar({
       <button
         type="button"
         onClick={() => setMobileOpen((value) => !value)}
-        className="flex h-11 w-11 items-center justify-center border border-stone-800 bg-black/40 text-stone-300 lg:hidden"
+        className="flex h-11 w-11 items-center justify-center border border-neutral-800 bg-black/40 text-neutral-300 lg:hidden"
         aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
         aria-expanded={mobileOpen}
         aria-controls="mobile-menu"

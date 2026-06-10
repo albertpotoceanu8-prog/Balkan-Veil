@@ -188,7 +188,7 @@ function PublicSite() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#020100] text-stone-100">
+    <main className="min-h-screen overflow-hidden bg-[#020100] text-neutral-200">
       <Seo language={language} page={page} content={content} canonicalPath={route.canonicalPath} isNotFound={route.isNotFound} />
       <AnimatePresence>{introVisible && <CinematicIntro compact={isMobile} tagline={content.footer.tagline} />}</AnimatePresence>
 
@@ -197,11 +197,11 @@ function PublicSite() {
           <motion.div
             animate={decorativeCinematic ? { x: [0, 30, -20, 0], y: [0, -20, 20, 0] } : undefined}
             transition={{ repeat: Infinity, duration: 14, ease: "easeInOut" }}
-            className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-amber-500/10 opacity-30 blur-3xl"
+            className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-neutral-500/10 opacity-30 blur-3xl"
           />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] opacity-25 md:bg-[size:64px_64px] md:opacity-30" />
-        {decorativeCinematic && <div className="absolute inset-0 hidden opacity-30 md:block" style={{ background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(251,191,36,0.16), transparent 28%)` }} />}
+        {decorativeCinematic && <div className="absolute inset-0 hidden opacity-30 md:block" style={{ background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(155,155,148,0.16), transparent 28%)` }} />}
       </div>
 
       <Navbar
@@ -272,10 +272,10 @@ function NotFoundPage({ language, goHome }: { language: Language; goHome: () => 
 
   return (
     <section className="relative z-10 mx-auto min-h-[calc(100vh-120px)] max-w-[1500px] px-5 py-24 md:px-8 md:py-32">
-      <p className="text-sm uppercase tracking-[0.38em] text-amber-300">{copy.eyebrow}</p>
-      <h1 className="mt-6 font-serif text-5xl leading-tight text-stone-100 md:text-8xl">{copy.title}</h1>
-      <p className="mt-7 max-w-2xl text-lg leading-8 text-stone-400 md:text-2xl md:leading-10">{copy.text}</p>
-      <button type="button" onClick={goHome} className="mt-10 rounded-full bg-amber-300 px-8 py-4 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-amber-200">
+      <p className="text-sm uppercase tracking-[0.38em] text-neutral-300">{copy.eyebrow}</p>
+      <h1 className="mt-6 font-serif text-5xl leading-tight text-neutral-200 md:text-8xl">{copy.title}</h1>
+      <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-400 md:text-2xl md:leading-10">{copy.text}</p>
+      <button type="button" onClick={goHome} className="mt-10 rounded-full bg-neutral-300 px-8 py-4 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-neutral-200">
         {copy.action}
       </button>
     </section>

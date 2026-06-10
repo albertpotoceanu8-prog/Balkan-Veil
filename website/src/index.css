@@ -6,12 +6,12 @@
   color-scheme: dark;
   --veil-black: #020100;
   --veil-panel: #050302;
-  --veil-edge: #241d0c;
-  --veil-gold: #d4af37;
-  --veil-gold-strong: #f0c85a;
-  --veil-gold-muted: #b99832;
-  --veil-text: #d8c7a3;
-  --veil-muted: #6c5e4e;
+  --veil-edge: #202224;
+  --veil-gold: #a7a39a;
+  --veil-gold-strong: #d6d3ca;
+  --veil-gold-muted: #7b7a73;
+  --veil-text: #d1cec5;
+  --veil-muted: #74726b;
   background: #020100;
 }
 
@@ -20,8 +20,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 18% 12%, rgba(212, 175, 55, 0.08), transparent 30rem),
-    radial-gradient(circle at 82% 8%, rgba(185, 152, 50, 0.08), transparent 34rem),
+    radial-gradient(circle at 18% 12%, rgba(155, 155, 148, 0.08), transparent 30rem),
+    radial-gradient(circle at 82% 8%, rgba(120, 121, 116, 0.08), transparent 34rem),
     #020100;
   text-rendering: optimizeLegibility;
 }
@@ -38,18 +38,18 @@ textarea {
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.32);
+  background: rgba(155, 155, 148, 0.32);
   color: #fff7dd;
 }
 
 :focus-visible {
-  outline: 2px solid rgba(251, 191, 36, 0.82);
+  outline: 2px solid rgba(155, 155, 148, 0.82);
   outline-offset: 4px;
 }
 
 .veil-lines {
   background-image:
-    linear-gradient(115deg, rgba(212, 175, 55, 0.08) 0 1px, transparent 1px 22px),
+    linear-gradient(115deg, rgba(155, 155, 148, 0.08) 0 1px, transparent 1px 22px),
     linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
   background-size: 72px 72px, 56px 56px, 56px 56px;
@@ -58,22 +58,22 @@ textarea {
 .archive-noise {
   background-image:
     radial-gradient(circle at 1px 1px, rgba(255, 244, 214, 0.08) 1px, transparent 0),
-    linear-gradient(135deg, rgba(212, 175, 55, 0.04), transparent 42%);
+    linear-gradient(135deg, rgba(155, 155, 148, 0.04), transparent 42%);
   background-size: 22px 22px, auto;
 }
 
 .operator-grid {
   background-image:
-    linear-gradient(rgba(212, 175, 55, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(155, 155, 148, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    radial-gradient(circle at 78% 14%, rgba(212, 175, 55, 0.12), transparent 18rem);
+    radial-gradient(circle at 78% 14%, rgba(155, 155, 148, 0.12), transparent 18rem);
   background-size: 42px 42px, 42px 42px, auto;
 }
 
 .operator-scan {
   background-image:
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 9px),
-    linear-gradient(135deg, rgba(212, 175, 55, 0.06), transparent 42%);
+    linear-gradient(135deg, rgba(155, 155, 148, 0.06), transparent 42%);
 }
 
 .operator-surface {
@@ -87,7 +87,7 @@ textarea {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.05), transparent 46%),
+    linear-gradient(90deg, transparent, rgba(155, 155, 148, 0.05), transparent 46%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 34%);
   content: "";
   pointer-events: none;
@@ -100,8 +100,8 @@ textarea {
   z-index: -1;
   width: 5rem;
   height: 5rem;
-  border-right: 1px solid rgba(240, 200, 90, 0.42);
-  border-bottom: 1px solid rgba(240, 200, 90, 0.42);
+  border-right: 1px solid rgba(198, 196, 188, 0.42);
+  border-bottom: 1px solid rgba(198, 196, 188, 0.42);
   content: "";
   pointer-events: none;
 }
@@ -172,7 +172,7 @@ textarea {
   z-index: 2;
   width: 4rem;
   height: 4rem;
-  border-color: rgba(212, 175, 55, 0.38);
+  border-color: rgba(155, 155, 148, 0.38);
   content: "";
   pointer-events: none;
 }
@@ -268,7 +268,7 @@ textarea {
 @media (max-width: 767px) {
   body {
     background:
-      radial-gradient(circle at 24% 8%, rgba(212, 175, 55, 0.06), transparent 18rem),
+      radial-gradient(circle at 24% 8%, rgba(155, 155, 148, 0.06), transparent 18rem),
       #020100;
   }
 
