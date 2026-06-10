@@ -11,7 +11,7 @@ import {
 
 const GOLD = "#f6d365";
 const GOLD_SOFT = "rgba(246, 211, 101, 0.75)";
-const BLACK = "#050505";
+const BLACK = "#020100";
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);

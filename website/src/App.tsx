@@ -58,7 +58,7 @@ function AdminMode() {
 
 function AdminLoading() {
   return (
-    <main className="grid min-h-screen place-items-center bg-[#050505] text-[#D4AF37]">
+    <main className="grid min-h-screen place-items-center bg-[#020100] text-[#D4AF37]">
       <p className="font-mono text-xs uppercase tracking-[0.28em]">Loading VEIL OS</p>
     </main>
   );
@@ -188,20 +188,21 @@ function PublicSite() {
   };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#050505] text-stone-100">
+    <main className="min-h-screen overflow-hidden bg-[#020100] text-stone-100">
       <Seo language={language} page={page} content={content} canonicalPath={route.canonicalPath} isNotFound={route.isNotFound} />
       <AnimatePresence>{introVisible && <CinematicIntro compact={isMobile} tagline={content.footer.tagline} />}</AnimatePresence>
 
-      <div className="pointer-events-none fixed inset-0 opacity-25 md:opacity-30">
+      <div className="pointer-events-none fixed inset-0">
         {!isMobile && (
           <motion.div
             animate={decorativeCinematic ? { x: [0, 30, -20, 0], y: [0, -20, 20, 0] } : undefined}
             transition={{ repeat: Infinity, duration: 14, ease: "easeInOut" }}
-            className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-amber-500/10 blur-3xl"
+            className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-amber-500/10 opacity-30 blur-3xl"
           />
         )}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] md:bg-[size:64px_64px]" />
-        {decorativeCinematic && <div className="absolute inset-0 hidden md:block" style={{ background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(251,191,36,0.16), transparent 28%)` }} />}
+        <div className="veil-background-scratches absolute inset-0 opacity-75 md:opacity-90" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] opacity-25 md:bg-[size:64px_64px] md:opacity-30" />
+        {decorativeCinematic && <div className="absolute inset-0 hidden opacity-30 md:block" style={{ background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(251,191,36,0.16), transparent 28%)` }} />}
       </div>
 
       <Navbar

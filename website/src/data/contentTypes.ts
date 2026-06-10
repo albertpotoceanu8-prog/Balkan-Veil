@@ -1,4 +1,4 @@
-﻿import type { PageKey } from "@/types/navigation";
+import type { PageKey } from "@/types/navigation";
 
 export type Language = "ro" | "en";
 export type ServiceIcon = "Terminal" | "Network" | "Eye" | "Lock" | "Shield" | "ArrowRight";
