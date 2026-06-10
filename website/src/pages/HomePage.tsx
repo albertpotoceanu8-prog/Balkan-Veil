@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, CircleDot, Lock, Radio, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
@@ -19,13 +20,9 @@ const filePanel =
 
 const goldText = "text-[#b9924b]";
 const mutedGoldText = "text-[#7f6a39]";
-const signalWaveBase =
-  "0,32 34,32 46,30 56,34 66,32 86,32 94,27 101,42 108,12 116,51 124,32 154,32 168,29 184,35 202,32 230,32 240,30 250,34 260,32 285,32 294,25 301,44 309,15 318,50 327,32 360,32";
-const signalWaveFrames =
-  `${signalWaveBase};` +
-  "0,32 34,32 46,31 56,33 66,32 86,32 94,28 101,41 108,15 116,49 124,32 154,32 168,30 184,34 202,32 230,32 240,31 250,33 260,32 285,32 294,26 301,43 309,17 318,48 327,32 360,32;" +
-  "0,32 34,32 46,30 56,34 66,32 86,32 94,26 101,43 108,10 116,53 124,32 154,32 168,29 184,35 202,32 230,32 240,30 250,34 260,32 285,32 294,24 301,46 309,12 318,52 327,32 360,32;" +
-  signalWaveBase;
+const signalWaveX = [0, 34, 46, 56, 66, 86, 94, 101, 108, 116, 124, 154, 168, 184, 202, 230, 240, 250, 260, 285, 294, 301, 309, 318, 327, 360];
+const signalWaveY = [32, 32, 30, 34, 32, 32, 27, 42, 12, 51, 32, 32, 29, 35, 32, 32, 30, 34, 32, 32, 25, 44, 15, 50, 32, 32];
+const signalWaveBase = toSignalPoints(signalWaveY);
 
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
@@ -266,14 +263,67 @@ function MicroBlock({ label, lines, icon }: { label: string; lines: readonly str
 }
 
 function SignalWavePath() {
+  const softRef = useRef<SVGPolylineElement | null>(null);
+  const lineRef = useRef<SVGPolylineElement | null>(null);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      softRef.current?.setAttribute("points", signalWaveBase);
+      lineRef.current?.setAttribute("points", signalWaveBase);
+      return;
+    }
+
+    let current = createSignalTarget();
+    let target = createSignalTarget();
+    let frameId = 0;
+    let nextTargetAt = 0;
+
+    const tick = (time: number) => {
+      if (time >= nextTargetAt) {
+        target = createSignalTarget();
+        nextTargetAt = time + 720 + Math.random() * 760;
+      }
+
+      current = current.map((value, index) => value + (target[index] - value) * 0.045);
+      const points = toSignalPoints(current);
+      softRef.current?.setAttribute("points", points);
+      lineRef.current?.setAttribute("points", points);
+
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
   return (
     <>
-      <polyline className="signal-feed-line signal-feed-line-soft" points={signalWaveBase}>
-        <animate attributeName="points" dur="5.2s" repeatCount="indefinite" values={signalWaveFrames} />
-      </polyline>
-      <polyline className="signal-feed-line" points={signalWaveBase}>
-        <animate attributeName="points" dur="5.2s" repeatCount="indefinite" values={signalWaveFrames} />
-      </polyline>
+      <polyline ref={softRef} className="signal-feed-line signal-feed-line-soft" points={signalWaveBase} />
+      <polyline ref={lineRef} className="signal-feed-line" points={signalWaveBase} />
     </>
   );
+}
+
+function createSignalTarget() {
+  const firstPulse = 0.82 + Math.random() * 0.38;
+  const secondPulse = 0.78 + Math.random() * 0.44;
+
+  return signalWaveY.map((baseY, index) => {
+    const jitter = index === 8 || index === 9 || index === 22 || index === 23 ? 2.2 : 0.9;
+    let y = baseY + (Math.random() - 0.5) * jitter;
+
+    if (index === 8) y = 32 - 20 * firstPulse - Math.random() * 2.5;
+    if (index === 9) y = 32 + 19 * firstPulse + Math.random() * 2.5;
+    if (index === 22) y = 32 - 18 * secondPulse - Math.random() * 2.2;
+    if (index === 23) y = 32 + 18 * secondPulse + Math.random() * 2.2;
+
+    return Math.max(8, Math.min(56, y));
+  });
+}
+
+function toSignalPoints(points: readonly number[]) {
+  return points.map((y, index) => `${signalWaveX[index]},${y.toFixed(1)}`).join(" ");
 }

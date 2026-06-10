@@ -251,6 +251,7 @@ textarea {
   }
 
   .signal-feed-wave::before,
+  .signal-feed-wave::after,
   .signal-feed-track,
   .signal-feed-line {
     animation: none;
