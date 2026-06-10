@@ -200,7 +200,6 @@ function PublicSite() {
             className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-amber-500/10 opacity-30 blur-3xl"
           />
         )}
-        <div className="veil-background-scratches absolute inset-0 opacity-75 md:opacity-90" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] opacity-25 md:bg-[size:64px_64px] md:opacity-30" />
         {decorativeCinematic && <div className="absolute inset-0 hidden opacity-30 md:block" style={{ background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(251,191,36,0.16), transparent 28%)` }} />}
       </div>
