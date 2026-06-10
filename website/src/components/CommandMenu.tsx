@@ -53,7 +53,7 @@ export function CommandMenu({ commandItems, labels, goToPage, close }: CommandMe
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 16, scale: 0.98 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
-        className="operator-surface w-full max-w-3xl overflow-hidden border border-neutral-300/20 bg-neutral-950/95 shadow-[0_0_90px_rgba(155,155,148,0.12)]"
+        className="operator-surface w-full max-w-3xl overflow-hidden border border-neutral-300/20 bg-neutral-950/95"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-center justify-between border-b border-neutral-800 px-6 py-5">

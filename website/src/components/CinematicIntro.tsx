@@ -17,7 +17,7 @@ export function CinematicIntro({ compact = false, tagline = "Simple. Dark. Well 
       transition={{ duration: shortMotion ? 0.2 : 1 }}
       className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden bg-black"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(155,155,148,0.14),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(185,138,50,0.14),transparent_55%)]" />
       {!shortMotion && <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:70px_70px] opacity-40" />}
 
       <motion.div
@@ -30,7 +30,7 @@ export function CinematicIntro({ compact = false, tagline = "Simple. Dark. Well 
           initial={{ rotate: -4, opacity: 0, y: 10 }}
           animate={{ rotate: 0, opacity: 1, y: 0 }}
           transition={{ duration: shortMotion ? 0.35 : 1.5 }}
-          className="mb-8 flex h-44 w-44 items-center justify-center rounded-full border border-neutral-300/20 bg-black shadow-[0_0_60px_rgba(155,155,148,0.22)] sm:h-56 sm:w-56 md:mb-12 md:h-80 md:w-80 md:shadow-[0_0_100px_rgba(155,155,148,0.28)] lg:h-96 lg:w-96"
+          className="mb-8 flex h-44 w-44 items-center justify-center rounded-full border border-neutral-300/20 bg-black sm:h-56 sm:w-56 md:mb-12 md:h-80 md:w-80 md: lg:h-96 lg:w-96"
         >
           <img src={LOGO_SRC} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full rounded-full object-cover" />
         </motion.div>

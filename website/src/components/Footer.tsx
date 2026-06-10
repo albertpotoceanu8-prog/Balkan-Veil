@@ -31,7 +31,7 @@ export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: 
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
           <div>
             <div className="flex items-center gap-4">
-              <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black shadow-[0_0_40px_rgba(155,155,148,0.18)] md:h-14 md:w-14">
+              <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black md:h-14 md:w-14">
                 <img src={LOGO_SRC} alt="Balkan Veil logo" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </div>
               <div>

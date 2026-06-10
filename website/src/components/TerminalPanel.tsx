@@ -158,7 +158,7 @@ export function TerminalPanel({ cinematic = true, loop = false, slow = false, co
       className="relative mx-auto max-w-5xl"
     >
       <div className="absolute -inset-8 hidden border border-neutral-300/10 bg-neutral-400/[0.025] blur-2xl md:block" />
-      <Card className="operator-surface relative overflow-hidden border border-neutral-300/20 bg-black/70 shadow-2xl transition duration-500 hover:border-neutral-300/35 hover:shadow-[0_0_70px_rgba(155,155,148,0.12)] md:backdrop-blur-xl">
+      <Card className="operator-surface relative overflow-hidden border border-neutral-300/20 bg-black/70 shadow-2xl transition duration-500 hover:border-neutral-300/35 md:backdrop-blur-xl">
         <CardContent className="p-0">
           <div className="border-b border-neutral-800 bg-neutral-950/80 px-4 py-4 md:px-6 md:py-5">
             <div className="flex items-center gap-2">

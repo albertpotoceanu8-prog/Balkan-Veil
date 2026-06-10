@@ -13,13 +13,13 @@ type HomePageProps = {
 };
 
 const archivePanel =
-  "relative overflow-hidden border border-[#202224] bg-[#050302]/92 shadow-[inset_0_1px_0_rgba(155,155,148,0.08)]";
+  "relative overflow-hidden border border-[#202224] bg-[#050302]/92";
 
 const filePanel =
-  "relative overflow-hidden border border-[#202224] bg-[#020100]/88 transition duration-300 hover:border-[#7b7a73]/55 hover:bg-[#090503]";
+  "relative overflow-hidden border border-[#202224] bg-[#020100]/88 transition duration-300 hover:border-[#7d6a45]/55 hover:bg-[#090503]";
 
-const goldText = "text-[#a7a39a]";
-const mutedGoldText = "text-[#a7a39a]";
+const goldText = "text-[#b98a32]";
+const mutedGoldText = "text-[#b98a32]";
 const signalWaveX = [0, 34, 46, 56, 66, 86, 94, 101, 108, 116, 124, 154, 168, 184, 202, 230, 240, 250, 260, 285, 294, 301, 309, 318, 327, 360];
 const signalWaveY = [32, 32, 30, 34, 32, 32, 27, 42, 12, 51, 32, 32, 29, 35, 32, 32, 30, 34, 32, 32, 25, 44, 15, 50, 32, 32];
 const signalWaveBase = toSignalPoints(signalWaveY);
@@ -27,26 +27,26 @@ const signalWaveBase = toSignalPoints(signalWaveY);
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
-      <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-6 pt-2.5 text-[#b8b5ad] sm:px-5 sm:pb-8 md:px-8 md:pb-12">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(155,155,148,0.10),transparent_28rem)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7b7a73]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
+      <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-6 pt-2.5 text-[#b6a27a] sm:px-5 sm:pb-8 md:px-8 md:pb-12">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.10),transparent_28rem)]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)]`}>
-          <div className="pointer-events-none absolute inset-0 opacity-[0.24] [background-image:linear-gradient(rgba(155,155,148,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 opacity-[0.24] [background-image:linear-gradient(rgba(185,138,50,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.18]" aria-hidden="true" />
 
           <header className="relative grid min-h-12 grid-cols-[1fr_auto] items-center gap-3 border-b border-[#202224] px-3 py-2.5 sm:min-h-14 sm:px-4 sm:py-3 md:grid-cols-[1fr_auto_1fr] md:px-7">
             <div className="flex min-w-0 items-center gap-4">
-              <span className="hidden h-4 w-4 border border-[#a7a39a]/60 sm:block" aria-hidden="true" />
-              <button type="button" onClick={() => goToPage("home")} className="min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.2em] text-[#a7a39a] sm:text-[11px] sm:tracking-[0.28em] md:text-sm">
+              <span className="hidden h-4 w-4 border border-[#b98a32]/60 sm:block" aria-hidden="true" />
+              <button type="button" onClick={() => goToPage("home")} className="min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.2em] text-[#b98a32] sm:text-[11px] sm:tracking-[0.28em] md:text-sm">
                 Balkan Veil
               </button>
             </div>
-            <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-[#8c887c] md:flex">
+            <div className="hidden items-center gap-2 font-mono text-[10px] uppercase tracking-[0.26em] text-[#9a8255] md:flex">
               <span>// access terminal</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-[#a7a39a]" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[#b98a32] shadow-[0_0_12px_rgba(185,138,50,0.85)]" aria-hidden="true" />
             </div>
-            <button type="button" onClick={() => goToPage("access")} className="justify-self-end font-mono text-[9px] uppercase tracking-[0.2em] text-[#a7a39a] transition hover:text-[#d6d3ca] sm:text-[10px] sm:tracking-[0.26em]">
+            <button type="button" onClick={() => goToPage("access")} className="justify-self-end font-mono text-[9px] uppercase tracking-[0.2em] text-[#b98a32] transition hover:text-[#d2aa55] sm:text-[10px] sm:tracking-[0.26em]">
               Menu
             </button>
           </header>
@@ -57,20 +57,20 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
             </aside>
 
             <main className="relative min-h-[28rem] border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
-              <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7b7a73]/35 to-transparent md:block" aria-hidden="true" />
-              <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7b7a73]/20 to-transparent md:block" aria-hidden="true" />
+              <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/35 to-transparent md:block" aria-hidden="true" />
+              <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/20 to-transparent md:block" aria-hidden="true" />
 
               <div className="mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem]">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
                 <HeroTitle text={content.hero} cinematic={cinematic} introDone={introDone} />
-                <p className="mt-6 max-w-[30rem] font-mono text-[10px] leading-6 text-[#8a8984] sm:mt-8 sm:text-[11px] sm:leading-7 md:max-w-[34rem] md:text-sm md:leading-8">{content.text}</p>
+                <p className="mt-6 max-w-[30rem] font-mono text-[10px] leading-6 text-[#8a806c] sm:mt-8 sm:text-[11px] sm:leading-7 md:max-w-[34rem] md:text-sm md:leading-8">{content.text}</p>
 
                 <div className="mt-7 grid w-full max-w-[30rem] border border-[#252729] bg-[#050302] sm:mt-9 sm:max-w-[34rem] sm:grid-cols-[1fr_auto]">
-                  <button type="button" onClick={() => goToPage("access")} className="min-h-12 px-4 text-left font-mono text-[9px] uppercase tracking-[0.16em] text-[#8c887c] transition hover:bg-[#090503] hover:text-[#d6d3ca] sm:min-h-14 sm:px-5 sm:text-[10px] sm:tracking-[0.2em] md:px-7">
+                  <button type="button" onClick={() => goToPage("access")} className="min-h-12 px-4 text-left font-mono text-[9px] uppercase tracking-[0.16em] text-[#9a8255] transition hover:bg-[#090503] hover:text-[#d2aa55] sm:min-h-14 sm:px-5 sm:text-[10px] sm:tracking-[0.2em] md:px-7">
                     &gt; {content.primaryCta}
-                    <span className="ml-2 inline-block h-3 w-px translate-y-0.5 bg-[#a7a39a]" aria-hidden="true" />
+                    <span className="ml-2 inline-block h-3 w-px translate-y-0.5 bg-[#b98a32] shadow-[0_0_10px_rgba(185,138,50,0.55)]" aria-hidden="true" />
                   </button>
-                  <button type="button" onClick={() => goToPage("protocol")} className="min-h-12 border-t border-[#252729] px-4 font-mono text-[9px] uppercase tracking-[0.18em] text-[#a7a39a] transition hover:bg-[#a7a39a] hover:text-black sm:min-h-14 sm:border-l sm:border-t-0 sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+                  <button type="button" onClick={() => goToPage("protocol")} className="min-h-12 border-t border-[#252729] px-4 font-mono text-[9px] uppercase tracking-[0.18em] text-[#b98a32] transition hover:bg-[#b98a32] hover:text-black sm:min-h-14 sm:border-l sm:border-t-0 sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
                     Authenticate
                   </button>
                 </div>
@@ -96,7 +96,7 @@ function HeroTitle({ text, cinematic, introDone }: { text: string; cinematic: bo
   const words = text.split(/\s+/).filter(Boolean);
 
   return (
-    <h1 className="mt-6 flex max-w-[min(100%,52rem)] flex-col items-center font-serif text-[clamp(3.2rem,17vw,5.6rem)] leading-[0.84] text-[#d1cec5] drop-shadow-[0_0_22px_rgba(155,155,148,0.12)] sm:mt-8 sm:text-[clamp(4.2rem,15vw,7.8rem)] md:mt-10 md:text-[clamp(5.5rem,8.7vw,9.1rem)]">
+    <h1 className="mt-6 flex max-w-[min(100%,52rem)] flex-col items-center font-serif text-[clamp(3.2rem,17vw,5.6rem)] leading-[0.84] text-[#c8ad72] [text-shadow:0_0_18px_rgba(185,138,50,0.24)] sm:mt-8 sm:text-[clamp(4.2rem,15vw,7.8rem)] md:mt-10 md:text-[clamp(5.5rem,8.7vw,9.1rem)]">
       {words.map((word) => (
         <span key={word} className="block whitespace-nowrap">
           {cinematic ? <DecodeText text={word} canStart={introDone} /> : word}
@@ -111,11 +111,11 @@ function SideIntel({ content }: { content: SiteContent["home"] }) {
     <div className="space-y-6">
       <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
       <div className={`${filePanel} p-4`}>
-        <div className="h-24 opacity-80 [background-image:radial-gradient(circle_at_24%_42%,rgba(155,155,148,0.45)_0_1px,transparent_2px),radial-gradient(circle_at_68%_36%,rgba(155,155,148,0.35)_0_1px,transparent_2px),linear-gradient(120deg,transparent,rgba(155,155,148,0.08),transparent)] [background-size:18px_18px,24px_24px,auto]" />
+        <div className="h-24 opacity-80 [background-image:radial-gradient(circle_at_24%_42%,rgba(185,138,50,0.45)_0_1px,transparent_2px),radial-gradient(circle_at_68%_36%,rgba(185,138,50,0.35)_0_1px,transparent_2px),linear-gradient(120deg,transparent,rgba(185,138,50,0.08),transparent)] [background-size:18px_18px,24px_24px,auto]" />
       </div>
       <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
       <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
-      <div className={`${filePanel} grid grid-cols-2 gap-4 p-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#696b68]`}>
+      <div className={`${filePanel} grid grid-cols-2 gap-4 p-4 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654]`}>
         <div>
           <p className={goldText}>Time</p>
           <p className="mt-2">21:42:17</p>
@@ -134,14 +134,14 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
       <div className={`${filePanel} p-3 sm:p-4`}>
         <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Active files</p>
-        <div className="mt-4 space-y-2.5 font-mono text-[9px] uppercase tracking-[0.1em] text-[#a7a39a] sm:mt-5 sm:space-y-3 sm:text-[10px] sm:tracking-[0.12em]">
+        <div className="mt-4 space-y-2.5 font-mono text-[9px] uppercase tracking-[0.1em] text-[#b98a32] sm:mt-5 sm:space-y-3 sm:text-[10px] sm:tracking-[0.12em]">
           {content.signalStrip.slice(0, 5).map((item, index) => (
-            <button key={item} type="button" className="block max-w-full break-all text-left transition hover:text-[#d6d3ca]">
+            <button key={item} type="button" className="block max-w-full break-all text-left transition hover:text-[#d2aa55]">
               0{index}_{item.replace(/\s+/g, "_")}.vel
             </button>
           ))}
         </div>
-        <p className="mt-4 border-t border-[#202224] pt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-[#696b68] sm:mt-5 sm:text-[10px] sm:tracking-[0.2em]">5 files</p>
+        <p className="mt-4 border-t border-[#202224] pt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-[#6f6654] sm:mt-5 sm:text-[10px] sm:tracking-[0.2em]">5 files</p>
       </div>
 
       <div className={`${filePanel} p-3 sm:p-4`}>
@@ -160,9 +160,9 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
 
       <div className={`${filePanel} hidden p-4 sm:block`}>
         <p className={`font-mono text-[10px] uppercase tracking-[0.24em] ${goldText}`}>Encryption</p>
-        <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#a7a39a]">AES-256 / SHA-512</p>
-        <div className="mt-7 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#a7a39a]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#a7a39a]" aria-hidden="true" />
+        <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#b98a32]">AES-256 / SHA-512</p>
+        <div className="mt-7 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#b98a32]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#b98a32]" aria-hidden="true" />
           online
         </div>
       </div>
@@ -174,19 +174,19 @@ function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToP
   return (
     <div className="relative grid border-t border-[#202224] md:grid-cols-[0.42fr_1fr_0.45fr_0.85fr]">
       <div className="hidden border-r border-[#202224] p-4 md:block">
-        <div className="h-20 bg-[radial-gradient(circle_at_35%_35%,rgba(155,155,148,0.25),transparent_36%),linear-gradient(145deg,#0c0c0c,#050302)]" />
+        <div className="h-20 bg-[radial-gradient(circle_at_35%_35%,rgba(185,138,50,0.25),transparent_36%),linear-gradient(145deg,#0c0c0c,#050302)]" />
       </div>
       <div className="border-b border-[#202224] p-4 md:border-b-0 md:border-r md:p-5">
         <p className="max-w-xl font-mono text-[10px] uppercase leading-6 tracking-[0.14em] text-[#aaa59a] sm:text-xs sm:leading-7 sm:tracking-[0.18em]">{content.dossier.note}</p>
       </div>
-      <button type="button" onClick={() => goToPage("work")} className="border-b border-[#202224] p-4 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#a7a39a] transition hover:bg-[#090503] hover:text-[#d6d3ca] sm:text-[10px] sm:tracking-[0.24em] md:border-b-0 md:border-r md:p-5">
+      <button type="button" onClick={() => goToPage("work")} className="border-b border-[#202224] p-4 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#b98a32] transition hover:bg-[#090503] hover:text-[#d2aa55] sm:text-[10px] sm:tracking-[0.24em] md:border-b-0 md:border-r md:p-5">
         Scroll to decrypt
         <ArrowRight className="mt-3 h-4 w-4 sm:mt-4" aria-hidden="true" />
       </button>
       <div className="relative hidden min-h-24 overflow-hidden p-5 sm:block">
-        <div className="absolute right-8 top-5 h-14 w-14 rounded-full border border-[#a7a39a]/70 shadow-[0_0_30px_rgba(155,155,148,0.12)]" aria-hidden="true" />
-        <div className="absolute right-9 top-6 h-12 w-12 rounded-full border border-[#a7a39a]/25" aria-hidden="true" />
-        <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#7b7a73]/60 to-transparent" aria-hidden="true" />
+        <div className="absolute right-8 top-5 h-14 w-14 rounded-full border border-[#b98a32]/70" aria-hidden="true" />
+        <div className="absolute right-9 top-6 h-12 w-12 rounded-full border border-[#b98a32]/25" aria-hidden="true" />
+        <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/60 to-transparent" aria-hidden="true" />
       </div>
     </div>
   );
@@ -199,8 +199,8 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         {content.valueProps.map((item, index) => (
           <article key={item.title} className="bg-[#050302] p-4 sm:p-5 md:p-7">
             <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] sm:tracking-[0.26em] ${mutedGoldText}`}>file 0{index + 1}</p>
-            <h2 className="mt-5 font-serif text-2xl leading-tight text-[#d1cec5] sm:mt-6 sm:text-3xl md:text-4xl">{item.title}</h2>
-            <p className="mt-4 text-sm leading-7 text-[#74726b] sm:mt-5">{item.text}</p>
+            <h2 className="mt-5 font-serif text-2xl leading-tight text-[#c8ad72] sm:mt-6 sm:text-3xl md:text-4xl">{item.title}</h2>
+            <p className="mt-4 text-sm leading-7 text-[#786f5e] sm:mt-5">{item.text}</p>
           </article>
         ))}
       </div>
@@ -210,16 +210,16 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
           <div className="flex items-start justify-between gap-4 border-b border-[#202224] pb-5">
             <div>
               <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.26em] ${goldText}`}>{content.launchChanges.eyebrow}</p>
-              <h2 className="mt-4 max-w-3xl font-serif text-2xl leading-tight text-[#d1cec5] sm:mt-5 sm:text-3xl md:text-5xl">{content.launchChanges.title}</h2>
+              <h2 className="mt-4 max-w-3xl font-serif text-2xl leading-tight text-[#c8ad72] sm:mt-5 sm:text-3xl md:text-5xl">{content.launchChanges.title}</h2>
             </div>
-            <Radio className="hidden h-8 w-8 text-[#a7a39a] md:block" aria-hidden="true" />
+            <Radio className="hidden h-8 w-8 text-[#b98a32] md:block" aria-hidden="true" />
           </div>
-          <p className="mt-5 max-w-4xl text-sm leading-7 text-[#74726b] md:text-base md:leading-8">{content.launchChanges.text}</p>
+          <p className="mt-5 max-w-4xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
           <div className="mt-6 grid gap-3 sm:mt-7 md:grid-cols-3">
             {content.launchChanges.items.map((item, index) => (
               <div key={item.title} className={`${filePanel} p-3 sm:p-4`}>
                 <p className={`font-mono text-[9px] uppercase tracking-[0.18em] sm:text-[10px] sm:tracking-[0.2em] ${mutedGoldText}`}>output 0{index + 1}</p>
-                <h3 className="mt-4 font-serif text-lg text-[#d1cec5] sm:text-xl">{item.title}</h3>
+                <h3 className="mt-4 font-serif text-lg text-[#c8ad72] sm:text-xl">{item.title}</h3>
                 <p className="mt-4 text-sm leading-6 text-[#777772]">{item.text}</p>
               </div>
             ))}
@@ -233,7 +233,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
               <div key={item} className="grid grid-cols-[1.8rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100] px-3 py-3 sm:grid-cols-[2.2rem_1fr_auto] sm:gap-3 sm:px-4">
                 <span className={`font-mono text-[9px] sm:text-[10px] ${mutedGoldText}`}>0{index + 1}</span>
                 <span className="text-sm leading-6 text-[#787873]">{item}</span>
-                <CircleDot className="h-3.5 w-3.5 text-[#7b7a73]" aria-hidden="true" />
+                <CircleDot className="h-3.5 w-3.5 text-[#7d6a45]" aria-hidden="true" />
               </div>
             ))}
           </div>
@@ -241,15 +241,15 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       </div>
 
       <div className={`${archivePanel} mt-4 p-4 text-center sm:mt-5 sm:p-5 md:p-9`}>
-        <ShieldCheck className="mx-auto h-7 w-7 text-[#a7a39a] sm:h-8 sm:w-8" aria-hidden="true" />
+        <ShieldCheck className="mx-auto h-7 w-7 text-[#b98a32] sm:h-8 sm:w-8" aria-hidden="true" />
         <p className={`mt-5 font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] sm:tracking-[0.28em] ${goldText}`}>{content.finalCta.eyebrow}</p>
-        <h2 className="mx-auto mt-5 max-w-4xl font-serif text-2xl leading-tight text-[#d1cec5] sm:text-3xl md:text-6xl">{content.finalCta.title}</h2>
-        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#74726b] md:text-base md:leading-8">{content.finalCta.text}</p>
+        <h2 className="mx-auto mt-5 max-w-4xl font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl md:text-6xl">{content.finalCta.title}</h2>
+        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.finalCta.text}</p>
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-          <button type="button" onClick={() => goToPage("access")} className="min-h-12 border border-[#a7a39a] bg-[#a7a39a] px-5 font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#d1cec5] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+          <button type="button" onClick={() => goToPage("access")} className="min-h-12 border border-[#b98a32] bg-[#b98a32] px-5 font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
             {content.finalCta.primary}
           </button>
-          <button type="button" onClick={() => goToPage("pricing")} className="min-h-12 border border-[#252729] bg-transparent px-5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#7b7a73] transition hover:border-[#a7a39a] hover:text-[#d1cec5] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+          <button type="button" onClick={() => goToPage("pricing")} className="min-h-12 border border-[#252729] bg-transparent px-5 font-mono text-[9px] uppercase tracking-[0.18em] text-[#7d6a45] transition hover:border-[#b98a32] hover:text-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
             {content.finalCta.secondary}
           </button>
         </div>
@@ -265,7 +265,7 @@ function MicroBlock({ label, lines, icon }: { label: string; lines: readonly str
         <p className={`font-mono text-[10px] uppercase tracking-[0.24em] ${goldText}`}>&gt; {label}</p>
         {icon}
       </div>
-      <div className="mt-4 space-y-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#74726b]">
+      <div className="mt-4 space-y-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[#786f5e]">
         {lines.map((line) => (
           <p key={line}>{line}</p>
         ))}

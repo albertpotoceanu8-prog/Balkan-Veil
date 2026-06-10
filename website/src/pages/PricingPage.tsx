@@ -24,49 +24,49 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
       <div className="operator-surface mb-10 border border-[#252729] bg-black/45 p-5 md:p-7">
         <div className="absolute inset-0 operator-grid opacity-10" aria-hidden="true" />
         <div className="relative max-w-4xl">
-          <p className="text-xs uppercase tracking-[0.32em] text-[#a7a39a]">{content.scopeNote.eyebrow}</p>
-          <h2 className="mt-4 font-serif text-3xl leading-tight text-[#d1cec5] md:text-4xl">{content.scopeNote.title}</h2>
-          <p className="mt-4 text-base leading-7 text-[#74726b]">{content.scopeNote.text}</p>
+          <p className="text-xs uppercase tracking-[0.32em] text-[#b98a32]">{content.scopeNote.eyebrow}</p>
+          <h2 className="mt-4 font-serif text-3xl leading-tight text-[#c8ad72] md:text-4xl">{content.scopeNote.title}</h2>
+          <p className="mt-4 text-base leading-7 text-[#786f5e]">{content.scopeNote.text}</p>
         </div>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-[0.9fr_1.12fr_0.9fr] lg:items-start">
         {content.plans.map((plan, index) => (
           <motion.div key={plan.name} {...cardMotion} className={`h-full ${plan.recommended ? "lg:-mt-8" : "lg:mt-10"}`}>
-            <VeilFrame label={`${content.planIndexLabel} ${String(index + 1).padStart(2, "0")}`} index={plan.name} className={`h-full ${plan.recommended ? "border-[#7b7a73]/50 bg-[#050302]/92" : "bg-[#050302]/86"}`}>
+            <VeilFrame label={`${content.planIndexLabel} ${String(index + 1).padStart(2, "0")}`} index={plan.name} className={`h-full ${plan.recommended ? "border-[#7d6a45]/50 bg-[#050302]/92" : "bg-[#050302]/86"}`}>
               <div className="flex h-full flex-col p-6 md:p-8">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#a7a39a]">{plan.label}</p>
-                    <h2 className="mt-5 font-serif text-4xl text-[#d1cec5] md:text-5xl">{plan.name}</h2>
+                    <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#b98a32]">{plan.label}</p>
+                    <h2 className="mt-5 font-serif text-4xl text-[#c8ad72] md:text-5xl">{plan.name}</h2>
                   </div>
                   <ArchiveStamp code={String(index + 1).padStart(2, "0")} label={content.minimumLabel} status={plan.recommended} align="right" className="hidden sm:flex" />
                 </div>
 
                 <div className="relative mt-9 border-y border-[#202224] py-6">
-                  <span className={plan.recommended ? "absolute right-0 top-6 h-2 w-16 bg-[#7b7a73]/45" : "absolute right-0 top-6 h-2 w-16 bg-[#7b7a73]/30"} aria-hidden="true" />
+                  <span className={plan.recommended ? "absolute right-0 top-6 h-2 w-16 bg-[#7d6a45]/45" : "absolute right-0 top-6 h-2 w-16 bg-[#7d6a45]/30"} aria-hidden="true" />
                   <div className="flex items-end gap-2">
-                    <p className="font-serif text-5xl text-[#d1cec5] md:text-6xl">{plan.promoPrice ?? plan.price}</p>
-                    <p className="pb-2 text-sm uppercase tracking-[0.2em] text-[#74726b]">{plan.period}</p>
+                    <p className="font-serif text-5xl text-[#c8ad72] md:text-6xl">{plan.promoPrice ?? plan.price}</p>
+                    <p className="pb-2 text-sm uppercase tracking-[0.2em] text-[#786f5e]">{plan.period}</p>
                   </div>
                   {plan.promoPrice ? (
-                    <p className="mt-3 text-sm leading-6 text-[#74726b]">
-                      <span className="text-[#d6d3ca]">{plan.promoLabel}:</span> {plan.promoNote}
+                    <p className="mt-3 text-sm leading-6 text-[#786f5e]">
+                      <span className="text-[#d2aa55]">{plan.promoLabel}:</span> {plan.promoNote}
                     </p>
                   ) : null}
-                  <p className="mt-4 text-base leading-7 text-[#74726b]">{plan.description}</p>
+                  <p className="mt-4 text-base leading-7 text-[#786f5e]">{plan.description}</p>
                 </div>
 
                 <SignalLedger items={plan.included} label={content.ledgerLabel} className="mt-7" />
 
                 <div className="mt-auto space-y-4 pt-7">
                   <p className="text-sm leading-6 text-[#787873]">
-                    <span className="text-[#d6d3ca]">{content.supportLabel}:</span> {plan.support}
+                    <span className="text-[#d2aa55]">{content.supportLabel}:</span> {plan.support}
                   </p>
                   <p className="text-sm leading-6 text-[#787873]">
-                    <span className="text-[#d6d3ca]">{content.bestForLabel}:</span> {plan.bestFor}
+                    <span className="text-[#d2aa55]">{content.bestForLabel}:</span> {plan.bestFor}
                   </p>
-                  <Button type="button" onClick={() => goToPage("access")} className="mt-2 inline-flex min-h-12 w-full items-center justify-center border border-[#a7a39a] bg-[#a7a39a] px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-black transition hover:bg-[#d1cec5]">
+                  <Button type="button" onClick={() => goToPage("access")} className="mt-2 inline-flex min-h-12 w-full items-center justify-center border border-[#b98a32] bg-[#b98a32] px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-black transition hover:bg-[#c8ad72]">
                     {content.finalCta.primary} <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
@@ -88,18 +88,18 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
 
       <motion.div {...cardMotion} className="operator-surface mt-28 border border-[#252729] bg-black/55 p-7 md:p-12">
         <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
-        <p className="text-sm uppercase tracking-[0.35em] text-[#a7a39a]">{content.buyoutNote.eyebrow}</p>
-        <h2 className="mt-5 font-serif text-4xl leading-tight text-[#d1cec5] md:text-6xl">{content.buyoutNote.title}</h2>
-        <p className="mt-6 max-w-4xl text-lg leading-8 text-[#74726b]">{content.buyoutNote.text}</p>
+        <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.buyoutNote.eyebrow}</p>
+        <h2 className="mt-5 font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.buyoutNote.title}</h2>
+        <p className="mt-6 max-w-4xl text-lg leading-8 text-[#786f5e]">{content.buyoutNote.text}</p>
       </motion.div>
 
       <div className="mt-28">
-        <p className="text-sm uppercase tracking-[0.35em] text-[#a7a39a]">{content.faqLabel}</p>
-        <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-[#d1cec5] md:text-6xl">{content.faqTitle}</h2>
+        <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.faqLabel}</p>
+        <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.faqTitle}</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {content.faq.map((item) => (
             <DossierPanel key={item.q} eyebrow={content.faqLabel} title={item.q}>
-              <p className="mt-4 text-base leading-7 text-[#74726b]">{item.a}</p>
+              <p className="mt-4 text-base leading-7 text-[#786f5e]">{item.a}</p>
             </DossierPanel>
           ))}
         </div>

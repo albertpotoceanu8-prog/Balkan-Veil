@@ -6,7 +6,7 @@ export const cardMotion = {
 } as const;
 
 export const cardClass =
-  "operator-surface relative overflow-hidden border border-[#202224] bg-[#020100]/95 text-[#b8b5ad] shadow-[inset_0_1px_0_rgba(155,155,148,0.07)] transition duration-500 hover:border-[#7b7a73]/60 hover:bg-[#050302]";
+  "operator-surface relative overflow-hidden border border-[#202224] bg-[#020100]/95 text-[#b6a27a] shadow-[inset_0_1px_0_rgba(185,138,50,0.07)] transition duration-500 hover:border-[#7d6a45]/60 hover:bg-[#050302]";
 
 export const panelClass =
-  "operator-surface relative overflow-hidden border border-[#202224] bg-[#020100]/95 shadow-[inset_0_1px_0_rgba(155,155,148,0.06)] transition duration-500 hover:border-[#7b7a73]/60 hover:bg-[#050302]";
+  "operator-surface relative overflow-hidden border border-[#202224] bg-[#020100]/95 shadow-[inset_0_1px_0_rgba(185,138,50,0.06)] transition duration-500 hover:border-[#7d6a45]/60 hover:bg-[#050302]";

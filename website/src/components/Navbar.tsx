@@ -63,7 +63,7 @@ export function Navbar({
   return (
     <nav className="relative z-20 mx-auto flex max-w-[1500px] items-center justify-between px-5 py-5 md:px-8 md:py-8" aria-label="Primary navigation">
       <button type="button" onClick={() => goToPage("home")} className="flex items-center gap-4 text-left" aria-label="Balkan Veil home">
-        <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black shadow-[0_0_40px_rgba(155,155,148,0.18)] md:h-14 md:w-14">
+        <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black md:h-14 md:w-14">
           <img src={LOGO_SRC} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full object-cover" />
         </div>
         <div>
@@ -98,7 +98,7 @@ export function Navbar({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.16 }}
-                    className="absolute left-0 top-full mt-4 min-w-44 border border-neutral-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(155,155,148,0.10)]"
+                    className="absolute left-0 top-full mt-4 min-w-44 border border-neutral-300/15 bg-black/95 p-2"
                   >
                     {group.children?.map(([key, label]) => (
                       <button
@@ -150,7 +150,7 @@ export function Navbar({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.18 }}
-                className="absolute right-0 mt-3 w-40 overflow-hidden border border-neutral-300/15 bg-black/95 p-2 shadow-[0_0_40px_rgba(155,155,148,0.10)]"
+                className="absolute right-0 mt-3 w-40 overflow-hidden border border-neutral-300/15 bg-black/95 p-2"
               >
                 <button
                   type="button"

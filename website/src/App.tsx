@@ -71,7 +71,6 @@ function PublicSite() {
   const [introVisible, setIntroVisible] = React.useState(true);
   const page = route.page;
   const [cinematic, setCinematic] = React.useState(true);
-  const [mouse, setMouse] = React.useState({ x: 50, y: 20 });
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [commandOpen, setCommandOpen] = React.useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -148,17 +147,6 @@ function PublicSite() {
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
   }, [page, language, prefersReducedMotion]);
 
-  React.useEffect(() => {
-    if (!decorativeCinematic) return;
-
-    const handleMouseMove = (event: MouseEvent) => {
-      setMouse({ x: (event.clientX / window.innerWidth) * 100, y: (event.clientY / window.innerHeight) * 100 });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [decorativeCinematic]);
-
   const goToPage = (target: PageKey) => {
     const nextRoute = {
       language,
@@ -201,7 +189,6 @@ function PublicSite() {
           />
         )}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] opacity-25 md:bg-[size:64px_64px] md:opacity-30" />
-        {decorativeCinematic && <div className="absolute inset-0 hidden opacity-30 md:block" style={{ background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(155,155,148,0.16), transparent 28%)` }} />}
       </div>
 
       <Navbar
