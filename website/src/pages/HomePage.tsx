@@ -62,9 +62,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
 
               <div className="mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem]">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
-                <h1 className="mt-6 max-w-4xl font-serif text-[clamp(3.1rem,18vw,5rem)] leading-[0.84] text-[#d8c7a3] drop-shadow-[0_0_22px_rgba(197,130,63,0.12)] sm:mt-8 sm:text-[clamp(4rem,17vw,8rem)] md:mt-10 md:text-[clamp(7rem,10vw,10.5rem)]">
-                  {cinematic ? <DecodeText text={content.hero} canStart={introDone} /> : content.hero}
-                </h1>
+                <HeroTitle text={content.hero} cinematic={cinematic} introDone={introDone} />
                 <p className="mt-6 max-w-[30rem] font-mono text-[10px] leading-6 text-[#8f856f] sm:mt-8 sm:text-[11px] sm:leading-7 md:max-w-[34rem] md:text-sm md:leading-8">{content.text}</p>
 
                 <div className="mt-7 grid w-full max-w-[30rem] border border-[#33270f] bg-[#050302] sm:mt-9 sm:max-w-[34rem] sm:grid-cols-[1fr_auto]">
@@ -91,6 +89,20 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
 
       <ArchiveModules content={content} goToPage={goToPage} />
     </>
+  );
+}
+
+function HeroTitle({ text, cinematic, introDone }: { text: string; cinematic: boolean; introDone: boolean }) {
+  const words = text.split(/\s+/).filter(Boolean);
+
+  return (
+    <h1 className="mt-6 flex max-w-[min(100%,52rem)] flex-col items-center font-serif text-[clamp(3.2rem,17vw,5.6rem)] leading-[0.84] text-[#d8c7a3] drop-shadow-[0_0_22px_rgba(212,175,55,0.12)] sm:mt-8 sm:text-[clamp(4.2rem,15vw,7.8rem)] md:mt-10 md:text-[clamp(5.5rem,8.7vw,9.1rem)]">
+      {words.map((word) => (
+        <span key={word} className="block whitespace-nowrap">
+          {cinematic ? <DecodeText text={word} canStart={introDone} /> : word}
+        </span>
+      ))}
+    </h1>
   );
 }
 
