@@ -109,7 +109,8 @@ textarea {
     repeating-linear-gradient(90deg, transparent 0 15px, rgba(185, 146, 75, 0.12) 15px 16px, transparent 16px 24px);
 }
 
-.signal-feed-wave::before {
+.signal-feed-wave::before,
+.signal-feed-wave::after {
   position: absolute;
   inset: 0;
   content: "";
@@ -117,9 +118,18 @@ textarea {
 }
 
 .signal-feed-wave::before {
-  background: radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.28), transparent 42%);
+  background: radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.24), transparent 44%);
   opacity: 0;
   animation: signal-wave-pulse 1.7s ease-in-out infinite;
+}
+
+.signal-feed-wave::after {
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.26), transparent);
+  filter: blur(7px);
+  opacity: 0.68;
+  transform: translateX(-115%);
+  animation: signal-wave-sweep 2.35s ease-in-out infinite;
 }
 
 .signal-feed-svg {
@@ -130,7 +140,7 @@ textarea {
 }
 
 .signal-feed-track {
-  animation: signal-wave-travel 2.8s linear infinite;
+  animation: signal-wave-travel 3.15s linear infinite;
 }
 
 .signal-feed-line {
@@ -190,7 +200,18 @@ textarea {
   }
 
   to {
-    transform: translateX(-360px);
+    transform: translateX(360px);
+  }
+}
+
+@keyframes signal-wave-sweep {
+  0% {
+    transform: translateX(-115%);
+  }
+
+  52%,
+  100% {
+    transform: translateX(275%);
   }
 }
 
