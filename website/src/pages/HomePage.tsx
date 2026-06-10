@@ -19,11 +19,13 @@ const filePanel =
 
 const goldText = "text-[#b9924b]";
 const mutedGoldText = "text-[#7f6a39]";
+const signalWaveBase =
+  "0,32 34,32 46,30 56,34 66,32 86,32 94,27 101,42 108,12 116,51 124,32 154,32 168,29 184,35 202,32 230,32 240,30 250,34 260,32 285,32 294,25 301,44 309,15 318,50 327,32 360,32";
 const signalWaveFrames =
-  "0,32 18,32 28,26 38,38 48,20 58,45 68,32 84,32 94,24 104,40 114,31 128,31 138,16 148,49 158,29 172,32 188,32 198,27 208,36 218,23 228,42 238,31 252,31 262,18 272,47 282,32 298,32 308,26 318,38 328,30 344,32 360,32;" +
-  "0,32 18,30 28,37 38,24 48,43 58,18 68,35 84,32 94,45 104,25 114,36 128,31 138,52 148,14 158,34 172,30 188,32 198,42 208,26 218,40 228,19 238,35 252,30 262,48 272,16 282,33 298,31 308,40 318,25 328,35 344,31 360,32;" +
-  "0,32 18,34 28,22 38,42 48,18 58,39 68,31 84,33 94,20 104,44 114,27 128,32 138,18 148,50 158,28 172,34 188,31 198,23 208,39 218,21 228,46 238,29 252,33 262,17 272,44 282,30 298,34 308,22 318,41 328,28 344,33 360,32;" +
-  "0,32 18,32 28,26 38,38 48,20 58,45 68,32 84,32 94,24 104,40 114,31 128,31 138,16 148,49 158,29 172,32 188,32 198,27 208,36 218,23 228,42 238,31 252,31 262,18 272,47 282,32 298,32 308,26 318,38 328,30 344,32 360,32";
+  `${signalWaveBase};` +
+  "0,32 34,32 46,31 56,33 66,32 86,32 94,28 101,41 108,15 116,49 124,32 154,32 168,30 184,34 202,32 230,32 240,31 250,33 260,32 285,32 294,26 301,43 309,17 318,48 327,32 360,32;" +
+  "0,32 34,32 46,30 56,34 66,32 86,32 94,26 101,43 108,10 116,53 124,32 154,32 168,29 184,35 202,32 230,32 240,30 250,34 260,32 285,32 294,24 301,46 309,12 318,52 327,32 360,32;" +
+  signalWaveBase;
 
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
@@ -266,11 +268,11 @@ function MicroBlock({ label, lines, icon }: { label: string; lines: readonly str
 function SignalWavePath() {
   return (
     <>
-      <polyline className="signal-feed-line signal-feed-line-soft" points="0,32 18,32 28,26 38,38 48,20 58,45 68,32 84,32 94,24 104,40 114,31 128,31 138,16 148,49 158,29 172,32 188,32 198,27 208,36 218,23 228,42 238,31 252,31 262,18 272,47 282,32 298,32 308,26 318,38 328,30 344,32 360,32">
-        <animate attributeName="points" dur="2.6s" repeatCount="indefinite" values={signalWaveFrames} />
+      <polyline className="signal-feed-line signal-feed-line-soft" points={signalWaveBase}>
+        <animate attributeName="points" dur="5.2s" repeatCount="indefinite" values={signalWaveFrames} />
       </polyline>
-      <polyline className="signal-feed-line" points="0,32 18,32 28,26 38,38 48,20 58,45 68,32 84,32 94,24 104,40 114,31 128,31 138,16 148,49 158,29 172,32 188,32 198,27 208,36 218,23 228,42 238,31 252,31 262,18 272,47 282,32 298,32 308,26 318,38 328,30 344,32 360,32">
-        <animate attributeName="points" dur="2.6s" repeatCount="indefinite" values={signalWaveFrames} />
+      <polyline className="signal-feed-line" points={signalWaveBase}>
+        <animate attributeName="points" dur="5.2s" repeatCount="indefinite" values={signalWaveFrames} />
       </polyline>
     </>
   );

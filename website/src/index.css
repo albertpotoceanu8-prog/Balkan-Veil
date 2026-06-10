@@ -124,12 +124,12 @@ textarea {
 }
 
 .signal-feed-wave::after {
-  width: 42%;
-  background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.26), transparent);
-  filter: blur(7px);
-  opacity: 0.68;
+  width: 28%;
+  background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.22), rgba(74, 222, 128, 0.34), transparent);
+  filter: blur(6px);
+  opacity: 0.54;
   transform: translateX(-115%);
-  animation: signal-wave-sweep 2.35s ease-in-out infinite;
+  animation: signal-wave-sweep 4.9s ease-in-out infinite;
 }
 
 .signal-feed-svg {
@@ -140,7 +140,7 @@ textarea {
 }
 
 .signal-feed-track {
-  animation: signal-wave-travel 3.15s linear infinite;
+  animation: signal-wave-travel 6.4s linear infinite;
 }
 
 .signal-feed-line {
@@ -148,15 +148,15 @@ textarea {
   stroke: rgba(74, 222, 128, 0.92);
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-width: 1.65;
-  filter: drop-shadow(0 0 7px rgba(74, 222, 128, 0.7));
-  animation: signal-wave-glow 1.4s ease-in-out infinite;
+  stroke-width: 1.45;
+  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.62));
+  animation: signal-wave-glow 2.8s ease-in-out infinite;
 }
 
 .signal-feed-line-soft {
-  stroke: rgba(74, 222, 128, 0.22);
-  stroke-width: 6;
-  filter: blur(2px);
+  stroke: rgba(74, 222, 128, 0.18);
+  stroke-width: 5;
+  filter: blur(2.4px);
 }
 
 .veil-frame::before,
