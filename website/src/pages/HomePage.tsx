@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { ArrowRight, CircleDot, Lock, Radio, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
+import { TacticalMap } from "@/components/TacticalMap";
 import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
@@ -112,8 +113,10 @@ function SideIntel({ content }: { content: SiteContent["home"] }) {
   return (
     <div className="space-y-6">
       <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
-      <div className={`${sidePanel} p-4`}>
-        <div className="h-24 opacity-80 [background-image:radial-gradient(circle_at_24%_42%,rgba(185,138,50,0.45)_0_1px,transparent_2px),radial-gradient(circle_at_68%_36%,rgba(185,138,50,0.35)_0_1px,transparent_2px),linear-gradient(120deg,transparent,rgba(185,138,50,0.08),transparent)] [background-size:18px_18px,24px_24px,auto]" />
+      <div className={`${sidePanel} p-3`}>
+        <div className="h-32">
+          <TacticalMap />
+        </div>
       </div>
       <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
       <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
