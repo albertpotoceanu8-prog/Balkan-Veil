@@ -166,130 +166,6 @@ textarea {
   filter: blur(2.4px);
 }
 
-.tactical-map {
-  position: relative;
-  height: 100%;
-  min-height: 8rem;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 57% 48%, rgba(185, 138, 50, 0.13), transparent 4.8rem),
-    linear-gradient(rgba(185, 138, 50, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 244, 214, 0.035) 1px, transparent 1px),
-    #030201;
-  background-size: auto, 22px 22px, 22px 22px, auto;
-}
-
-.tactical-map::before,
-.tactical-map::after {
-  position: absolute;
-  content: "";
-  pointer-events: none;
-}
-
-.tactical-map::before {
-  inset: 0.7rem;
-  border-top: 1px solid rgba(210, 170, 85, 0.18);
-  border-bottom: 1px solid rgba(210, 170, 85, 0.12);
-}
-
-.tactical-map::after {
-  inset: 0;
-  background:
-    linear-gradient(90deg, transparent 49%, rgba(255, 244, 214, 0.06) 50%, transparent 51%),
-    linear-gradient(0deg, transparent 49%, rgba(185, 138, 50, 0.045) 50%, transparent 51%);
-  opacity: 0.7;
-}
-
-.tactical-map__svg {
-  position: absolute;
-  inset: 0.4rem;
-  z-index: 1;
-  width: calc(100% - 0.8rem);
-  height: calc(100% - 0.8rem);
-}
-
-.tactical-map__land {
-  stroke: rgba(255, 244, 214, 0.22);
-  stroke-width: 1;
-}
-
-.tactical-map__balkan {
-  stroke: rgba(210, 170, 85, 0.34);
-  stroke-width: 0.9;
-}
-
-.tactical-map__connections {
-  stroke: rgba(185, 138, 50, 0.18);
-  stroke-dasharray: 4 8;
-  stroke-width: 0.8;
-}
-
-.tactical-map__markers {
-  stroke: rgba(255, 244, 214, 0.22);
-  stroke-width: 0.75;
-}
-
-.tactical-map__romania {
-  stroke: rgba(255, 244, 214, 0.72);
-  stroke-width: 0.85;
-}
-
-.tactical-map__pulse {
-  fill: none;
-  stroke: rgba(185, 138, 50, 0.58);
-  stroke-width: 1;
-  transform-origin: center;
-  animation: tactical-map-pulse 3.8s ease-out infinite;
-}
-
-.tactical-map__pulse--late {
-  animation-delay: 1.9s;
-}
-
-.tactical-map__node-glow {
-  fill: rgba(185, 138, 50, 0.28);
-}
-
-.tactical-map__node {
-  fill: #d2aa55;
-  stroke: rgba(255, 244, 214, 0.78);
-}
-
-.tactical-map__scan {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -38%;
-  z-index: 2;
-  width: 30%;
-  background: linear-gradient(90deg, transparent, rgba(210, 170, 85, 0.13), transparent);
-  opacity: 0.55;
-  transform: skewX(-12deg);
-  animation: tactical-map-scan 7.5s ease-in-out infinite;
-  pointer-events: none;
-}
-
-.tactical-map__label {
-  position: absolute;
-  z-index: 3;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 0.46rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(210, 170, 85, 0.5);
-}
-
-.tactical-map__label--top {
-  top: 0.65rem;
-  left: 0.75rem;
-}
-
-.tactical-map__label--bottom {
-  right: 0.75rem;
-  bottom: 0.65rem;
-  color: rgba(255, 244, 214, 0.44);
-}
-
 .veil-frame::before,
 .veil-frame::after {
   position: absolute;
@@ -372,31 +248,6 @@ textarea {
   }
 }
 
-@keyframes tactical-map-scan {
-  0%,
-  24% {
-    transform: translateX(0) skewX(-12deg);
-  }
-
-  68%,
-  100% {
-    transform: translateX(470%) skewX(-12deg);
-  }
-}
-
-@keyframes tactical-map-pulse {
-  0% {
-    opacity: 0.42;
-    transform: scale(0.45);
-  }
-
-  70%,
-  100% {
-    opacity: 0;
-    transform: scale(1.45);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -409,9 +260,7 @@ textarea {
   .signal-feed-wave::before,
   .signal-feed-wave::after,
   .signal-feed-track,
-  .signal-feed-line,
-  .tactical-map__scan,
-  .tactical-map__pulse {
+  .signal-feed-line {
     animation: none;
   }
 }
