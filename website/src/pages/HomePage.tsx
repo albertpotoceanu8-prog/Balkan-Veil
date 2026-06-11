@@ -112,8 +112,8 @@ function SideIntel({ content }: { content: SiteContent["home"] }) {
   return (
     <div className="space-y-6">
       <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
-      <div className={`${sidePanel} p-3`}>
-        <img src="/assets/tactical-world-map.png" alt="" aria-hidden="true" className="h-32 w-full object-cover opacity-85 mix-blend-screen" />
+      <div className={`${sidePanel} p-2`}>
+        <img src="/assets/tactical-world-map-v2.jpg" alt="" aria-hidden="true" className="h-40 w-full object-cover opacity-80 [filter:brightness(.72)_contrast(1.12)_saturate(.88)]" />
       </div>
       <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
       <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
