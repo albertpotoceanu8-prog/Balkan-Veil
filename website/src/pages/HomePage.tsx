@@ -157,9 +157,9 @@ const cardFrameVerticalMotion: Variants = {
 const sweepContentMotion: Variants = {
   hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
   visible: {
-    opacity: 1,
-    clipPath: "inset(0 0% 0 0)",
-    transition: { delay: 2.65, duration: 6.0, ease: [0.16, 1, 0.3, 1] },
+    opacity: [0, 1, 1, 1],
+    clipPath: ["inset(0 100% 0 0)", "inset(0 100% 0 0)", "inset(0 0% 0 0)", "inset(0 0% 0 0)"],
+    transition: { delay: 2.55, duration: 6.1, times: [0, 0.08, 0.92, 1], ease: [0.16, 1, 0.3, 1] },
   },
 };
 
