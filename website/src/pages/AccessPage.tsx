@@ -123,7 +123,7 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 24 }}
               transition={{ duration: 0.32 }}
-              className="max-w-xl border border-[#252729] bg-[#050302] p-10 text-center"
+              className="max-w-xl border border-[#202224] bg-[#030201] p-10 text-center"
             >
               <p className="text-xs uppercase tracking-[0.35em] text-[#b98a32]">{content.modalLabel}</p>
               <h2 id="access-success-title" className="mt-6 font-serif text-5xl text-[#c8ad72]">{content.modalTitle}</h2>
@@ -136,8 +136,8 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         )}
       </AnimatePresence>
 
-      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <Card className="operator-surface border border-[#252729] bg-[#050302]/90 text-[#c8ad72] transition duration-500 hover:border-[#7d6a45]/55">
+      <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <Card className="operator-surface border border-[#202224] bg-[#030201] text-[#c8ad72] transition duration-500 hover:border-[#7d6a45]/55">
           <CardContent className="p-7 md:p-12">
             <h2 className="font-serif text-4xl text-[#c8ad72]">
               <DecodeText text={content.panelTitle} disabled />
@@ -156,19 +156,19 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
           </CardContent>
         </Card>
 
-        <div className="relative lg:translate-y-10">
+        <div className="relative lg:translate-y-8">
           <TerminalPanel cinematic={cinematic} loop slow compact={compactMotion} lines={terminal.lines} header={terminal.header} />
         </div>
       </div>
 
-      <div className="operator-surface mt-24 border border-[#202224] bg-[#050302]/86 p-7 md:p-12">
+      <div className="operator-surface mt-32 border border-[#202224] bg-[#030201] p-7 md:p-12">
         <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
-        <div className="grid gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+        <div className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.beforeApply.eyebrow}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.beforeApply.title}</h2>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3">
             {content.beforeApply.items.map((item, index) => (
               <motion.div key={item.title} {...cardMotion} className="border border-[#252729] bg-black/45 p-6">
                 <p className="font-mono text-xs text-[#b98a32]">0{index + 1}</p>
@@ -180,12 +180,12 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         </div>
       </div>
 
-      <div className="mt-20 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+      <div className="mt-32 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.fit.eyebrow}</p>
           <h2 className="mt-6 font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.fit.title}</h2>
         </div>
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-7 md:grid-cols-2">
           {[
             { label: content.fit.goodLabel, items: content.fit.good },
             { label: content.fit.badLabel, items: content.fit.bad },
@@ -202,23 +202,23 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         </div>
       </div>
 
-      <div className="operator-surface mt-20 border border-[#252729] bg-black/45 p-5 md:mt-28 md:p-12 md:backdrop-blur-xl">
+      <div className="operator-surface mt-32 border border-[#202224] bg-[#030201] p-6 md:p-12 md:backdrop-blur-xl">
         <div className="pointer-events-none absolute inset-0 z-0 operator-grid opacity-15" aria-hidden="true" />
-        <div className="relative z-10 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="relative z-10 grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.inquiryLabel}</p>
             <h2 className="mt-6 font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.inquiryTitle}</h2>
             <p className="mt-6 text-lg leading-8 text-[#786f5e]">{content.inquiryText}</p>
           </div>
 
-          <form onSubmit={submitAccessRequest} className="grid gap-5" aria-describedby={hasSubmitError ? "access-form-error" : undefined} noValidate>
+          <form onSubmit={submitAccessRequest} className="grid gap-6" aria-describedby={hasSubmitError ? "access-form-error" : undefined} noValidate>
             <div className="hidden" aria-hidden="true">
               <label htmlFor="access-website">
                 Website
                 <input id="access-website" name="website" tabIndex={-1} autoComplete="off" value={form.website} onChange={(event) => setForm((current) => ({ ...current, website: event.target.value }))} />
               </label>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-2">
               <div className="border border-[#202224] bg-[#050302]/88 p-5 transition focus-within:border-[#7d6a45]/55">
                 <label htmlFor="access-name" className="text-xs uppercase tracking-[0.28em] text-[#786f5e]">{content.form.name}</label>
                 <input id="access-name" name="name" value={form.name} onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))} placeholder={content.form.namePlaceholder} autoComplete="name" required maxLength={80} aria-invalid={hasSubmitError && form.name.trim().length < 2} className="mt-3 h-10 w-full border-b border-[#202224] bg-transparent text-[#aaa59a] outline-none placeholder:text-[#6f6654]" />
@@ -267,7 +267,7 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-5 md:grid-cols-2">
               <div className="border border-[#202224] bg-[#050302]/88 p-4 md:p-5">
                 <p className="text-xs uppercase tracking-[0.28em] text-[#786f5e]">{content.qualification.interestedLabel}</p>
                 <div className="mt-5 flex flex-wrap gap-3">
@@ -333,10 +333,10 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         </div>
       </div>
 
-      <div className="mt-28">
+      <div className="mt-32">
         <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.afterSubmit.eyebrow}</p>
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.afterSubmit.title}</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-7 md:grid-cols-3">
           {content.afterSubmit.steps.map((step, index) => (
             <motion.div key={step.title} {...cardMotion} className={panelClass + " operator-surface rounded-none p-7"}>
               <p className="font-serif text-5xl text-[#b98a32]/20">0{index + 1}</p>
@@ -347,9 +347,9 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         </div>
       </div>
 
-      <div className="mt-28">
+      <div className="mt-32">
         <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.packagesLabel}</p>
-        <div className="mt-8 grid gap-8 lg:grid-cols-3">
+        <div className="mt-10 grid gap-8 lg:grid-cols-3">
           {content.packages.map((item) => (
             <motion.div key={item.name} {...cardMotion}>
               <Card className={cardClass}>
@@ -371,9 +371,9 @@ export function AccessPage({ content, terminal, cinematic, compactMotion = false
         </div>
       </div>
 
-      <div className="mt-28">
+      <div className="mt-32">
         <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.faqLabel}</p>
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-7 md:grid-cols-2">
           {content.faq.map((item) => (
             <motion.div key={item.q} {...cardMotion} className={panelClass + " operator-surface rounded-none p-8"}>
               <h3 className="font-serif text-3xl text-[#c8ad72]">{item.q}</h3>

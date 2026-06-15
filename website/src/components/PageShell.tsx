@@ -27,23 +27,25 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
       animate={{ opacity: 1, y: 0 }}
       exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -14 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.42, ease: "easeOut" }}
-      className="relative z-10 mx-auto max-w-[1500px] px-3 py-8 text-[#c8ad72] sm:px-5 sm:py-12 md:px-8 md:py-16"
+      className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-14 pt-2.5 text-[#c8ad72] sm:px-5 sm:pb-20 md:px-8 md:pb-28"
     >
-      <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#b98a32]/45 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.08),transparent_28rem)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
-      <header className="relative overflow-hidden border border-[#202224] bg-[#050302]/88">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(185,138,50,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] [background-size:40px_40px]" aria-hidden="true" />
+      <header className="relative overflow-hidden border border-[#202224] bg-[#030201] shadow-[inset_0_1px_0_rgba(185,138,50,0.08)]">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.22] [background-image:linear-gradient(rgba(185,138,50,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.12]" aria-hidden="true" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#b98a32]/55 to-transparent" aria-hidden="true" />
 
-        <div className="relative grid gap-0 lg:grid-cols-[minmax(0,1fr)_22rem]">
-          <div className="min-w-0 p-5 sm:p-7 md:p-9">
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-b border-[#202224] pb-4 font-mono text-[9px] uppercase tracking-[0.24em] text-[#b98a32] sm:text-[10px] sm:tracking-[0.3em]">
-              <p>{eyebrow}</p>
-              <span className="hidden h-px w-12 bg-[#b98a32]/40 sm:block" aria-hidden="true" />
-              <p className="text-[#6f6654]">public dossier</p>
-            </div>
+        <div className="relative flex min-h-12 items-center justify-between gap-4 border-b border-[#202224] px-3 py-2.5 font-mono text-[9px] uppercase tracking-[0.24em] text-[#9a8255] sm:min-h-14 sm:px-5 sm:text-[10px] md:px-7">
+          <span className="min-w-0 truncate text-[#b98a32]">{eyebrow}</span>
+          <span className="hidden h-px w-24 bg-gradient-to-r from-transparent via-[#7d6a45]/55 to-transparent sm:block" aria-hidden="true" />
+          <span className="text-right text-[#6f6654]">public dossier</span>
+        </div>
 
-            <div className="max-w-5xl pt-8 md:pt-10">
+        <div className="relative grid gap-0 lg:grid-cols-[minmax(0,1fr)_22rem]">
+          <div className="min-w-0 p-6 sm:p-8 md:p-10 lg:p-12">
+            <div className="max-w-5xl">
               <h1 className="max-w-[820px] font-serif text-[clamp(2.65rem,6.2vw,5.35rem)] leading-[0.96] text-[#f0dfb0]">
                 <DecodeText text={title} disabled />
               </h1>
@@ -51,7 +53,7 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
             </div>
           </div>
 
-          <aside className="border-t border-[#202224] bg-black/22 p-5 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654] lg:border-l lg:border-t-0 sm:p-7">
+          <aside className="border-t border-[#202224] bg-black/22 p-6 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654] lg:border-l lg:border-t-0 sm:p-8 md:p-10">
             <div className="grid grid-cols-2 gap-x-5 gap-y-4 lg:block lg:space-y-6">
               <div>
                 <p className="text-[#b98a32]">&gt; file</p>
@@ -75,7 +77,7 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
       </header>
 
       {topContent}
-      <section className="relative mt-6 md:mt-10">{children}</section>
+      <section className="relative mt-12 md:mt-16">{children}</section>
       {bottomContent}
     </motion.section>
   );

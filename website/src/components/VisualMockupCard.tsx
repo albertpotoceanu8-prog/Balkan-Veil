@@ -9,8 +9,8 @@ type VisualMockupCardProps = {
 
 export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
   return (
-    <motion.div {...cardMotion} className="operator-surface relative overflow-hidden border border-[#202224] bg-[#020100]/95 shadow-[inset_0_1px_0_rgba(185,138,50,0.07)] transition duration-500 hover:border-[#7d6a45]/60 hover:bg-[#050302] md:backdrop-blur-xl">
-      <div className="absolute inset-0 operator-grid opacity-16" aria-hidden="true" />
+    <motion.div {...cardMotion} className="operator-surface relative overflow-hidden border border-[#202224] bg-[#030201] shadow-[inset_0_1px_0_rgba(185,138,50,0.07)] transition duration-500 hover:border-[#7d6a45]/60 hover:bg-[#050302] md:backdrop-blur-xl">
+      <div className="absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(185,138,50,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] [background-size:44px_44px]" aria-hidden="true" />
       <div className="relative grid min-h-full md:grid-cols-[3.25rem_1fr]">
         <div className="hidden border-r border-[#202224] md:block">
           <div className="flex h-full flex-col items-center justify-between px-3 py-4">
@@ -19,8 +19,8 @@ export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
             <p className="-rotate-90 whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.24em] text-[#6f6654]">mockup</p>
           </div>
         </div>
-        <div className="p-5">
-          <div className="mb-5 flex items-center justify-between border-b border-[#202224] pb-4">
+        <div className="p-6 md:p-7">
+          <div className="mb-6 flex items-center justify-between border-b border-[#202224] pb-4">
             <div className="flex items-center gap-2" aria-hidden="true">
               <span className="h-2 w-8 border border-[#d2aa55]/50 bg-[#d2aa55]/12" />
               <span className="h-2 w-4 border border-emerald-300/30 bg-emerald-300/10" />
@@ -37,7 +37,7 @@ export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
               </div>
             ))}
           </div>
-          <div className="mt-8 grid h-28 grid-cols-[1.2fr_0.8fr_1fr_0.5fr] border border-[#202224] bg-black/35" aria-hidden="true">
+          <div className="mt-9 grid h-28 grid-cols-[1.2fr_0.8fr_1fr_0.5fr] border border-[#202224] bg-black/35" aria-hidden="true">
             <div className="border-r border-[#202224] bg-[#b98a32]/[0.035]" />
             <div className="border-r border-[#202224] bg-[#b98a32]/[0.06]" />
             <div className="border-r border-[#202224] bg-neutral-300/[0.025]" />

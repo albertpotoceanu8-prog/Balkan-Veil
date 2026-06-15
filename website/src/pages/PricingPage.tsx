@@ -21,7 +21,7 @@ type PricingPageProps = {
 export function PricingPage({ content, goToPage }: PricingPageProps) {
   return (
     <PageShell eyebrow={content.eyebrow} title={content.title} text={content.text}>
-      <div className="operator-surface mb-10 border border-[#252729] bg-black/45 p-5 md:p-7">
+      <div className="operator-surface mb-14 border border-[#202224] bg-[#030201] p-6 md:mb-16 md:p-10">
         <div className="absolute inset-0 operator-grid opacity-10" aria-hidden="true" />
         <div className="relative max-w-4xl">
           <p className="text-xs uppercase tracking-[0.32em] text-[#b98a32]">{content.scopeNote.eyebrow}</p>
@@ -30,9 +30,9 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
         </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.12fr_0.9fr] lg:items-start">
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.12fr_0.9fr] lg:items-start xl:gap-10">
         {content.plans.map((plan, index) => (
-          <motion.div key={plan.name} {...cardMotion} className={`h-full ${plan.recommended ? "lg:-mt-8" : "lg:mt-10"}`}>
+          <motion.div key={plan.name} {...cardMotion} className="h-full">
             <VeilFrame label={`${content.planIndexLabel} ${String(index + 1).padStart(2, "0")}`} index={plan.name} className={`h-full ${plan.recommended ? "border-[#7d6a45]/50 bg-[#050302]/92" : "bg-[#050302]/86"}`}>
               <div className="flex h-full flex-col p-6 md:p-8">
                 <div className="flex items-start justify-between gap-4">
@@ -76,27 +76,27 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
         ))}
       </div>
 
-      <VeilDivider label={content.minimumLabel} className="mt-20" />
+      <VeilDivider label={content.minimumLabel} className="mt-28" />
 
-      <div className="mt-28">
+      <div className="mt-32">
         <ProcessPreview eyebrow={content.subscriptionSteps.eyebrow} title={content.subscriptionSteps.title} steps={content.subscriptionSteps.steps} />
       </div>
 
-      <DossierPanel eyebrow={content.notIncluded.eyebrow} title={content.notIncluded.title} className="mt-28 archive-noise">
+      <DossierPanel eyebrow={content.notIncluded.eyebrow} title={content.notIncluded.title} className="mt-32 archive-noise">
         <SignalLedger items={content.notIncluded.items} label={content.notIncludedLabel} />
       </DossierPanel>
 
-      <motion.div {...cardMotion} className="operator-surface mt-28 border border-[#252729] bg-black/55 p-7 md:p-12">
+      <motion.div {...cardMotion} className="operator-surface mt-32 border border-[#202224] bg-[#030201] p-7 md:p-12">
         <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
         <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.buyoutNote.eyebrow}</p>
         <h2 className="mt-5 font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.buyoutNote.title}</h2>
         <p className="mt-6 max-w-4xl text-lg leading-8 text-[#786f5e]">{content.buyoutNote.text}</p>
       </motion.div>
 
-      <div className="mt-28">
+      <div className="mt-32">
         <p className="text-sm uppercase tracking-[0.35em] text-[#b98a32]">{content.faqLabel}</p>
         <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight text-[#c8ad72] md:text-6xl">{content.faqTitle}</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-7 md:grid-cols-2">
           {content.faq.map((item) => (
             <DossierPanel key={item.q} eyebrow={content.faqLabel} title={item.q}>
               <p className="mt-4 text-base leading-7 text-[#786f5e]">{item.a}</p>
@@ -105,7 +105,7 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
         </div>
       </div>
 
-      <div className="mt-28">
+      <div className="mt-32">
         <SectionCTA eyebrow={content.finalCta.eyebrow} title={content.finalCta.title} text={content.finalCta.text} primaryLabel={content.finalCta.primary} secondaryLabel={content.finalCta.secondary} primaryTarget="access" secondaryTarget="services" goToPage={goToPage} />
       </div>
     </PageShell>
