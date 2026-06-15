@@ -132,7 +132,7 @@ const cardSweepMotion: Variants = {
   visible: {
     opacity: 1,
     scaleX: 1,
-    transition: { delay: 2.35, duration: 5.6, ease: "linear" },
+    transition: { delay: 2.1, duration: 4.7, ease: "linear" },
   },
 };
 
@@ -159,7 +159,7 @@ const sweepContentMotion: Variants = {
   visible: {
     opacity: 1,
     clipPath: "inset(0 0% 0 0)",
-    transition: { delay: 2.35, duration: 5.6, ease: "linear" },
+    transition: { delay: 2.1, duration: 4.7, ease: "linear" },
   },
 };
 
