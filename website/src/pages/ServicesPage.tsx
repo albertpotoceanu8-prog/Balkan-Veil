@@ -3,6 +3,7 @@ import { ArrowRight, Eye, Lock, Network, Shield, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 import { DossierPanel } from "@/components/DossierPanel";
 import { PageShell } from "@/components/PageShell";
+import { SignalLedger } from "@/components/SignalLedger";
 import { Button } from "@/components/ui/button";
 import { cardMotion, panelClass } from "@/components/motionConfig";
 import { VeilFrame } from "@/components/VeilFrame";
@@ -31,14 +32,7 @@ export function ServicesPage({ content, goToPage }: ServicesPageProps) {
           <motion.div key={service.title} {...cardMotion} className={`h-full ${index === 0 || index === 3 ? "xl:col-span-3" : "xl:col-span-2"}`}>
             <DossierPanel eyebrow={`BV SERVICE / ${String(index + 1).padStart(2, "0")}`} title={service.title} text={service.text} className="h-full md:backdrop-blur-xl">
               <div className="mb-6 flex h-12 w-12 items-center justify-center border border-[#252729] bg-[#b98a32]/5 text-[#d2aa55]" aria-hidden="true">{serviceIcons[service.icon]}</div>
-              <div className="mt-7 space-y-3 border-t border-[#202224] pt-6">
-                {service.deliverables.map((item, deliverableIndex) => (
-                  <div key={item} className="grid grid-cols-[auto_1fr] gap-4 border border-[#202224] bg-black/35 p-4">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#7d6a45]">{String(deliverableIndex + 1).padStart(2, "0")}</span>
-                    <p className="text-sm leading-6 text-[#787873]">{item}</p>
-                  </div>
-                ))}
-              </div>
+              <SignalLedger items={service.deliverables} />
             </DossierPanel>
           </motion.div>
         ))}
