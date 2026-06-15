@@ -1,11 +1,9 @@
 import { useEffect, useRef } from "react";
-import { ArrowRight, CircleDot, Lock, Radio, ShieldCheck } from "lucide-react";
+import { ArrowRight, CircleDot, Lock, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
-import { SignalLedger } from "@/components/SignalLedger";
 import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
 import { VeilDivider } from "@/components/VeilDivider";
-import { VeilFrame } from "@/components/VeilFrame";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
 
@@ -206,165 +204,154 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
     <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-10 text-[#b6a27a] sm:px-5 sm:pb-14 md:px-8 md:pb-20">
       <VeilDivider label={content.builtAround} className="mb-5" />
 
-      <div className="grid gap-4 sm:gap-5 xl:grid-cols-[0.95fr_1.35fr]">
-        <VeilFrame label={content.launchChanges.eyebrow} index="BV / OUTPUT" className="min-h-[33rem]">
-          <div className="relative grid min-h-[33rem] content-between gap-8 p-4 sm:p-6 md:p-8">
-            <div className="pointer-events-none absolute inset-0 veil-lines opacity-30" aria-hidden="true" />
-            <div className="pointer-events-none absolute right-4 top-12 h-40 w-40 border border-[#7d6a45]/20 sm:-right-16 sm:h-56 sm:w-56" aria-hidden="true" />
-            <div className="relative">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className={`font-mono text-[9px] uppercase tracking-[0.24em] sm:text-[10px] sm:tracking-[0.3em] ${goldText}`}>{content.builtAround}</p>
-                  <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[0.95] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
-                </div>
-                <Radio className="hidden h-8 w-8 shrink-0 text-[#b98a32] md:block" aria-hidden="true" />
-              </div>
-              <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
-            </div>
-
-            <div className="relative grid gap-px border border-[#202224] bg-[#202224] md:grid-cols-3">
-              {content.valueProps.map((item, index) => (
-                <article key={item.title} className="bg-[#020100]/92 p-4 sm:p-5">
-                  <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${mutedGoldText}`}>control 0{index + 1}</p>
-                  <h3 className="mt-5 font-serif text-xl leading-tight text-[#c8ad72] sm:text-2xl">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-6 text-[#777772]">{item.text}</p>
-                </article>
-              ))}
+      <div className="relative overflow-hidden border border-[#202224] bg-[#030201]">
+        <div className="pointer-events-none absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
+        <div className="relative grid gap-px bg-[#202224] lg:grid-cols-[0.78fr_1.22fr]">
+          <div className="bg-[#050302] p-5 sm:p-7 md:p-10">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.launchChanges.eyebrow}</p>
+            <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[1.02] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
+            <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
+            <div className="mt-8 signal-feed-wave h-10 max-w-md" aria-hidden="true">
+              <svg className="signal-feed-svg" viewBox="0 0 360 64" preserveAspectRatio="none" focusable="false">
+                <g className="signal-feed-track">
+                  <g transform="translate(-360 0)">
+                    <SignalWavePath />
+                  </g>
+                  <SignalWavePath />
+                </g>
+              </svg>
             </div>
           </div>
-        </VeilFrame>
 
-        <div className="grid gap-4 sm:gap-5">
-          <VeilFrame label={content.interfacePreview.eyebrow} index={content.interfacePreview.systemLabel}>
-            <div className="grid gap-px bg-[#202224] md:grid-cols-[1.1fr_0.9fr]">
-              <div className="relative min-h-[22rem] overflow-hidden bg-[#050302] p-4 sm:p-6 md:p-7">
-                <div className="pointer-events-none absolute inset-0 operator-grid opacity-25" aria-hidden="true" />
-                <div className="relative">
-                  <p className={`font-mono text-[9px] uppercase tracking-[0.24em] sm:text-[10px] ${goldText}`}>{content.interfacePreview.statusLine}</p>
-                  <h2 className="mt-5 max-w-2xl font-serif text-2xl leading-tight text-[#c8ad72] sm:text-4xl md:text-5xl">{content.interfacePreview.title}</h2>
-                  <p className="mt-5 max-w-xl text-sm leading-7 text-[#786f5e]">{content.interfacePreview.text}</p>
-                </div>
+          <div className="grid gap-px bg-[#202224] sm:grid-cols-3">
+            {content.valueProps.map((item, index) => (
+              <article key={item.title} className="group relative min-h-[18rem] overflow-hidden bg-[#020100] p-5 sm:p-6">
+                <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
+                <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] ${mutedGoldText}`}>control 0{index + 1}</p>
+                <h3 className="mt-12 font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{item.title}</h3>
+                <p className="mt-5 text-sm leading-7 text-[#777772]">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
 
-                <div className="relative mt-8 grid gap-3 sm:grid-cols-3">
-                  {content.interfacePreview.metrics.map((metric) => (
-                    <div key={metric} className="border border-[#202224] bg-black/35 p-4">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-[#6f6654]">metric</p>
-                      <p className="mt-3 font-serif text-2xl text-[#c8ad72]">{metric}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-[#020100] p-4 sm:p-6 md:p-7">
-                <SignalLedger items={content.interfacePreview.rows} label={content.interfacePreview.moduleLabel} />
-                <div className="mt-4 border border-[#202224] bg-black/30 p-4">
-                  <div className="signal-feed-wave h-10" aria-hidden="true">
-                    <svg className="signal-feed-svg" viewBox="0 0 360 64" preserveAspectRatio="none" focusable="false">
-                      <g className="signal-feed-track">
-                        <g transform="translate(-360 0)">
-                          <SignalWavePath />
-                        </g>
-                        <SignalWavePath />
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-              </div>
+      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 xl:grid-cols-[1.15fr_0.85fr]">
+        <section className="relative overflow-hidden border border-[#202224] bg-[#050302] p-5 sm:p-7 md:p-9">
+          <div className="pointer-events-none absolute -right-20 bottom-[-7rem] h-80 w-80 opacity-[0.12]" aria-hidden="true">
+            <ThreeWireGlobe className="h-full w-full" />
+          </div>
+          <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+            <div>
+              <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.interfacePreview.eyebrow}</p>
+              <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.interfacePreview.title}</h2>
+              <p className="mt-5 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.interfacePreview.text}</p>
             </div>
-          </VeilFrame>
 
-          <div className="grid gap-4 sm:gap-5 lg:grid-cols-[0.95fr_1.05fr]">
-            <VeilFrame label={content.methodPreview.eyebrow} index="SEQUENCE">
-              <div className="p-4 sm:p-6">
-                <h2 className="font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{content.methodPreview.title}</h2>
-                <div className="mt-6 grid gap-2">
-                  {content.methodPreview.steps.map((step, index) => (
-                    <div key={step} className="grid grid-cols-[2.5rem_1fr] items-center border border-[#202224] bg-[#020100]/80 px-3 py-3">
-                      <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#9a8255]">{step}</span>
-                    </div>
-                  ))}
+            <div className="grid gap-3">
+              {content.interfacePreview.rows.map((item, index) => (
+                <div key={item} className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 border-b border-[#202224] pb-4">
+                  <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
+                  <span className="font-serif text-xl leading-snug text-[#c8ad72]">{item}</span>
+                  <span className="hidden h-px w-12 bg-[#7d6a45]/45 sm:block" aria-hidden="true" />
                 </div>
-              </div>
-            </VeilFrame>
-
-            <VeilFrame label="Target files" index="AUDIENCE">
-              <div className="grid gap-2 p-4 sm:p-6">
-                {content.audience.map((item, index) => (
-                  <div key={item} className="grid grid-cols-[1.8rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100] px-3 py-3 sm:grid-cols-[2.2rem_1fr_auto] sm:gap-3 sm:px-4">
-                    <span className={`font-mono text-[9px] sm:text-[10px] ${mutedGoldText}`}>0{index + 1}</span>
-                    <span className="text-sm leading-6 text-[#787873]">{item}</span>
-                    <CircleDot className="h-3.5 w-3.5 text-[#7d6a45]" aria-hidden="true" />
+              ))}
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {content.interfacePreview.metrics.map((metric) => (
+                  <div key={metric} className="border border-[#202224] bg-black/30 p-4">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#6f6654]">signal</p>
+                    <p className="mt-3 font-serif text-2xl text-[#c8ad72]">{metric}</p>
                   </div>
                 ))}
               </div>
-            </VeilFrame>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 xl:grid-cols-[0.86fr_1.14fr]">
-        <VeilFrame label={content.subscriptionIntro.eyebrow} index="MANAGED">
-          <div className="relative min-h-[25rem] overflow-hidden p-4 sm:p-6 md:p-8">
-            <div className="pointer-events-none absolute inset-0 archive-noise opacity-30" aria-hidden="true" />
-            <ThreeWireGlobe className="pointer-events-none absolute -bottom-16 right-0 h-56 w-56 opacity-[0.12] sm:-right-14 sm:h-72 sm:w-72" />
-            <div className="relative max-w-xl">
-              <h2 className="font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.subscriptionIntro.title}</h2>
-              <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.subscriptionIntro.text}</p>
             </div>
-            <div className="relative mt-8 grid gap-3 sm:grid-cols-2">
-              {content.subscriptionIntro.points.map((point, index) => (
-                <div key={point} className="border border-[#202224] bg-black/35 p-4">
-                  <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}>node 0{index + 1}</p>
-                  <p className="mt-4 font-serif text-xl text-[#c8ad72]">{point}</p>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden border border-[#202224] bg-[#020100]">
+          <div className="border-b border-[#202224] px-5 py-4 sm:px-6">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.methodPreview.eyebrow}</p>
+          </div>
+          <div className="p-5 sm:p-6">
+            <h2 className="font-serif text-3xl leading-tight text-[#c8ad72]">{content.methodPreview.title}</h2>
+            <div className="mt-7 border-l border-[#202224]">
+              {content.methodPreview.steps.map((step, index) => (
+                <div key={step} className="relative pb-6 pl-6 last:pb-0">
+                  <span className="absolute -left-[5px] top-1 h-2.5 w-2.5 rotate-45 border border-[#7d6a45] bg-[#020100]" aria-hidden="true" />
+                  <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
+                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#9a8255]">{step}</p>
                 </div>
               ))}
             </div>
           </div>
-        </VeilFrame>
-
-        <VeilFrame label={content.beforeAfter.eyebrow} index="CONVERSION">
-          <div className="p-4 sm:p-6 md:p-8">
-            <h2 className="max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.beforeAfter.title}</h2>
-            <div className="mt-7 grid gap-px border border-[#202224] bg-[#202224] md:grid-cols-2">
-              {beforeAfterColumns.map((column) => (
-                <div key={column.label} className="bg-[#020100]">
-                  <p className={`border-b border-[#202224] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{column.label}</p>
-                  <div className="divide-y divide-[#202224]">
-                    {column.items.map((item, index) => (
-                      <div key={item} className="grid grid-cols-[2.4rem_1fr] gap-3 px-4 py-4">
-                        <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{String(index + 1).padStart(2, "0")}</span>
-                        <span className="text-sm leading-6 text-[#8a806c]">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </VeilFrame>
+        </section>
       </div>
 
-      <VeilFrame label={content.finalCta.eyebrow} index="REQUEST" className="mt-4 sm:mt-5">
-        <div className="relative overflow-hidden p-4 sm:p-6 md:p-9">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.14),transparent_24rem)]" aria-hidden="true" />
-          <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div>
-              <ShieldCheck className="h-7 w-7 text-[#b98a32] sm:h-8 sm:w-8" aria-hidden="true" />
-              <h2 className="mt-5 max-w-4xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl md:text-6xl">{content.finalCta.title}</h2>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.finalCta.text}</p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[24rem] lg:grid-cols-1">
-              <button type="button" onClick={() => goToPage("access")} className="min-h-12 border border-[#b98a32] bg-[#b98a32] px-5 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
-                &gt; {content.finalCta.primary}
-              </button>
-              <button type="button" onClick={() => goToPage("pricing")} className="min-h-12 border border-[#252729] bg-transparent px-5 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#7d6a45] transition hover:border-[#b98a32] hover:text-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
-                &gt; {content.finalCta.secondary}
-              </button>
-            </div>
+      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 xl:grid-cols-[0.82fr_1.18fr]">
+        <section className="border border-[#202224] bg-[#050302] p-5 sm:p-7 md:p-8">
+          <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.subscriptionIntro.eyebrow}</p>
+          <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.subscriptionIntro.title}</h2>
+          <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.subscriptionIntro.text}</p>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {content.subscriptionIntro.points.map((point, index) => (
+              <div key={point} className="border border-[#202224] bg-black/35 p-4">
+                <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}>node 0{index + 1}</p>
+                <p className="mt-4 font-serif text-xl text-[#c8ad72]">{point}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="border border-[#202224] bg-[#020100] p-5 sm:p-7 md:p-8">
+          <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.beforeAfter.eyebrow}</p>
+          <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.beforeAfter.title}</h2>
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
+            {beforeAfterColumns.map((column) => (
+              <div key={column.label}>
+                <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{column.label}</p>
+                <div className="mt-4 grid gap-2">
+                  {column.items.map((item, index) => (
+                    <div key={item} className="grid grid-cols-[2.4rem_1fr] gap-3 border border-[#202224] bg-black/25 px-4 py-3">
+                      <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{String(index + 1).padStart(2, "0")}</span>
+                      <span className="text-sm leading-6 text-[#8a806c]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <section className="relative mt-4 overflow-hidden border border-[#202224] bg-[#050302] p-5 sm:mt-5 sm:p-7 md:p-9">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(185,138,50,0.045),transparent)]" aria-hidden="true" />
+        <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+          <div>
+            <ShieldCheck className="h-7 w-7 text-[#b98a32] sm:h-8 sm:w-8" aria-hidden="true" />
+            <p className={`mt-5 font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.finalCta.eyebrow}</p>
+            <h2 className="mt-5 max-w-4xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl md:text-6xl">{content.finalCta.title}</h2>
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.finalCta.text}</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[24rem] lg:grid-cols-1">
+            <button type="button" onClick={() => goToPage("access")} className="min-h-12 border border-[#b98a32] bg-[#b98a32] px-5 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+              &gt; {content.finalCta.primary}
+            </button>
+            <button type="button" onClick={() => goToPage("pricing")} className="min-h-12 border border-[#252729] bg-transparent px-5 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#7d6a45] transition hover:border-[#b98a32] hover:text-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+              &gt; {content.finalCta.secondary}
+            </button>
           </div>
         </div>
-      </VeilFrame>
+      </section>
+
+      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+        {content.audience.map((item, index) => (
+          <div key={item} className="grid grid-cols-[2rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100]/70 px-3 py-3">
+            <span className={`font-mono text-[9px] ${mutedGoldText}`}>0{index + 1}</span>
+            <span className="text-sm leading-6 text-[#787873]">{item}</span>
+            <CircleDot className="h-3.5 w-3.5 text-[#7d6a45]" aria-hidden="true" />
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
