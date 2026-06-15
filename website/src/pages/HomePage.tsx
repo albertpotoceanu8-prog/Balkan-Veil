@@ -180,22 +180,22 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
   ] as const;
 
   return (
-    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-10 text-[#b6a27a] sm:px-5 sm:pb-14 md:px-8 md:pb-20">
-      <VeilDivider label={content.builtAround} className="mb-5" />
+    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-12 text-[#b6a27a] sm:px-5 sm:pb-16 md:px-8 md:pb-24">
+      <VeilDivider label={content.builtAround} className="mb-7 md:mb-10" />
 
       <div className="relative overflow-hidden border border-[#202224] bg-[#030201]">
         <div className="pointer-events-none absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
         <div className="relative grid gap-px bg-[#202224] lg:grid-cols-[0.78fr_1.22fr]">
-          <div className="bg-[#050302] p-5 sm:p-7 md:p-10">
+          <div className="bg-[#050302] p-6 sm:p-8 md:p-12">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.launchChanges.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[1.02] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
             <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
             <div className="mt-8 h-px max-w-md bg-gradient-to-r from-[#7d6a45]/70 via-[#202224] to-transparent" aria-hidden="true" />
           </div>
 
-          <div className="grid gap-px bg-[#202224] sm:grid-cols-3">
+          <div className="grid gap-3 bg-[#050302] p-3 sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
             {content.valueProps.map((item, index) => (
-              <article key={item.title} className="group relative min-h-[18rem] overflow-hidden bg-[#020100] p-5 sm:p-6">
+              <article key={item.title} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 sm:p-6 md:p-7">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                 <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] ${mutedGoldText}`}>control 0{index + 1}</p>
                 <h3 className="mt-12 font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{item.title}</h3>
@@ -206,8 +206,8 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </div>
       </div>
 
-      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 xl:grid-cols-[1.15fr_0.85fr]">
-        <section className="relative overflow-hidden border border-[#202224] bg-[#050302] p-5 sm:p-7 md:p-9">
+      <div className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[1.15fr_0.85fr]">
+        <section className="relative overflow-hidden border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-10">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
           <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
@@ -216,15 +216,15 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
               <p className="mt-5 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.interfacePreview.text}</p>
             </div>
 
-            <div className="grid gap-3">
+            <div className="grid gap-5">
               {content.interfacePreview.rows.map((item, index) => (
-                <div key={item} className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-3 border-b border-[#202224] pb-4">
+                <div key={item} className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 border-b border-[#202224] pb-5">
                   <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
                   <span className="font-serif text-xl leading-snug text-[#c8ad72]">{item}</span>
                   <span className="hidden h-px w-12 bg-[#7d6a45]/45 sm:block" aria-hidden="true" />
                 </div>
               ))}
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div className="mt-7 grid gap-4 sm:grid-cols-3">
                 {content.interfacePreview.metrics.map((metric) => (
                   <div key={metric} className="border border-[#202224] bg-black/30 p-4">
                     <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#6f6654]">signal</p>
@@ -237,14 +237,14 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </section>
 
         <section className="relative overflow-hidden border border-[#202224] bg-[#020100]">
-          <div className="border-b border-[#202224] px-5 py-4 sm:px-6">
+          <div className="border-b border-[#202224] px-6 py-5 sm:px-7">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.methodPreview.eyebrow}</p>
           </div>
-          <div className="p-5 sm:p-6">
+          <div className="p-6 sm:p-7 md:p-8">
             <h2 className="font-serif text-3xl leading-tight text-[#c8ad72]">{content.methodPreview.title}</h2>
-            <div className="mt-7 border-l border-[#202224]">
+            <div className="mt-8 border-l border-[#202224]">
               {content.methodPreview.steps.map((step, index) => (
-                <div key={step} className="relative pb-6 pl-6 last:pb-0">
+                <div key={step} className="relative pb-8 pl-7 last:pb-0">
                   <span className="absolute -left-[5px] top-1 h-2.5 w-2.5 rotate-45 border border-[#7d6a45] bg-[#020100]" aria-hidden="true" />
                   <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
                   <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#9a8255]">{step}</p>
@@ -255,12 +255,12 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </section>
       </div>
 
-      <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 xl:grid-cols-[0.82fr_1.18fr]">
-        <section className="border border-[#202224] bg-[#050302] p-5 sm:p-7 md:p-8">
+      <div className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[0.82fr_1.18fr]">
+        <section className="border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-10">
           <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.subscriptionIntro.eyebrow}</p>
           <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.subscriptionIntro.title}</h2>
           <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.subscriptionIntro.text}</p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {content.subscriptionIntro.points.map((point, index) => (
               <div key={point} className="border border-[#202224] bg-black/35 p-4">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}>node 0{index + 1}</p>
@@ -270,14 +270,14 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
           </div>
         </section>
 
-        <section className="border border-[#202224] bg-[#020100] p-5 sm:p-7 md:p-8">
+        <section className="border border-[#202224] bg-[#020100] p-6 sm:p-8 md:p-10">
           <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.beforeAfter.eyebrow}</p>
           <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.beforeAfter.title}</h2>
-          <div className="mt-8 grid gap-5 md:grid-cols-2">
+          <div className="mt-10 grid gap-7 md:grid-cols-2">
             {beforeAfterColumns.map((column) => (
               <div key={column.label}>
                 <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{column.label}</p>
-                <div className="mt-4 grid gap-2">
+                <div className="mt-5 grid gap-3">
                   {column.items.map((item, index) => (
                     <div key={item} className="grid grid-cols-[2.4rem_1fr] gap-3 border border-[#202224] bg-black/25 px-4 py-3">
                       <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{String(index + 1).padStart(2, "0")}</span>
@@ -291,7 +291,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </section>
       </div>
 
-      <section className="relative mt-4 overflow-hidden border border-[#202224] bg-[#050302] p-5 sm:mt-5 sm:p-7 md:p-9">
+      <section className="relative mt-7 overflow-hidden border border-[#202224] bg-[#050302] p-6 sm:mt-8 sm:p-8 md:mt-10 md:p-10">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(185,138,50,0.045),transparent)]" aria-hidden="true" />
         <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
@@ -311,7 +311,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </div>
       </section>
 
-      <div className="mt-4 grid gap-2 sm:grid-cols-3">
+      <div className="mt-7 grid gap-3 sm:mt-8 sm:grid-cols-3 md:mt-10 md:gap-4">
         {content.audience.map((item, index) => (
           <div key={item} className="grid grid-cols-[2rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100]/70 px-3 py-3">
             <span className={`font-mono text-[9px] ${mutedGoldText}`}>0{index + 1}</span>
