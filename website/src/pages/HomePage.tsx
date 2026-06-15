@@ -128,48 +128,51 @@ const sweepCardDarkMotion: Variants = {
 };
 
 const cardSweepMotion: Variants = {
-  hidden: { opacity: 0, x: "-8%", scaleX: 0.18 },
+  hidden: { opacity: 0, scaleX: 0 },
   visible: {
-    opacity: [0, 1, 0.92, 0],
-    x: ["-8%", "0%", "112%", "112%"],
-    scaleX: [0.18, 1, 1, 0.75],
-    transition: { duration: 3.05, times: [0, 0.18, 0.88, 1], ease: [0.16, 1, 0.3, 1] },
+    opacity: [0, 1, 1, 0.9],
+    scaleX: [0, 0, 1, 1],
+    transition: { delay: 1.35, duration: 3.45, times: [0, 0.08, 0.88, 1], ease: [0.16, 1, 0.3, 1] },
   },
 };
 
-const sweepTextGroupMotion: Variants = {
-  hidden: {},
+const cardFramePointMotion: Variants = {
+  hidden: { opacity: 0, y: 0 },
   visible: {
-    transition: {
-      delayChildren: 0.95,
-      staggerChildren: 0.075,
-    },
+    opacity: [0, 1, 1, 0],
+    y: ["0%", "0%", "calc(100% - 0.45rem)", "calc(100% - 0.45rem)"],
+    transition: { duration: 1.55, times: [0, 0.12, 0.88, 1], ease: [0.22, 1, 0.36, 1] },
   },
 };
 
-const sweepTextCharMotion: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.12, ease: "linear" } },
+const cardFrameVerticalMotion: Variants = {
+  hidden: { opacity: 0, scaleY: 0 },
+  visible: {
+    opacity: [0, 1, 1],
+    scaleY: [0, 1, 1],
+    transition: { duration: 1.55, times: [0, 0.88, 1], ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const sweepContentMotion: Variants = {
+  hidden: { opacity: 0, clipPath: "inset(0 100% 0 0)" },
+  visible: {
+    opacity: 1,
+    clipPath: "inset(0 0% 0 0)",
+    transition: { delay: 1.55, duration: 3.35, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 const sweepInnerCardsMotion: Variants = {
   hidden: {},
-  visible: {
-    transition: {
-      delayChildren: 2.3,
-      staggerChildren: 0.2,
-    },
-  },
+  visible: {},
 };
 
 const sweepInnerCardMotion: Variants = {
-  hidden: { opacity: 0, y: 16, backgroundColor: "rgba(0,0,0,0)", borderColor: "rgba(32,34,36,0)" },
+  hidden: { backgroundColor: "rgba(0,0,0,0.28)", borderColor: "rgba(32,34,36,1)" },
   visible: {
-    opacity: 1,
-    y: 0,
     backgroundColor: "rgba(0,0,0,0.28)",
     borderColor: "rgba(32,34,36,1)",
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -434,42 +437,46 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[0.82fr_1.18fr]"
       >
         <motion.section variants={sweepCardMotion} className="relative overflow-hidden border p-6 sm:p-8 md:p-10">
-          <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform" aria-hidden="true" />
-          <motion.div variants={sweepTextGroupMotion} className="relative z-10">
-            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}><SlowRevealText text={content.subscriptionIntro.eyebrow} /></p>
-            <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl"><SlowRevealText text={content.subscriptionIntro.title} /></h2>
-            <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8"><SlowRevealText text={content.subscriptionIntro.text} /></p>
-          </motion.div>
-          <motion.div variants={sweepInnerCardsMotion} className="relative z-10 mt-10 grid gap-4 sm:grid-cols-2">
-            {content.subscriptionIntro.points.map((point, index) => (
-              <motion.div key={point} variants={sweepInnerCardMotion} className="border p-4">
-                <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}><SlowRevealText text={`node 0${index + 1}`} /></p>
-                <p className="mt-4 font-serif text-xl text-[#c8ad72]"><SlowRevealText text={point} /></p>
-              </motion.div>
-            ))}
+          <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
+          <motion.span variants={cardFramePointMotion} className="pointer-events-none absolute left-0 top-0 z-40 h-2 w-2 -translate-x-1/2 rounded-full bg-[#b98a32] shadow-[0_0_16px_rgba(185,138,50,0.75)]" aria-hidden="true" />
+          <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border-y border-r border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.18)] will-change-transform" aria-hidden="true" />
+          <motion.div variants={sweepContentMotion} className="relative z-10">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.subscriptionIntro.eyebrow}</p>
+            <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.subscriptionIntro.title}</h2>
+            <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.subscriptionIntro.text}</p>
+            <motion.div variants={sweepInnerCardsMotion} className="mt-10 grid gap-4 sm:grid-cols-2">
+              {content.subscriptionIntro.points.map((point, index) => (
+                <motion.div key={point} variants={sweepInnerCardMotion} className="border p-4">
+                  <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}>node 0{index + 1}</p>
+                  <p className="mt-4 font-serif text-xl text-[#c8ad72]">{point}</p>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </motion.section>
 
         <motion.section variants={sweepCardDarkMotion} className="relative overflow-hidden border p-6 sm:p-8 md:p-10">
-          <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform" aria-hidden="true" />
-          <motion.div variants={sweepTextGroupMotion} className="relative z-10">
-            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}><SlowRevealText text={content.beforeAfter.eyebrow} /></p>
-            <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl"><SlowRevealText text={content.beforeAfter.title} /></h2>
-          </motion.div>
-          <motion.div variants={sweepInnerCardsMotion} className="relative z-10 mt-10 grid gap-7 md:grid-cols-2">
-            {beforeAfterColumns.map((column) => (
-              <motion.div key={column.label} variants={sweepTextGroupMotion}>
-                <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}><SlowRevealText text={column.label} /></p>
-                <div className="mt-5 grid gap-3">
-                  {column.items.map((item, index) => (
-                    <motion.div key={item} variants={sweepInnerCardMotion} className="grid grid-cols-[2.4rem_1fr] gap-3 border px-4 py-3">
-                      <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}><SlowRevealText text={String(index + 1).padStart(2, "0")} /></span>
-                      <span className="text-sm leading-6 text-[#8a806c]"><SlowRevealText text={item} /></span>
-                    </motion.div>
-                  ))}
+          <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
+          <motion.span variants={cardFramePointMotion} className="pointer-events-none absolute left-0 top-0 z-40 h-2 w-2 -translate-x-1/2 rounded-full bg-[#b98a32] shadow-[0_0_16px_rgba(185,138,50,0.75)]" aria-hidden="true" />
+          <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border-y border-r border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.18)] will-change-transform" aria-hidden="true" />
+          <motion.div variants={sweepContentMotion} className="relative z-10">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.beforeAfter.eyebrow}</p>
+            <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.beforeAfter.title}</h2>
+            <motion.div variants={sweepInnerCardsMotion} className="mt-10 grid gap-7 md:grid-cols-2">
+              {beforeAfterColumns.map((column) => (
+                <div key={column.label}>
+                  <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{column.label}</p>
+                  <div className="mt-5 grid gap-3">
+                    {column.items.map((item, index) => (
+                      <motion.div key={item} variants={sweepInnerCardMotion} className="grid grid-cols-[2.4rem_1fr] gap-3 border px-4 py-3">
+                        <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{String(index + 1).padStart(2, "0")}</span>
+                        <span className="text-sm leading-6 text-[#8a806c]">{item}</span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
+              ))}
+            </motion.div>
           </motion.div>
         </motion.section>
       </motion.div>
@@ -504,18 +511,6 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         ))}
       </div>
     </section>
-  );
-}
-
-function SlowRevealText({ text }: { text: string }) {
-  return (
-    <motion.span variants={sweepTextGroupMotion} className="inline whitespace-pre-wrap" aria-label={text} role="text">
-      {Array.from(text).map((char, index) => (
-        <motion.span key={`${char}-${index}`} variants={sweepTextCharMotion} aria-hidden="true">
-          {char}
-        </motion.span>
-      ))}
-    </motion.span>
   );
 }
 
