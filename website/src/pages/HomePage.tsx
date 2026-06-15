@@ -35,7 +35,7 @@ const launchIntroMotion: Variants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 1.45, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.9, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -45,7 +45,7 @@ const launchFrameSweepMotion: Variants = {
     opacity: [0, 1, 0.85, 0],
     scaleY: [0.25, 1, 1, 0.55],
     x: ["0%", "0%", "118%", "118%"],
-    transition: { delay: 1.25, duration: 1.1, times: [0, 0.2, 0.82, 1], ease: [0.16, 1, 0.3, 1] },
+    transition: { delay: 1.75, duration: 1.75, times: [0, 0.22, 0.84, 1], ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -53,8 +53,8 @@ const launchCardsMotion: Variants = {
   hidden: {},
   visible: {
     transition: {
-      delayChildren: 2.25,
-      staggerChildren: 0.24,
+      delayChildren: 3.45,
+      staggerChildren: 0.34,
     },
   },
 };
@@ -67,7 +67,7 @@ const launchCardMotion: Variants = {
     scale: 1,
     rotateX: 0,
     z: 0,
-    transition: { duration: 1.25, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 1.65, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
