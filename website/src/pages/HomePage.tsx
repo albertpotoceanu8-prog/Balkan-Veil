@@ -198,6 +198,35 @@ const sweepInnerCardMotion: Variants = {
   },
 };
 
+const audienceDropMotion: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.12,
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const audienceCardDropMotion: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -86,
+    scaleY: 0.72,
+    scaleX: 0.96,
+    filter: "blur(8px)",
+    transformOrigin: "50% 0%",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scaleY: 1,
+    scaleX: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
@@ -523,15 +552,21 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </div>
       </section>
 
-      <div className="mt-7 grid gap-3 sm:mt-8 sm:grid-cols-3 md:mt-10 md:gap-4">
+      <motion.div
+        variants={audienceDropMotion}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.45, margin: "0px 0px -10% 0px" }}
+        className="mt-7 grid gap-3 sm:mt-8 sm:grid-cols-3 md:mt-10 md:gap-4"
+      >
         {content.audience.map((item, index) => (
-          <div key={item} className="grid grid-cols-[2rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100]/70 px-3 py-3">
+          <motion.div key={item} variants={audienceCardDropMotion} className="grid grid-cols-[2rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100]/70 px-3 py-3">
             <span className={`font-mono text-[9px] ${mutedGoldText}`}>0{index + 1}</span>
             <span className="text-sm leading-6 text-[#787873]">{item}</span>
             <CircleDot className="h-3.5 w-3.5 text-[#7d6a45]" aria-hidden="true" />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
