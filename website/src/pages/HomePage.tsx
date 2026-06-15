@@ -230,11 +230,12 @@ const audienceCardDropMotion: Variants = {
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
-      <section className="relative z-10 w-full px-0 pb-6 pt-0 text-[#b6a27a] sm:pb-8 md:pb-12">
+      <section className="relative z-10 w-full pb-6 pt-0 text-[#b6a27a] sm:pb-8 md:pb-12">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.10),transparent_28rem)]" aria-hidden="true" />
-        <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
+        <div className="relative mx-auto w-full max-w-[clamp(1400px,94vw,1800px)] px-2.5 sm:px-5 md:px-8">
+          <div className="pointer-events-none absolute inset-x-2.5 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)] 3xl:min-h-[calc(100svh-7rem)]`}>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)] 3xl:min-h-[calc(100svh-7rem)]`}>
           <div className="pointer-events-none absolute inset-0 opacity-[0.24] [background-image:linear-gradient(rgba(185,138,50,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.18]" aria-hidden="true" />
 
@@ -287,7 +288,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           </div>
 
           <BottomRail content={content} goToPage={goToPage} />
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <ArchiveModules content={content} goToPage={goToPage} />
@@ -390,7 +392,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
   ] as const;
 
   return (
-    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-16 text-[#b6a27a] sm:px-5 sm:pb-24 md:px-8 md:pb-32 3xl:max-w-[1800px] 3xl:px-12 3xl:pb-40 4xl:max-w-[2560px] 4xl:px-16">
+    <section className="relative z-10 mx-auto w-full max-w-[clamp(1200px,88vw,1600px)] px-2.5 pb-16 text-[#b6a27a] sm:px-5 sm:pb-24 md:px-8 md:pb-32">
       <VeilDivider label={content.builtAround} className="mb-10 md:mb-14" />
 
       <motion.div
