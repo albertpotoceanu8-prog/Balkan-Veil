@@ -109,6 +109,49 @@ const splitCardRightMotion: Variants = {
   },
 };
 
+const sweepCardMotion: Variants = {
+  hidden: { backgroundColor: "rgba(5,3,2,0)", borderColor: "rgba(32,34,36,0)" },
+  visible: {
+    backgroundColor: "rgba(5,3,2,0.94)",
+    borderColor: "rgba(32,34,36,1)",
+    transition: { delay: 1.15, duration: 0.9, ease: "easeOut" },
+  },
+};
+
+const sweepCardDarkMotion: Variants = {
+  hidden: { backgroundColor: "rgba(2,1,0,0)", borderColor: "rgba(32,34,36,0)" },
+  visible: {
+    backgroundColor: "rgba(2,1,0,1)",
+    borderColor: "rgba(32,34,36,1)",
+    transition: { delay: 1.15, duration: 0.9, ease: "easeOut" },
+  },
+};
+
+const cardSweepMotion: Variants = {
+  hidden: { opacity: 0, x: "-8%", scaleX: 0.18 },
+  visible: {
+    opacity: [0, 1, 0.92, 0],
+    x: ["-8%", "0%", "112%", "112%"],
+    scaleX: [0.18, 1, 1, 0.75],
+    transition: { duration: 2.35, times: [0, 0.18, 0.86, 1], ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const sweepTextGroupMotion: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 0.65,
+      staggerChildren: 0.055,
+    },
+  },
+};
+
+const sweepTextCharMotion: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.08, ease: "linear" } },
+};
+
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
@@ -363,41 +406,52 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </motion.section>
       </motion.div>
 
-      <div className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[0.82fr_1.18fr]">
-        <section className="border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-10">
-          <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.subscriptionIntro.eyebrow}</p>
-          <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.subscriptionIntro.title}</h2>
-          <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.subscriptionIntro.text}</p>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
+        className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[0.82fr_1.18fr]"
+      >
+        <motion.section variants={sweepCardMotion} className="relative overflow-hidden border p-6 sm:p-8 md:p-10">
+          <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform" aria-hidden="true" />
+          <motion.div variants={sweepTextGroupMotion} className="relative z-10">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}><SlowRevealText text={content.subscriptionIntro.eyebrow} /></p>
+            <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl"><SlowRevealText text={content.subscriptionIntro.title} /></h2>
+            <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8"><SlowRevealText text={content.subscriptionIntro.text} /></p>
+          </motion.div>
+          <motion.div variants={sweepTextGroupMotion} className="relative z-10 mt-10 grid gap-4 sm:grid-cols-2">
             {content.subscriptionIntro.points.map((point, index) => (
               <div key={point} className="border border-[#202224] bg-black/35 p-4">
-                <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}>node 0{index + 1}</p>
-                <p className="mt-4 font-serif text-xl text-[#c8ad72]">{point}</p>
+                <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}><SlowRevealText text={`node 0${index + 1}`} /></p>
+                <p className="mt-4 font-serif text-xl text-[#c8ad72]"><SlowRevealText text={point} /></p>
               </div>
             ))}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
-        <section className="border border-[#202224] bg-[#020100] p-6 sm:p-8 md:p-10">
-          <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.beforeAfter.eyebrow}</p>
-          <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.beforeAfter.title}</h2>
-          <div className="mt-10 grid gap-7 md:grid-cols-2">
+        <motion.section variants={sweepCardDarkMotion} className="relative overflow-hidden border p-6 sm:p-8 md:p-10">
+          <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform" aria-hidden="true" />
+          <motion.div variants={sweepTextGroupMotion} className="relative z-10">
+            <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}><SlowRevealText text={content.beforeAfter.eyebrow} /></p>
+            <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl"><SlowRevealText text={content.beforeAfter.title} /></h2>
+          </motion.div>
+          <div className="relative z-10 mt-10 grid gap-7 md:grid-cols-2">
             {beforeAfterColumns.map((column) => (
-              <div key={column.label}>
-                <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{column.label}</p>
+              <motion.div key={column.label} variants={sweepTextGroupMotion}>
+                <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}><SlowRevealText text={column.label} /></p>
                 <div className="mt-5 grid gap-3">
                   {column.items.map((item, index) => (
                     <div key={item} className="grid grid-cols-[2.4rem_1fr] gap-3 border border-[#202224] bg-black/25 px-4 py-3">
-                      <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{String(index + 1).padStart(2, "0")}</span>
-                      <span className="text-sm leading-6 text-[#8a806c]">{item}</span>
+                      <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}><SlowRevealText text={String(index + 1).padStart(2, "0")} /></span>
+                      <span className="text-sm leading-6 text-[#8a806c]"><SlowRevealText text={item} /></span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
 
       <section className="relative mt-7 overflow-hidden border border-[#202224] bg-[#050302] p-6 sm:mt-8 sm:p-8 md:mt-10 md:p-10">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(185,138,50,0.045),transparent)]" aria-hidden="true" />
@@ -429,6 +483,18 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         ))}
       </div>
     </section>
+  );
+}
+
+function SlowRevealText({ text }: { text: string }) {
+  return (
+    <motion.span variants={sweepTextGroupMotion} className="inline whitespace-pre-wrap" aria-label={text} role="text">
+      {Array.from(text).map((char, index) => (
+        <motion.span key={`${char}-${index}`} variants={sweepTextCharMotion} aria-hidden="true">
+          {char}
+        </motion.span>
+      ))}
+    </motion.span>
   );
 }
 
