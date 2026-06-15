@@ -26,17 +26,25 @@ const goldText = "text-[#b98a32]";
 const mutedGoldText = "text-[#b98a32]";
 
 const launchSectionMotion: Variants = {
-  hidden: { backgroundColor: "rgba(3,2,1,0)", borderColor: "rgba(32,34,36,0)" },
+  hidden: {
+    opacity: 0,
+    backgroundColor: "rgba(3,2,1,0)",
+    borderColor: "rgba(32,34,36,0)",
+  },
   visible: {
+    opacity: 1,
     backgroundColor: "rgba(3,2,1,1)",
     borderColor: "rgba(32,34,36,1)",
-    transition: { delay: 3.15, duration: 0.7, ease: "easeOut" },
+    transition: { duration: 0.35, ease: "easeOut" },
   },
 };
 
 const launchGridMotion: Variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 0.2, transition: { delay: 3.15, duration: 0.7, ease: "easeOut" } },
+  visible: {
+    opacity: 0.2,
+    transition: { delay: 0.15, duration: 0.7, ease: "easeOut" },
+  },
 };
 
 const launchIntroMotion: Variants = {
@@ -44,17 +52,22 @@ const launchIntroMotion: Variants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 1.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
 const launchFrameSweepMotion: Variants = {
-  hidden: { opacity: 0, x: "0%", scaleX: 1 },
+  hidden: { opacity: 0, x: "-35%", scaleX: 0.75 },
   visible: {
     opacity: [0, 1, 0.88, 0],
-    x: ["0%", "0%", "155%", "155%"],
-    scaleX: [1, 1, 0.95, 0.95],
-    transition: { delay: 1.75, duration: 1.75, times: [0, 0.22, 0.84, 1], ease: [0.16, 1, 0.3, 1] },
+    x: ["-35%", "0%", "135%", "135%"],
+    scaleX: [0.75, 1, 0.95, 0.95],
+    transition: {
+      delay: 0.55,
+      duration: 1.45,
+      times: [0, 0.22, 0.84, 1],
+      ease: [0.16, 1, 0.3, 1],
+    },
   },
 };
 
@@ -63,22 +76,30 @@ const launchCardsMotion: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      opacity: { delay: 3.25, duration: 0.55, ease: "easeOut" },
-      delayChildren: 3.45,
-      staggerChildren: 0.34,
+      opacity: { delay: 1.1, duration: 0.35, ease: "easeOut" },
+      delayChildren: 1.25,
+      staggerChildren: 0.18,
     },
   },
 };
 
 const launchCardMotion: Variants = {
-  hidden: { opacity: 0, y: 58, scale: 0.74, rotateX: 16, z: -360 },
+  hidden: {
+    opacity: 0,
+    y: 48,
+    scale: 0.86,
+    rotateX: 12,
+    z: -180,
+    filter: "blur(12px)",
+  },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     rotateX: 0,
     z: 0,
-    transition: { duration: 1.65, ease: [0.16, 1, 0.3, 1] },
+    filter: "blur(0px)",
+    transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
