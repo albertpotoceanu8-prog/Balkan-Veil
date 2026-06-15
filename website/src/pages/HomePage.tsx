@@ -230,7 +230,7 @@ const audienceCardDropMotion: Variants = {
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
-      <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-6 pt-2.5 text-[#b6a27a] sm:px-5 sm:pb-8 md:px-8 md:pb-12">
+      <section className="relative z-10 w-full px-0 pb-6 pt-0 text-[#b6a27a] sm:pb-8 md:pb-12">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.10),transparent_28rem)]" aria-hidden="true" />
         <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
