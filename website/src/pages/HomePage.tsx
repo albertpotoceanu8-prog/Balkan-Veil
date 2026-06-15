@@ -433,7 +433,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
         className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[1.15fr_0.85fr]"
       >
-        <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden border border-[#202224] bg-[#050302] p-6 will-change-transform sm:p-8 md:p-10">
+        <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden bg-[#050302] p-6 will-change-transform sm:p-8 md:p-10">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
           <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
@@ -444,7 +444,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
 
             <div className="grid gap-5">
               {content.interfacePreview.rows.map((item, index) => (
-                <div key={item} className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 border-b border-[#202224] pb-5">
+                <div key={item} className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 pb-5">
                   <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
                   <span className="font-serif text-xl leading-snug text-[#c8ad72]">{item}</span>
                   <span className="hidden h-px w-12 bg-[#7d6a45]/45 sm:block" aria-hidden="true" />
@@ -452,7 +452,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
               ))}
               <div className="mt-7 grid gap-4 sm:grid-cols-3">
                 {content.interfacePreview.metrics.map((metric) => (
-                  <div key={metric} className="border border-[#202224] bg-black/30 p-4">
+                  <div key={metric} className="bg-black/30 p-4">
                     <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#6f6654]">signal</p>
                     <p className="mt-3 font-serif text-2xl text-[#c8ad72]">{metric}</p>
                   </div>
@@ -462,16 +462,16 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
           </div>
         </motion.section>
 
-        <motion.section variants={splitCardRightMotion} className="relative overflow-hidden border border-[#202224] bg-[#020100] will-change-transform">
-          <div className="border-b border-[#202224] px-6 py-5 sm:px-7">
+        <motion.section variants={splitCardRightMotion} className="relative overflow-hidden bg-[#020100] will-change-transform">
+          <div className="px-6 py-5 sm:px-7">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.methodPreview.eyebrow}</p>
           </div>
           <div className="p-6 sm:p-7 md:p-8">
             <h2 className="font-serif text-3xl leading-tight text-[#c8ad72]">{content.methodPreview.title}</h2>
-            <div className="mt-8 border-l border-[#202224]">
+            <div className="mt-8">
               {content.methodPreview.steps.map((step, index) => (
                 <div key={step} className="relative pb-8 pl-7 last:pb-0">
-                  <span className="absolute -left-[5px] top-1 h-2.5 w-2.5 rotate-45 border border-[#7d6a45] bg-[#020100]" aria-hidden="true" />
+                  <span className="absolute left-0 top-1 h-2.5 w-2.5 rotate-45 bg-[#7d6a45]/55" aria-hidden="true" />
                   <span className={`font-mono text-[10px] ${mutedGoldText}`}>{String(index + 1).padStart(2, "0")}</span>
                   <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.24em] text-[#9a8255]">{step}</p>
                 </div>
