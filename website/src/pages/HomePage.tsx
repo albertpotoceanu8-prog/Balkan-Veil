@@ -31,7 +31,7 @@ const launchSectionMotion: Variants = {
 };
 
 const launchIntroMotion: Variants = {
-  hidden: { opacity: 0, x: -320 },
+  hidden: { opacity: 1, x: "calc(-100% - 4rem)" },
   visible: {
     opacity: 1,
     x: 0,
