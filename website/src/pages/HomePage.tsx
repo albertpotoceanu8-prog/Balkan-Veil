@@ -16,11 +16,11 @@ type HomePageProps = {
 };
 
 const archivePanel =
-  "relative overflow-hidden border border-[#202224] bg-[#050302]/92";
+  "relative overflow-hidden bg-transparent";
 
 const filePanel =
   "relative overflow-hidden border border-[#202224] bg-[#020100]/88 transition duration-300 hover:border-[#7d6a45]/55 hover:bg-[#090503]";
-const sidePanel = "relative overflow-hidden border border-transparent bg-[#020100]/58";
+const sidePanel = "relative overflow-hidden border border-[#202224] bg-[#020100]/58";
 
 const goldText = "text-[#b98a32]";
 const mutedGoldText = "text-[#b98a32]";
@@ -236,10 +236,12 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
           <div className="pointer-events-none absolute inset-x-2.5 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)] 3xl:min-h-[calc(100svh-7rem)]`}>
-          <div className="pointer-events-none absolute inset-0 opacity-[0.24] [background-image:linear-gradient(rgba(185,138,50,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
-          <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.18]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(185,138,50,0.032)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.016)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.10]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-x-0 top-[4.25rem] h-px bg-gradient-to-r from-transparent via-[#202224] to-transparent sm:top-[4.75rem]" aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-[6.5rem] hidden h-px bg-gradient-to-r from-transparent via-[#202224] to-transparent md:block" aria-hidden="true" />
 
-          <header className="relative grid min-h-12 grid-cols-[1fr_auto] items-center gap-3 border-b border-[#202224] px-3 py-2.5 sm:min-h-14 sm:px-4 sm:py-3 md:grid-cols-[1fr_auto_1fr] md:px-7">
+          <header className="relative grid min-h-12 grid-cols-[1fr_auto] items-center gap-3 border-y border-[#202224]/75 bg-[#020100]/35 px-3 py-2.5 sm:min-h-14 sm:px-4 sm:py-3 md:grid-cols-[1fr_auto_1fr] md:px-7">
             <div className="flex min-w-0 items-center gap-4">
               <span className="hidden h-4 w-4 border border-[#b98a32]/60 sm:block" aria-hidden="true" />
               <button type="button" onClick={() => goToPage("home")} className="min-w-0 truncate font-mono text-[10px] uppercase tracking-[0.2em] text-[#b98a32] sm:text-[11px] sm:tracking-[0.28em] md:text-sm">
@@ -255,14 +257,14 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
             </button>
           </header>
 
-          <div className="relative grid gap-0 lg:grid-cols-[0.78fr_2fr_0.85fr] 3xl:grid-cols-[0.9fr_2.25fr_1fr] 4xl:grid-cols-[1fr_2.35fr_1.1fr]">
-            <aside className="hidden border-r border-[#202224] p-5 xl:block 3xl:p-7">
+          <div className="relative grid gap-5 py-5 lg:grid-cols-[0.78fr_2fr_0.85fr] 3xl:grid-cols-[0.9fr_2.25fr_1fr] 4xl:grid-cols-[1fr_2.35fr_1.1fr]">
+            <aside className="hidden border border-[#202224] bg-[#020100]/34 p-5 xl:block 3xl:p-7">
               <SideIntel content={content} />
             </aside>
 
-            <main className="relative min-h-[28rem] border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r 3xl:min-h-[48rem] 3xl:px-16 3xl:py-16 4xl:min-h-[54rem]">
-              <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/35 to-transparent md:block" aria-hidden="true" />
-              <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/20 to-transparent md:block" aria-hidden="true" />
+            <main className="relative min-h-[28rem] px-3 py-8 sm:min-h-[34rem] sm:px-6 sm:py-10 md:min-h-[40rem] md:px-12 md:py-14 3xl:min-h-[48rem] 3xl:px-20 3xl:py-20 4xl:min-h-[54rem]">
+              <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/35 to-transparent md:inset-x-14" aria-hidden="true" />
+              <div className="pointer-events-none absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/20 to-transparent md:inset-x-14" aria-hidden="true" />
 
               <div className="relative z-10 mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem] 3xl:min-h-[41rem] 3xl:max-w-6xl 4xl:min-h-[46rem]">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
@@ -282,7 +284,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
               </div>
             </main>
 
-            <aside className="border-t border-[#202224] p-3 sm:p-5 lg:border-t-0 3xl:p-7">
+            <aside className="border border-[#202224] bg-[#020100]/34 p-3 sm:p-5 lg:border-t 3xl:p-7">
               <RightIntel content={content} />
             </aside>
           </div>
