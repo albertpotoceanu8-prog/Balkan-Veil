@@ -1,6 +1,8 @@
 import { ArrowRight, CircleDot, Lock, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
+import { SignalLedger } from "@/components/SignalLedger";
+import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
 import { VeilDivider } from "@/components/VeilDivider";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
@@ -149,6 +151,10 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
           online
         </div>
       </div>
+
+      <div className={`${filePanel} hidden p-0 sm:block`}>
+        <SignalLedger items={content.signalStrip.slice(0, 4)} label="Signal feed" className="border-0 bg-transparent" />
+      </div>
     </div>
   );
 }
@@ -157,7 +163,7 @@ function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToP
   return (
     <div className="relative grid border-t border-[#202224] md:grid-cols-[0.42fr_1fr_0.45fr_0.85fr]">
       <div className="hidden border-r border-[#202224] p-4 md:block">
-        <div className="h-20 bg-[radial-gradient(circle_at_35%_35%,rgba(185,138,50,0.25),transparent_36%),linear-gradient(145deg,#0c0c0c,#050302)]" />
+        <ThreeWireGlobe className="h-20 w-full opacity-85" />
       </div>
       <div className="border-b border-[#202224] p-4 md:border-b-0 md:border-r md:p-5">
         <p className="max-w-xl font-mono text-[10px] uppercase leading-6 tracking-[0.14em] text-[#aaa59a] sm:text-xs sm:leading-7 sm:tracking-[0.18em]">{content.dossier.note}</p>
