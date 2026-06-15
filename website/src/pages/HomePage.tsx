@@ -234,7 +234,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.10),transparent_28rem)]" aria-hidden="true" />
         <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
 
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)]`}>
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className={`${archivePanel} min-h-[calc(100svh-6rem)] 3xl:min-h-[calc(100svh-7rem)]`}>
           <div className="pointer-events-none absolute inset-0 opacity-[0.24] [background-image:linear-gradient(rgba(185,138,50,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] [background-size:44px_44px] sm:[background-size:56px_56px]" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-0 operator-scan opacity-[0.18]" aria-hidden="true" />
 
@@ -254,21 +254,21 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
             </button>
           </header>
 
-          <div className="relative grid gap-0 lg:grid-cols-[0.78fr_2fr_0.85fr]">
-            <aside className="hidden border-r border-[#202224] p-5 xl:block">
+          <div className="relative grid gap-0 lg:grid-cols-[0.78fr_2fr_0.85fr] 3xl:grid-cols-[0.9fr_2.25fr_1fr] 4xl:grid-cols-[1fr_2.35fr_1.1fr]">
+            <aside className="hidden border-r border-[#202224] p-5 xl:block 3xl:p-7">
               <SideIntel content={content} />
             </aside>
 
-            <main className="relative min-h-[28rem] border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r">
+            <main className="relative min-h-[28rem] border-[#202224] px-3 py-6 sm:min-h-[34rem] sm:px-6 sm:py-8 md:min-h-[40rem] md:px-10 md:py-12 lg:border-r 3xl:min-h-[48rem] 3xl:px-16 3xl:py-16 4xl:min-h-[54rem]">
               <div className="pointer-events-none absolute left-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/35 to-transparent md:block" aria-hidden="true" />
               <div className="pointer-events-none absolute right-4 top-0 hidden h-full w-px bg-gradient-to-b from-transparent via-[#7d6a45]/20 to-transparent md:block" aria-hidden="true" />
 
-              <div className="relative z-10 mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem]">
+              <div className="relative z-10 mx-auto flex min-h-[23rem] max-w-4xl flex-col items-center justify-center text-center sm:min-h-[28rem] md:min-h-[34rem] 3xl:min-h-[41rem] 3xl:max-w-6xl 4xl:min-h-[46rem]">
                 <p className={`font-mono text-[9px] uppercase tracking-[0.28em] ${mutedGoldText} sm:text-[10px] sm:tracking-[0.46em] md:text-xs`}>{content.badge}</p>
                 <HeroTitle text={content.hero} cinematic={cinematic} introDone={introDone} />
-                <p className="mt-6 max-w-[30rem] font-mono text-[10px] leading-6 text-[#8a806c] sm:mt-8 sm:text-[11px] sm:leading-7 md:max-w-[34rem] md:text-sm md:leading-8">{content.text}</p>
+                <p className="mt-6 max-w-[30rem] font-mono text-[10px] leading-6 text-[#8a806c] sm:mt-8 sm:text-[11px] sm:leading-7 md:max-w-[34rem] md:text-sm md:leading-8 3xl:max-w-[44rem] 3xl:text-base 3xl:leading-9">{content.text}</p>
 
-                <div className="mt-7 grid w-full max-w-[30rem] border border-[#252729] bg-[#050302] sm:mt-9 sm:max-w-[34rem] sm:grid-cols-[1fr_auto]">
+                <div className="mt-7 grid w-full max-w-[30rem] border border-[#252729] bg-[#050302] sm:mt-9 sm:max-w-[34rem] sm:grid-cols-[1fr_auto] 3xl:mt-12 3xl:max-w-[42rem]">
                   <button type="button" onClick={() => goToPage("access")} className="min-h-12 px-4 text-left font-mono text-[9px] uppercase tracking-[0.16em] text-[#9a8255] transition hover:bg-[#090503] hover:text-[#d2aa55] sm:min-h-14 sm:px-5 sm:text-[10px] sm:tracking-[0.2em] md:px-7">
                     &gt; {content.primaryCta}
                     <span className="ml-2 inline-block h-3 w-px translate-y-0.5 bg-[#b98a32] shadow-[0_0_10px_rgba(185,138,50,0.55)]" aria-hidden="true" />
@@ -281,7 +281,7 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
               </div>
             </main>
 
-            <aside className="border-t border-[#202224] p-3 sm:p-5 lg:border-t-0">
+            <aside className="border-t border-[#202224] p-3 sm:p-5 lg:border-t-0 3xl:p-7">
               <RightIntel content={content} />
             </aside>
           </div>
@@ -299,7 +299,7 @@ function HeroTitle({ text, cinematic, introDone }: { text: string; cinematic: bo
   const words = text.split(/\s+/).filter(Boolean);
 
   return (
-    <h1 className="mt-6 flex max-w-[min(100%,52rem)] flex-col items-center font-serif text-[clamp(3.2rem,17vw,5.6rem)] leading-[0.84] text-[#c8ad72] [text-shadow:0_0_18px_rgba(185,138,50,0.24)] sm:mt-8 sm:text-[clamp(4.2rem,15vw,7.8rem)] md:mt-10 md:text-[clamp(5.5rem,8.7vw,9.1rem)]">
+    <h1 className="mt-6 flex max-w-[min(100%,52rem)] flex-col items-center font-serif text-[clamp(3.2rem,17vw,5.6rem)] leading-[0.84] text-[#c8ad72] [text-shadow:0_0_18px_rgba(185,138,50,0.24)] sm:mt-8 sm:text-[clamp(4.2rem,15vw,7.8rem)] md:mt-10 md:text-[clamp(5.5rem,8.7vw,9.1rem)] 3xl:max-w-[70rem] 3xl:text-[clamp(9.1rem,6.1vw,11.6rem)] 4xl:max-w-[78rem] 4xl:text-[12.4rem]">
       {words.map((word) => (
         <span key={word} className="block whitespace-nowrap">
           {cinematic ? <DecodeText text={word} canStart={introDone} /> : word}
@@ -311,10 +311,10 @@ function HeroTitle({ text, cinematic, introDone }: { text: string; cinematic: bo
 
 function SideIntel({ content }: { content: SiteContent["home"] }) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 3xl:space-y-8">
       <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
       <div className={`${sidePanel} p-2`}>
-        <img src="/assets/tactical-world-map-v2.jpg" alt="" aria-hidden="true" className="h-40 w-full object-cover opacity-80 [filter:brightness(.72)_contrast(1.12)_saturate(.88)]" />
+        <img src="/assets/tactical-world-map-v2.jpg" alt="" aria-hidden="true" className="h-40 w-full object-cover opacity-80 [filter:brightness(.72)_contrast(1.12)_saturate(.88)] 3xl:h-56" />
       </div>
       <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
       <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
@@ -334,7 +334,7 @@ function SideIntel({ content }: { content: SiteContent["home"] }) {
 
 function RightIntel({ content }: { content: SiteContent["home"] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 3xl:gap-6">
       <div className={`${filePanel} p-3 sm:p-4`}>
         <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Active files</p>
         <div className="mt-4 space-y-2.5 font-mono text-[9px] uppercase tracking-[0.1em] text-[#b98a32] sm:mt-5 sm:space-y-3 sm:text-[10px] sm:tracking-[0.12em]">
@@ -365,14 +365,14 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
 
 function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToPage: (target: PageKey) => void }) {
   return (
-    <div className="relative grid border-t border-[#202224] md:grid-cols-[0.42fr_1fr_0.45fr_0.85fr]">
-      <div className="hidden border-r border-[#202224] p-4 md:block">
-        <ThreeWireGlobe className="h-20 w-full opacity-85" />
+    <div className="relative grid border-t border-[#202224] md:grid-cols-[0.42fr_1fr_0.45fr_0.85fr] 3xl:grid-cols-[0.5fr_1.25fr_0.5fr_1fr]">
+      <div className="hidden border-r border-[#202224] p-4 md:block 3xl:p-6">
+        <ThreeWireGlobe className="h-20 w-full opacity-85 3xl:h-28" />
       </div>
-      <div className="border-b border-[#202224] p-4 md:border-b-0 md:border-r md:p-5">
-        <p className="max-w-xl font-mono text-[10px] uppercase leading-6 tracking-[0.14em] text-[#aaa59a] sm:text-xs sm:leading-7 sm:tracking-[0.18em]">{content.dossier.note}</p>
+      <div className="border-b border-[#202224] p-4 md:border-b-0 md:border-r md:p-5 3xl:p-7">
+        <p className="max-w-xl font-mono text-[10px] uppercase leading-6 tracking-[0.14em] text-[#aaa59a] sm:text-xs sm:leading-7 sm:tracking-[0.18em] 3xl:max-w-3xl 3xl:text-sm 3xl:leading-8">{content.dossier.note}</p>
       </div>
-      <button type="button" onClick={() => goToPage("work")} className="border-b border-[#202224] p-4 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#b98a32] transition hover:bg-[#090503] hover:text-[#d2aa55] sm:text-[10px] sm:tracking-[0.24em] md:border-b-0 md:border-r md:p-5">
+      <button type="button" onClick={() => goToPage("work")} className="border-b border-[#202224] p-4 text-left font-mono text-[9px] uppercase tracking-[0.2em] text-[#b98a32] transition hover:bg-[#090503] hover:text-[#d2aa55] sm:text-[10px] sm:tracking-[0.24em] md:border-b-0 md:border-r md:p-5 3xl:p-7">
         Scroll to decrypt
         <ArrowRight className="mt-3 h-4 w-4 sm:mt-4" aria-hidden="true" />
       </button>
@@ -390,7 +390,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
   ] as const;
 
   return (
-    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-16 text-[#b6a27a] sm:px-5 sm:pb-24 md:px-8 md:pb-32">
+    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-16 text-[#b6a27a] sm:px-5 sm:pb-24 md:px-8 md:pb-32 3xl:max-w-[1800px] 3xl:px-12 3xl:pb-40 4xl:max-w-[2560px] 4xl:px-16">
       <VeilDivider label={content.builtAround} className="mb-10 md:mb-14" />
 
       <motion.div
@@ -431,11 +431,11 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
-        className="mt-14 grid gap-12 sm:mt-16 sm:gap-14 md:mt-20 md:gap-16 xl:grid-cols-[1.15fr_0.85fr]"
+        className="mt-14 grid gap-12 sm:mt-16 sm:gap-14 md:mt-20 md:gap-16 xl:grid-cols-[1.15fr_0.85fr] 3xl:gap-20"
       >
         <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden bg-[#050302] p-8 will-change-transform sm:p-10 md:p-14 lg:p-16">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
-          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+          <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 3xl:gap-20">
             <div>
               <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.interfacePreview.eyebrow}</p>
               <h2 className="mt-6 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.interfacePreview.title}</h2>
@@ -485,7 +485,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
-        className="mt-12 grid gap-10 sm:mt-14 sm:gap-12 md:mt-16 md:gap-14 xl:grid-cols-[0.82fr_1.18fr]"
+        className="mt-12 grid gap-10 sm:mt-14 sm:gap-12 md:mt-16 md:gap-14 xl:grid-cols-[0.82fr_1.18fr] 3xl:gap-20"
       >
         <motion.section variants={sweepCardMotion} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
           <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />

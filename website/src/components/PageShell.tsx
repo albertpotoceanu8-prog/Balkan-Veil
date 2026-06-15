@@ -27,7 +27,7 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
       animate={{ opacity: 1, y: 0 }}
       exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -14 }}
       transition={{ duration: shouldReduceMotion ? 0 : 0.42, ease: "easeOut" }}
-      className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-20 pt-2.5 text-[#c8ad72] sm:px-5 sm:pb-28 md:px-8 md:pb-44"
+      className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-20 pt-2.5 text-[#c8ad72] sm:px-5 sm:pb-28 md:px-8 md:pb-44 3xl:max-w-[1800px] 3xl:px-12 3xl:pb-52 4xl:max-w-[2560px] 4xl:px-16"
     >
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(185,138,50,0.08),transparent_28rem)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-x-3 top-0 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/50 to-transparent sm:inset-x-5 md:inset-x-8" aria-hidden="true" />
@@ -43,17 +43,17 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
           <span className="text-right text-[#6f6654]">public dossier</span>
         </div>
 
-        <div className="relative grid gap-0 lg:grid-cols-[minmax(0,1fr)_22rem]">
-          <div className="min-w-0 p-8 sm:p-10 md:p-14 lg:p-16">
-            <div className="max-w-5xl">
-              <h1 className="max-w-[820px] font-serif text-[clamp(2.65rem,6.2vw,5.35rem)] leading-[0.96] text-[#f0dfb0]">
+        <div className="relative grid gap-0 lg:grid-cols-[minmax(0,1fr)_22rem] 3xl:grid-cols-[minmax(0,1fr)_28rem]">
+          <div className="min-w-0 p-8 sm:p-10 md:p-14 lg:p-16 3xl:p-20 4xl:p-24">
+            <div className="max-w-5xl 3xl:max-w-6xl">
+              <h1 className="max-w-[820px] font-serif text-[clamp(2.65rem,6.2vw,5.35rem)] leading-[0.96] text-[#f0dfb0] 3xl:max-w-[1020px] 3xl:text-[clamp(5.35rem,4.8vw,7.4rem)]">
                 <DecodeText text={title} disabled />
               </h1>
-              {text && <p className="mt-6 max-w-3xl font-mono text-[10px] leading-6 text-[#8b816b] sm:text-xs sm:leading-7 md:mt-7">{text}</p>}
+              {text && <p className="mt-6 max-w-3xl font-mono text-[10px] leading-6 text-[#8b816b] sm:text-xs sm:leading-7 md:mt-7 3xl:max-w-4xl 3xl:text-sm 3xl:leading-8">{text}</p>}
             </div>
           </div>
 
-          <aside className="border-t border-[#202224] bg-black/22 p-8 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654] lg:border-l lg:border-t-0 sm:p-10 md:p-14">
+          <aside className="border-t border-[#202224] bg-black/22 p-8 font-mono text-[10px] uppercase tracking-[0.2em] text-[#6f6654] lg:border-l lg:border-t-0 sm:p-10 md:p-14 3xl:p-16 3xl:text-xs">
             <div className="grid grid-cols-2 gap-x-5 gap-y-4 lg:block lg:space-y-6">
               <div>
                 <p className="text-[#b98a32]">&gt; file</p>
@@ -77,7 +77,7 @@ export function PageShell({ eyebrow, title, text, children, topContent, bottomCo
       </header>
 
       {topContent}
-      <section className="relative mt-16 md:mt-24">{children}</section>
+      <section className="relative mt-16 md:mt-24 3xl:mt-32">{children}</section>
       {bottomContent}
     </motion.section>
   );

@@ -188,7 +188,7 @@ function PublicSite() {
             className="absolute left-1/2 top-0 h-[800px] w-[800px] -translate-x-1/2 rounded-full bg-neutral-500/10 opacity-30 blur-3xl"
           />
         )}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] opacity-25 md:bg-[size:64px_64px] md:opacity-30" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.028)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:88px_88px] opacity-25 md:bg-[size:64px_64px] md:opacity-30 3xl:bg-[size:84px_84px] 3xl:opacity-25" />
       </div>
 
       <Navbar
@@ -258,7 +258,7 @@ function NotFoundPage({ language, goHome }: { language: Language; goHome: () => 
         };
 
   return (
-    <section className="relative z-10 mx-auto min-h-[calc(100vh-120px)] max-w-[1500px] px-5 py-24 md:px-8 md:py-32">
+    <section className="relative z-10 mx-auto min-h-[calc(100vh-120px)] max-w-[1500px] px-5 py-24 md:px-8 md:py-32 3xl:max-w-[1800px] 3xl:px-12 4xl:max-w-[2560px] 4xl:px-16">
       <p className="text-sm uppercase tracking-[0.38em] text-neutral-300">{copy.eyebrow}</p>
       <h1 className="mt-6 font-serif text-5xl leading-tight text-neutral-200 md:text-8xl">{copy.title}</h1>
       <p className="mt-7 max-w-2xl text-lg leading-8 text-neutral-400 md:text-2xl md:leading-10">{copy.text}</p>
