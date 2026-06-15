@@ -27,26 +27,41 @@ const mutedGoldText = "text-[#b98a32]";
 
 const launchSectionMotion: Variants = {
   hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.16,
-      delayChildren: 0.12,
-    },
-  },
+  visible: {},
 };
 
 const launchIntroMotion: Variants = {
-  hidden: { opacity: 0, x: -140, filter: "blur(12px)" },
+  hidden: { opacity: 0, x: -320, filter: "blur(10px)" },
   visible: {
     opacity: 1,
     x: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 1.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const launchFrameSweepMotion: Variants = {
+  hidden: { opacity: 0, scaleY: 0.25, x: 0 },
+  visible: {
+    opacity: [0, 1, 0.85, 0],
+    scaleY: [0.25, 1, 1, 0.55],
+    x: ["0%", "0%", "118%", "118%"],
+    transition: { delay: 1.25, duration: 1.1, times: [0, 0.2, 0.82, 1], ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const launchCardsMotion: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: 2.25,
+      staggerChildren: 0.24,
+    },
   },
 };
 
 const launchCardMotion: Variants = {
-  hidden: { opacity: 0, y: 44, scale: 0.82, rotateX: 12, z: -260, filter: "blur(16px)" },
+  hidden: { opacity: 0, y: 58, scale: 0.74, rotateX: 16, z: -360, filter: "blur(18px)" },
   visible: {
     opacity: 1,
     y: 0,
@@ -54,7 +69,7 @@ const launchCardMotion: Variants = {
     rotateX: 0,
     z: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 1.25, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -233,14 +248,16 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       >
         <div className="pointer-events-none absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
         <div className="relative grid gap-px bg-[#202224] lg:grid-cols-[0.78fr_1.22fr]">
-          <motion.div variants={launchIntroMotion} className="bg-[#050302] p-6 sm:p-8 md:p-12">
+          <motion.div variants={launchIntroMotion} className="relative z-10 border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-12">
+            <div className="pointer-events-none absolute inset-0 border border-[#7d6a45]/20" aria-hidden="true" />
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.launchChanges.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[1.02] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
             <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
             <div className="mt-8 h-px max-w-md bg-gradient-to-r from-[#7d6a45]/70 via-[#202224] to-transparent" aria-hidden="true" />
           </motion.div>
+          <motion.span variants={launchFrameSweepMotion} className="pointer-events-none absolute bottom-0 left-[39%] top-0 z-20 hidden w-[42%] origin-left border-l border-r border-[#b98a32]/45 bg-[linear-gradient(90deg,rgba(185,138,50,0.04),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] lg:block" aria-hidden="true" />
 
-          <div className="grid gap-3 bg-[#050302] p-3 [perspective:1100px] sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
+          <motion.div variants={launchCardsMotion} className="grid gap-3 bg-[#050302] p-3 [perspective:1100px] sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
             {content.valueProps.map((item, index) => (
               <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 [transform-style:preserve-3d] sm:p-6 md:p-7">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
@@ -249,7 +266,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
                 <p className="mt-5 text-sm leading-7 text-[#777772]">{item.text}</p>
               </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 
