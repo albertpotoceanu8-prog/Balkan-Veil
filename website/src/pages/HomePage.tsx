@@ -48,10 +48,11 @@ const launchGridMotion: Variants = {
 };
 
 const launchIntroMotion: Variants = {
-  hidden: { opacity: 1, x: "calc(-100% - 4rem)" },
+  hidden: { opacity: 0, x: "calc(-100% - 4rem)", filter: "blur(10px)" },
   visible: {
     opacity: 1,
     x: 0,
+    filter: "blur(0px)",
     transition: { duration: 1.15, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -153,7 +154,7 @@ const cardSweepMotion: Variants = {
   visible: {
     opacity: 1,
     scaleX: 1,
-    transition: { delay: 2.1, duration: 4.7, ease: "linear" },
+    transition: { delay: 0.65, duration: 1.65, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -180,7 +181,7 @@ const sweepContentMotion: Variants = {
   visible: {
     opacity: 1,
     clipPath: "inset(0 0% 0 0)",
-    transition: { delay: 2.1, duration: 4.7, ease: "linear" },
+    transition: { delay: 0.85, duration: 1.65, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
