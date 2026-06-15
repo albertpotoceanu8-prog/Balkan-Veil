@@ -31,11 +31,10 @@ const launchSectionMotion: Variants = {
 };
 
 const launchIntroMotion: Variants = {
-  hidden: { opacity: 0, x: -320, filter: "blur(10px)" },
+  hidden: { opacity: 0, x: -320 },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: { duration: 1.45, ease: [0.22, 1, 0.36, 1] },
   },
 };
@@ -61,14 +60,13 @@ const launchCardsMotion: Variants = {
 };
 
 const launchCardMotion: Variants = {
-  hidden: { opacity: 0, y: 58, scale: 0.74, rotateX: 16, z: -360, filter: "blur(18px)" },
+  hidden: { opacity: 0, y: 58, scale: 0.74, rotateX: 16, z: -360 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     rotateX: 0,
     z: 0,
-    filter: "blur(0px)",
     transition: { duration: 1.25, ease: [0.16, 1, 0.3, 1] },
   },
 };
@@ -243,23 +241,23 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         variants={launchSectionMotion}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.28 }}
+        viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
         className="relative overflow-hidden border border-[#202224] bg-[#030201]"
       >
         <div className="pointer-events-none absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
         <div className="relative grid gap-px bg-[#202224] lg:grid-cols-[0.78fr_1.22fr]">
-          <motion.div variants={launchIntroMotion} className="relative z-10 border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-12">
+          <motion.div variants={launchIntroMotion} className="relative z-10 border border-[#202224] bg-[#050302] p-6 will-change-transform sm:p-8 md:p-12">
             <div className="pointer-events-none absolute inset-0 border border-[#7d6a45]/20" aria-hidden="true" />
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.launchChanges.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[1.02] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
             <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
             <div className="mt-8 h-px max-w-md bg-gradient-to-r from-[#7d6a45]/70 via-[#202224] to-transparent" aria-hidden="true" />
           </motion.div>
-          <motion.span variants={launchFrameSweepMotion} className="pointer-events-none absolute bottom-0 left-[39%] top-0 z-20 hidden w-[42%] origin-left border-l border-r border-[#b98a32]/45 bg-[linear-gradient(90deg,rgba(185,138,50,0.04),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] lg:block" aria-hidden="true" />
+          <motion.span variants={launchFrameSweepMotion} className="pointer-events-none absolute bottom-0 left-[39%] top-0 z-20 hidden w-[42%] origin-left border-l border-r border-[#b98a32]/45 bg-[linear-gradient(90deg,rgba(185,138,50,0.04),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform lg:block" aria-hidden="true" />
 
           <motion.div variants={launchCardsMotion} className="grid gap-3 bg-[#050302] p-3 [perspective:1100px] sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
             {content.valueProps.map((item, index) => (
-              <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 [transform-style:preserve-3d] sm:p-6 md:p-7">
+              <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 [transform-style:preserve-3d] will-change-transform sm:p-6 md:p-7">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                 <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] ${mutedGoldText}`}>control 0{index + 1}</p>
                 <h3 className="mt-12 font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{item.title}</h3>
