@@ -1,8 +1,6 @@
-import { useEffect, useRef } from "react";
 import { ArrowRight, CircleDot, Lock, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
-import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
 import { VeilDivider } from "@/components/VeilDivider";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
@@ -23,10 +21,6 @@ const sidePanel = "relative overflow-hidden border border-transparent bg-[#02010
 
 const goldText = "text-[#b98a32]";
 const mutedGoldText = "text-[#b98a32]";
-const signalWaveX = [0, 34, 46, 56, 66, 86, 94, 101, 108, 116, 124, 154, 168, 184, 202, 230, 240, 250, 260, 285, 294, 301, 309, 318, 327, 360];
-const signalWaveY = [32, 32, 30, 34, 32, 32, 27, 42, 12, 51, 32, 32, 29, 35, 32, 32, 30, 34, 32, 32, 25, 44, 15, 50, 32, 32];
-const signalWaveBase = toSignalPoints(signalWaveY);
-
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
@@ -147,20 +141,6 @@ function RightIntel({ content }: { content: SiteContent["home"] }) {
         <p className="mt-4 border-t border-[#202224] pt-3 font-mono text-[9px] uppercase tracking-[0.18em] text-[#6f6654] sm:mt-5 sm:text-[10px] sm:tracking-[0.2em]">5 files</p>
       </div>
 
-      <div className={`${filePanel} p-3 sm:p-4`}>
-        <p className={`font-mono text-[9px] uppercase tracking-[0.2em] sm:text-[10px] sm:tracking-[0.24em] ${goldText}`}>Signal feed</p>
-        <div className="signal-feed-wave mt-5 h-9 sm:mt-7 sm:h-10" aria-hidden="true">
-          <svg className="signal-feed-svg" viewBox="0 0 360 64" preserveAspectRatio="none" focusable="false">
-            <g className="signal-feed-track">
-              <g transform="translate(-360 0)">
-                <SignalWavePath />
-              </g>
-              <SignalWavePath />
-            </g>
-          </svg>
-        </div>
-      </div>
-
       <div className={`${filePanel} hidden p-4 sm:block`}>
         <p className={`font-mono text-[10px] uppercase tracking-[0.24em] ${goldText}`}>Encryption</p>
         <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#b98a32]">AES-256 / SHA-512</p>
@@ -187,8 +167,7 @@ function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToP
         <ArrowRight className="mt-3 h-4 w-4 sm:mt-4" aria-hidden="true" />
       </button>
       <div className="relative hidden min-h-24 overflow-hidden p-5 sm:block">
-        <ThreeWireGlobe className="pointer-events-none absolute bottom-[-3.2rem] right-[-1.8rem] h-[150px] w-[150px] opacity-[0.16] md:bottom-[-3.8rem] md:right-[-2.2rem] md:h-[180px] md:w-[180px] lg:h-[190px] lg:w-[190px]" />
-        <div className="mt-12 h-px bg-gradient-to-r from-transparent via-[#7d6a45]/60 to-transparent" aria-hidden="true" />
+        <div className="h-full min-h-14 bg-[linear-gradient(115deg,transparent_0_28%,rgba(185,138,50,0.10)_28%_29%,transparent_29%_58%,rgba(125,106,69,0.16)_58%_59%,transparent_59%),radial-gradient(circle_at_78%_35%,rgba(185,138,50,0.16),transparent_28%)]" aria-hidden="true" />
       </div>
     </div>
   );
@@ -211,16 +190,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.launchChanges.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[1.02] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
             <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
-            <div className="mt-8 signal-feed-wave h-10 max-w-md" aria-hidden="true">
-              <svg className="signal-feed-svg" viewBox="0 0 360 64" preserveAspectRatio="none" focusable="false">
-                <g className="signal-feed-track">
-                  <g transform="translate(-360 0)">
-                    <SignalWavePath />
-                  </g>
-                  <SignalWavePath />
-                </g>
-              </svg>
-            </div>
+            <div className="mt-8 h-px max-w-md bg-gradient-to-r from-[#7d6a45]/70 via-[#202224] to-transparent" aria-hidden="true" />
           </div>
 
           <div className="grid gap-px bg-[#202224] sm:grid-cols-3">
@@ -238,9 +208,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
 
       <div className="mt-4 grid gap-4 sm:mt-5 sm:gap-5 xl:grid-cols-[1.15fr_0.85fr]">
         <section className="relative overflow-hidden border border-[#202224] bg-[#050302] p-5 sm:p-7 md:p-9">
-          <div className="pointer-events-none absolute -right-20 bottom-[-7rem] h-80 w-80 opacity-[0.12]" aria-hidden="true">
-            <ThreeWireGlobe className="h-full w-full" />
-          </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
           <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.interfacePreview.eyebrow}</p>
@@ -370,70 +338,4 @@ function MicroBlock({ label, lines, icon }: { label: string; lines: readonly str
       </div>
     </div>
   );
-}
-
-function SignalWavePath() {
-  const softRef = useRef<SVGPolylineElement | null>(null);
-  const lineRef = useRef<SVGPolylineElement | null>(null);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    if (reducedMotion) {
-      softRef.current?.setAttribute("points", signalWaveBase);
-      lineRef.current?.setAttribute("points", signalWaveBase);
-      return;
-    }
-
-    let current = createSignalTarget();
-    let target = createSignalTarget();
-    let frameId = 0;
-    let nextTargetAt = 0;
-
-    const tick = (time: number) => {
-      if (time >= nextTargetAt) {
-        target = createSignalTarget();
-        nextTargetAt = time + 720 + Math.random() * 760;
-      }
-
-      current = current.map((value, index) => value + (target[index] - value) * 0.045);
-      const points = toSignalPoints(current);
-      softRef.current?.setAttribute("points", points);
-      lineRef.current?.setAttribute("points", points);
-
-      frameId = window.requestAnimationFrame(tick);
-    };
-
-    frameId = window.requestAnimationFrame(tick);
-
-    return () => window.cancelAnimationFrame(frameId);
-  }, []);
-
-  return (
-    <>
-      <polyline ref={softRef} className="signal-feed-line signal-feed-line-soft" points={signalWaveBase} />
-      <polyline ref={lineRef} className="signal-feed-line" points={signalWaveBase} />
-    </>
-  );
-}
-
-function createSignalTarget() {
-  const firstPulse = 0.82 + Math.random() * 0.38;
-  const secondPulse = 0.78 + Math.random() * 0.44;
-
-  return signalWaveY.map((baseY, index) => {
-    const jitter = index === 8 || index === 9 || index === 22 || index === 23 ? 2.2 : 0.9;
-    let y = baseY + (Math.random() - 0.5) * jitter;
-
-    if (index === 8) y = 32 - 20 * firstPulse - Math.random() * 2.5;
-    if (index === 9) y = 32 + 19 * firstPulse + Math.random() * 2.5;
-    if (index === 22) y = 32 - 18 * secondPulse - Math.random() * 2.2;
-    if (index === 23) y = 32 + 18 * secondPulse + Math.random() * 2.2;
-
-    return Math.max(8, Math.min(56, y));
-  });
-}
-
-function toSignalPoints(points: readonly number[]) {
-  return points.map((y, index) => `${signalWaveX[index]},${y.toFixed(1)}`).join(" ");
 }
