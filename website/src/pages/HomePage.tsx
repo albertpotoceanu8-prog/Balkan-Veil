@@ -82,6 +82,33 @@ const launchCardMotion: Variants = {
   },
 };
 
+const splitSectionMotion: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+    },
+  },
+};
+
+const splitCardLeftMotion: Variants = {
+  hidden: { opacity: 0, x: "calc(-100% - 5rem)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const splitCardRightMotion: Variants = {
+  hidden: { opacity: 0, x: "calc(100% + 5rem)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
@@ -281,8 +308,14 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </div>
       </motion.div>
 
-      <div className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[1.15fr_0.85fr]">
-        <section className="relative overflow-hidden border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-10">
+      <motion.div
+        variants={splitSectionMotion}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
+        className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[1.15fr_0.85fr]"
+      >
+        <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden border border-[#202224] bg-[#050302] p-6 will-change-transform sm:p-8 md:p-10">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
           <div className="relative grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
@@ -309,9 +342,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <section className="relative overflow-hidden border border-[#202224] bg-[#020100]">
+        <motion.section variants={splitCardRightMotion} className="relative overflow-hidden border border-[#202224] bg-[#020100] will-change-transform">
           <div className="border-b border-[#202224] px-6 py-5 sm:px-7">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.methodPreview.eyebrow}</p>
           </div>
@@ -327,8 +360,8 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
               ))}
             </div>
           </div>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
 
       <div className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[0.82fr_1.18fr]">
         <section className="border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-10">
