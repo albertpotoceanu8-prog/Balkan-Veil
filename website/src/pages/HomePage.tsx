@@ -1,5 +1,6 @@
 import { ArrowRight, CircleDot, Lock, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
 import { SignalLedger } from "@/components/SignalLedger";
 import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
@@ -23,6 +24,40 @@ const sidePanel = "relative overflow-hidden border border-transparent bg-[#02010
 
 const goldText = "text-[#b98a32]";
 const mutedGoldText = "text-[#b98a32]";
+
+const launchSectionMotion: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.16,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const launchIntroMotion: Variants = {
+  hidden: { opacity: 0, x: -140, filter: "blur(12px)" },
+  visible: {
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const launchCardMotion: Variants = {
+  hidden: { opacity: 0, y: 44, scale: 0.82, rotateX: 12, z: -260, filter: "blur(16px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateX: 0,
+    z: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.95, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
@@ -189,28 +224,34 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
     <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-12 text-[#b6a27a] sm:px-5 sm:pb-16 md:px-8 md:pb-24">
       <VeilDivider label={content.builtAround} className="mb-7 md:mb-10" />
 
-      <div className="relative overflow-hidden border border-[#202224] bg-[#030201]">
+      <motion.div
+        variants={launchSectionMotion}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.28 }}
+        className="relative overflow-hidden border border-[#202224] bg-[#030201]"
+      >
         <div className="pointer-events-none absolute inset-0 operator-grid opacity-20" aria-hidden="true" />
         <div className="relative grid gap-px bg-[#202224] lg:grid-cols-[0.78fr_1.22fr]">
-          <div className="bg-[#050302] p-6 sm:p-8 md:p-12">
+          <motion.div variants={launchIntroMotion} className="bg-[#050302] p-6 sm:p-8 md:p-12">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.launchChanges.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-[1.02] text-[#c8ad72] sm:text-5xl md:text-6xl">{content.builtTitle}</h2>
             <p className="mt-6 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.launchChanges.text}</p>
             <div className="mt-8 h-px max-w-md bg-gradient-to-r from-[#7d6a45]/70 via-[#202224] to-transparent" aria-hidden="true" />
-          </div>
+          </motion.div>
 
-          <div className="grid gap-3 bg-[#050302] p-3 sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
+          <div className="grid gap-3 bg-[#050302] p-3 [perspective:1100px] sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
             {content.valueProps.map((item, index) => (
-              <article key={item.title} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 sm:p-6 md:p-7">
+              <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 [transform-style:preserve-3d] sm:p-6 md:p-7">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                 <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] ${mutedGoldText}`}>control 0{index + 1}</p>
                 <h3 className="mt-12 font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{item.title}</h3>
                 <p className="mt-5 text-sm leading-7 text-[#777772]">{item.text}</p>
-              </article>
+              </motion.article>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[1.15fr_0.85fr]">
         <section className="relative overflow-hidden border border-[#202224] bg-[#050302] p-6 sm:p-8 md:p-10">
