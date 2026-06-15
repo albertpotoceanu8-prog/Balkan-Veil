@@ -19,8 +19,8 @@ export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
             <p className="-rotate-90 whitespace-nowrap font-mono text-[9px] uppercase tracking-[0.24em] text-[#6f6654]">mockup</p>
           </div>
         </div>
-        <div className="p-6 md:p-7">
-          <div className="mb-6 flex items-center justify-between border-b border-[#202224] pb-4">
+        <div className="p-7 md:p-9">
+          <div className="mb-8 flex items-center justify-between border-b border-[#202224] pb-5">
             <div className="flex items-center gap-2" aria-hidden="true">
               <span className="h-2 w-8 border border-[#d2aa55]/50 bg-[#d2aa55]/12" />
               <span className="h-2 w-4 border border-emerald-300/30 bg-emerald-300/10" />
@@ -29,15 +29,15 @@ export function VisualMockupCard({ item, index }: VisualMockupCardProps) {
           </div>
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#b98a32]">{item.label}</p>
           <h3 className="mt-4 font-serif text-3xl text-[#c8ad72]">{item.title}</h3>
-          <div className="mt-8 grid gap-px border border-[#202224] bg-[#202224]">
+          <div className="mt-10 grid gap-px border border-[#202224] bg-[#202224]">
             {item.lines.map((line) => (
-              <div key={line} className="grid grid-cols-[1fr_auto] items-center bg-[#020100] px-4 py-3">
+              <div key={line} className="grid grid-cols-[1fr_auto] items-center bg-[#020100] px-5 py-4">
                 <p className="text-sm text-[#787873]">{line}</p>
                 <span className="h-1.5 w-10 bg-[#d2aa55]/55" aria-hidden="true" />
               </div>
             ))}
           </div>
-          <div className="mt-9 grid h-28 grid-cols-[1.2fr_0.8fr_1fr_0.5fr] border border-[#202224] bg-black/35" aria-hidden="true">
+          <div className="mt-11 grid h-32 grid-cols-[1.2fr_0.8fr_1fr_0.5fr] border border-[#202224] bg-black/35" aria-hidden="true">
             <div className="border-r border-[#202224] bg-[#b98a32]/[0.035]" />
             <div className="border-r border-[#202224] bg-[#b98a32]/[0.06]" />
             <div className="border-r border-[#202224] bg-neutral-300/[0.025]" />

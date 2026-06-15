@@ -61,7 +61,7 @@ export function Navbar({
   const isGroupActive = (group: NavigationGroup) => page === group.page || Boolean(group.children?.some(([key]) => key === page));
 
   return (
-    <nav className="relative z-20 mx-auto flex max-w-[1500px] items-center justify-between px-5 py-5 md:px-8 md:py-8" aria-label="Primary navigation">
+    <nav className="relative z-20 mx-auto flex max-w-[1500px] items-center justify-between px-5 py-7 md:px-8 md:py-12" aria-label="Primary navigation">
       <button type="button" onClick={() => goToPage("home")} className="flex items-center gap-4 text-left" aria-label="Balkan Veil home">
         <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black md:h-14 md:w-14">
           <img src={LOGO_SRC} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full object-cover" />
@@ -72,7 +72,7 @@ export function Navbar({
         </div>
       </button>
 
-      <div className="hidden items-center gap-6 text-xs uppercase tracking-[0.28em] text-neutral-400 lg:flex">
+      <div className="hidden items-center gap-7 text-xs uppercase tracking-[0.28em] text-neutral-400 lg:flex">
         {navigationGroups.map((group) => {
           const active = isGroupActive(group);
           const hasChildren = Boolean(group.children?.length);

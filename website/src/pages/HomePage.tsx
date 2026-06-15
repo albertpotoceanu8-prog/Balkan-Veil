@@ -390,8 +390,8 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
   ] as const;
 
   return (
-    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-12 text-[#b6a27a] sm:px-5 sm:pb-16 md:px-8 md:pb-24">
-      <VeilDivider label={content.builtAround} className="mb-7 md:mb-10" />
+    <section className="relative z-10 mx-auto max-w-[1500px] px-2.5 pb-16 text-[#b6a27a] sm:px-5 sm:pb-24 md:px-8 md:pb-32">
+      <VeilDivider label={content.builtAround} className="mb-10 md:mb-14" />
 
       <motion.div
         variants={launchSectionMotion}
@@ -402,7 +402,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       >
         <motion.div variants={launchGridMotion} className="pointer-events-none absolute inset-0 operator-grid" aria-hidden="true" />
         <div className="relative grid gap-px bg-[#050302] lg:grid-cols-[0.78fr_1.22fr]">
-          <motion.div variants={launchIntroMotion} className="relative z-20 border border-[#202224] bg-[#050302] p-6 will-change-transform [transform-style:preserve-3d] sm:p-8 md:p-12">
+          <motion.div variants={launchIntroMotion} className="relative z-20 border border-[#202224] bg-[#050302] p-8 will-change-transform [transform-style:preserve-3d] sm:p-10 md:p-14">
             <div className="pointer-events-none absolute inset-0 border border-[#7d6a45]/20" aria-hidden="true" />
             <motion.div variants={launchFrameSweepMotion} className="pointer-events-none absolute inset-0 z-30 border border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.035),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform" aria-hidden="true" />
             <div className="relative z-10">
@@ -413,9 +413,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
             </div>
           </motion.div>
 
-          <motion.div variants={launchCardsMotion} className="grid gap-3 bg-[#050302] p-3 [perspective:1100px] sm:grid-cols-3 sm:p-4 md:gap-4 md:p-5">
+          <motion.div variants={launchCardsMotion} className="grid gap-5 bg-[#050302] p-5 [perspective:1100px] sm:grid-cols-3 sm:p-6 md:gap-6 md:p-7">
             {content.valueProps.map((item, index) => (
-              <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[18rem] overflow-hidden border border-[#202224] bg-[#020100] p-5 [transform-style:preserve-3d] will-change-transform sm:p-6 md:p-7">
+              <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[19rem] overflow-hidden border border-[#202224] bg-[#020100] p-6 [transform-style:preserve-3d] will-change-transform sm:p-7 md:p-8">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                 <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] ${mutedGoldText}`}>control 0{index + 1}</p>
                 <h3 className="mt-12 font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{item.title}</h3>
@@ -431,9 +431,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
-        className="mt-10 grid gap-10 sm:mt-12 sm:gap-12 md:mt-16 md:gap-14 xl:grid-cols-[1.15fr_0.85fr]"
+        className="mt-14 grid gap-12 sm:mt-16 sm:gap-14 md:mt-20 md:gap-16 xl:grid-cols-[1.15fr_0.85fr]"
       >
-        <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden bg-[#050302] p-7 will-change-transform sm:p-9 md:p-12 lg:p-14">
+        <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden bg-[#050302] p-8 will-change-transform sm:p-10 md:p-14 lg:p-16">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
           <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
             <div>
@@ -450,9 +450,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
                   <span className="hidden h-px w-12 bg-[#7d6a45]/45 sm:block" aria-hidden="true" />
                 </div>
               ))}
-              <div className="mt-10 grid gap-5 sm:grid-cols-3">
+              <div className="mt-12 grid gap-6 sm:grid-cols-3">
                 {content.interfacePreview.metrics.map((metric) => (
-                  <div key={metric} className="bg-black/30 p-5">
+                  <div key={metric} className="bg-black/30 p-6">
                     <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-[#6f6654]">signal</p>
                     <p className="mt-4 font-serif text-2xl text-[#c8ad72]">{metric}</p>
                   </div>
@@ -463,10 +463,10 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </motion.section>
 
         <motion.section variants={splitCardRightMotion} className="relative overflow-hidden bg-[#020100] will-change-transform">
-          <div className="px-7 py-7 sm:px-9 md:px-10">
+          <div className="px-8 py-8 sm:px-10 md:px-12">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.methodPreview.eyebrow}</p>
           </div>
-          <div className="px-7 pb-8 pt-5 sm:px-9 sm:pb-10 md:px-10 md:pb-12">
+          <div className="px-8 pb-10 pt-6 sm:px-10 sm:pb-12 md:px-12 md:pb-14">
             <h2 className="font-serif text-3xl leading-tight text-[#c8ad72]">{content.methodPreview.title}</h2>
             <div className="mt-11">
               {content.methodPreview.steps.map((step, index) => (
@@ -485,9 +485,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
-        className="mt-7 grid gap-7 sm:mt-8 sm:gap-8 md:mt-10 md:gap-10 xl:grid-cols-[0.82fr_1.18fr]"
+        className="mt-12 grid gap-10 sm:mt-14 sm:gap-12 md:mt-16 md:gap-14 xl:grid-cols-[0.82fr_1.18fr]"
       >
-        <motion.section variants={sweepCardMotion} className="relative overflow-hidden border p-6 sm:p-8 md:p-10">
+        <motion.section variants={sweepCardMotion} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
           <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
           <motion.span variants={cardFramePointMotion} className="pointer-events-none absolute left-0 top-0 z-40 h-2 w-2 -translate-x-1/2 rounded-full bg-[#b98a32] shadow-[0_0_16px_rgba(185,138,50,0.75)]" aria-hidden="true" />
           <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border-y border-r border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.18)] will-change-transform" aria-hidden="true" />
@@ -495,9 +495,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.subscriptionIntro.eyebrow}</p>
             <h2 className="mt-5 font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.subscriptionIntro.title}</h2>
             <p className="mt-6 text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.subscriptionIntro.text}</p>
-            <motion.div variants={sweepInnerCardsMotion} className="mt-10 grid gap-4 sm:grid-cols-2">
+            <motion.div variants={sweepInnerCardsMotion} className="mt-12 grid gap-6 sm:grid-cols-2">
               {content.subscriptionIntro.points.map((point, index) => (
-                <motion.div key={point} variants={sweepInnerCardMotion} className="border p-4">
+                <motion.div key={point} variants={sweepInnerCardMotion} className="border p-5">
                   <p className={`font-mono text-[9px] uppercase tracking-[0.22em] ${mutedGoldText}`}>node 0{index + 1}</p>
                   <p className="mt-4 font-serif text-xl text-[#c8ad72]">{point}</p>
                 </motion.div>
@@ -506,20 +506,20 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
           </motion.div>
         </motion.section>
 
-        <motion.section variants={sweepCardDarkMotion} className="relative overflow-hidden border p-6 sm:p-8 md:p-10">
+        <motion.section variants={sweepCardDarkMotion} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
           <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
           <motion.span variants={cardFramePointMotion} className="pointer-events-none absolute left-0 top-0 z-40 h-2 w-2 -translate-x-1/2 rounded-full bg-[#b98a32] shadow-[0_0_16px_rgba(185,138,50,0.75)]" aria-hidden="true" />
           <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border-y border-r border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.18)] will-change-transform" aria-hidden="true" />
           <motion.div variants={sweepContentMotion} className="relative z-10">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.beforeAfter.eyebrow}</p>
             <h2 className="mt-5 max-w-3xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl">{content.beforeAfter.title}</h2>
-            <motion.div variants={sweepInnerCardsMotion} className="mt-10 grid gap-7 md:grid-cols-2">
+            <motion.div variants={sweepInnerCardsMotion} className="mt-12 grid gap-9 md:grid-cols-2">
               {beforeAfterColumns.map((column) => (
                 <div key={column.label}>
                   <p className={`font-mono text-[10px] uppercase tracking-[0.26em] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{column.label}</p>
-                  <div className="mt-5 grid gap-3">
+                  <div className="mt-6 grid gap-4">
                     {column.items.map((item, index) => (
-                      <motion.div key={item} variants={sweepInnerCardMotion} className="grid grid-cols-[2.4rem_1fr] gap-3 border px-4 py-3">
+                      <motion.div key={item} variants={sweepInnerCardMotion} className="grid grid-cols-[2.4rem_1fr] gap-4 border px-5 py-4">
                         <span className={`font-mono text-[10px] ${column.tone === "gold" ? "text-[#b98a32]" : "text-[#6f6654]"}`}>{String(index + 1).padStart(2, "0")}</span>
                         <span className="text-sm leading-6 text-[#8a806c]">{item}</span>
                       </motion.div>
@@ -532,20 +532,20 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </motion.section>
       </motion.div>
 
-      <section className="relative mt-7 overflow-hidden border border-[#202224] bg-[#050302] p-6 sm:mt-8 sm:p-8 md:mt-10 md:p-10">
+      <section className="relative mt-12 overflow-hidden border border-[#202224] bg-[#050302] p-8 sm:mt-14 sm:p-10 md:mt-16 md:p-14">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(185,138,50,0.045),transparent)]" aria-hidden="true" />
-        <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
             <ShieldCheck className="h-7 w-7 text-[#b98a32] sm:h-8 sm:w-8" aria-hidden="true" />
             <p className={`mt-5 font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.finalCta.eyebrow}</p>
             <h2 className="mt-5 max-w-4xl font-serif text-3xl leading-tight text-[#c8ad72] sm:text-5xl md:text-6xl">{content.finalCta.title}</h2>
             <p className="mt-5 max-w-2xl text-sm leading-7 text-[#786f5e] md:text-base md:leading-8">{content.finalCta.text}</p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:min-w-[24rem] lg:grid-cols-1">
-            <button type="button" onClick={() => goToPage("access")} className="min-h-12 border border-[#b98a32] bg-[#b98a32] px-5 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+          <div className="grid gap-5 sm:grid-cols-2 lg:min-w-[24rem] lg:grid-cols-1">
+            <button type="button" onClick={() => goToPage("access")} className="min-h-14 border border-[#b98a32] bg-[#b98a32] px-6 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-black transition hover:bg-[#c8ad72] sm:px-8 sm:text-[10px] sm:tracking-[0.22em]">
               &gt; {content.finalCta.primary}
             </button>
-            <button type="button" onClick={() => goToPage("pricing")} className="min-h-12 border border-[#252729] bg-transparent px-5 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#7d6a45] transition hover:border-[#b98a32] hover:text-[#c8ad72] sm:px-6 sm:text-[10px] sm:tracking-[0.22em]">
+            <button type="button" onClick={() => goToPage("pricing")} className="min-h-14 border border-[#252729] bg-transparent px-6 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#7d6a45] transition hover:border-[#b98a32] hover:text-[#c8ad72] sm:px-8 sm:text-[10px] sm:tracking-[0.22em]">
               &gt; {content.finalCta.secondary}
             </button>
           </div>
@@ -557,10 +557,10 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         initial="hidden"
         whileInView="visible"
         viewport={{ once: false, amount: 0.45, margin: "0px 0px -10% 0px" }}
-        className="mt-7 grid gap-3 sm:mt-8 sm:grid-cols-3 md:mt-10 md:gap-4"
+        className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-3 md:mt-16 md:gap-6"
       >
         {content.audience.map((item, index) => (
-          <motion.div key={item} variants={audienceCardDropMotion} className="grid grid-cols-[2rem_1fr_auto] items-center gap-2 border border-[#202224] bg-[#020100]/70 px-3 py-3">
+          <motion.div key={item} variants={audienceCardDropMotion} className="grid grid-cols-[2rem_1fr_auto] items-center gap-4 border border-[#202224] bg-[#020100]/70 px-5 py-4">
             <span className={`font-mono text-[9px] ${mutedGoldText}`}>0{index + 1}</span>
             <span className="text-sm leading-6 text-[#787873]">{item}</span>
             <CircleDot className="h-3.5 w-3.5 text-[#7d6a45]" aria-hidden="true" />

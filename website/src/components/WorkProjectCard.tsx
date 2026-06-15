@@ -21,8 +21,8 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
     <motion.article {...cardMotion}>
       <VeilFrame label={`BV-WORK-${project.number}`} index={labels.scenario} className="archive-noise">
         <div className="grid gap-0 lg:grid-cols-[0.82fr_1.18fr]">
-          <div className="border-b border-[#202224] p-6 md:p-8 lg:border-b-0 lg:border-r">
-            <div className="flex items-start justify-between gap-5">
+          <div className="border-b border-[#202224] p-8 md:p-10 lg:border-b-0 lg:border-r">
+            <div className="flex items-start justify-between gap-7">
               <div>
                 <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-[#b98a32] md:text-xs md:tracking-[0.3em]">{project.category}</p>
                 <h3 className="mt-5 max-w-xl font-serif text-3xl leading-tight text-[#c8ad72] md:mt-6 md:text-5xl">{project.title}</h3>
@@ -30,9 +30,9 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
               <ArchiveStamp code={project.number} label="BV" status={labels.scenario} align="right" className="hidden sm:flex" />
             </div>
 
-            <p className="mt-6 max-w-xl text-base leading-7 text-[#787873] md:mt-8 md:text-lg md:leading-8">{project.summary}</p>
+            <p className="mt-8 max-w-xl text-base leading-7 text-[#787873] md:mt-10 md:text-lg md:leading-8">{project.summary}</p>
 
-            <div className="mt-8 flex items-end justify-between gap-6 border-t border-[#252729] pt-6 md:mt-10">
+            <div className="mt-10 flex items-end justify-between gap-8 border-t border-[#252729] pt-8 md:mt-12">
               <p className="font-serif text-6xl leading-none text-[#b98a32]/15 md:text-8xl">{project.number}</p>
               <div className="max-w-44 text-right">
                 <span className="mb-4 ml-auto block h-2 w-14 bg-[#7d6a45]/35" aria-hidden="true" />
@@ -41,10 +41,10 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
             </div>
           </div>
 
-          <div className="p-6 md:p-8">
+          <div className="p-8 md:p-10">
             <div className="divide-y divide-[#202224] border-y border-[#202224]">
               {dossierRows.map(([label, value], index) => (
-                <div key={label} className="grid gap-3 py-5 md:grid-cols-[10rem_1fr] md:gap-6">
+                <div key={label} className="grid gap-4 py-7 md:grid-cols-[10rem_1fr] md:gap-8">
                   <div className="flex items-center gap-3">
                     <span className={index === 0 ? "h-2 w-2 bg-red-300/40" : "h-2 w-2 bg-[#7d6a45]/45"} aria-hidden="true" />
                     <span className="font-mono text-xs text-[#b98a32]">{String(index + 1).padStart(2, "0")}</span>
@@ -55,7 +55,7 @@ export function WorkProjectCard({ project, labels }: WorkProjectCardProps) {
               ))}
             </div>
 
-            <div className="mt-7 flex flex-col gap-3 border border-[#202224] bg-black/35 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-9 flex flex-col gap-4 border border-[#202224] bg-black/35 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
               <span className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#786f5e]">BV-WORK-{project.number}</span>
               <span className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#b98a32]">{project.recommendedPlan}</span>
             </div>

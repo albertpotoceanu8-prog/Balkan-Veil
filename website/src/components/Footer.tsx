@@ -25,10 +25,10 @@ type FooterProps = {
 
 export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: FooterProps) {
   return (
-    <footer className="relative z-10 mx-auto max-w-[1500px] px-5 py-16 md:px-8 md:py-20">
-      <div className="operator-surface border border-neutral-900 bg-black/45 p-6 md:p-12 md:backdrop-blur-xl">
+    <footer className="relative z-10 mx-auto max-w-[1500px] px-5 py-24 md:px-8 md:py-36">
+      <div className="operator-surface border border-neutral-900 bg-black/45 p-9 md:p-16 md:backdrop-blur-xl">
         <div className="absolute inset-0 operator-grid opacity-15" aria-hidden="true" />
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr]">
+        <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr_0.8fr_1fr] xl:gap-20">
           <div>
             <div className="flex items-center gap-4">
               <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black md:h-14 md:w-14">
@@ -39,7 +39,7 @@ export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: 
                 <p className="text-xs uppercase tracking-[0.32em] text-neutral-600">{labels.brandLine}</p>
               </div>
             </div>
-            <p className="mt-8 max-w-md text-lg leading-8 text-neutral-500">{labels.description}</p>
+            <p className="mt-10 max-w-md text-lg leading-8 text-neutral-500">{labels.description}</p>
           </div>
 
           <div>
@@ -89,7 +89,7 @@ export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: 
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col justify-between gap-4 border-t border-neutral-900 pt-8 text-sm text-neutral-700 md:flex-row">
+        <div className="mt-14 flex flex-col justify-between gap-5 border-t border-neutral-900 pt-10 text-sm text-neutral-700 md:flex-row">
           <p>{labels.copyright}</p>
           <p>{labels.tagline}</p>
         </div>
