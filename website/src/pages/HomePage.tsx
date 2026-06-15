@@ -114,7 +114,7 @@ const sweepCardMotion: Variants = {
   visible: {
     backgroundColor: "rgba(5,3,2,0.94)",
     borderColor: "rgba(32,34,36,1)",
-    transition: { delay: 1.45, duration: 1.15, ease: "easeOut" },
+    transition: { delay: 2.05, duration: 1.45, ease: "easeOut" },
   },
 };
 
@@ -123,7 +123,7 @@ const sweepCardDarkMotion: Variants = {
   visible: {
     backgroundColor: "rgba(2,1,0,1)",
     borderColor: "rgba(32,34,36,1)",
-    transition: { delay: 1.45, duration: 1.15, ease: "easeOut" },
+    transition: { delay: 2.05, duration: 1.45, ease: "easeOut" },
   },
 };
 
@@ -132,7 +132,7 @@ const cardSweepMotion: Variants = {
   visible: {
     opacity: [0, 1, 1, 0.9],
     scaleX: [0, 0, 1, 1],
-    transition: { delay: 1.35, duration: 3.45, times: [0, 0.08, 0.88, 1], ease: [0.16, 1, 0.3, 1] },
+    transition: { delay: 2.05, duration: 4.45, times: [0, 0.08, 0.9, 1], ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -141,7 +141,7 @@ const cardFramePointMotion: Variants = {
   visible: {
     opacity: [0, 1, 1, 0],
     y: ["0%", "0%", "calc(100% - 0.45rem)", "calc(100% - 0.45rem)"],
-    transition: { duration: 1.55, times: [0, 0.12, 0.88, 1], ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 2.15, times: [0, 0.12, 0.88, 1], ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -150,7 +150,7 @@ const cardFrameVerticalMotion: Variants = {
   visible: {
     opacity: [0, 1, 1],
     scaleY: [0, 1, 1],
-    transition: { duration: 1.55, times: [0, 0.88, 1], ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 2.15, times: [0, 0.88, 1], ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -159,7 +159,7 @@ const sweepContentMotion: Variants = {
   visible: {
     opacity: 1,
     clipPath: "inset(0 0% 0 0)",
-    transition: { delay: 1.55, duration: 3.35, ease: [0.16, 1, 0.3, 1] },
+    transition: { delay: 2.15, duration: 4.35, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
