@@ -5,7 +5,6 @@ import { DossierPanel } from "@/components/DossierPanel";
 import { PageShell } from "@/components/PageShell";
 import { ProcessPreview } from "@/components/ProcessPreview";
 import { SectionCTA } from "@/components/SectionCTA";
-import { SignalLedger } from "@/components/SignalLedger";
 import { Button } from "@/components/ui/button";
 import { cardMotion } from "@/components/motionConfig";
 import { VeilDivider } from "@/components/VeilDivider";
@@ -57,7 +56,15 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
                   <p className="mt-4 text-base leading-7 text-[#786f5e]">{plan.description}</p>
                 </div>
 
-                <SignalLedger items={plan.included} label={content.ledgerLabel} className="mt-7" />
+                <div className="mt-8 space-y-3">
+                  <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#b98a32]">{content.ledgerLabel}</p>
+                  {plan.included.map((item, includedIndex) => (
+                    <div key={item} className="grid grid-cols-[auto_1fr] gap-4 border border-[#202224] bg-black/35 p-4">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#7d6a45]">{String(includedIndex + 1).padStart(2, "0")}</span>
+                      <p className="text-sm leading-6 text-[#787873]">{item}</p>
+                    </div>
+                  ))}
+                </div>
 
                 <div className="mt-auto space-y-4 pt-7">
                   <p className="text-sm leading-6 text-[#787873]">
@@ -83,7 +90,14 @@ export function PricingPage({ content, goToPage }: PricingPageProps) {
       </div>
 
       <DossierPanel eyebrow={content.notIncluded.eyebrow} title={content.notIncluded.title} className="mt-28 archive-noise">
-        <SignalLedger items={content.notIncluded.items} label={content.notIncludedLabel} />
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {content.notIncluded.items.map((item, index) => (
+            <div key={item} className="border border-[#202224] bg-black/35 p-5">
+              <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-[#7d6a45]">{content.notIncludedLabel} / {String(index + 1).padStart(2, "0")}</p>
+              <p className="mt-4 text-sm leading-6 text-[#787873]">{item}</p>
+            </div>
+          ))}
+        </div>
       </DossierPanel>
 
       <motion.div {...cardMotion} className="operator-surface mt-28 border border-[#252729] bg-black/55 p-7 md:p-12">
