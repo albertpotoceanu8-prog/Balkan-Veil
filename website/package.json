@@ -13,25 +13,25 @@
     "build": "tsc --noEmit && vite build && node scripts/generate-static-routes.mjs"
   },
   "dependencies": {
-    "@remotion/cli": "^4.0.465",
-    "@supabase/supabase-js": "^2.106.2",
-    "@vitejs/plugin-react": "^5.0.0",
-    "framer-motion": "^12.0.0",
-    "lucide-react": "^0.468.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "@remotion/cli": "^4.0.484",
+    "@supabase/supabase-js": "^2.108.2",
+    "@vitejs/plugin-react": "^6.0.3",
+    "framer-motion": "^12.42.0",
+    "lucide-react": "^1.22.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "remotion": "^4.0.465",
-    "three": "^0.184.0",
-    "zod": "^4.3.6"
+    "three": "^0.185.0",
+    "zod": "^4.4.3"
   },
   "overrides": {
     "ws": "8.21.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
-    "@types/react": "^19.0.0",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.0.0",
-    "@types/three": "^0.184.1",
+    "@types/three": "^0.185.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^9.0.0",
     "eslint-plugin-react-hooks": "^5.0.0",
