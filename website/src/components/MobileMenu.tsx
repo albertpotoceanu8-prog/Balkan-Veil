@@ -15,7 +15,7 @@ type MobileMenuProps = {
   openCommandMenu: () => void;
 };
 
-export function MobileMenu({ page, navigationGroups, labels, language, onLanguageChange, goToPage, openCommandMenu }: MobileMenuProps) {
+export function MobileMenu({ page, navigationGroups, labels, goToPage, openCommandMenu }: MobileMenuProps) {
   const isGroupActive = (group: NavigationGroup) => page === group.page || Boolean(group.children?.some(([key]) => key === page));
 
   return (
@@ -61,28 +61,6 @@ export function MobileMenu({ page, navigationGroups, labels, language, onLanguag
         <button type="button" onClick={openCommandMenu} className="mt-1 min-h-12 border border-neutral-800 bg-black/50 px-4 py-3 text-left text-[11px] uppercase tracking-[0.22em] text-neutral-200">
           {labels.openCommandMenu}
         </button>
-
-        <div className="mt-1 border border-neutral-800 bg-black/50 p-3">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-neutral-500">{labels.language}</p>
-          <div className="mt-3 grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => onLanguageChange("ro")}
-              aria-pressed={language === "ro"}
-              className={`min-h-11 border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "border-neutral-300/40 bg-neutral-300/10 text-neutral-100" : "border-neutral-800 text-neutral-500"}`}
-            >
-              RO
-            </button>
-            <button
-              type="button"
-              onClick={() => onLanguageChange("en")}
-              aria-pressed={language === "en"}
-              className={`min-h-11 border px-4 py-2.5 text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "border-neutral-300/40 bg-neutral-300/10 text-neutral-100" : "border-neutral-800 text-neutral-500"}`}
-            >
-              ENG
-            </button>
-          </div>
-        </div>
       </div>
     </motion.div>
   );

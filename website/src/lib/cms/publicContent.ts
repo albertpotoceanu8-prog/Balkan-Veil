@@ -11,7 +11,7 @@ const fallbackIcon = "Terminal" as const;
 
 export async function loadPublicCmsContent(base: SiteContent, language: Language): Promise<SiteContent> {
   if (!supabaseConfigured) return base;
-  if (language !== "en") return base;
+  // Site is Romanian-first; the CMS drives whatever language loads.
 
   const [settingsResult, servicesResult, packagesResult, protocolResult] =
     await Promise.all([

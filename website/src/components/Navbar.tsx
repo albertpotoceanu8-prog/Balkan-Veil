@@ -1,6 +1,6 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, Languages, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { LOGO_SRC } from "@/data/logo";
 import type { Language } from "@/data/siteContent";
 import type { NavigationGroup, PageKey } from "@/types/navigation";
@@ -33,8 +33,6 @@ export function Navbar({
   page,
   navigationGroups,
   labels,
-  language,
-  onLanguageChange,
   activeCinematic,
   prefersReducedMotion,
   mobileOpen,
@@ -43,18 +41,10 @@ export function Navbar({
   setCommandOpen,
   goToPage,
 }: NavbarProps) {
-  const [languageOpen, setLanguageOpen] = React.useState(false);
   const [openGroup, setOpenGroup] = React.useState<PageKey | null>(null);
-  const languageMenuId = "language-menu";
-
-  const chooseLanguage = (nextLanguage: Language) => {
-    onLanguageChange(nextLanguage);
-    setLanguageOpen(false);
-  };
 
   const choosePage = (target: PageKey) => {
     setOpenGroup(null);
-    setLanguageOpen(false);
     goToPage(target);
   };
 
@@ -127,51 +117,6 @@ export function Navbar({
         >
           {labels.command}
         </button>
-
-        <div className="relative">
-          <button
-            type="button"
-            onClick={() => setLanguageOpen((value) => !value)}
-            className="flex items-center gap-2 border border-neutral-800 bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.24em] text-neutral-400 transition hover:border-neutral-300/35 hover:text-neutral-200"
-            aria-label={labels.language}
-            aria-expanded={languageOpen}
-            aria-controls={languageMenuId}
-          >
-            <Languages className="h-3.5 w-3.5" aria-hidden="true" />
-            {language === "ro" ? "RO" : "ENG"}
-            <ChevronDown className="h-3.5 w-3.5" aria-hidden="true" />
-          </button>
-
-          <AnimatePresence>
-            {languageOpen && (
-              <motion.div
-                id={languageMenuId}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.18 }}
-                className="absolute right-0 mt-3 w-40 overflow-hidden border border-neutral-300/15 bg-black/95 p-2"
-              >
-                <button
-                  type="button"
-                  onClick={() => chooseLanguage("ro")}
-                  aria-pressed={language === "ro"}
-                  className={`block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "ro" ? "border-neutral-300/20 bg-neutral-300/10 text-neutral-100" : "text-neutral-500 hover:bg-neutral-900 hover:text-neutral-200"}`}
-                >
-                  {labels.ro}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => chooseLanguage("en")}
-                  aria-pressed={language === "en"}
-                  className={`mt-1 block w-full border border-transparent px-3 py-2 text-left text-xs uppercase tracking-[0.2em] transition ${language === "en" ? "border-neutral-300/20 bg-neutral-300/10 text-neutral-100" : "text-neutral-500 hover:bg-neutral-900 hover:text-neutral-200"}`}
-                >
-                  {labels.en}
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
 
         <button
           type="button"
