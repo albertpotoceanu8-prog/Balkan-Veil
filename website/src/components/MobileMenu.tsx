@@ -41,15 +41,16 @@ export function MobileMenu({ page, navigationGroups, labels, language, onLanguag
               {group.label}
             </button>
             {group.children?.length ? (
-              <div className="grid grid-cols-2 gap-2 pl-3">
+              <div className="grid gap-2 pl-3">
                 {group.children.map(([key, label]) => (
                   <button
                     key={key}
                     type="button"
                     onClick={() => goToPage(key)}
                     aria-current={page === key ? "page" : undefined}
-                    className={`min-h-10 border px-3 py-2 text-left text-[11px] uppercase tracking-[0.2em] transition ${page === key ? "border-neutral-300/30 bg-neutral-300/10 text-neutral-100" : "border-neutral-800 bg-black/45 text-neutral-500"}`}
+                    className={`flex min-h-12 items-center gap-3 border px-4 py-3 text-left font-serif text-lg leading-tight transition ${page === key ? "border-neutral-300/30 bg-neutral-300/10 text-neutral-100" : "border-neutral-800 bg-black/45 text-neutral-400"}`}
                   >
+                    <span className="h-1.5 w-1.5 shrink-0 rotate-45 bg-neutral-500" aria-hidden="true" />
                     {label}
                   </button>
                 ))}

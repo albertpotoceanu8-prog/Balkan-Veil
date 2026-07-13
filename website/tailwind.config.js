@@ -1,6 +1,11 @@
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+
+const root = path.dirname(fileURLToPath(import.meta.url)).replace(/\\/g, "/");
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{ts,tsx}"],
+  content: [`${root}/index.html`, `${root}/src/**/*.{ts,tsx}`],
   theme: {
     extend: {
       screens: {

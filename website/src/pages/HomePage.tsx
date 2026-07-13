@@ -15,6 +15,10 @@ type HomePageProps = {
   introDone: boolean;
 };
 
+// Phones scroll fast: collapse the desktop launch/sweep choreography into quick
+// fades so effects land immediately instead of running the long cinematic timing.
+const prefersMobileReveal = typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches;
+
 const archivePanel =
   "relative overflow-hidden bg-transparent";
 
@@ -227,6 +231,47 @@ const audienceCardDropMotion: Variants = {
   },
 };
 
+// On phones, override every launch/sweep variant's timing with a fast fade.
+if (prefersMobileReveal) {
+  const revealVariants: Variants[] = [
+    launchSectionMotion,
+    launchGridMotion,
+    launchIntroMotion,
+    launchFrameSweepMotion,
+    launchCardsMotion,
+    launchCardMotion,
+    splitSectionMotion,
+    splitCardLeftMotion,
+    splitCardRightMotion,
+    sweepCardMotion,
+    sweepCardDarkMotion,
+    cardSweepMotion,
+    cardFramePointMotion,
+    cardFrameVerticalMotion,
+    sweepContentMotion,
+    audienceDropMotion,
+    audienceCardDropMotion,
+  ];
+  for (const variant of revealVariants) {
+    const visible = (variant as { visible?: Record<string, unknown> }).visible;
+    if (visible && typeof visible === "object") {
+      visible.transition = { duration: 0.24, ease: "easeOut", delayChildren: 0, staggerChildren: 0.05 };
+    }
+  }
+}
+
+// Desktop: a section parent orchestrates all its cards at once (cinematic).
+// Mobile: the parent stops orchestrating and each card reveals on its own
+// viewport entry, so off-screen cards no longer animate in pairs.
+const groupReveal = (variants?: Variants, amount = 0.32) =>
+  prefersMobileReveal
+    ? {}
+    : ({ variants, initial: "hidden", whileInView: "visible", viewport: { once: false, amount, margin: "0px 0px -12% 0px" } } as const);
+
+// Mobile: animate each card's variant on mount (whileInView proved unreliable and
+// left some cards invisible). Desktop keeps parent-orchestrated scroll reveal.
+const itemReveal = prefersMobileReveal ? ({ initial: "hidden", animate: "visible" } as const) : {};
+
 export function HomePage({ content, goToPage, cinematic, introDone }: HomePageProps) {
   return (
     <>
@@ -259,7 +304,8 @@ export function HomePage({ content, goToPage, cinematic, introDone }: HomePagePr
 
           <div className="relative grid gap-5 py-5 lg:grid-cols-[0.78fr_2fr_0.85fr] 3xl:grid-cols-[0.9fr_2.25fr_1fr] 4xl:grid-cols-[1fr_2.35fr_1.1fr]">
             <aside className="hidden border border-[#202224] bg-[#020100]/34 p-5 xl:block 3xl:p-7">
-              <SideIntel content={content} />
+              {/* Desktop-only (xl+); never mounted on mobile. */}
+              {!prefersMobileReveal && <SideIntel content={content} />}
             </aside>
 
             <main className="relative min-h-[28rem] px-3 py-8 sm:min-h-[34rem] sm:px-6 sm:py-10 md:min-h-[40rem] md:px-12 md:py-14 3xl:min-h-[48rem] 3xl:px-20 3xl:py-20 4xl:min-h-[54rem]">
@@ -371,7 +417,8 @@ function BottomRail({ content, goToPage }: { content: SiteContent["home"]; goToP
   return (
     <div className="relative grid border-t border-[#202224] md:grid-cols-[0.42fr_1fr_0.45fr_0.85fr] 3xl:grid-cols-[0.5fr_1.25fr_0.5fr_1fr]">
       <div className="hidden border-r border-[#202224] p-4 md:block 3xl:p-6">
-        <ThreeWireGlobe className="h-20 w-full opacity-85 3xl:h-28" />
+        {/* Desktop-only: skip on mobile so three.js/WebGL never loads there. */}
+        {!prefersMobileReveal && <ThreeWireGlobe className="h-20 w-full opacity-85 3xl:h-28" />}
       </div>
       <div className="border-b border-[#202224] p-4 md:border-b-0 md:border-r md:p-5 3xl:p-7">
         <p className="max-w-xl font-mono text-[10px] uppercase leading-6 tracking-[0.14em] text-[#aaa59a] sm:text-xs sm:leading-7 sm:tracking-[0.18em] 3xl:max-w-3xl 3xl:text-sm 3xl:leading-8">{content.dossier.note}</p>
@@ -398,15 +445,12 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       <VeilDivider label={content.builtAround} className="mb-10 md:mb-14" />
 
       <motion.div
-        variants={launchSectionMotion}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
+        {...groupReveal(launchSectionMotion)}
         className="relative overflow-hidden border border-[#202224] bg-[#030201]"
       >
         <motion.div variants={launchGridMotion} className="pointer-events-none absolute inset-0 operator-grid" aria-hidden="true" />
         <div className="relative grid gap-px bg-[#050302] lg:grid-cols-[0.78fr_1.22fr]">
-          <motion.div variants={launchIntroMotion} className="relative z-20 border border-[#202224] bg-[#050302] p-8 will-change-transform [transform-style:preserve-3d] sm:p-10 md:p-14">
+          <motion.div variants={launchIntroMotion} {...itemReveal} className="relative z-20 border border-[#202224] bg-[#050302] p-8 will-change-transform [transform-style:preserve-3d] sm:p-10 md:p-14">
             <div className="pointer-events-none absolute inset-0 border border-[#7d6a45]/20" aria-hidden="true" />
             <motion.div variants={launchFrameSweepMotion} className="pointer-events-none absolute inset-0 z-30 border border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.035),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.22)] will-change-transform" aria-hidden="true" />
             <div className="relative z-10">
@@ -417,9 +461,9 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
             </div>
           </motion.div>
 
-          <motion.div variants={launchCardsMotion} className="grid gap-5 bg-[#050302] p-5 [perspective:1100px] sm:grid-cols-3 sm:p-6 md:gap-6 md:p-7">
+          <motion.div variants={prefersMobileReveal ? undefined : launchCardsMotion} className="grid gap-5 bg-[#050302] p-5 [perspective:1100px] sm:grid-cols-3 sm:p-6 md:gap-6 md:p-7">
             {content.valueProps.map((item, index) => (
-              <motion.article key={item.title} variants={launchCardMotion} className="group relative min-h-[19rem] overflow-hidden border border-[#202224] bg-[#020100] p-6 [transform-style:preserve-3d] will-change-transform sm:p-7 md:p-8">
+              <motion.article key={item.title} variants={launchCardMotion} {...itemReveal} className="group relative min-h-[19rem] overflow-hidden border border-[#202224] bg-[#020100] p-6 [transform-style:preserve-3d] will-change-transform sm:p-7 md:p-8">
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[#7d6a45]/30 opacity-0 transition group-hover:opacity-100" aria-hidden="true" />
                 <p className={`font-mono text-[9px] uppercase tracking-[0.22em] sm:text-[10px] ${mutedGoldText}`}>control 0{index + 1}</p>
                 <h3 className="mt-12 font-serif text-2xl leading-tight text-[#c8ad72] sm:text-3xl">{item.title}</h3>
@@ -431,13 +475,10 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       </motion.div>
 
       <motion.div
-        variants={splitSectionMotion}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
+        {...groupReveal(splitSectionMotion)}
         className="mt-14 grid gap-12 sm:mt-16 sm:gap-14 md:mt-20 md:gap-16 xl:grid-cols-[1.15fr_0.85fr] 3xl:gap-20"
       >
-        <motion.section variants={splitCardLeftMotion} className="relative overflow-hidden bg-[#050302] p-8 will-change-transform sm:p-10 md:p-14 lg:p-16">
+        <motion.section variants={splitCardLeftMotion} {...itemReveal} className="relative overflow-hidden bg-[#050302] p-8 will-change-transform sm:p-10 md:p-14 lg:p-16">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
           <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 3xl:gap-20">
             <div>
@@ -466,7 +507,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
           </div>
         </motion.section>
 
-        <motion.section variants={splitCardRightMotion} className="relative overflow-hidden bg-[#020100] will-change-transform">
+        <motion.section variants={splitCardRightMotion} {...itemReveal} className="relative overflow-hidden bg-[#020100] will-change-transform">
           <div className="px-8 py-8 sm:px-10 md:px-12">
             <p className={`font-mono text-[9px] uppercase tracking-[0.26em] sm:text-[10px] ${goldText}`}>{content.methodPreview.eyebrow}</p>
           </div>
@@ -486,12 +527,10 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       </motion.div>
 
       <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.32, margin: "0px 0px -12% 0px" }}
+        {...groupReveal()}
         className="mt-12 grid gap-10 sm:mt-14 sm:gap-12 md:mt-16 md:gap-14 xl:grid-cols-[0.82fr_1.18fr] 3xl:gap-20"
       >
-        <motion.section variants={sweepCardMotion} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
+        <motion.section variants={sweepCardMotion} {...itemReveal} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
           <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
           <motion.span variants={cardFramePointMotion} className="pointer-events-none absolute left-0 top-0 z-40 h-2 w-2 -translate-x-1/2 rounded-full bg-[#b98a32] shadow-[0_0_16px_rgba(185,138,50,0.75)]" aria-hidden="true" />
           <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border-y border-r border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.18)] will-change-transform" aria-hidden="true" />
@@ -510,7 +549,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
           </motion.div>
         </motion.section>
 
-        <motion.section variants={sweepCardDarkMotion} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
+        <motion.section variants={sweepCardDarkMotion} {...itemReveal} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
           <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
           <motion.span variants={cardFramePointMotion} className="pointer-events-none absolute left-0 top-0 z-40 h-2 w-2 -translate-x-1/2 rounded-full bg-[#b98a32] shadow-[0_0_16px_rgba(185,138,50,0.75)]" aria-hidden="true" />
           <motion.div variants={cardSweepMotion} className="pointer-events-none absolute inset-y-0 left-0 z-20 w-full origin-left border-y border-r border-[#b98a32]/50 bg-[linear-gradient(90deg,rgba(185,138,50,0.045),transparent)] shadow-[0_0_24px_rgba(185,138,50,0.18)] will-change-transform" aria-hidden="true" />
@@ -557,14 +596,11 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
       </section>
 
       <motion.div
-        variants={audienceDropMotion}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.45, margin: "0px 0px -10% 0px" }}
+        {...groupReveal(audienceDropMotion, 0.45)}
         className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-3 md:mt-16 md:gap-6"
       >
         {content.audience.map((item, index) => (
-          <motion.div key={item} variants={audienceCardDropMotion} className="grid grid-cols-[2rem_1fr_auto] items-center gap-4 border border-[#202224] bg-[#020100]/70 px-5 py-4">
+          <motion.div key={item} variants={audienceCardDropMotion} {...itemReveal} className="grid grid-cols-[2rem_1fr_auto] items-center gap-4 border border-[#202224] bg-[#020100]/70 px-5 py-4">
             <span className={`font-mono text-[9px] ${mutedGoldText}`}>0{index + 1}</span>
             <span className="text-sm leading-6 text-[#787873]">{item}</span>
             <CircleDot className="h-3.5 w-3.5 text-[#7d6a45]" aria-hidden="true" />
