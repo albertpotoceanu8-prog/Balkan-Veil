@@ -2,6 +2,7 @@ import React from "react";
 import type { Session } from "@supabase/supabase-js";
 
 import { AdminDashboard } from "@/admin/AdminDashboard";
+import { AdminContent } from "@/admin/AdminContent";
 import { AdminAccessRequests } from "@/admin/AdminAccessRequests";
 import { AdminOfferCalculator } from "@/admin/AdminOfferCalculator";
 import { AdminPackages } from "@/admin/AdminPackages";
@@ -118,12 +119,8 @@ export function AdminApp() {
         description="Create and manage proposal records for qualified prospects."
       />
     ),
-    "/admin/copy": (
-      <AdminPlaceholder
-        title="Interface Copy"
-        description="Manage page copy blocks for the public interface."
-      />
-    ),
+    "/admin/content": <AdminContent />,
+    "/admin/home-interface": <AdminContent />,
     "/admin/analytics": (
       <AdminPlaceholder
         title="Analytics"

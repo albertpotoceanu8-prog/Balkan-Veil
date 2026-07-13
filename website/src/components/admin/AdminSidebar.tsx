@@ -18,7 +18,7 @@ import { AdminBrand } from "./AdminBrand";
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: Home },
   { href: "/admin/site-settings", label: "Site Settings", icon: Settings },
-  { href: "/admin/home-interface", label: "Home Interface", icon: Box },
+  { href: "/admin/home-interface", label: "Site Content", icon: Box },
   { href: "/admin/services", label: "Services Protocols", icon: Shield },
   { href: "/admin/packages", label: "Retainer Vault", icon: Package },
   { href: "/admin/protocol", label: "Execution Protocol", icon: Gauge },

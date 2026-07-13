@@ -9,35 +9,33 @@ import type {
 
 const fallbackIcon = "Terminal" as const;
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/** Deep-merge `override` onto `base`. Arrays and primitives replace; objects merge. */
+export function deepMerge<T>(base: T, override: unknown): T {
+  if (!isPlainObject(base) || !isPlainObject(override)) {
+    return (override === undefined ? base : (override as T));
+  }
+  const result: Record<string, unknown> = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    if (value === undefined) continue;
+    result[key] = isPlainObject(value) && isPlainObject(result[key]) ? deepMerge(result[key], value) : value;
+  }
+  return result as T;
+}
+
 export async function loadPublicCmsContent(base: SiteContent, language: Language): Promise<SiteContent> {
   if (!supabaseConfigured) return base;
-  // Site is Romanian-first; the CMS drives whatever language loads.
 
-  const [settingsResult, servicesResult, packagesResult, protocolResult] =
+  const [settingsResult, servicesResult, packagesResult, protocolResult, overrideResult] =
     await Promise.all([
-      supabase
-        .from("site_settings")
-        .select("*")
-        .eq("singleton_key", "main")
-        .maybeSingle<SiteSettings>(),
-      supabase
-        .from("service_protocols")
-        .select("*")
-        .eq("active", true)
-        .order("display_order", { ascending: true })
-        .returns<ServiceProtocol[]>(),
-      supabase
-        .from("retainer_packages")
-        .select("*")
-        .eq("active", true)
-        .order("display_order", { ascending: true })
-        .returns<RetainerPackage[]>(),
-      supabase
-        .from("protocol_steps")
-        .select("*")
-        .eq("active", true)
-        .order("step_number", { ascending: true })
-        .returns<ProtocolStep[]>(),
+      supabase.from("site_settings").select("*").eq("singleton_key", "main").maybeSingle<SiteSettings>(),
+      supabase.from("service_protocols").select("*").eq("active", true).order("display_order", { ascending: true }).returns<ServiceProtocol[]>(),
+      supabase.from("retainer_packages").select("*").eq("active", true).order("display_order", { ascending: true }).returns<RetainerPackage[]>(),
+      supabase.from("protocol_steps").select("*").eq("active", true).order("step_number", { ascending: true }).returns<ProtocolStep[]>(),
+      supabase.from("content_overrides").select("data").eq("language", language).maybeSingle<{ data: Record<string, unknown> }>(),
     ]);
 
   const settings = settingsResult.data;
@@ -45,7 +43,8 @@ export async function loadPublicCmsContent(base: SiteContent, language: Language
   const packages = packagesResult.data ?? [];
   const protocol = protocolResult.data ?? [];
 
-  return {
+  // Layer 1: structured tables (hero, services, packages, protocol, footer).
+  const mapped: SiteContent = {
     ...base,
     footer: {
       ...base.footer,
@@ -76,14 +75,8 @@ export async function loadPublicCmsContent(base: SiteContent, language: Language
     },
     protocol: {
       ...base.protocol,
-      protocol: protocol.length
-        ? protocol.map((step) => step.title)
-        : base.protocol.protocol,
-      paragraphs: protocol.length
-        ? protocol
-            .map((step) => step.short_description || step.output || "")
-            .filter(Boolean)
-        : base.protocol.paragraphs,
+      protocol: protocol.length ? protocol.map((step) => step.title) : base.protocol.protocol,
+      paragraphs: protocol.length ? protocol.map((step) => step.short_description || step.output || "").filter(Boolean) : base.protocol.paragraphs,
     },
     access: {
       ...base.access,
@@ -97,4 +90,8 @@ export async function loadPublicCmsContent(base: SiteContent, language: Language
         : base.access.packages,
     },
   };
+
+  // Layer 2: generic per-section overrides edited in the admin (wins over everything).
+  const override = overrideResult.data?.data;
+  return isPlainObject(override) ? deepMerge(mapped, override) : mapped;
 }
