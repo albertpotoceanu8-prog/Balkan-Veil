@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { MobileMenu } from "@/components/MobileMenu";
 import { Navbar } from "@/components/Navbar";
 import { Seo } from "@/components/Seo";
+import { SiteImagesProvider } from "@/lib/siteImages";
 import { siteContent, type Language } from "@/data/siteContent";
 import { getAppMode } from "@/lib/appMode";
 import { buildPublicPath, parsePublicRoute, type PublicRoute } from "@/lib/routing";
@@ -176,6 +177,7 @@ function PublicSite() {
   };
 
   return (
+    <SiteImagesProvider value={content.images}>
     <main className="min-h-screen overflow-hidden bg-[#020100] text-neutral-200">
       <Seo language={language} page={page} content={content} canonicalPath={route.canonicalPath} isNotFound={route.isNotFound} />
       <AnimatePresence>{introVisible && <CinematicIntro compact={isMobile} tagline={content.footer.tagline} />}</AnimatePresence>
@@ -238,6 +240,7 @@ function PublicSite() {
 
       <Footer navigationGroups={content.navigationGroups} labels={content.footer} activeCinematic={activeCinematic} goToPage={goToPage} />
     </main>
+    </SiteImagesProvider>
   );
 }
 

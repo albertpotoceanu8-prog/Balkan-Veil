@@ -1,4 +1,4 @@
-import { LOGO_SRC } from "@/data/logo";
+import { useSiteImages } from "@/lib/siteImages";
 import type { NavigationGroup, PageKey } from "@/types/navigation";
 
 type FooterProps = {
@@ -24,6 +24,7 @@ type FooterProps = {
 };
 
 export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: FooterProps) {
+  const { logo } = useSiteImages();
   return (
     <footer className="relative z-10 mx-auto max-w-[1500px] px-5 py-24 md:px-8 md:py-36 3xl:max-w-[1800px] 3xl:px-12 3xl:py-44 4xl:max-w-[2560px] 4xl:px-16">
       <div className="operator-surface border border-neutral-900 bg-black/45 p-9 md:p-16 md:backdrop-blur-xl 3xl:p-20 4xl:p-24">
@@ -32,7 +33,7 @@ export function Footer({ navigationGroups, labels, activeCinematic, goToPage }: 
           <div>
             <div className="flex items-center gap-4">
               <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black md:h-14 md:w-14">
-                <img src={LOGO_SRC} alt="Balkan Veil logo" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                <img src={logo} alt="Balkan Veil logo" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </div>
               <div>
                 <p className="font-serif text-2xl tracking-[0.22em] text-neutral-200">BALKAN VEIL</p>

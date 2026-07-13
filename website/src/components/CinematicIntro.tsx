@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { LOGO_SRC } from "@/data/logo";
+import { useSiteImages } from "@/lib/siteImages";
 
 type CinematicIntroProps = {
   compact?: boolean;
@@ -9,6 +9,7 @@ type CinematicIntroProps = {
 export function CinematicIntro({ compact = false, tagline = "Simple. Dark. Well built." }: CinematicIntroProps) {
   const shouldReduceMotion = useReducedMotion();
   const shortMotion = compact || Boolean(shouldReduceMotion);
+  const { logo } = useSiteImages();
 
   return (
     <motion.div
@@ -32,7 +33,7 @@ export function CinematicIntro({ compact = false, tagline = "Simple. Dark. Well 
           transition={{ duration: shortMotion ? 0.35 : 1.5 }}
           className="mb-8 flex h-44 w-44 items-center justify-center rounded-full border border-neutral-300/20 bg-black sm:h-56 sm:w-56 md:mb-12 md:h-80 md:w-80 md: lg:h-96 lg:w-96"
         >
-          <img src={LOGO_SRC} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full rounded-full object-cover" />
+          <img src={logo} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full rounded-full object-cover" />
         </motion.div>
 
         <motion.h1

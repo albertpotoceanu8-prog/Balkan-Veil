@@ -148,7 +148,13 @@ type ServiceArchitectureContent = {
   nodes: string[];
 };
 
+export type SiteImages = {
+  logo: string;
+  worldMap: string;
+};
+
 export type SiteContent = {
+  images: SiteImages;
   navItems: NavItem[];
   navigationGroups: NavigationGroup[];
   commandItems: CommandItem[];

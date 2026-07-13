@@ -3,6 +3,7 @@ import type { Session } from "@supabase/supabase-js";
 
 import { AdminDashboard } from "@/admin/AdminDashboard";
 import { AdminContent } from "@/admin/AdminContent";
+import { AdminMedia } from "@/admin/AdminMedia";
 import { AdminAccessRequests } from "@/admin/AdminAccessRequests";
 import { AdminOfferCalculator } from "@/admin/AdminOfferCalculator";
 import { AdminPackages } from "@/admin/AdminPackages";
@@ -121,6 +122,7 @@ export function AdminApp() {
     ),
     "/admin/content": <AdminContent />,
     "/admin/home-interface": <AdminContent />,
+    "/admin/media": <AdminMedia />,
     "/admin/analytics": (
       <AdminPlaceholder
         title="Analytics"

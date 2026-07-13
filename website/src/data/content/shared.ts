@@ -1,9 +1,15 @@
 import type { Language, SiteContent } from "../contentTypes";
 
-type SharedContent = Pick<SiteContent, "navItems" | "navigationGroups" | "commandItems" | "navigation" | "mobileMenu" | "commandMenu" | "footer" | "terminal">;
+type SharedContent = Pick<SiteContent, "images" | "navItems" | "navigationGroups" | "commandItems" | "navigation" | "mobileMenu" | "commandMenu" | "footer" | "terminal">;
+
+const siteImages = {
+  logo: "/balkan-veil-logo.webp",
+  worldMap: "/assets/tactical-world-map-v2.jpg",
+};
 
 export const sharedContent = {
   ro: {
+    images: siteImages,
     navItems: [
       ["home", "Acasa"],
       ["studio", "Studio"],
@@ -87,6 +93,7 @@ export const sharedContent = {
     },
   },
   en: {
+    images: siteImages,
     navItems: [
       ["home", "Home"],
       ["studio", "Studio"],

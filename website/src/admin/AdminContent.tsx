@@ -11,6 +11,7 @@ const LANGUAGE = "ro" as const;
 
 // Sections a client can edit (structural navigation is intentionally excluded).
 const SECTIONS: { key: string; label: string }[] = [
+  { key: "images", label: "Images" },
   { key: "home", label: "Home" },
   { key: "servicesPage", label: "Services" },
   { key: "pricing", label: "Pricing" },
@@ -77,13 +78,19 @@ function TreeEditor({ value, path, onChange, onArray }: {
   onArray: (op: "add" | "remove", path: Path) => void;
 }) {
   if (typeof value === "string") {
+    const looksLikeImage = /\.(png|jpe?g|webp|gif|svg|avif|mp4)(\?|$)/i.test(value) || /\/storage\/v1\/object\/public\//.test(value);
     return (
-      <textarea
-        value={value}
-        rows={fieldRows(value)}
-        onChange={(e) => onChange(path, e.target.value)}
-        className="w-full resize-y border border-[#D4AF37]/20 bg-[#050505] px-3 py-2 text-sm leading-6 text-[#F3EAD2] outline-none transition focus:border-[#D4AF37]"
-      />
+      <div>
+        <textarea
+          value={value}
+          rows={fieldRows(value)}
+          onChange={(e) => onChange(path, e.target.value)}
+          className="w-full resize-y border border-[#D4AF37]/20 bg-[#050505] px-3 py-2 text-sm leading-6 text-[#F3EAD2] outline-none transition focus:border-[#D4AF37]"
+        />
+        {looksLikeImage && value ? (
+          <img src={value} alt="" className="mt-2 h-24 w-auto max-w-full border border-[#D4AF37]/15 bg-black object-contain" />
+        ) : null}
+      </div>
     );
   }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { LOGO_SRC } from "@/data/logo";
+import { useSiteImages } from "@/lib/siteImages";
 import type { Language } from "@/data/siteContent";
 import type { NavigationGroup, PageKey } from "@/types/navigation";
 
@@ -42,6 +42,7 @@ export function Navbar({
   goToPage,
 }: NavbarProps) {
   const [openGroup, setOpenGroup] = React.useState<PageKey | null>(null);
+  const { logo } = useSiteImages();
 
   const choosePage = (target: PageKey) => {
     setOpenGroup(null);
@@ -54,7 +55,7 @@ export function Navbar({
     <nav className="relative z-20 mx-auto flex max-w-[1500px] items-center justify-between px-5 py-7 md:px-8 md:py-12 3xl:max-w-[1800px] 3xl:px-12 4xl:max-w-[2560px] 4xl:px-16" aria-label="Primary navigation">
       <button type="button" onClick={() => goToPage("home")} className="flex items-center gap-4 text-left" aria-label="Balkan Veil home">
         <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-neutral-400/30 bg-black md:h-14 md:w-14">
-          <img src={LOGO_SRC} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full object-cover" />
+          <img src={logo} alt="Balkan Veil logo" loading="eager" decoding="async" className="h-full w-full object-cover" />
         </div>
         <div>
           <p className="font-serif text-lg tracking-[0.18em] text-neutral-200 md:text-2xl md:tracking-[0.24em]">BALKAN VEIL</p>

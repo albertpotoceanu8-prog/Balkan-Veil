@@ -4,6 +4,7 @@ import type { Variants } from "framer-motion";
 import { DecodeText } from "@/components/DecodeText";
 import { SignalLedger } from "@/components/SignalLedger";
 import { ThreeWireGlobe } from "@/components/ThreeWireGlobe";
+import { useSiteImages } from "@/lib/siteImages";
 import { VeilDivider } from "@/components/VeilDivider";
 import type { SiteContent } from "@/data/siteContent";
 import type { PageKey } from "@/types/navigation";
@@ -360,11 +361,12 @@ function HeroTitle({ text, cinematic, introDone }: { text: string; cinematic: bo
 }
 
 function SideIntel({ content }: { content: SiteContent["home"] }) {
+  const { worldMap } = useSiteImages();
   return (
     <div className="space-y-6 3xl:space-y-8">
       <MicroBlock label="Location" lines={["Balkan Veil HQ", "Sarajevo / Remote"]} />
       <div className={`${sidePanel} p-2`}>
-        <img src="/assets/tactical-world-map-v2.jpg" alt="" aria-hidden="true" className="h-40 w-full object-cover opacity-80 [filter:brightness(.72)_contrast(1.12)_saturate(.88)] 3xl:h-56" />
+        <img src={worldMap} alt="" aria-hidden="true" className="h-40 w-full object-cover opacity-80 [filter:brightness(.72)_contrast(1.12)_saturate(.88)] 3xl:h-56" />
       </div>
       <MicroBlock label="Status" lines={["System secure", content.dossier.status]} icon={<Lock className="h-3.5 w-3.5" />} />
       <MicroBlock label="Clearance level" lines={["Black access", content.dossier.stampCode]} />
