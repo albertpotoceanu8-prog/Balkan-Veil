@@ -1,5 +1,5 @@
 import React from "react";
-import { Bell, Search } from "lucide-react";
+import { Bell, Menu, Search, X } from "lucide-react";
 
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
 import { supabase } from "@/lib/supabase/client";
@@ -21,6 +21,7 @@ const newSignalOptions = [
 
 export function AdminShell({ children, path, navigate }: AdminShellProps) {
   const [newSignalOpen, setNewSignalOpen] = React.useState(false);
+  const [navOpen, setNavOpen] = React.useState(false);
 
   const logout = async () => {
     await supabase.auth.signOut();
@@ -38,19 +39,37 @@ export function AdminShell({ children, path, navigate }: AdminShellProps) {
       <div className="pointer-events-none fixed inset-0 opacity-[0.18] [background-image:linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.018)_1px,transparent_1px)] [background-size:72px_72px]" />
       <div className="pointer-events-none fixed inset-0 opacity-30 [background-image:radial-gradient(circle_at_35%_80%,rgba(212,175,55,0.16),transparent_18%),radial-gradient(circle_at_72%_14%,rgba(255,255,255,0.06),transparent_22%)]" />
 
-      <div className="relative grid h-screen w-screen grid-cols-[290px_minmax(0,1fr)]">
-        <AdminSidebar path={path} navigate={navigate} onLogout={logout} />
+      <div className="relative grid h-screen w-screen grid-cols-1 lg:grid-cols-[290px_minmax(0,1fr)]">
+        <AdminSidebar path={path} navigate={navigate} onLogout={logout} open={navOpen} onClose={() => setNavOpen(false)} />
+
+        {navOpen ? (
+          <button
+            type="button"
+            aria-label="Close menu"
+            onClick={() => setNavOpen(false)}
+            className="fixed inset-0 z-40 bg-black/65 backdrop-blur-sm lg:hidden"
+          />
+        ) : null}
 
         <section className="h-screen min-w-0 overflow-hidden">
-          <header className="sticky top-0 z-20 flex h-[56px] items-center justify-between border-b border-white/[0.07] bg-[#050608]/88 px-8 backdrop-blur-xl">
+          <header className="sticky top-0 z-20 flex h-[56px] items-center justify-between gap-3 border-b border-white/[0.07] bg-[#050608]/88 px-4 backdrop-blur-xl lg:px-8">
             <button
               type="button"
-              className="grid h-8 w-8 place-items-center rounded-full border border-white/[0.07] text-[#A8A8A8]"
+              onClick={() => setNavOpen((current) => !current)}
+              aria-label="Toggle menu"
+              className="grid h-9 w-9 place-items-center rounded-[8px] border border-[#D4AF37]/25 text-[#F2C75C] lg:hidden"
+            >
+              {navOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
+
+            <button
+              type="button"
+              className="hidden h-8 w-8 place-items-center rounded-full border border-white/[0.07] text-[#A8A8A8] lg:grid"
             >
               <span className="h-2 w-2 rounded-full border border-[#F3EAD2]" />
             </button>
 
-            <label className="ml-[125px] mr-auto flex h-[36px] w-[500px] items-center gap-3 rounded-[9px] border border-white/[0.10] bg-[#0d0f14]/86 px-4 shadow-[0_16px_50px_rgba(0,0,0,0.25)]">
+            <label className="mr-auto hidden h-[36px] w-[500px] items-center gap-3 rounded-[9px] border border-white/[0.10] bg-[#0d0f14]/86 px-4 shadow-[0_16px_50px_rgba(0,0,0,0.25)] lg:ml-[125px] lg:flex">
               <Search size={18} className="text-[#A8A8A8]" />
               <input
                 className="w-full bg-transparent text-sm text-[#F3EAD2] outline-none placeholder:text-[#A8A8A8]"

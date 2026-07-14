@@ -35,11 +35,24 @@ type AdminSidebarProps = {
   path: string;
   navigate: (path: string) => void;
   onLogout: () => void;
+  open?: boolean;
+  onClose?: () => void;
 };
 
-export function AdminSidebar({ path, navigate, onLogout }: AdminSidebarProps) {
+export function AdminSidebar({ path, navigate, onLogout, open = false, onClose }: AdminSidebarProps) {
+  const go = (href: string) => {
+    navigate(href);
+    onClose?.();
+  };
+
   return (
-    <aside className="flex h-screen w-[290px] flex-col border-r border-[#D4AF37]/15 bg-[#080705] px-6 py-6 text-[#F3EAD2] shadow-[18px_0_80px_rgba(0,0,0,0.35)]">
+    <aside
+      className={[
+        "fixed inset-y-0 left-0 z-50 flex h-screen w-[280px] max-w-[85vw] flex-col border-r border-[#D4AF37]/15 bg-[#080705] px-6 py-6 text-[#F3EAD2] shadow-[18px_0_80px_rgba(0,0,0,0.35)] transition-transform duration-300",
+        "lg:static lg:z-auto lg:w-[290px] lg:max-w-none lg:translate-x-0",
+        open ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+      ].join(" ")}
+    >
       <AdminBrand />
 
       <div className="mt-9 flex-1 overflow-y-auto">
@@ -58,7 +71,7 @@ export function AdminSidebar({ path, navigate, onLogout }: AdminSidebarProps) {
               <button
                 type="button"
                 key={item.href}
-                onClick={() => navigate(item.href)}
+                onClick={() => go(item.href)}
                 className={[
                   "flex h-[40px] w-full items-center gap-3 rounded-[7px] border px-4 text-left text-[14px] transition",
                   active

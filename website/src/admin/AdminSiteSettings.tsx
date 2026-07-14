@@ -235,7 +235,7 @@ export function AdminSiteSettings() {
   };
 
   return (
-    <main className="h-full overflow-y-auto p-8">
+    <main className="h-full overflow-y-auto p-4 md:p-8">
       <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#D4AF37]">
