@@ -92,7 +92,7 @@ export function AdminShell({ children, path, navigate }: AdminShellProps) {
                 </button>
 
                 {newSignalOpen ? (
-                  <div className="absolute right-0 top-[46px] z-50 w-[240px] overflow-hidden rounded-[10px] border border-[#D4AF37]/35 bg-[#080705]/98 p-2 shadow-[0_28px_90px_rgba(0,0,0,0.55),0_0_40px_rgba(212,175,55,0.08)] backdrop-blur-xl">
+                  <div className="absolute right-0 top-[46px] z-50 w-[240px] overflow-hidden rounded-[10px] border border-[#D4AF37]/50 bg-[#0d0b07] p-2 shadow-[0_28px_90px_rgba(0,0,0,0.7),0_0_40px_rgba(212,175,55,0.10)]">
                     <p className="px-3 pb-2 pt-1 font-mono text-[10px] uppercase tracking-[0.22em] text-[#8F7835]">
                       Create Signal
                     </p>
