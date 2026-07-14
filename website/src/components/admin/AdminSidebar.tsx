@@ -1,34 +1,25 @@
 import {
   Box,
-  Gauge,
   Home,
   Image,
   KeyRound,
   Layers,
   Lock,
   Menu,
-  Navigation,
   Package,
   Settings,
-  Shield,
 } from "lucide-react";
 
 import { AdminBrand } from "./AdminBrand";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: Home },
-  { href: "/admin/site-settings", label: "Site Settings", icon: Settings },
   { href: "/admin/home-interface", label: "Site Content", icon: Box },
-  { href: "/admin/services", label: "Services Protocols", icon: Shield },
-  { href: "/admin/packages", label: "Retainer Vault", icon: Package },
-  { href: "/admin/protocol", label: "Execution Protocol", icon: Gauge },
+  { href: "/admin/media", label: "Media Library", icon: Image },
   { href: "/admin/access-requests", label: "Access Requests", icon: Lock },
+  { href: "/admin/site-settings", label: "Site Settings", icon: Settings },
   { href: "/admin/prospects", label: "Prospect Vault", icon: Layers },
   { href: "/admin/calculator", label: "Offer Calculator", icon: Package },
-  { href: "/admin/navigation", label: "Navigation Matrix", icon: Navigation },
-  { href: "/admin/archive", label: "Signal Archive", icon: Layers },
-  { href: "/admin/media", label: "Media Library", icon: Image },
-  { href: "/admin/system", label: "System Settings", icon: Settings },
 ];
 
 type AdminSidebarProps = {
