@@ -1,5 +1,6 @@
 import React from "react";
 
+import { logActivity } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 
 const BUCKET = "media";
@@ -52,6 +53,7 @@ export function AdminMedia() {
       return;
     }
     setStatus("Uploaded");
+    void logActivity({ action: "media_uploaded", entityType: "media", metadata: { file: path } });
     await load();
   };
 
@@ -62,6 +64,7 @@ export function AdminMedia() {
       setError(removeError.message);
       return;
     }
+    void logActivity({ action: "media_deleted", entityType: "media", metadata: { file: name } });
     await load();
   };
 
@@ -85,7 +88,7 @@ export function AdminMedia() {
             Upload images and copy their URL into any image field in Site Content.
           </p>
         </div>
-        <div className="border border-green-400/20 bg-green-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-green-300">
+        <div className="self-start border border-green-400/20 bg-green-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-green-300 lg:self-auto">
           {status || (loading ? "Loading" : `${items.length} files`)}
         </div>
       </div>

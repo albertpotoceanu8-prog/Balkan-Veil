@@ -2,6 +2,7 @@ import React from "react";
 import { Bell, Menu, Search, X } from "lucide-react";
 
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
+import { logActivity } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminShellProps = {
@@ -24,6 +25,7 @@ export function AdminShell({ children, path, navigate }: AdminShellProps) {
   const [navOpen, setNavOpen] = React.useState(false);
 
   const logout = async () => {
+    await logActivity({ action: "logout" });
     await supabase.auth.signOut();
     navigate("/admin/login");
   };

@@ -2,6 +2,7 @@ import React from "react";
 import { z } from "zod";
 
 import { AdminPanel, EmptyState, Field, ModuleHeader, StatusMessage, inputClass } from "@/admin/AdminModule";
+import { logActivity } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 import type { Prospect, ProspectStatus } from "@/types/database";
 
@@ -124,6 +125,12 @@ export function AdminProspects() {
       return;
     }
 
+    void logActivity({
+      action: "prospect_saved",
+      entityType: "prospects",
+      entityId: form.id,
+      metadata: { business_name: parsed.data.business_name, mode: form.id ? "update" : "create" },
+    });
     setForm(empty);
     setStatus("Prospect saved.");
     load();
@@ -148,7 +155,7 @@ export function AdminProspects() {
   };
 
   return (
-    <main className="h-full overflow-y-auto p-8">
+    <main className="h-full overflow-y-auto p-4 md:p-8">
       <ModuleHeader eyebrow="VEIL OS / Pipeline" title="Prospect Vault" description="Track prospects, outreach status, opportunity and estimated value." />
       <StatusMessage error={error} status={status} />
       <div className="grid gap-6 xl:grid-cols-[1fr_420px]">
@@ -177,7 +184,7 @@ export function AdminProspects() {
           <h2 className="mb-5 font-mono text-xs uppercase tracking-[0.25em] text-[#D4AF37]">{form.id ? "Edit Prospect" : "New Prospect"}</h2>
           <form onSubmit={save} className="grid gap-4">
             <Field label="Business Name"><input className={inputClass} value={form.business_name} onChange={(e) => setField("business_name", e.target.value)} /></Field>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <Field label="Industry"><input className={inputClass} value={form.industry} onChange={(e) => setField("industry", e.target.value)} /></Field>
               <Field label="Location"><input className={inputClass} value={form.location} onChange={(e) => setField("location", e.target.value)} /></Field>
             </div>
@@ -186,7 +193,7 @@ export function AdminProspects() {
             <Field label="Observed Problem"><textarea className={inputClass} rows={2} value={form.observed_problem} onChange={(e) => setField("observed_problem", e.target.value)} /></Field>
             <Field label="Opportunity"><textarea className={inputClass} rows={2} value={form.opportunity} onChange={(e) => setField("opportunity", e.target.value)} /></Field>
             <Field label="Suggested Offer"><input className={inputClass} value={form.suggested_offer} onChange={(e) => setField("suggested_offer", e.target.value)} /></Field>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
               <Field label="Status"><select className={inputClass} value={form.status} onChange={(e) => setField("status", e.target.value as ProspectStatus)}>{statuses.map((option) => <option key={option}>{option}</option>)}</select></Field>
               <Field label="Priority"><input className={inputClass} type="number" value={form.priority} onChange={(e) => setField("priority", Number(e.target.value))} /></Field>
               <Field label="Value"><input className={inputClass} type="number" value={form.estimated_value} onChange={(e) => setField("estimated_value", e.target.value === "" ? "" : Number(e.target.value))} /></Field>

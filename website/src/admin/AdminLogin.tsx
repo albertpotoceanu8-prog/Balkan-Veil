@@ -1,5 +1,6 @@
 import React from "react";
 
+import { logActivity, logFailedLogin } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 
 type AdminLoginProps = {
@@ -25,10 +26,12 @@ export function AdminLogin({ navigate }: AdminLoginProps) {
     setLoading(false);
 
     if (authError) {
+      void logFailedLogin(email, authError.message);
       setError("Access denied. Check credentials.");
       return;
     }
 
+    await logActivity({ action: "login" });
     navigate("/admin");
   };
 

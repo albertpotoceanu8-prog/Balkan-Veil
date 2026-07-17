@@ -1,5 +1,6 @@
 import React from "react";
 
+import { logActivity } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 import { siteContent } from "@/data/siteContent";
 import { deepMerge, loadPublicCmsContent } from "@/lib/cms/publicContent";
@@ -220,7 +221,10 @@ export function AdminContent() {
 
     setSaving(false);
     if (saveError) setError(saveError.message);
-    else setStatus("Published");
+    else {
+      setStatus("Published");
+      void logActivity({ action: "content_published", entityType: "content_overrides", metadata: { language: LANGUAGE, sections: Object.keys(data).length } });
+    }
   };
 
   return (
@@ -233,7 +237,7 @@ export function AdminContent() {
             Edit every text on the public site, section by section. Changes publish to the live Romanian site.
           </p>
         </div>
-        <div className="border border-green-400/20 bg-green-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-green-300">
+        <div className="self-start border border-green-400/20 bg-green-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-green-300 lg:self-auto">
           {status || (loading ? "Loading" : "Live")}
         </div>
       </div>

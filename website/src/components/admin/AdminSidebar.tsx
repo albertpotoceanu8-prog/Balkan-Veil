@@ -1,4 +1,5 @@
 import {
+  Activity,
   Box,
   Home,
   Image,
@@ -6,8 +7,10 @@ import {
   Layers,
   Lock,
   Menu,
+  MessageSquare,
   Package,
   Settings,
+  ShieldCheck,
 } from "lucide-react";
 
 import { AdminBrand } from "./AdminBrand";
@@ -17,8 +20,11 @@ const navItems = [
   { href: "/admin/home-interface", label: "Site Content", icon: Box },
   { href: "/admin/media", label: "Media Library", icon: Image },
   { href: "/admin/access-requests", label: "Access Requests", icon: Lock },
+  { href: "/admin/chat", label: "Client Chat", icon: MessageSquare },
   { href: "/admin/site-settings", label: "Site Settings", icon: Settings },
   { href: "/admin/prospects", label: "Prospect Vault", icon: Layers },
+  { href: "/admin/security", label: "Security Log", icon: ShieldCheck },
+  { href: "/admin/activity", label: "Activity Log", icon: Activity },
   { href: "/admin/calculator", label: "Offer Calculator", icon: Package },
 ];
 

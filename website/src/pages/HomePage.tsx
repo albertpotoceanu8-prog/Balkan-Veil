@@ -478,7 +478,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
 
       <motion.div
         {...groupReveal(splitSectionMotion)}
-        className="mt-14 grid gap-12 sm:mt-16 sm:gap-14 md:mt-20 md:gap-16 xl:grid-cols-[1.15fr_0.85fr] 3xl:gap-20"
+        className="mt-24 grid gap-12 sm:mt-28 sm:gap-14 md:mt-36 md:gap-16 xl:grid-cols-[1.15fr_0.85fr] 3xl:gap-20"
       >
         <motion.section variants={splitCardLeftMotion} {...itemReveal} className="relative overflow-hidden bg-[#050302] p-8 will-change-transform sm:p-10 md:p-14 lg:p-16">
           <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-[linear-gradient(135deg,transparent,rgba(185,138,50,0.055),transparent)]" aria-hidden="true" />
@@ -530,7 +530,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
 
       <motion.div
         {...groupReveal()}
-        className="mt-12 grid gap-10 sm:mt-14 sm:gap-12 md:mt-16 md:gap-14 xl:grid-cols-[0.82fr_1.18fr] 3xl:gap-20"
+        className="mt-24 grid gap-10 sm:mt-28 sm:gap-12 md:mt-36 md:gap-14 xl:grid-cols-[0.82fr_1.18fr] 3xl:gap-20"
       >
         <motion.section variants={sweepCardMotion} {...itemReveal} className="relative overflow-hidden border p-8 sm:p-10 md:p-14">
           <motion.span variants={cardFrameVerticalMotion} className="pointer-events-none absolute bottom-0 left-0 top-0 z-30 w-px origin-top bg-[#b98a32]/55 shadow-[0_0_16px_rgba(185,138,50,0.28)]" aria-hidden="true" />
@@ -577,7 +577,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
         </motion.section>
       </motion.div>
 
-      <section className="relative mt-12 overflow-hidden border border-[#202224] bg-[#050302] p-8 sm:mt-14 sm:p-10 md:mt-16 md:p-14">
+      <section className="relative mt-24 overflow-hidden border border-[#202224] bg-[#050302] p-8 sm:mt-28 sm:p-10 md:mt-36 md:p-14">
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,transparent,rgba(185,138,50,0.045),transparent)]" aria-hidden="true" />
         <div className="relative grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
@@ -599,7 +599,7 @@ function ArchiveModules({ content, goToPage }: { content: SiteContent["home"]; g
 
       <motion.div
         {...groupReveal(audienceDropMotion, 0.45)}
-        className="mt-10 grid gap-5 sm:mt-12 sm:grid-cols-3 md:mt-16 md:gap-6"
+        className="mt-16 grid gap-5 sm:mt-20 sm:grid-cols-3 md:mt-24 md:gap-6"
       >
         {content.audience.map((item, index) => (
           <motion.div key={item} variants={audienceCardDropMotion} {...itemReveal} className="grid grid-cols-[2rem_1fr_auto] items-center gap-4 border border-[#202224] bg-[#020100]/70 px-5 py-4">

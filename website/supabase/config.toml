@@ -1,0 +1,23 @@
+[functions.notify-lead]
+verify_jwt = false
+
+[functions.client-chat-get]
+verify_jwt = false
+
+[functions.client-chat-send]
+verify_jwt = false
+
+[functions.save-push-subscription]
+verify_jwt = true
+
+[functions.client-cms-chat-get]
+verify_jwt = true
+
+[functions.client-cms-chat-send]
+verify_jwt = true
+
+[functions.chat-hub-get]
+verify_jwt = false
+
+[functions.chat-hub-send]
+verify_jwt = false

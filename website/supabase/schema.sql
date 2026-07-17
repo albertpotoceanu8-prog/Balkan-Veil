@@ -220,3 +220,69 @@ on public.prospects for all to authenticated using (true) with check (true);
 drop policy if exists "authenticated_all_activity_log" on public.activity_log;
 create policy "authenticated_all_activity_log"
 on public.activity_log for all to authenticated using (true) with check (true);
+
+-- Live tracking: stream new activity_log rows to the admin Security Log page.
+-- Realtime respects RLS, so only authenticated admins receive events.
+alter publication supabase_realtime add table public.activity_log;
+
+-- Failed-login logging: a login attempt has no session, so a direct anon insert is
+-- blocked by RLS. This SECURITY DEFINER function inserts a controlled 'login_failed'
+-- row with elevated privileges. anon can only call this RPC (not insert arbitrary rows),
+-- so the audit table stays closed to anonymous writes.
+create or replace function public.log_failed_login(attempted_email text, reason text default null)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  insert into public.activity_log (actor, action, entity_type, metadata)
+  values (
+    coalesce(nullif(attempted_email, ''), 'unknown'),
+    'login_failed',
+    'auth',
+    jsonb_build_object('email', coalesce(attempted_email, ''), 'reason', reason)
+  );
+end;
+$$;
+
+grant execute on function public.log_failed_login(text, text) to anon, authenticated;
+
+-- Email on new lead: a trigger calls Resend directly via pg_net (no edge function needed).
+-- Replace the RESEND key placeholder before running. onboarding@resend.dev only delivers
+-- to the Resend account owner's address; verify a domain in Resend for production senders.
+create extension if not exists pg_net;
+
+create or replace function public.notify_lead_created()
+returns trigger
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  perform net.http_post(
+    url := 'https://api.resend.com/emails',
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'Authorization', 'Bearer re_YOUR_RESEND_KEY'
+    ),
+    body := jsonb_build_object(
+      'from', 'Balkan Veil <onboarding@resend.dev>',
+      'to', jsonb_build_array('albertpotoceanu8@gmail.com'),
+      'subject', 'New brief: ' || coalesce(new.name, 'Unknown'),
+      'html',
+        '<h2>' || coalesce(new.name, 'New lead') || '</h2><p>' ||
+        'Brand: ' || coalesce(new.brand, '—') || '<br>' ||
+        'Project: ' || coalesce(new.project_type, '—') || '<br>' ||
+        'Budget: ' || coalesce(new.budget_range, '—') || '<br>' ||
+        'Message: ' || coalesce(new.message, '—') || '</p>'
+    )
+  );
+  return new;
+end;
+$$;
+
+drop trigger if exists on_access_request_created on public.access_requests;
+create trigger on_access_request_created
+after insert on public.access_requests
+for each row execute function public.notify_lead_created();

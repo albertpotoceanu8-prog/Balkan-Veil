@@ -20,12 +20,14 @@ const WorkPage = React.lazy(() => import("@/pages/WorkPage").then((module) => ({
 const BuildPage = React.lazy(() => import("@/pages/BuildPage").then((module) => ({ default: module.BuildPage })));
 const ProtocolPage = React.lazy(() => import("@/pages/ProtocolPage").then((module) => ({ default: module.ProtocolPage })));
 const AccessPage = React.lazy(() => import("@/pages/AccessPage").then((module) => ({ default: module.AccessPage })));
+const ClientCmsApp = React.lazy(() => import("@/client/ClientCmsApp").then((module) => ({ default: module.ClientCmsApp })));
 const AdminApp = React.lazy(() => import("@/admin/AdminApp").then((module) => ({ default: module.AdminApp })));
 
 export default function App() {
   // VITE_APP_MODE controls deploy separation: public site, admin-only CMS, or local full mode.
   const appMode = getAppMode();
   const isAdminRoute = typeof window !== "undefined" && window.location.pathname.startsWith("/admin");
+  const isClientRoute = typeof window !== "undefined" && window.location.pathname.startsWith("/client");
 
   if (appMode === "admin") {
     return <AdminMode />;
@@ -33,6 +35,14 @@ export default function App() {
 
   if (appMode === "full" && isAdminRoute) {
     return <AdminMode />;
+  }
+
+  if (appMode === "full" && isClientRoute) {
+    return (
+      <React.Suspense fallback={<AdminLoading />}>
+        <ClientCmsApp />
+      </React.Suspense>
+    );
   }
 
   // site mode never renders AdminApp; /admin falls through to the public 404/noindex route.

@@ -16,7 +16,7 @@ export function AdminOfferCalculator() {
   const remainingIfCancelled = Math.max(finalValue - paidBeforeCancel, 0);
 
   return (
-    <main className="h-full overflow-y-auto p-8">
+    <main className="h-full overflow-y-auto p-4 md:p-8">
       <ModuleHeader eyebrow="VEIL OS / Internal Tool" title="Offer Calculator" description="Calculate setup, retainer, contract value and cancellation exposure." />
       <div className="grid gap-6 xl:grid-cols-[420px_1fr]">
         <AdminPanel className="p-5">

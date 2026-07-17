@@ -1,6 +1,7 @@
 import React from "react";
 
 import { AdminPanel, EmptyState, Field, ModuleHeader, StatusMessage, inputClass } from "@/admin/AdminModule";
+import { logActivity } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 import type { AccessRequest, AccessRequestStatus } from "@/types/database";
 
@@ -35,11 +36,12 @@ export function AdminAccessRequests() {
       return;
     }
     setStatus("Request updated.");
+    void logActivity({ action: "access_request_updated", entityType: "access_requests", entityId: id, metadata: patch });
     load();
   };
 
   return (
-    <main className="h-full overflow-y-auto p-8">
+    <main className="h-full overflow-y-auto p-4 md:p-8">
       <ModuleHeader eyebrow="VEIL OS / Access" title="Access Requests" description="Review public inquiries, qualify leads and add internal notes." />
       <StatusMessage error={error} status={status} />
       <AdminPanel className="p-5">

@@ -1,6 +1,7 @@
 import React from "react";
 import { z } from "zod";
 
+import { logActivity } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
 import type { SiteSettings } from "@/types/database";
 
@@ -232,6 +233,7 @@ export function AdminSiteSettings() {
     }
 
     setStatus("Published");
+    void logActivity({ action: "settings_updated", entityType: "site_settings" });
   };
 
   return (
@@ -248,7 +250,7 @@ export function AdminSiteSettings() {
           </p>
         </div>
 
-        <div className="border border-green-400/20 bg-green-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-green-300">
+        <div className="self-start border border-green-400/20 bg-green-400/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-green-300 lg:self-auto">
           {status || (loading ? "Loading" : "Published")}
         </div>
       </div>

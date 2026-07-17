@@ -1,31 +1,31 @@
 import React from "react";
 import {
   BarChart3,
-  Boxes,
   Clock3,
   Crown,
   Eye,
   FileText,
   Gauge,
   Home,
+  Image,
+  Layers,
   Link2,
   Lock,
   MoreVertical,
-  Navigation,
   Package,
   PenLine,
   Rocket,
   Settings,
   ShieldCheck,
   Sparkles,
-  Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { z } from "zod";
 
 import { StatusCard } from "@/admin/StatusCard";
+import { activityLabel, relativeTime } from "@/lib/adminLog";
 import { supabase } from "@/lib/supabase/client";
-import type { SiteSettings } from "@/types/database";
+import type { ActivityLog, SiteSettings } from "@/types/database";
 
 type AdminDashboardProps = {
   navigate: (path: string) => void;
@@ -205,6 +205,7 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
     proposalSent: 0,
     pipelineValue: 0,
   });
+  const [recent, setRecent] = React.useState<ActivityLog[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [saving, setSaving] = React.useState(false);
   const [status, setStatus] = React.useState("Published");
@@ -227,6 +228,7 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
         contactedResult,
         proposalSentResult,
         pipelineResult,
+        activityResult,
       ] = await Promise.all([
         supabase.from("site_settings").select("*").eq("singleton_key", "main").single<SiteSettings>(),
         supabase.from("service_protocols").select("*", { count: "exact", head: true }).eq("active", true),
@@ -237,6 +239,7 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
         supabase.from("prospects").select("*", { count: "exact", head: true }).eq("status", "contacted"),
         supabase.from("prospects").select("*", { count: "exact", head: true }).eq("status", "proposal_sent"),
         supabase.from("prospects").select("estimated_value").in("status", ["proposal_sent", "won"]),
+        supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(5).returns<ActivityLog[]>(),
       ]);
 
       if (cancelled) return;
@@ -262,6 +265,7 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
             0,
           ) ?? 0,
       });
+      setRecent(activityResult.data ?? []);
       setLoading(false);
     }
 
@@ -332,12 +336,9 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
     setSettings((current) => (current ? { ...current, ...parsed.data, seo_keywords: keywords } : current));
   };
 
-  const totalDocuments = 1 + counts.services + counts.packages + counts.protocol + counts.prospects + counts.requests;
-  const activePublished = 1 + counts.services + counts.packages;
-
   return (
-    <main className="h-full w-full overflow-hidden px-[34px] py-[34px]">
-      <div className="grid h-full grid-cols-[minmax(560px,0.78fr)_minmax(760px,1.22fr)] gap-[29px]">
+    <main className="h-full w-full overflow-y-auto px-4 py-6 lg:overflow-hidden lg:px-[34px] lg:py-[34px]">
+      <div className="grid grid-cols-1 gap-8 lg:h-full lg:grid-cols-[minmax(560px,0.78fr)_minmax(760px,1.22fr)] lg:gap-[29px]">
         <div className="min-w-0">
           <div className="mb-[22px]">
             <h1 className="text-[28px] font-semibold uppercase tracking-[0.03em] text-[#f5f1e8]">
@@ -350,11 +351,11 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
             <div className="mb-5 rounded-[8px] border border-red-400/20 bg-red-400/10 p-4 text-sm text-red-200">{error}</div>
           ) : null}
 
-          <div className="grid grid-cols-4 gap-[13px]">
-            <StatusCard icon={<FileText size={20} />} value={String(totalDocuments).padStart(2, "0")} label="Documents" meta="Total" />
-            <StatusCard icon={<BarChart3 size={20} />} value={String(activePublished).padStart(2, "0")} label="Active" meta="Published" tone="green" />
-            <StatusCard icon={<Boxes size={20} />} value={String(counts.requests).padStart(2, "0")} label="Requests" meta="New Access" />
-            <StatusCard icon={<PenLine size={20} />} value={`${counts.pipelineValue.toLocaleString()}`} label="Pipeline" meta="Estimated EUR" />
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-[13px]">
+            <StatusCard icon={<Layers size={20} />} value={String(counts.prospects).padStart(2, "0")} label="Prospects" meta="Total" />
+            <StatusCard icon={<Lock size={20} />} value={String(counts.requests).padStart(2, "0")} label="New Requests" meta="Leads" tone="green" />
+            <StatusCard icon={<FileText size={20} />} value={String(counts.proposalSent).padStart(2, "0")} label="Proposals" meta="Sent" />
+            <StatusCard icon={<BarChart3 size={20} />} value={`${counts.pipelineValue.toLocaleString()}`} label="Pipeline" meta="Estimated EUR" />
           </div>
 
           <Panel className="mt-[20px] p-4">
@@ -364,14 +365,14 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
               </div>
               <h2 className="text-[15px] uppercase tracking-[0.08em] text-[#f5f1e8]">Quick Access</h2>
             </div>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
               {([
-                ["Edit Home", "Interface", PenLine, "/admin/home-interface"],
-                ["Edit Services", "Protocols", Link2, "/admin/services"],
-                ["Edit Packages", "Retainer Vault", Package, "/admin/packages"],
-                ["Edit Protocol", "Execution Steps", Wrench, "/admin/protocol"],
+                ["Site Content", "Edit all text", PenLine, "/admin/home-interface"],
+                ["Media Library", "Images & files", Image, "/admin/media"],
                 ["Access Requests", "Leads", Lock, "/admin/access-requests"],
-                ["Navigation", "Matrix", Navigation, "/admin/navigation"],
+                ["Site Settings", "Studio config", Settings, "/admin/site-settings"],
+                ["Prospect Vault", "Pipeline", Layers, "/admin/prospects"],
+                ["Offer Calculator", "Pricing", Package, "/admin/calculator"],
               ] satisfies QuickAccessItem[]).map(([label, meta, Icon, href]) => (
                 <button
                   type="button"
@@ -389,7 +390,7 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
             </div>
           </Panel>
 
-          <div className="mt-[18px] grid grid-cols-[1.15fr_0.85fr] gap-4">
+          <div className="mt-[18px] grid grid-cols-1 gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <Panel className="p-5">
               <div className="mb-5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -401,24 +402,22 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
                 <span className="text-[#a8a8a8]">&gt;</span>
               </div>
               <div className="space-y-4">
-                {[
-                  ["Updated Veil Growth package", "Retainer Vault", "2h ago"],
-                  ["Modified Home Hero section", "Home Interface", "4h ago"],
-                  ["Changed Studio Status", "Site Settings", "1d ago"],
-                  ["Updated Build page content", "Navigation Matrix", "1d ago"],
-                  ["Added new protocol step", "Execution Protocol", "2d ago"],
-                ].map(([title, area, time]) => (
-                  <div key={title} className="grid grid-cols-[34px_1fr_auto] items-center gap-3">
-                    <div className="grid h-8 w-8 place-items-center rounded-full border border-white/[0.08] bg-white/[0.04] text-[#f2c75c]">
-                      <FileText size={14} />
+                {recent.length === 0 ? (
+                  <p className="text-[13px] text-[#a8a8a8]">No activity recorded yet.</p>
+                ) : (
+                  recent.map((entry) => (
+                    <div key={entry.id} className="grid grid-cols-[34px_1fr_auto] items-center gap-3">
+                      <div className="grid h-8 w-8 place-items-center rounded-full border border-white/[0.08] bg-white/[0.04] text-[#f2c75c]">
+                        <FileText size={14} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="truncate text-[13px] font-semibold text-[#f5f1e8]">{activityLabel(entry.action)}</p>
+                        <p className="mt-1 truncate text-[12px] text-[#a8a8a8]">{entry.actor || "unknown"}</p>
+                      </div>
+                      <span className="text-[12px] text-[#a8a8a8]">{relativeTime(entry.created_at)}</span>
                     </div>
-                    <div>
-                      <p className="text-[13px] font-semibold text-[#f5f1e8]">{title}</p>
-                      <p className="mt-1 text-[12px] text-[#a8a8a8]">{area}</p>
-                    </div>
-                    <span className="text-[12px] text-[#a8a8a8]">{time}</span>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             </Panel>
 
@@ -458,7 +457,7 @@ export function AdminDashboard({ navigate }: AdminDashboardProps) {
           </div>
         </div>
 
-        <Panel className="-mt-[34px] min-w-0 overflow-hidden">
+        <Panel className="hidden min-w-0 overflow-hidden lg:-mt-[34px] lg:block">
           <div className="flex h-[82px] items-center justify-between border-b border-white/[0.08] px-7">
             <div className="flex items-center gap-4">
               <h2 className="text-[22px] font-semibold text-[#f5f1e8]">Site Settings</h2>

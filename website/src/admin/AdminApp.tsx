@@ -2,6 +2,7 @@ import React from "react";
 import type { Session } from "@supabase/supabase-js";
 
 import { AdminDashboard } from "@/admin/AdminDashboard";
+import { AdminClientChat } from "@/admin/AdminClientChat";
 import { AdminContent } from "@/admin/AdminContent";
 import { AdminMedia } from "@/admin/AdminMedia";
 import { AdminAccessRequests } from "@/admin/AdminAccessRequests";
@@ -12,6 +13,8 @@ import { AdminPlaceholder } from "@/admin/AdminPlaceholder";
 import { AdminProspects } from "@/admin/AdminProspects";
 import { AdminProtocol } from "@/admin/AdminProtocol";
 import { AdminServices } from "@/admin/AdminServices";
+import { AdminActivityLog } from "@/admin/AdminActivityLog";
+import { AdminSecurityLog } from "@/admin/AdminSecurityLog";
 import { AdminShell } from "@/admin/AdminShell";
 import { AdminSiteSettings } from "@/admin/AdminSiteSettings";
 import { supabase, supabaseConfigured } from "@/lib/supabase/client";
@@ -19,6 +22,13 @@ import { supabase, supabaseConfigured } from "@/lib/supabase/client";
 function getPath() {
   return window.location.pathname.replace(/\/$/, "") || "/";
 }
+
+// DEV-ONLY login bypass for local mobile previews. Requires BOTH a development
+// build (import.meta.env.DEV) AND VITE_ADMIN_NO_AUTH=true in .env.local (gitignored),
+// so a production build can never skip auth. Note: Supabase RLS still applies, so
+// admin writes/reads that need a session will not work while bypassed.
+const AUTH_BYPASS =
+  import.meta.env.DEV && import.meta.env.VITE_ADMIN_NO_AUTH === "true";
 
 function ConfigMissing() {
   return (
@@ -78,7 +88,7 @@ export function AdminApp() {
   }, []);
 
   React.useEffect(() => {
-    if (loading || !supabaseConfigured) return;
+    if (loading || !supabaseConfigured || AUTH_BYPASS) return;
 
     if (!session && path !== "/admin/login") {
       window.history.replaceState({}, "", "/admin/login");
@@ -101,7 +111,7 @@ export function AdminApp() {
     );
   }
 
-  if (!session || path === "/admin/login") {
+  if (!AUTH_BYPASS && (!session || path === "/admin/login")) {
     return <AdminLogin navigate={navigate} />;
   }
 
@@ -113,6 +123,9 @@ export function AdminApp() {
     "/admin/protocol": <AdminProtocol />,
     "/admin/access-requests": <AdminAccessRequests />,
     "/admin/prospects": <AdminProspects />,
+    "/admin/chat": <AdminClientChat />,
+    "/admin/security": <AdminSecurityLog />,
+    "/admin/activity": <AdminActivityLog />,
     "/admin/calculator": <AdminOfferCalculator />,
     "/admin/proposals": (
       <AdminPlaceholder

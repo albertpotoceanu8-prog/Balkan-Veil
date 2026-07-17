@@ -1,0 +1,18 @@
+{
+  "name": "Balkan Veil CMS",
+  "short_name": "Veil CMS",
+  "description": "Balkan Veil CMS and client chat.",
+  "start_url": "/admin",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [
+    {
+      "src": "/assets/veil-admin-mark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

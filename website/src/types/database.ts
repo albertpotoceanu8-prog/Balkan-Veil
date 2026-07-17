@@ -120,3 +120,50 @@ export type ActivityLog = {
   metadata: Record<string, unknown>;
   created_at: string;
 };
+
+export type CmsClient = {
+  id: string;
+  hub_key: string;
+  name: string;
+  email: string | null;
+  company: string | null;
+  status: string;
+  external_project_ref: string | null;
+  external_cms_url: string | null;
+  allowed_origins: string[];
+  integration_secret_hash: string | null;
+  chat_enabled: boolean;
+  last_chat_access_at: string | null;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CmsConversation = {
+  id: string;
+  client_id: string | null;
+  inquiry_id: string | null;
+  access_request_id: string | null;
+  title: string;
+  status: string;
+  priority: string;
+  last_message_at: string | null;
+  client_access_token: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export type CmsMessage = {
+  id: string;
+  conversation_id: string;
+  sender_role: "admin" | "client" | "system";
+  sender_name: string | null;
+  sender_email: string | null;
+  body: string;
+  read_at: string | null;
+  created_at: string;
+};
+
+export type CmsConversationWithClient = CmsConversation & {
+  cms_clients: Pick<CmsClient, "id" | "name" | "email" | "company"> | null;
+};
