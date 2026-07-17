@@ -7,7 +7,11 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://ioxikwxbljbgrfwvyfkw.supabase.co https://rdhyjrljtfvjhjozsnlb.supabase.co; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://ioxikwxbljbgrfwvyfkw.supabase.co wss://ioxikwxbljbgrfwvyfkw.supabase.co https://rdhyjrljtfvjhjozsnlb.supabase.co wss://rdhyjrljtfvjhjozsnlb.supabase.co; worker-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self'; style-src 'self'; style-src-elem 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data: blob: https://ioxikwxbljbgrfwvyfkw.supabase.co https://rdhyjrljtfvjhjozsnlb.supabase.co; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://ioxikwxbljbgrfwvyfkw.supabase.co wss://ioxikwxbljbgrfwvyfkw.supabase.co https://rdhyjrljtfvjhjozsnlb.supabase.co wss://rdhyjrljtfvjhjozsnlb.supabase.co; worker-src 'self'; manifest-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://website-balkan-veil.vercel.app"
         },
         {
           "key": "X-Frame-Options",
